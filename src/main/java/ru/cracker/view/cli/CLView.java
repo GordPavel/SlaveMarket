@@ -58,22 +58,7 @@ public class CLView implements Observer, View {
      * Launch the view or CLI
      */
     public void launch() {
-        System.out.println("hello");
-        try {
-            controller.removeMerchant(2);
-        } catch (MerchandiseNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            System.out.println(controller.getMerchantById(2));
-        } catch (MerchandiseNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            System.out.println(controller.searchMerchant("gender=female and name=Julia and id>1000"));
-        } catch (WrongQueryException e) {
-            System.out.println(e.getMessage());
-        }
+
     }
 
 
