@@ -3,6 +3,7 @@ package ru.cracker.Model;
 import ru.cracker.Model.database.Database;
 import ru.cracker.Model.database.MerchDb;
 import ru.cracker.Model.merchandises.Merchandise;
+import ru.cracker.exceptions.AlreadyBoughtException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.view.Observer;
 
@@ -131,8 +132,10 @@ public class SlaveMarketModel implements Observable, Model {
      * @throws MerchandiseNotFoundException
      */
     @Override
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException {
-        return database.buyMerchandise(id);
+    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException, AlreadyBoughtException {
+        Merchandise merchandise = database.buyMerchandise(id);
+        changed(id);
+        return merchandise;
     }
 
 }

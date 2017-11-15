@@ -2,6 +2,7 @@ package ru.cracker.Controller;
 
 import ru.cracker.Model.Model;
 import ru.cracker.Model.merchandises.Merchandise;
+import ru.cracker.exceptions.AlreadyBoughtException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.view.View;
 import ru.cracker.view.cli.CLView;
@@ -93,7 +94,7 @@ public class SlaveController implements Controller {
      * @throws MerchandiseNotFoundException
      */
     @Override
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException {
+    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException, AlreadyBoughtException {
         return model.buyMerchandise(id);
     }
 

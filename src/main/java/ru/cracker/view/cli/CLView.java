@@ -3,10 +3,12 @@ package ru.cracker.view.cli;
 import ru.cracker.Controller.Controller;
 import ru.cracker.Model.Model;
 import ru.cracker.Model.Observable;
-import ru.cracker.exceptions.MerchandiseNotFoundException;
-import ru.cracker.exceptions.WrongQueryException;
+import ru.cracker.Model.merchandises.Slave;
+import ru.cracker.exceptions.AlreadyBoughtException;
 import ru.cracker.view.Observer;
 import ru.cracker.view.View;
+
+import java.util.ArrayList;
 
 
 /**
@@ -59,21 +61,17 @@ public class CLView implements Observer, View {
      */
     public void launch() {
         System.out.println("hello");
+        ArrayList<Slave> slaves = new ArrayList<>();
+        slaves.add(new Slave(140, 35, 12, "male", 0, "Pete", 100));
+        slaves.add(new Slave(174, 44, 16, "female", 1, "Diana", 200));
+        slaves.add(new Slave(185, 85, 20, "male", 2, "Luise", 300));
+        slaves.forEach(controller::addMerchant);
         try {
-            controller.removeMerchant(2);
-        } catch (MerchandiseNotFoundException e) {
-            System.out.println(e.getMessage());
+            controller.buyMerchandise(1);
+        } catch (AlreadyBoughtException e) {
+            System.out.println("Already bought");
         }
-        try {
-            System.out.println(controller.getMerchantById(2));
-        } catch (MerchandiseNotFoundException e) {
-            System.out.println(e.getMessage());
-        }
-        try {
-            System.out.println(controller.searchMerchant("gender=female and name=Julia and id>1000"));
-        } catch (WrongQueryException e) {
-            System.out.println(e.getMessage());
-        }
+        System.out.println(controller.searchMerchant("id>=0 and id!=2"));
     }
 
 

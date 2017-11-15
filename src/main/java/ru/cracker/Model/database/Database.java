@@ -1,6 +1,7 @@
 package ru.cracker.Model.database;
 
 import ru.cracker.Model.merchandises.Merchandise;
+import ru.cracker.exceptions.AlreadyBoughtException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 
 import java.util.List;
@@ -56,6 +57,6 @@ public interface Database {
      * @return bought merchandise
      * @throws MerchandiseNotFoundException
      */
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException;
+    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException, AlreadyBoughtException;
 
 }

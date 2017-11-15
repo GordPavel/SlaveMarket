@@ -2,6 +2,7 @@ package ru.cracker.Model.database;
 
 import ru.cracker.Model.merchandises.Merchandise;
 import ru.cracker.Model.merchandises.Slave;
+import ru.cracker.exceptions.AlreadyBoughtException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongQueryException;
 
@@ -328,12 +329,15 @@ public class MerchDb implements Database {
     }
 
     @Override
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException {
+    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException, AlreadyBoughtException {
         if (id >= merchants.size() || id < 0) {
             throw new MerchandiseNotFoundException(id);
         } else {
-            getMerchantById(id).buy();
-            return getMerchantById(id);
+            boolean bought = getMerchantById(id).buy();
+            if (bought) {
+                return getMerchantById(id);
+            } else
+                throw new AlreadyBoughtException(id);
         }
     }
 }

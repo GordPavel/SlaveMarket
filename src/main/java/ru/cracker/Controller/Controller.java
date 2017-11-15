@@ -1,6 +1,7 @@
 package ru.cracker.Controller;
 
 import ru.cracker.Model.merchandises.Merchandise;
+import ru.cracker.exceptions.AlreadyBoughtException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongQueryException;
 
@@ -58,6 +59,6 @@ public interface Controller {
      * @return bought merchandise
      * @throws MerchandiseNotFoundException
      */
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException;
+    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException, AlreadyBoughtException;
 
 }

@@ -173,7 +173,7 @@ public class Slave implements Merchandise {
      * Calculates productivity with
      */
     private void calculateBenefit() {
-        // TODO need to do calcuations
+        // TODO need to do calculations
 
     }
 
@@ -193,7 +193,6 @@ public class Slave implements Merchandise {
      *
      */
     public int getPrice() {
-        // TODO implement here
         return price;
     }
 
