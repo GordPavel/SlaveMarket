@@ -37,7 +37,7 @@ public class MerchDb implements Database {
      */
     public MerchDb() {
         merchants = new ArrayList<Merchandise>();
-//        generateData(1300);
+        generateData(1300);
     }
 
     private void generateData(int quantity) {

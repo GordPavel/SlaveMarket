@@ -3,8 +3,6 @@ package ru.cracker.view.cli;
 import ru.cracker.Controller.Controller;
 import ru.cracker.Model.Model;
 import ru.cracker.Model.Observable;
-import ru.cracker.exceptions.MerchandiseNotFoundException;
-import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.view.Observer;
 import ru.cracker.view.View;
 
@@ -58,7 +56,10 @@ public class CLView implements Observer, View {
      * Launch the view or CLI
      */
     public void launch() {
-
+        System.out.println("Program works good");
+        System.out
+                .println("That what i can find with query \"id<=10 and id!=4 and name=Julia and gender!=female\" in random generated data");
+        System.out.println(controller.searchMerchant("id<=20 and id!=4 and name=Julia and gender!=female"));
     }
 
 
