@@ -1,4 +1,4 @@
-package ru.cracker.Model;
+package ru.cracker.model;
 
 
 import ru.cracker.view.Observer;

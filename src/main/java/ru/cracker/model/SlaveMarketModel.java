@@ -1,8 +1,8 @@
-package ru.cracker.Model;
+package ru.cracker.model;
 
-import ru.cracker.Model.database.Database;
-import ru.cracker.Model.database.MerchDb;
-import ru.cracker.Model.merchandises.Merchandise;
+import ru.cracker.model.database.Database;
+import ru.cracker.model.database.MerchDb;
+import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.view.Observer;
 

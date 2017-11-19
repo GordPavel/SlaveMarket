@@ -1,4 +1,4 @@
-package ru.cracker.Model.merchandises;
+package ru.cracker.model.merchandises;
 
 /**
  *

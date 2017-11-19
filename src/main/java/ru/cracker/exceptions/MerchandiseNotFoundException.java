@@ -1,6 +1,6 @@
 package ru.cracker.exceptions;
 
-import ru.cracker.Model.merchandises.Merchandise;
+import ru.cracker.model.merchandises.Merchandise;
 
 /**
  * Throws when specified wrong id of merchandise
