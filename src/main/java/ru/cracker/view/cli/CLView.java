@@ -61,7 +61,11 @@ public class CLView implements Observer, View {
      * Launch the view or CLI
      */
     public void launch() {
+<<<<<<< HEAD
 
+=======
+      
+>>>>>>> 8e83fab97d424ccad71d9ad6d5ab319b7517b4d3
     }
 
 
