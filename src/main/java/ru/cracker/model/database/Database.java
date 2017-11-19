@@ -1,35 +1,32 @@
-package ru.cracker.Model;
+package ru.cracker.model.database;
 
-import ru.cracker.Model.merchandises.Merchandise;
+import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
-import ru.cracker.exceptions.WrongQueryException;
 
 import java.util.List;
 
 /**
- * Provides interface to manage slaves
+ *
  */
-public interface Model {
+public interface Database {
 
 
     /**
-     * Adding slave in database or something like that
+     * Puts merch into the vault
      *
-     * @param merch Slave to add
-     * @return
+     * @param merch Merch to put in vault
+     * @return void
      */
     public void addMerchandise(Merchandise merch);
 
     /**
-     * removes slave out our collection
-     *
-     * @param merch
-     * @return
+     * @param merch Removes merchandise from vault
+     * @return void
      */
     public void removeMerchandise(Merchandise merch);
 
     /**
-     * removes slave out our collection using only unique id
+     * remove merchandise from vault by id
      *
      * @param id
      * @return
@@ -37,13 +34,12 @@ public interface Model {
     public void removeMerchandise(int id);
 
     /**
-     * Search slave by the string  query
-     * like "height>150 productivity>40 weight<90 age=22"
+     * Method to find specified Merchandises
      *
-     * @param query query string
-     * @return list of founed slaves
+     * @param querry querry to filter results
+     * @return List of Merchandises specified by query
      */
-    public List<Merchandise> searchMerchandise(String query) throws WrongQueryException;
+    public List<Merchandise> searchMerchandise(String querry);
 
     /**
      * Returns merchandise by id or exception
@@ -61,4 +57,5 @@ public interface Model {
      * @throws MerchandiseNotFoundException
      */
     public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException;
+
 }

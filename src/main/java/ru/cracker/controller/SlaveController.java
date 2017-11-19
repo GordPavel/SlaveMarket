@@ -1,7 +1,7 @@
-package ru.cracker.Controller;
+package ru.cracker.controller;
 
-import ru.cracker.Model.Model;
-import ru.cracker.Model.merchandises.Merchandise;
+import ru.cracker.model.Model;
+import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.view.View;
 import ru.cracker.view.cli.CLView;

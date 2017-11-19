@@ -1,4 +1,4 @@
-package ru.cracker.Model.merchandises;
+package ru.cracker.model.merchandises;
 
 import java.util.Objects;
 
@@ -69,7 +69,7 @@ public class Slave implements Merchandise {
      * @param benefit How effective he can work in percentage
      * @param price   slave's cost
      */
-    public Slave(int height, int weight, int age, String gender, int id, Double benefit, String name, int price) {
+    private Slave(int height, int weight, int age, String gender, int id, Double benefit, String name, int price) {
         this.age = age;
         this.height = height;
         this.weight = weight;
@@ -89,7 +89,7 @@ public class Slave implements Merchandise {
      * @param gender Gender of a new slave.
      * @param id     slave's unique identification
      */
-    public Slave(int height, int weight, int age, String gender, int id, String name, int price) {
+    private Slave(int height, int weight, int age, String gender, int id, String name, int price) {
         this.age = age;
         this.height = height;
         this.weight = weight;
@@ -108,7 +108,7 @@ public class Slave implements Merchandise {
      * @param age    age of a new slave
      * @param gender Gender of a new slave.
      */
-    public Slave(int height, int weight, int age, String gender, String name, int price) {
+    private Slave(int height, int weight, int age, String gender, String name, int price) {
         this.age = age;
         this.height = height;
         this.weight = weight;
@@ -130,7 +130,7 @@ public class Slave implements Merchandise {
      * @param benefit How effective he can work in percentage
      * @param price   slave's cost
      */
-    public Slave(int height, int weight, int age, String gender, Double benefit, String name, int price) {
+    private Slave(int height, int weight, int age, String gender, Double benefit, String name, int price) {
         this.age = age;
         this.height = height;
         this.weight = weight;
@@ -139,6 +139,22 @@ public class Slave implements Merchandise {
         this.name = name;
         this.benefit = benefit;
         this.price = price;
+    }
+
+    private Slave() {
+        id = -1;
+        price = 0;
+        gender = "";
+        benefit = 0.0;
+    }
+
+    /**
+     * Returns new Builder instance
+     *
+     * @return new Builder instance for that slave
+     */
+    public static Builder newBuilder() {
+        return new Slave().new Builder();
     }
 
     /**
@@ -199,15 +215,13 @@ public class Slave implements Merchandise {
 
     /**
      * Returns merchandise quality in percentage.
-     *
-     * @return
      */
     public Double getBenefit() {
         return benefit;
     }
 
     /**
-     * @param benefit
+     * @param benefit slave's benefit
      */
     public void setBenefit(Double benefit) {
         this.benefit = benefit;
@@ -216,7 +230,7 @@ public class Slave implements Merchandise {
     /**
      * Method mark merchandise as bought
      *
-     * @return
+     * @return is this bought success?
      */
     public boolean buy() {
         if (bought) {
@@ -287,4 +301,125 @@ public class Slave implements Merchandise {
         }
         return false;
     }
+
+    /**
+     * Builder class for realiztion of builder pattern.
+     */
+    public class Builder {
+
+        /**
+         * Default constructor
+         */
+        private Builder() {
+        }
+
+
+        /**
+         * Sets up height to new Object
+         *
+         * @param height new Object's height
+         */
+        public Builder addHeight(int height) {
+            Slave.this.height = height;
+            return this;
+        }
+
+        /**
+         * Sets up weight to new Object
+         *
+         * @param weight new Object's weight
+         */
+        public Builder addWeight(int weight) {
+            Slave.this.weight = weight;
+            return this;
+        }
+
+        /**
+         * Sets up age to new Object
+         *
+         * @param age new Object's age
+         */
+        public Builder addAge(int age) {
+            Slave.this.age = age;
+            return this;
+        }
+
+        /**
+         * Setup gender in new Object
+         *
+         * @param gender new Object's gender
+         */
+        public Builder addGender(String gender) {
+            Slave.this.gender = gender;
+            return this;
+        }
+
+        /**
+         * Sets up age to new Object
+         *
+         * @param benefit new Object's benefit
+         */
+        public Builder addBenefit(double benefit) {
+            Slave.this.benefit = benefit;
+            return this;
+        }
+
+        /**
+         * calculates benefit with setted up parameters
+         */
+        public Builder autoCalculateBenefit() {
+            // TODO implement here
+            return this;
+        }
+
+        /**
+         * Sets up age to new Object
+         *
+         * @param price new Object's price
+         */
+        public Builder addPrice(int price) {
+            Slave.this.price = price;
+            return this;
+        }
+
+        /**
+         * Sets up age to new Object
+         *
+         * @param id new Object's id
+         */
+        public Builder addId(int id) {
+            Slave.this.id = id;
+            return this;
+        }
+
+        /**
+         * Sets up age to new Object
+         *
+         * @param name new Object's id
+         */
+        public Builder addName(String name) {
+            Slave.this.name = name;
+            return this;
+        }
+
+        /**
+         * Build slave with already specified parametres.
+         *
+         * @return Instance of new object
+         */
+        public Slave build() {
+            Slave slave = new Slave();
+            slave.benefit = Slave.this.benefit;
+            slave.name = Slave.this.name;
+            slave.id = Slave.this.id;
+            slave.gender = Slave.this.gender;
+            slave.price = Slave.this.price;
+            slave.age = Slave.this.age;
+            slave.weight = Slave.this.weight;
+            slave.height = Slave.this.height;
+            return slave;
+        }
+
+    }
+
 }

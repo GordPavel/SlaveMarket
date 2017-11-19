@@ -1,14 +1,13 @@
 import org.junit.Assert;
 import org.junit.Test;
-import ru.cracker.Model.Model;
-import ru.cracker.Model.Observable;
-import ru.cracker.Model.SlaveMarketModel;
-import ru.cracker.Model.database.MerchDb;
-import ru.cracker.Model.merchandises.Slave;
+import ru.cracker.model.Model;
+import ru.cracker.model.Observable;
+import ru.cracker.model.SlaveMarketModel;
+import ru.cracker.model.database.MerchDb;
+import ru.cracker.model.merchandises.Slave;
 import ru.cracker.view.Observer;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Pattern;
 
 
@@ -17,13 +16,34 @@ public class Tests {
     ArrayList<Slave> slaves = new ArrayList<>();
 
     {
-        db.addMerchandise(new Slave(140, 35, 12, "male", 0, "Pete", 100));
-        db.addMerchandise(new Slave(174, 44, 16, "female", 1, "Diana", 200));
-        db.addMerchandise(new Slave(185, 85, 20, "male", 2, "Luise", 300));
+//        Slave slave = Slave.newBuilder().addId(0).addAge(12).addGender("male").addHeight(140).addWeight(35).build();
+//        Slave slave = Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addPrice(100).build();
+//                new Slave(140, 35, 12, "male", 0, "Pete", 100);
+        db.addMerchandise(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35)
+                .addGender("male")
+                .addPrice(100).build());
+        db.addMerchandise(Slave.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
+                .addGender("female")
+                .addPrice(200).build());
+        db.addMerchandise(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+                .addGender("male")
+                .addPrice(300).build());
+//        db.addMerchandise(new Slave(174, 44, 16, "female", 1, "Diana", 200));
+//        db.addMerchandise(new Slave(185, 85, 20, "male", 2, "Luise", 300));
 
-        slaves.add(new Slave(140, 35, 12, "male", 0, "Pete", 100));
-        slaves.add(new Slave(174, 44, 16, "female", 1, "Diana", 200));
-        slaves.add(new Slave(185, 85, 20, "male", 2, "Luise", 300));
+//        slaves.add(new Slave(140, 35, 12, "male", 0, "Pete", 100));
+//        slaves.add(new Slave(174, 44, 16, "female", 1, "Diana", 200));
+//        slaves.add(new Slave(185, 85, 20, "male", 2, "Luise", 300));
+
+        slaves.add(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35)
+                .addGender("male")
+                .addPrice(100).build());
+        slaves.add(Slave.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
+                .addGender("female")
+                .addPrice(200).build());
+        slaves.add(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+                .addGender("male")
+                .addPrice(300).build());
     }
 
     @Test
@@ -40,18 +60,26 @@ public class Tests {
 
     @Test
     public void removeMerchandiseTest() {
-        db.removeMerchandise(new Slave(174, 44, 16, "female", 1, "Diana", 200));
+        db.removeMerchandise(Slave.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
+                .addGender("female")
+                .addPrice(200).build());
         slaves.remove(1);
         ArrayList<Slave> list = new ArrayList<>();
-        list.add(new Slave(140, 35, 12, "male", 0, "Pete", 100));
-        list.add(new Slave(185, 85, 20, "male", 1, "Luise", 300));
+        list.add(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35)
+                .addGender("male")
+                .addPrice(100).build());
+        list.add(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+                .addGender("male")
+                .addPrice(300).build());
         Assert.assertEquals(list, db.searchMerchandise(""));
     }
 
     @Test
     public void getMerchantByIdTest() {
         Assert.assertEquals(
-                new Slave(185, 85, 20, "male", 2, "Luise", 300),
+                Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+                        .addGender("male")
+                        .addPrice(300).build(),
                 db.getMerchantById(2));
     }
 
@@ -60,20 +88,27 @@ public class Tests {
         db.removeMerchandise(1);
         db.removeMerchandise(0);
         ArrayList<Slave> list = new ArrayList<>();
-        list.add(new Slave(185, 85, 20, "male", 1, "Luise", 300));
+//        list.add(new Slave(185, 85, 20, "male", 1, "Luise", 300));
+        list.add(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+                .addGender("male")
+                .addPrice(300).build());
         Assert.assertEquals(list, db.searchMerchandise(""));
     }
 
     @Test
     public void slaveEqualsTest() {
-        Assert.assertEquals(true, slaves.get(0).equals(new Slave(140, 35, 12, "male", 1, "Pete", 100)));
+        Assert.assertEquals(true, slaves.get(0)
+                .equals(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35)
+                        .addGender("male")
+                        .addPrice(100).build()));
     }
 
     @Test
     public void addSlaveTest() {
-        Slave slave = new Slave(1, 2, 3, "male", "David", 320);
+//        Slave slave = new Slave(1, 2, 3, "male", "David", 320);
+        Slave slave = Slave.newBuilder().addWeight(3).addHeight(3).addGender("male").addPrice(320).addAge(3).build();
         db.addMerchandise(slave);
-        slaves.add(new Slave(1, 2, 3, "male", 3, "David", 320));
+        slaves.add(Slave.newBuilder().addWeight(3).addHeight(3).addGender("male").addPrice(320).addAge(3).build());
         Assert.assertEquals(slaves, db.searchMerchandise(""));
     }
 

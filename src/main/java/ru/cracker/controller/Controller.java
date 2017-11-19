@@ -1,8 +1,9 @@
-package ru.cracker.Controller;
+package ru.cracker.controller;
 
-import ru.cracker.Model.merchandises.Merchandise;
+
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongQueryException;
+import ru.cracker.model.merchandises.Merchandise;
 
 import java.util.List;
 
