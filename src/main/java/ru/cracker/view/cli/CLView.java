@@ -35,7 +35,7 @@ public class CLView implements Observer, View {
         System.out.println("Opened slave\'s menu with id " + slaveId + "\nType \"help\" to learn basics");
         System.out.print(">");
         Pattern delete = Pattern.compile("\\bDELETE\\b");
-        Pattern set = Pattern.compile("(\\bSET \\b)([a-zA-Z]*=[a-z0-9A-Z]+)");
+        Pattern set = Pattern.compile("(\\bSET \\b)([a-zA-Z]+=[a-z0-9A-Z]+)");
         Pattern exit = Pattern.compile("(\\bEXIT\\b)");
         Pattern help = Pattern.compile("(\\bHELP\\b)");
         Pattern info = Pattern.compile("(\\bINFO\\b)");
