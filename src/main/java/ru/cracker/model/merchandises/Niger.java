@@ -43,6 +43,8 @@ public class Niger implements SlaveInterface {
      */
     private int id;
 
+    private int price;
+
 
     /**
      * Returns new Builder instance for adding parametres in new slave
@@ -90,6 +92,12 @@ public class Niger implements SlaveInterface {
      */
     public String getName() {
         return name;
+    }
+
+
+    public int getPrice()
+    {
+        return price;
     }
 
     /**

@@ -35,4 +35,7 @@ public interface SlaveInterface extends Merchandise {
    */
   public String getName();
 
+
+
+
 }
