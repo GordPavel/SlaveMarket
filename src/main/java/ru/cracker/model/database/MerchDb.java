@@ -131,7 +131,6 @@ public class MerchDb implements Database {
       return merchandises.collect(Collectors.toList());
     }
     return merchandises.collect(Collectors.toList());
-    // return new ArrayList<Merchandise>();
   }
 
   private QueryComparator<String, String> createComparator(String sign) {
