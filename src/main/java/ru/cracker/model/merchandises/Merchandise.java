@@ -1,66 +1,57 @@
 package ru.cracker.model.merchandises;
 
-import java.util.*;
-
 /**
- * 
+ *
  */
 public interface Merchandise {
 
+  /**
+   * get Merchandise's id
+   * @return
+   */
+  public int getId();
 
-    /**
-     * get Merchandise's id
-     * @return
-     */
-    public int getId();
+  /**
+   * @return price
+   */
+  public int getPrice();
 
-    /**
-     * @return
-     */
-    public int getPrice();
+  /**
+   * Returns merchandise quality in percentage
+   * @return
+   */
+  public float getBenefit();
 
-    /**
-     * @param benefit 
-     * @return
-     */
-    public void setBenefit(Double benefit);
+  /**
+   * Method mark merchandise as bought
+   * @return
+   */
+  public boolean buy();
 
-    /**
-     * Returns merchandise quality in percentage
-     * @return
-     */
-    public Double getBenefit();
+  /**
+   * Get merchant's name
+   * @return Merchant's name
+   */
+  public String getName();
 
-    /**
-     * Method mark merchandise as bought
-     * @return
-     */
-    public boolean buy();
+  /**
+   * Returns all information about merchandise.
+   * @return Complicated string of merchandise info.
+   * Formatted like "ClassName Param1:Value1 Param2:Value2 ..."
+   */
+  public String getAllInfo();
 
-    /**
-     * Get merchant's name
-     * @return Merchant's name
-     */
-    public String getName();
+  /**
+   * Returns merchandise boughtFlag.
+   * @return true if merchandise already bought.
+   */
+  public boolean isBought();
 
-    /**
-     * Returns all information about merchandise.
-     * @return Complicated string of merchandise info.
-     * Formatted like "ClassName Param1:Value1 Param2:Value2 ..."
-     */
-    public String getAllInfo();
-
-    /**
-     * Returns merchandise boughtFlag.
-     * @return true if merchandise already bought.
-     */
-    public boolean isBought();
-
-    /**
-     * method to set new id to mercandise
-     * @param id new id
-     * @return
-     */
-    public void setId(int id);
+  /**
+   * method to set new id to mercandise
+   * @param id new id
+   * @return
+   */
+  public void setId(int id);
 
 }
