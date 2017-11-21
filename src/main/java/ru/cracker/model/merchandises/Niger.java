@@ -9,7 +9,7 @@ public class Niger implements SlaveInterface {
     /**
      * Default constructor
      */
-    public Niger() {
+    private Niger() {
     }
 
     /**
@@ -49,8 +49,7 @@ public class Niger implements SlaveInterface {
      * @return new builder wtih methord for crating new instance
      */
     public static Builder newBuilder() {
-        // TODO implement here
-        return null;
+        return new Niger().new Builder();
     }
 
     /**
@@ -58,8 +57,7 @@ public class Niger implements SlaveInterface {
      * @return slave's height
      */
     public float getHeight() {
-        // TODO implement here
-        return 0.0f;
+        return height;
     }
 
     /**
@@ -67,8 +65,7 @@ public class Niger implements SlaveInterface {
      * @return slave's weight
      */
     public float getWeight() {
-        // TODO implement here
-        return 0.0f;
+        return weight;
     }
 
     /**
@@ -76,8 +73,7 @@ public class Niger implements SlaveInterface {
      * @return slave's age
      */
     public int getAge() {
-        // TODO implement here
-        return 0;
+        return age;
     }
 
     /**
@@ -85,8 +81,7 @@ public class Niger implements SlaveInterface {
      * @return returns slave's gender
      */
     public String getGender() {
-        // TODO implement here
-        return "";
+        return gender;
     }
 
     /**
@@ -94,8 +89,7 @@ public class Niger implements SlaveInterface {
      * @return slave's name
      */
     public String getName() {
-        // TODO implement here
-        return "";
+        return name;
     }
 
     /**
@@ -106,7 +100,7 @@ public class Niger implements SlaveInterface {
         /**
          * Default constructor
          */
-        public Builder() {
+        private Builder() {
         }
 
 
@@ -116,8 +110,8 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addHeight(int height) {
-            // TODO implement here
-            return null;
+            Niger.this.height = height;
+            return this;
         }
 
         /**
@@ -126,8 +120,8 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addWeight(int weight) {
-            // TODO implement here
-            return null;
+            Niger.this.weight = weight;
+            return this;
         }
 
         /**
@@ -136,8 +130,8 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addAge(int age) {
-            // TODO implement here
-            return null;
+            Niger.this.age = age;
+            return this;
         }
 
         /**
@@ -146,27 +140,8 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addGender(String gender) {
-            // TODO implement here
-            return null;
-        }
-
-        /**
-         * Sets up age to new Object
-         * @param benefit new Object's benefit
-         * @return
-         */
-        public Builder addBenefit(double benefit) {
-            // TODO implement here
-            return null;
-        }
-
-        /**
-         * calculates benefit with setted up parameters
-         * @return calculates benefit with setted up parameters
-         */
-        public Builder autoCalculateBenefit() {
-            // TODO implement here
-            return null;
+            Niger.this.gender = gender;
+            return this;
         }
 
         /**
@@ -175,8 +150,8 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addPrice(int price) {
-            // TODO implement here
-            return null;
+            Niger.this.price = price;
+            return this;
         }
 
         /**
@@ -185,8 +160,8 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addId(int id) {
-            // TODO implement here
-            return null;
+            Niger.this.id = id;
+            return this;
         }
 
         /**
@@ -194,8 +169,16 @@ public class Niger implements SlaveInterface {
          * @return Instance of new object
          */
         public Niger build() {
-            // TODO implement here
-            return null;
+            Niger niger = new Niger();
+            niger.benefit = Niger.this.benefit;
+            niger.name = Niger.this.name;
+            niger.id = Niger.this.id;
+            niger.gender = Niger.this.gender;
+            niger.price = Niger.this.price;
+            niger.age = Niger.this.age;
+            niger.weight = Niger.this.weight;
+            niger.height = Niger.this.height;
+            return niger;
         }
 
         /**
@@ -204,8 +187,8 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addName(String name) {
-            // TODO implement here
-            return null;
+            Niger.this.name = name;
+            return this;
         }
 
     }
