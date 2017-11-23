@@ -6,12 +6,20 @@ import ru.cracker.model.Observable;
 import ru.cracker.view.Observer;
 import ru.cracker.view.View;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.ResourceBundle;
 import java.util.Scanner;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.Merchandise;
+import java.util.Map;
+import java.util.stream.Collectors;
+import java.util.Arrays;
+import ru.cracker.model.merchandises.Merchandise;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
 
 /**
  *
@@ -128,7 +136,7 @@ public class CLView implements Observer, View {
     Pattern search = Pattern.compile(
         "^(\\bSEARCH \\b)((([a-zA-Z]*[a-zA-Z0-9]*)(>=|<=|>|<|!=|=)([a-zA-Z0-9]+[.\\w]*)+)((\\b and \\b)(([a-zA-Z]*[a-zA-Z0-9]*)(>=|<=|>|<|!=|=)([a-zA-Z0-9]+[.\\w]*)))*)");
     Pattern slaveMenu = Pattern.compile("(\\bSLAVE \\b)(\\d*)");
-    Pattern addMerchandise = Pattern.compile("(\\bADD \\b)([A-Z]+)");
+    Pattern addMerchandise = Pattern.compile("(\\bADD \\b)([A-Z]+)(( (([a-zA-Z]*[a-zA-Z0-9]*)=([a-zA-Z0-9]+[.\\w]*)))+)");
     Pattern help = Pattern.compile("\\bHELP\\b");
     Matcher exitMatcher;
     Matcher searchMatcher;
@@ -157,9 +165,7 @@ public class CLView implements Observer, View {
           try {
             System.out.println("search of \"" + searchMatcher.group(2).trim() + "\" performed");
             controller.searchMerchant(searchMatcher.group(2).trim());
-          } catch (UnsupportedOperationException e) {
-            System.out.println(e.getMessage());
-          } catch (WrongQueryException e) {
+          } catch (UnsupportedOperationException | WrongQueryException e) {
             System.out.println(e.getMessage());
           }
         }
@@ -173,12 +179,20 @@ public class CLView implements Observer, View {
         className = className.toLowerCase();
         className = Character.toUpperCase(className.charAt(0)) + className.substring(1);
         try {
-          Class merchandise = Class.forName("ru.cracker.model.merchandises." + className);
-          //todo Add slave by reflection
+          Class merchandise = Class.forName("ru.cracker.model.merchandises.classes." + className);
+          Map<String, String> kvs = Arrays.stream(addMatcher.group(3).trim().split(" ")).map(elem -> elem.split("="))
+              .collect(Collectors.toMap(e -> e[0], e -> e[1]));
+          Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass()).invoke(null, kvs);
+          System.out.println(merch);
         } catch (ClassNotFoundException e) {
           System.out.println("Can not find that Type of merchandise");
+        } catch (IllegalAccessException |  NoSuchMethodException e) {
+          System.out.println("Error while building");
+        }catch (WrongQueryException e){
+          System.out.println(e.getMessage());
+        }catch (InvocationTargetException e){
+          System.out.println(e.getCause().getMessage());
         }
-        System.out.println("class: " + className);
       } else {
         System.out.println("Unknown command");
       }

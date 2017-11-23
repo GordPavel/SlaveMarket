@@ -1,57 +1,82 @@
 package ru.cracker.model.merchandises;
 
+import ru.cracker.exceptions.WrongQueryException;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.InvocationTargetException;
+import java.util.Map;
+import java.util.Objects;
+
 /**
  *
  */
 public interface Merchandise {
 
-  /**
-   * get Merchandise's id
-   * @return
-   */
-  public int getId();
+//    public static Merchandise buildFromMap(Class className, Map<String, String> map) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
+//
+//        for (Field field : className.getDeclaredFields()) {
+//            if (!Objects.equals(field.getName(), "id") || !map.containsKey(field.getName()))
+//                throw new WrongQueryException("Missed key \"" + field.getName() + "\"");
+//
+//        }
+////            return (Merchandise) className.getMethod("buildFromMap", map.getClass()).invoke(null, map);
+//        return null;
+//    }
 
-  /**
-   * @return price
-   */
-  public int getPrice();
+    /**
+     * get Merchandise's id
+     *
+     * @return
+     */
+    public int getId();
 
-  /**
-   * Returns merchandise quality in percentage
-   * @return
-   */
-  public float getBenefit();
+    /**
+     * method to set new id to mercandise
+     *
+     * @param id new id
+     * @return
+     */
+    public void setId(int id);
 
-  /**
-   * Method mark merchandise as bought
-   * @return
-   */
-  public boolean buy();
+    /**
+     * @return price
+     */
+    public int getPrice();
 
-  /**
-   * Get merchant's name
-   * @return Merchant's name
-   */
-  public String getName();
+    /**
+     * Returns merchandise quality in percentage
+     *
+     * @return
+     */
+    public float getBenefit();
 
-  /**
-   * Returns all information about merchandise.
-   * @return Complicated string of merchandise info.
-   * Formatted like "ClassName Param1:Value1 Param2:Value2 ..."
-   */
-  public String getAllInfo();
+    /**
+     * Method mark merchandise as bought
+     *
+     * @return
+     */
+    public boolean buy();
 
-  /**
-   * Returns merchandise boughtFlag.
-   * @return true if merchandise already bought.
-   */
-  public boolean isBought();
+    /**
+     * Get merchant's name
+     *
+     * @return Merchant's name
+     */
+    public String getName();
 
-  /**
-   * method to set new id to mercandise
-   * @param id new id
-   * @return
-   */
-  public void setId(int id);
+    /**
+     * Returns all information about merchandise.
+     *
+     * @return Complicated string of merchandise info.
+     * Formatted like "ClassName Param1:Value1 Param2:Value2 ..."
+     */
+    public String getAllInfo();
+
+    /**
+     * Returns merchandise boughtFlag.
+     *
+     * @return true if merchandise already bought.
+     */
+    public boolean isBought();
 
 }

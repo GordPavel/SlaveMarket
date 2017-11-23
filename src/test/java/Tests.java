@@ -5,7 +5,7 @@ import ru.cracker.model.Model;
 import ru.cracker.model.Observable;
 import ru.cracker.model.SlaveMarketModel;
 import ru.cracker.model.database.MerchDb;
-import ru.cracker.model.merchandises.Niger;
+import ru.cracker.model.merchandises.classes.Niger;
 import ru.cracker.view.Observer;
 
 import java.util.ArrayList;
