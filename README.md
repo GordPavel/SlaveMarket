@@ -2,7 +2,7 @@
 **Our project can do:**
 - [x] Buy merchandise.
 - [x] Search for merchandise.
-- [ ] Add merchandise.
+- [x] Add merchandise.
 - [x] Delete merchandise.
 - [x] Change merchandise.
 - [x] Get all info about specified merchandise.
