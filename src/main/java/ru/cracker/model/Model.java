@@ -1,8 +1,8 @@
 package ru.cracker.model;
 
-import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongQueryException;
+import ru.cracker.model.merchandises.Merchandise;
 
 import java.util.List;
 
@@ -16,25 +16,28 @@ public interface Model {
      * Adding slave in database or something like that
      *
      * @param merch Slave to add
+     * @param user  user who performed action
      * @return
      */
-    public void addMerchandise(Merchandise merch);
+    public void addMerchandise(Merchandise merch, String user);
 
     /**
      * removes slave out our collection
      *
      * @param merch
+     * @param user  user who performed action
      * @return
      */
-    public void removeMerchandise(Merchandise merch);
+    public void removeMerchandise(Merchandise merch, String user);
 
     /**
      * removes slave out our collection using only unique id
      *
      * @param id
+     * @param user user who performed action
      * @return
      */
-    public void removeMerchandise(int id);
+    public void removeMerchandise(int id, String user);
 
     /**
      * Search slave by the string  query
@@ -56,9 +59,19 @@ public interface Model {
     /**
      * Marks merchandise as bought
      *
-     * @param id unique merchandise identity
+     * @param id   unique merchandise identity
+     * @param user user who performed action
      * @return bought merchandise
      * @throws MerchandiseNotFoundException
      */
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException;
+    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
+
+    /**
+     * Set new values  to merchandise.
+     *
+     * @param id     id of merchandise to be changed
+     * @param params String of parameters with values to change
+     * @param user   user who performed action
+     */
+    public void setValuesToMerchandise(int id, String params, String user);
 }

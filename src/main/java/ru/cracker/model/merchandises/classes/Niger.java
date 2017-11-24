@@ -1,9 +1,11 @@
 package ru.cracker.model.merchandises.classes;
 
+import ru.cracker.exceptions.MerchandiseAlreadyBought;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.SlaveInterface;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
 
 /**
@@ -46,6 +48,7 @@ public class Niger implements SlaveInterface {
      * of barter exchange is rarely seen.
      */
     private int price;
+    private String boughtBy ="";
 
     /**
      * Default constructor
@@ -70,8 +73,8 @@ public class Niger implements SlaveInterface {
      */
     public static Niger buildFromMap(HashMap<String, String> map) {
         Niger niger = new Niger();
-        String[] fields = new String[]{"AGE", "WEIGHT", "HEIGHT", "PRICE", "GENDER", "NAME"};
-        for (String s : fields) {
+        String[] requiredFields = new String[]{"AGE", "WEIGHT", "HEIGHT", "PRICE", "GENDER", "NAME"};
+        for (String s : requiredFields) {
             if (!map.containsKey(s))
                 throw new WrongQueryException("Missed key \"" + s + "\"");
         }
@@ -90,15 +93,57 @@ public class Niger implements SlaveInterface {
     }
 
     /**
+     * Set up object params with map values
+     *
+     * @param map of params. Where key is field name and value is field value.
+     */
+    public void setParamsByMap(Map<String, String> map) {
+        if (!bought) {
+            String[] fields = new String[]{"AGE", "WEIGHT", "HEIGHT", "PRICE", "GENDER", "NAME"};
+            map.forEach((key, value) -> {
+                boolean contains = false;
+                for (String field : fields) {
+                    if (field.equals(key)) {
+                        contains = true;
+                    }
+                }
+                if (!contains)
+                    throw new WrongQueryException(key + "=" + value);
+                switch (key) {
+                    case "AGE":
+                        this.age = Integer.parseInt(value);
+                        break;
+                    case "WEIGHT":
+                        this.weight = Float.parseFloat(value);
+                        break;
+                    case "HEIGHT":
+                        this.height = Float.parseFloat(value);
+                        break;
+                    case "PRICE":
+                        this.price = Integer.parseInt(value);
+                        break;
+                    case "GENDER":
+                        this.gender = value;
+                        break;
+                    case "NAME":
+                        this.name = value;
+                        break;
+                }
+            });
+        } else throw new MerchandiseAlreadyBought(id);
+    }
+
+    /**
      * Method mark merchandise as bought
      *
      * @return is this bought success?
      */
-    public boolean buy() {
+    public boolean buy(String user) {
         if (bought) {
-            return false;
+            throw new MerchandiseAlreadyBought(id);
         }
         bought = true;
+        boughtBy = user;
         return true;
     }
 
@@ -131,7 +176,8 @@ public class Niger implements SlaveInterface {
         if (obj.getClass().getName().equals(this.getClass().getName())) {
             if (((Niger) obj).name.equals(name) && ((Niger) obj).gender.equals(gender)
                     && Objects.equals(((Niger) obj).getBenefit(), getBenefit()) && ((Niger) obj).age == age
-                    && ((Niger) obj).weight == weight && ((Niger) obj).bought == bought && ((Niger) obj).price == price) {
+                    && ((Niger) obj).weight == weight && ((Niger) obj).bought == bought && ((Niger) obj).price == price
+                    && ((Niger) obj).boughtBy.equals(boughtBy)) {
                 return true;
             }
         }
@@ -212,6 +258,7 @@ public class Niger implements SlaveInterface {
     public boolean isBought() {
         return bought;
     }
+
 
     /**
      * Builder class for realiztion of builder pattern.

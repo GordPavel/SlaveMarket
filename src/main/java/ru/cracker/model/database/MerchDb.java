@@ -6,9 +6,7 @@ import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.Merchandise;
 
 import java.lang.reflect.Field;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -52,8 +50,9 @@ public class MerchDb implements Database {
      * Puts merch into the vault
      *
      * @param merch Merch to put in vault
+     * @param user  user who performed action
      */
-    public void addMerchandise(Merchandise merch) {
+    public void addMerchandise(Merchandise merch, String user) {
         merch.setId(merchants.size());
         merchants.add(merch);
         logger.log("admin", "add merchandise with id:" + merch.getId());
@@ -61,8 +60,9 @@ public class MerchDb implements Database {
 
     /**
      * @param merch Removes merchandise from vault
+     * @param user  user who performed action
      */
-    public void removeMerchandise(Merchandise merch) {
+    public void removeMerchandise(Merchandise merch, String user) {
         int id = merchants.indexOf(merch);
         if (id != -1) {
             merchants.stream().filter(i -> i.getId() >= id)
@@ -77,16 +77,20 @@ public class MerchDb implements Database {
     /**
      * remove merchandise from vault by id
      *
-     * @param id merchandise unique identification
+     * @param id   merchandise unique identification
+     * @param user user who performed action
      */
-    public void removeMerchandise(int id) {
+    public void removeMerchandise(int id, String user) {
         if (id >= merchants.size() || id < 0) {
             throw new MerchandiseNotFoundException(id);
+        }
+        if (merchants.get(id).isBought()) {
+            throw new MerchandiseAlreadyBought(id);
         }
         merchants.remove(id);
         merchants.stream().filter(i -> i.getId() >= id)
                 .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
-        logger.log("admin", "removed merchandise with id:" + id);
+        logger.log(user, "removed merchandise with id:" + id);
 
     }
 
@@ -99,7 +103,7 @@ public class MerchDb implements Database {
     //add niger name=nikolai age=41 gender=male height=180 weight=80 price=1000
     public List<Merchandise> searchMerchandise(String querry) {
         Stream<Merchandise> merchandises = merchants.stream();
-        if (!querry.trim().equals("")) {
+        if (!querry.trim().equals("ALL")) {
             Pattern pattern = Pattern.compile("\\sAND\\s");
             Pattern notEqQuerySplitter = Pattern.compile("([a-zA-z]+[[0-9]*[a-zA-z]]*)(>|>=|<|<=)([\\d]+[.\\d]*)");
             Pattern eqQuerySplitter = Pattern.compile("([a-zA-z]+[[0-9]*[a-zA-z]]*)(=|!=)([\\w]+[.\\w]*)");
@@ -174,16 +178,30 @@ public class MerchDb implements Database {
     }
 
     @Override
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException {
+    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
         if (id >= merchants.size() || id < 0) {
             throw new MerchandiseNotFoundException(id);
         } else {
-            if (getMerchantById(id).buy()) {
+            if (getMerchantById(id).buy(user)) {
                 logger.log("admin", "bought merchandise with id:" + id);
                 return getMerchantById(id);
             } else {
                 throw new MerchandiseAlreadyBought(id);
             }
         }
+    }
+
+    /**
+     * Set new values  to merchandise.
+     *
+     * @param id     id of merchandise to be changed
+     * @param params String of parameters with values to change
+     * @param user   user who performed action
+     */
+    public void setValuesToMerchandise(int id, String params, String user) {
+        Map<String, String> kvs = Arrays.stream(params.trim().split(" "))
+                .map(elem -> elem.split("="))
+                .collect(Collectors.toMap(e -> e[0], e -> e[1]));
+        getMerchantById(id).setParamsByMap(kvs);
     }
 }

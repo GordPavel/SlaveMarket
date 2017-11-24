@@ -1,11 +1,6 @@
 package ru.cracker.model.merchandises;
 
-import ru.cracker.exceptions.WrongQueryException;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.InvocationTargetException;
 import java.util.Map;
-import java.util.Objects;
 
 /**
  *
@@ -55,7 +50,7 @@ public interface Merchandise {
      *
      * @return
      */
-    public boolean buy();
+    public boolean buy(String user);
 
     /**
      * Get merchant's name
@@ -79,4 +74,10 @@ public interface Merchandise {
      */
     public boolean isBought();
 
+    /**
+     * Set up object params with map values
+     *
+     * @param map of params. Where key is field name and value is field value.
+     */
+    public void setParamsByMap(Map<String, String> map);
 }

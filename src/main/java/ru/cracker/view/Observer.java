@@ -2,19 +2,21 @@ package ru.cracker.view;
 
 
 /**
- * 
+ *
  */
 public interface Observer {
 
 
     /**
      * Apply action performed after the trigger
+     *
      * @return
      */
     public void update();
 
     /**
      * Update information of Merchandise with id.
+     *
      * @param id id of changed element
      * @return
      */
@@ -22,6 +24,7 @@ public interface Observer {
 
     /**
      * Update information of Merchandise with id.
+     *
      * @param id id of changed element
      * @return
      */

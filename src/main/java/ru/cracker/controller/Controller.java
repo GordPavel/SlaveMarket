@@ -16,25 +16,28 @@ public interface Controller {
      * Add slave in model
      *
      * @param merch Slave to add
+     * @param user  user who performed action
      * @return
      */
-    public void addMerchant(Merchandise merch);
+    public void addMerchant(Merchandise merch, String user);
 
     /**
      * tells to model for remove the slave
      *
      * @param merch slave to remove
+     * @param user  user who performed action
      * @return
      */
-    public void removeMerchant(Merchandise merch);
+    public void removeMerchant(Merchandise merch, String user);
 
     /**
      * tells to model for remove the slave by id
      *
-     * @param id slaves's id to remove the slave by it.
+     * @param id   slaves's id to remove the slave by it.
+     * @param user user who performed action
      * @return
      */
-    public void removeMerchant(int id);
+    public void removeMerchant(int id, String user);
 
     /**
      * tells to model for search  the slave by the query
@@ -55,10 +58,20 @@ public interface Controller {
     /**
      * Marks merchandise as bought
      *
-     * @param id unique merchandise identity
+     * @param id   unique merchandise identity
+     * @param user user who performed action
      * @return bought merchandise
      * @throws MerchandiseNotFoundException
      */
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException;
+    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
+
+    /**
+     * Set new values  to merchandise.
+     *
+     * @param id     id of merchandise to be changed
+     * @param params String of parameters with values to change
+     * @param user   user who performed action
+     */
+    public void setValuesToMerchandise(int id, String params, String user);
 
 }

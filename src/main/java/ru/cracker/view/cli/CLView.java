@@ -11,10 +11,7 @@ import ru.cracker.view.Observer;
 import ru.cracker.view.View;
 
 import java.lang.reflect.InvocationTargetException;
-import java.util.Arrays;
-import java.util.Map;
-import java.util.ResourceBundle;
-import java.util.Scanner;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
@@ -27,6 +24,7 @@ public class CLView implements Observer, View {
 
     private ResourceBundle resources = ResourceBundle.getBundle("app");
     private Controller controller;
+    private String user= "s3rius";
 
     /**
      * Constructor to subscribe new view as observer . And link controller.
@@ -41,12 +39,12 @@ public class CLView implements Observer, View {
     }
 
     private void openSlaveMenu(int slaveId, Scanner scanner) {
-        System.out.println("Opened slave\'s menu with id " + slaveId + "\nType \"help\" to learn basics");
+        System.out.println("Opened merchandise\'s menu with id " + slaveId + "\nType \"help\" to learn basics");
         System.out.print(">");
         Pattern delete = Pattern.compile("\\bDELETE\\b");
-        Pattern set = Pattern.compile("(\\bSET \\b)([a-zA-Z]+=[a-z0-9A-Z]+)");
+        Pattern set = Pattern.compile("(\\bSET\\b)(( ([a-zA-Z]*[a-zA-Z0-9]*)(=)([a-zA-Z0-9]+[.\\w]*)+)+)");
         Pattern exit = Pattern.compile("(\\bEXIT\\b)");
-        Pattern help = Pattern.compile("(\\bHELP\\b)");
+        Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?");
         Pattern info = Pattern.compile("(\\bINFO\\b)");
         Pattern buy = Pattern.compile("(\\bBUY\\b)");
         Matcher deleteMatcher;
@@ -64,20 +62,32 @@ public class CLView implements Observer, View {
             infoMatcher = info.matcher(action);
             buyMatcher = buy.matcher(action);
             if (deleteMatcher.lookingAt()) {
-                System.out.println("You try to delete slave but that operation is ");
                 try {
-                    controller.removeMerchant(slaveId);
+                    controller.removeMerchant(slaveId, user);
                 } catch (UnsupportedOperationException e) {
+                    System.out.println("You try to delete slave but that operation is ");
                     System.out.println(e.getMessage());
                 }
                 return;
             } else if (exitMatcher.lookingAt()) {
                 return;
             } else if (setMatcher.lookingAt()) {
-                System.out.println("you try to set " + setMatcher.group(2) + " to slave with id=" + slaveId);
-                System.out.println("But that operation is not supported yet");
+                try {
+                    controller.setValuesToMerchandise(slaveId, setMatcher.group(2), user);
+                } catch (MerchandiseAlreadyBought e) {
+                    System.out.println("Can not change merchandise. It's already bought.");
+                } catch (WrongQueryException e) {
+                    System.out.println(e.getMessage());
+                }
             } else if (helpMatcher.lookingAt()) {
-                System.out.println(resources.getString("slaveMenuHelp"));
+                if (helpMatcher.group(2) == null)
+                    System.out.println(resources.getString("slaveMenuHelp"));
+                else
+                    try {
+                        System.out.println(resources.getString("HELPMERCH" + helpMatcher.group(2).trim()));
+                    } catch (MissingResourceException e) {
+                        System.out.println("Unknown option \"" + helpMatcher.group(2).trim() + "\"");
+                    }
             } else if (infoMatcher.lookingAt()) {
                 System.out.println("Slave's info :");
                 try {
@@ -87,7 +97,7 @@ public class CLView implements Observer, View {
                 }
             } else if (buyMatcher.lookingAt()) {
                 try {
-                    controller.buyMerchandise(slaveId);
+                    controller.buyMerchandise(slaveId, user);
                 } catch (MerchandiseAlreadyBought e) {
                     System.out.println(e.getMessage());
                 }
@@ -133,11 +143,11 @@ public class CLView implements Observer, View {
         Scanner scanner = new Scanner(System.in);
         Pattern exit = Pattern.compile("(\\bEXIT\\b)([ ]*)([\\w]*)");
         Pattern search = Pattern.compile(
-                "^(\\bSEARCH \\b)((([a-zA-Z]*[a-zA-Z0-9]*)(>=|<=|>|<|!=|=)([a-zA-Z0-9]+[.\\w]*)+)((\\b AND \\b)(([a-zA-Z]*[a-zA-Z0-9]*)(>=|<=|>|<|!=|=)([a-zA-Z0-9]+.[\\w]*)))*)");
-        Pattern slaveMenu = Pattern.compile("(\\bSLAVE \\b)(\\d*)");
+                "^(\\bSEARCH \\b)((([a-zA-Z]*[a-zA-Z0-9]*)(>=|<=|>|<|!=|=)([a-zA-Z0-9]+[.\\w]*)+)((\\b AND \\b)(([a-zA-Z]*[a-zA-Z0-9]*)(>=|<=|>|<|!=|=)([a-zA-Z0-9]+.[\\w]*)))*|ALL)");
+        Pattern slaveMenu = Pattern.compile("(\\bMERCH \\b)(\\d*)");
         Pattern addMerchandise = Pattern
                 .compile("(\\bADD \\b)([A-Z]+)(( (([a-zA-Z]*[a-zA-Z0-9]*)=([a-zA-Z0-9]+[.\\w]*)))+)");
-        Pattern help = Pattern.compile("\\bHELP\\b");
+        Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?");
         Matcher exitMatcher;
         Matcher searchMatcher;
         Matcher slaveMenuMatcher;
@@ -178,7 +188,15 @@ public class CLView implements Observer, View {
                     System.out.println("Merchandise with that id doesn't exist");
                 }
             } else if (helpMatcher.lookingAt()) {
-                System.out.println(resources.getString("help"));
+                if (helpMatcher.group(2) == null) {
+                    System.out.println(resources.getString("help"));
+                } else {
+                    try {
+                        System.out.println(resources.getString("HELPMAIN" + helpMatcher.group(2).trim()));
+                    } catch (MissingResourceException e) {
+                        System.out.println("Unknown option \"" + helpMatcher.group(2).trim() + "\"");
+                    }
+                }
             } else if (addMatcher.lookingAt()) {
                 String className = addMatcher.group(2);
                 className = className.toLowerCase();
@@ -190,7 +208,7 @@ public class CLView implements Observer, View {
                             .collect(Collectors.toMap(e -> e[0], e -> e[1]));
                     Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass())
                             .invoke(null, kvs);
-                    controller.addMerchant(merch);
+                    controller.addMerchant(merch, user);
                 } catch (ClassNotFoundException e) {
                     System.out.println("Can not find that Type of merchandise");
                 } catch (IllegalAccessException | NoSuchMethodException e) {

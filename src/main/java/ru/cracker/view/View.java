@@ -2,7 +2,7 @@ package ru.cracker.view;
 
 
 /**
- * 
+ *
  */
 public interface View {
 

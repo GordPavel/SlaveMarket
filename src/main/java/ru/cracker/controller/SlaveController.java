@@ -1,8 +1,8 @@
 package ru.cracker.controller;
 
+import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.model.Model;
 import ru.cracker.model.merchandises.Merchandise;
-import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.view.View;
 import ru.cracker.view.cli.CLView;
 
@@ -38,20 +38,22 @@ public class SlaveController implements Controller {
      * Add slave in model
      *
      * @param merch Slave to add
+     * @param user  user who performed action
      * @return
      */
-    public void addMerchant(Merchandise merch) {
-        model.addMerchandise(merch);
+    public void addMerchant(Merchandise merch, String user) {
+        model.addMerchandise(merch, user);
     }
 
     /**
      * tells to model for remove the slave
      *
      * @param merch slave to remove
+     * @param user  user who performed action
      * @return
      */
-    public void removeMerchant(Merchandise merch) {
-        // TODO implement here
+    public void removeMerchant(Merchandise merch, String user) {
+        model.removeMerchandise(merch, user);
     }
 
     /**
@@ -67,11 +69,12 @@ public class SlaveController implements Controller {
     /**
      * tells to model for remove the slave by id
      *
-     * @param id slaves's id to remove the slave by it.
+     * @param id   slaves's id to remove the slave by it.
+     * @param user user who performed action
      * @return
      */
-    public void removeMerchant(int id) {
-        model.removeMerchandise(id);
+    public void removeMerchant(int id, String user) {
+        model.removeMerchandise(id, user);
     }
 
     /**
@@ -88,13 +91,24 @@ public class SlaveController implements Controller {
     /**
      * Marks merchandise as bought
      *
-     * @param id unique merchandise identity
+     * @param id   unique merchandise identity
+     * @param user user who performed action
      * @return bought merchandise
-     * @throws MerchandiseNotFoundException
+     * @throws MerchandiseNotFoundException throws if merchandise with that id is not found
      */
     @Override
-    public Merchandise buyMerchandise(int id) throws MerchandiseNotFoundException {
-        return model.buyMerchandise(id);
+    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
+        return model.buyMerchandise(id, user);
     }
 
+    /**
+     * Set new values  to merchandise.
+     *
+     * @param id     id of merchandise to be changed
+     * @param params String of parameters with values to change
+     * @param user   user who performed action
+     */
+    public void setValuesToMerchandise(int id, String params, String user) {
+        model.setValuesToMerchandise(id, params, user);
+    }
 }
