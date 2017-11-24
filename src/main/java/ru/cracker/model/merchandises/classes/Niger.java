@@ -48,7 +48,7 @@ public class Niger implements SlaveInterface {
      * of barter exchange is rarely seen.
      */
     private int price;
-    private String boughtBy ="";
+    private String boughtBy = "";
 
     /**
      * Default constructor
@@ -57,9 +57,9 @@ public class Niger implements SlaveInterface {
     }
 
     /**
-     * Returns new Builder instance for adding parametres in new slave
+     * Returns new Builder instance for adding parameters in new slave
      *
-     * @return new builder wtih methord for crating new instance
+     * @return new builder with method for creating new instance
      */
     public static Builder newBuilder() {
         return new Niger().new Builder();
@@ -351,6 +351,18 @@ public class Niger implements SlaveInterface {
             niger.age = Niger.this.age;
             niger.weight = Niger.this.weight;
             niger.height = Niger.this.height;
+            return niger;
+        }
+
+        public Niger buildDefault() {
+            Niger niger = new Niger();
+            niger.name = "";
+            niger.id = -1;
+            niger.gender = "";
+            niger.price = 0;
+            niger.age = -1;
+            niger.weight = -1;
+            niger.height = -1;
             return niger;
         }
 

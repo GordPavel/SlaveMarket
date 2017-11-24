@@ -55,7 +55,7 @@ public class MerchDb implements Database {
     public void addMerchandise(Merchandise merch, String user) {
         merch.setId(merchants.size());
         merchants.add(merch);
-        logger.log("admin", "add merchandise with id:" + merch.getId());
+        logger.log(user, "add merchandise", merchants.get(merchants.size() - 1).getAllInfo());
     }
 
     /**
@@ -69,7 +69,7 @@ public class MerchDb implements Database {
                     .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
             merchants.remove(id);
 //        add niger name=igor gender=helicopter price=10000 height=1414 weight=1300 age=11
-            logger.log("admin", "removed merchandise with id:" + id);
+            logger.log(user, "removed merchandise", merch.getAllInfo());
         } else
             throw new MerchandiseNotFoundException(merch);
     }
@@ -87,10 +87,10 @@ public class MerchDb implements Database {
         if (merchants.get(id).isBought()) {
             throw new MerchandiseAlreadyBought(id);
         }
+        logger.log(user, "removed merchandise", getMerchantById(id).getAllInfo());
         merchants.remove(id);
         merchants.stream().filter(i -> i.getId() >= id)
                 .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
-        logger.log(user, "removed merchandise with id:" + id);
 
     }
 
@@ -104,9 +104,10 @@ public class MerchDb implements Database {
     public List<Merchandise> searchMerchandise(String querry) {
         Stream<Merchandise> merchandises = merchants.stream();
         if (!querry.trim().equals("ALL")) {
+            String namePattern = "([a-zA-z]+[[0-9]*[a-zA-z]]*)";
             Pattern pattern = Pattern.compile("\\sAND\\s");
-            Pattern notEqQuerySplitter = Pattern.compile("([a-zA-z]+[[0-9]*[a-zA-z]]*)(>|>=|<|<=)([\\d]+[.\\d]*)");
-            Pattern eqQuerySplitter = Pattern.compile("([a-zA-z]+[[0-9]*[a-zA-z]]*)(=|!=)([\\w]+[.\\w]*)");
+            Pattern notEqQuerySplitter = Pattern.compile(namePattern + "(>|>=|<|<=)([\\d]+[.\\d]*)");
+            Pattern eqQuerySplitter = Pattern.compile(namePattern + "(=|!=)([\\w]+[.\\w]*)");
             String[] strings = pattern.split(querry);
             for (String subQuery : strings) {
                 Matcher notEqualsMatcher = notEqQuerySplitter.matcher(subQuery);
@@ -183,7 +184,7 @@ public class MerchDb implements Database {
             throw new MerchandiseNotFoundException(id);
         } else {
             if (getMerchantById(id).buy(user)) {
-                logger.log("admin", "bought merchandise with id:" + id);
+                logger.log(user, "bought merchandise", getMerchantById(id).getAllInfo());
                 return getMerchantById(id);
             } else {
                 throw new MerchandiseAlreadyBought(id);
@@ -202,6 +203,8 @@ public class MerchDb implements Database {
         Map<String, String> kvs = Arrays.stream(params.trim().split(" "))
                 .map(elem -> elem.split("="))
                 .collect(Collectors.toMap(e -> e[0], e -> e[1]));
+        String merchIfo = "{Before: " + getMerchantById(id).getAllInfo() + "},";
         getMerchantById(id).setParamsByMap(kvs);
+        logger.log(user, "Changed merchandise parameters", merchIfo + " {After: " + getMerchantById(id) + "}");
     }
 }

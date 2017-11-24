@@ -24,7 +24,7 @@ public class CLView implements Observer, View {
 
     private ResourceBundle resources = ResourceBundle.getBundle("app");
     private Controller controller;
-    private String user= "s3rius";
+    private String user = "s3rius";
 
     /**
      * Constructor to subscribe new view as observer . And link controller.
@@ -141,12 +141,14 @@ public class CLView implements Observer, View {
         System.out.println(resources.getString("welcomeBasics"));
         System.out.print(">");
         Scanner scanner = new Scanner(System.in);
+        String namePattern = "([a-zA-Z]*[a-zA-Z0-9]*)";
+        String valuePattern = "([a-zA-Z0-9]+[.\\w]*)";
         Pattern exit = Pattern.compile("(\\bEXIT\\b)([ ]*)([\\w]*)");
         Pattern search = Pattern.compile(
-                "^(\\bSEARCH \\b)((([a-zA-Z]*[a-zA-Z0-9]*)(>=|<=|>|<|!=|=)([a-zA-Z0-9]+[.\\w]*)+)((\\b AND \\b)(([a-zA-Z]*[a-zA-Z0-9]*)(>=|<=|>|<|!=|=)([a-zA-Z0-9]+.[\\w]*)))*|ALL)");
+                "^(\\bSEARCH \\b)((" + namePattern + "(>=|<=|>|<|!=|=)" + valuePattern + "+)((\\b AND \\b)(" + namePattern + "(>=|<=|>|<|!=|=)" + valuePattern + "))*|ALL)");
         Pattern slaveMenu = Pattern.compile("(\\bMERCH \\b)(\\d*)");
         Pattern addMerchandise = Pattern
-                .compile("(\\bADD \\b)([A-Z]+)(( (([a-zA-Z]*[a-zA-Z0-9]*)=([a-zA-Z0-9]+[.\\w]*)))+)");
+                .compile("(\\bADD \\b)([A-Z]+)(( (" + namePattern + "=" + valuePattern + "))+)");
         Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?");
         Matcher exitMatcher;
         Matcher searchMatcher;

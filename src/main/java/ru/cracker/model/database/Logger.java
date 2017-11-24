@@ -34,15 +34,15 @@ public class Logger {
      * @param user   Username who has performed an action
      * @param action action to log performed by user
      */
-    public void log(String user, String action) {
+    public void log(String user, String action, String merchInfo) {
         try {
             userWriter = new PrintWriter(new FileOutputStream(new File(userDir + user + ".log"), true), true);
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
         String date = new SimpleDateFormat(datePattern).format(new Date(System.currentTimeMillis()));
-        writer.write('\n' + date + " " + action + " performed by " + user);
-        userWriter.write('\n' + date + " " + action);
+        writer.write('\n' + date + " " + action + " [" + merchInfo + "] performed by " + user);
+        userWriter.write('\n' + date + " " + action + " [" + merchInfo + "]");
         System.out.println(new SimpleDateFormat(datePattern).format(new Date(System.currentTimeMillis())) + " "
                 + action + " performed by " + user);
         writer.flush();
