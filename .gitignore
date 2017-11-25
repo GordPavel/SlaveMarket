@@ -1,5 +1,5 @@
 target/*
 .idea/*
 .settings/*
-logs/main/*
 logs/users/*
+!logs/users/admin.log
