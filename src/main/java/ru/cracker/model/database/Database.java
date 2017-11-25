@@ -58,7 +58,7 @@ public interface Database {
      * @param id   unique merchandise identity
      * @param user user who performed action
      * @return bought merchandise
-     * @throws MerchandiseNotFoundException
+     * @throws MerchandiseNotFoundException throws if merchandise can not be found
      */
     public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
 

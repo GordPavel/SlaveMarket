@@ -1,11 +1,12 @@
 package ru.cracker.model.merchandises;
 
+import java.io.Serializable;
 import java.util.Map;
 
 /**
  *
  */
-public interface Merchandise {
+public interface Merchandise extends Serializable{
 
 //    public static Merchandise buildFromMap(Class className, Map<String, String> map) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
 //

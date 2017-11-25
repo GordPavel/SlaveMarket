@@ -41,12 +41,12 @@ public class CLView implements Observer, View {
     private void openSlaveMenu(int slaveId, Scanner scanner) {
         System.out.println("Opened merchandise\'s menu with id " + slaveId + "\nType \"help\" to learn basics");
         System.out.print(">");
-        Pattern delete = Pattern.compile("\\bDELETE\\b");
-        Pattern set = Pattern.compile("(\\bSET\\b)(( ([a-zA-Z]*[a-zA-Z0-9]*)(=)([a-zA-Z0-9]+[.\\w]*)+)+)");
-        Pattern exit = Pattern.compile("(\\bEXIT\\b)");
-        Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?");
-        Pattern info = Pattern.compile("(\\bINFO\\b)");
-        Pattern buy = Pattern.compile("(\\bBUY\\b)");
+        Pattern delete = Pattern.compile("\\bDELETE\\b", Pattern.CASE_INSENSITIVE);
+        Pattern set = Pattern.compile("(\\bSET\\b)(( ([a-zA-Z]*[a-zA-Z0-9]*)(=)([a-zA-Z0-9]+[.\\w]*)+)+)", Pattern.CASE_INSENSITIVE);
+        Pattern exit = Pattern.compile("(\\bEXIT\\b)", Pattern.CASE_INSENSITIVE);
+        Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
+        Pattern info = Pattern.compile("(\\bINFO\\b)", Pattern.CASE_INSENSITIVE);
+        Pattern buy = Pattern.compile("(\\bBUY\\b)", Pattern.CASE_INSENSITIVE);
         Matcher deleteMatcher;
         Matcher setMatcher;
         Matcher exitMatcher;
@@ -54,7 +54,7 @@ public class CLView implements Observer, View {
         Matcher infoMatcher;
         Matcher buyMatcher;
         while (scanner.hasNext()) {
-            String action = scanner.nextLine().toUpperCase();
+            String action = scanner.nextLine();
             deleteMatcher = delete.matcher(action);
             setMatcher = set.matcher(action);
             exitMatcher = exit.matcher(action);
@@ -84,7 +84,7 @@ public class CLView implements Observer, View {
                     System.out.println(resources.getString("slaveMenuHelp"));
                 else
                     try {
-                        System.out.println(resources.getString("HELPMERCH" + helpMatcher.group(2).trim()));
+                        System.out.println(resources.getString("HELPMERCH" + helpMatcher.group(2).trim().toUpperCase()));
                     } catch (MissingResourceException e) {
                         System.out.println("Unknown option \"" + helpMatcher.group(2).trim() + "\"");
                     }
@@ -143,20 +143,20 @@ public class CLView implements Observer, View {
         Scanner scanner = new Scanner(System.in);
         String namePattern = "([a-zA-Z]*[a-zA-Z0-9]*)";
         String valuePattern = "([a-zA-Z0-9]+[.\\w]*)";
-        Pattern exit = Pattern.compile("(\\bEXIT\\b)([ ]*)([\\w]*)");
+        Pattern exit = Pattern.compile("(\\bEXIT\\b)([ ]*)([\\w]*)", Pattern.CASE_INSENSITIVE);
         Pattern search = Pattern.compile(
-                "^(\\bSEARCH \\b)((" + namePattern + "(>=|<=|>|<|!=|=)" + valuePattern + "+)((\\b AND \\b)(" + namePattern + "(>=|<=|>|<|!=|=)" + valuePattern + "))*|ALL)");
-        Pattern slaveMenu = Pattern.compile("(\\bMERCH \\b)(\\d*)");
+                "^(\\bSEARCH \\b)((" + namePattern + "(>=|<=|>|<|!=|=)" + valuePattern + "+)((\\b AND \\b)(" + namePattern + "(>=|<=|>|<|!=|=)" + valuePattern + "))*|ALL)", Pattern.CASE_INSENSITIVE);
+        Pattern slaveMenu = Pattern.compile("(\\bMERCH \\b)(\\d*)", Pattern.CASE_INSENSITIVE);
         Pattern addMerchandise = Pattern
-                .compile("(\\bADD \\b)([A-Z]+)(( (" + namePattern + "=" + valuePattern + "))+)");
-        Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?");
+                .compile("(\\bADD \\b)([A-Z]+)(( (" + namePattern + "=" + valuePattern + "))+)", Pattern.CASE_INSENSITIVE);
+        Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
         Matcher exitMatcher;
         Matcher searchMatcher;
         Matcher slaveMenuMatcher;
         Matcher helpMatcher;
         Matcher addMatcher;
         while (scanner.hasNext()) {
-            String line = scanner.nextLine().toUpperCase();
+            String line = scanner.nextLine();
             exitMatcher = exit.matcher(line);
             addMatcher = addMerchandise.matcher(line);
             searchMatcher = search.matcher(line);
@@ -194,7 +194,7 @@ public class CLView implements Observer, View {
                     System.out.println(resources.getString("help"));
                 } else {
                     try {
-                        System.out.println(resources.getString("HELPMAIN" + helpMatcher.group(2).trim()));
+                        System.out.println(resources.getString("HELPMAIN" + helpMatcher.group(2).trim().toUpperCase()));
                     } catch (MissingResourceException e) {
                         System.out.println("Unknown option \"" + helpMatcher.group(2).trim() + "\"");
                     }
@@ -207,7 +207,7 @@ public class CLView implements Observer, View {
                     Class merchandise = Class.forName("ru.cracker.model.merchandises.classes." + className);
                     Map<String, String> kvs = Arrays.stream(addMatcher.group(3).trim().split(" "))
                             .map(elem -> elem.split("="))
-                            .collect(Collectors.toMap(e -> e[0], e -> e[1]));
+                            .collect(Collectors.toMap(e -> e[0].toUpperCase(), e -> e[1]));
                     Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass())
                             .invoke(null, kvs);
                     controller.addMerchant(merch, user);
