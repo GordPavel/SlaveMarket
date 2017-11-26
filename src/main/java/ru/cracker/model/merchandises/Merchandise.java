@@ -6,7 +6,7 @@ import java.util.Map;
 /**
  *
  */
-public interface Merchandise extends Serializable{
+public interface Merchandise extends Serializable {
 
 //    public static Merchandise buildFromMap(Class className, Map<String, String> map) throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException, IllegalAccessException {
 //

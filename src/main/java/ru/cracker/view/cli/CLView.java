@@ -42,7 +42,8 @@ public class CLView implements Observer, View {
         System.out.println("Opened merchandise\'s menu with id " + slaveId + "\nType \"help\" to learn basics");
         System.out.print(">");
         Pattern delete = Pattern.compile("\\bDELETE\\b", Pattern.CASE_INSENSITIVE);
-        Pattern set = Pattern.compile("(\\bSET\\b)(( ([a-zA-Z]*[a-zA-Z0-9]*)(=)([a-zA-Z0-9]+[.\\w]*)+)+)", Pattern.CASE_INSENSITIVE);
+        Pattern set = Pattern
+                .compile("(\\bSET\\b)(( ([a-zA-Z]*[a-zA-Z0-9]*)(=)([a-zA-Z0-9]+[.\\w]*)+)+)", Pattern.CASE_INSENSITIVE);
         Pattern exit = Pattern.compile("(\\bEXIT\\b)", Pattern.CASE_INSENSITIVE);
         Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
         Pattern info = Pattern.compile("(\\bINFO\\b)", Pattern.CASE_INSENSITIVE);
@@ -84,7 +85,8 @@ public class CLView implements Observer, View {
                     System.out.println(resources.getString("slaveMenuHelp"));
                 else
                     try {
-                        System.out.println(resources.getString("HELPMERCH" + helpMatcher.group(2).trim().toUpperCase()));
+                        System.out
+                                .println(resources.getString("HELPMERCH" + helpMatcher.group(2).trim().toUpperCase()));
                     } catch (MissingResourceException e) {
                         System.out.println("Unknown option \"" + helpMatcher.group(2).trim() + "\"");
                     }
@@ -204,6 +206,8 @@ public class CLView implements Observer, View {
                 className = className.toLowerCase();
                 className = Character.toUpperCase(className.charAt(0)) + className.substring(1);
                 try {
+                    //This code sucks, you know it and I know it.
+                    //Move on and call me an idiot later.
                     Class merchandise = Class.forName("ru.cracker.model.merchandises.classes." + className);
                     Map<String, String> kvs = Arrays.stream(addMatcher.group(3).trim().split(" "))
                             .map(elem -> elem.split("="))
@@ -211,6 +215,7 @@ public class CLView implements Observer, View {
                     Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass())
                             .invoke(null, kvs);
                     controller.addMerchant(merch, user);
+                    // Catching exceptions is for communists
                 } catch (ClassNotFoundException e) {
                     System.out.println("Can not find that Type of merchandise");
                 } catch (IllegalAccessException | NoSuchMethodException e) {

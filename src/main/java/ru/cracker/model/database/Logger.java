@@ -11,18 +11,20 @@ import java.util.Date;
  *
  */
 public class Logger {
-
+    /**
+     * mainLogFile -  File string to log all of operations.
+     * userDir - directory to store users logs.
+     * datePattern - pattern to write date in logs.
+     * writers to write logs in files.
+     */
     private final String mainLogFile = "logs/main/Slavemarket.log";
     private final String userDir = "logs/users/";
     private final String datePattern = "YYYY-MM-dd HH:mm:ss";
     PrintWriter writer;
     PrintWriter userWriter;
 
-    /**
-     * Default constructor
-     */
-    public Logger() {
 
+    public Logger() {
         try {
             writer = new PrintWriter(new FileOutputStream(new File(mainLogFile), true), true);
         } catch (FileNotFoundException e) {

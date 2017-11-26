@@ -152,6 +152,16 @@ public class MerchDb implements Database {
     //add niger name=nikolai age=41 gender=male height=180 weight=80 price=1000
     public List<Merchandise> searchMerchandise(String querry) {
         Stream<Merchandise> merchandises = merchants.stream();
+        /**
+         //	Dear maintainer:
+         //
+         // Once you are done trying to 'optimize' this routine,
+         // and have realized what a terrible mistake that was,
+         // please increment the following counter as a warning
+         // to the next guy:
+         //
+         // total_hours_wasted_here = 42
+         */
         if (!Pattern.compile("all", Pattern.CASE_INSENSITIVE).matcher(querry.trim()).lookingAt()) {
             String namePattern = "([a-zA-z]+[[0-9]*[a-zA-z]]*)";
             Pattern pattern = Pattern.compile("\\sAND\\s");
@@ -208,6 +218,12 @@ public class MerchDb implements Database {
         return merchandises.collect(Collectors.toList());
     }
 
+    /**
+     * Function to create comparator for subQuery
+     *
+     * @param sign sign of subQuery between key an value
+     * @return lambda comparator that compare to values and return boolean.
+     */
     private QueryComparator<String, String> createComparator(String sign) {
         QueryComparator<String, String> comparator = null;
         if (sign.equals(">"))
@@ -281,4 +297,5 @@ public class MerchDb implements Database {
         logger.log(user, "Changed merchandise parameters", merchIfo + " {changed Values:" + kvs + "}");
         saveData();
     }
+
 }

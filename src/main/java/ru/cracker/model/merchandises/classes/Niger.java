@@ -72,6 +72,7 @@ public class Niger implements SlaveInterface {
      * @return new Instance of class made by map.
      */
     public static Niger buildFromMap(HashMap<String, String> map) {
+        // This is crap code but it’s 3 a.m. and I need to get this working
         Niger niger = new Niger();
         String[] requiredFields = new String[]{"AGE", "WEIGHT", "HEIGHT", "PRICE", "GENDER", "NAME"};
         for (String s : requiredFields) {

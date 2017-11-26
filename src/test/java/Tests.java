@@ -1,5 +1,4 @@
 import org.junit.Assert;
-import org.junit.Ignore;
 import org.junit.Test;
 import ru.cracker.model.Model;
 import ru.cracker.model.Observable;
@@ -96,9 +95,11 @@ public class Tests {
 //    @Ignore
     public void addSlaveTest() {
         //        Slave slave = new Slave(1, 2, 3, "male", "David", 320);
-        Niger slave = Niger.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320).addAge(3).build();
+        Niger slave = Niger.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320)
+                .addAge(3).build();
         db.addMerchandise(slave, user);
-        slaves.add(Niger.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320).addAge(3).build());
+        slaves.add(Niger.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320)
+                .addAge(3).build());
         Assert.assertEquals(slaves, db.searchMerchandise("ALL"));
     }
 
