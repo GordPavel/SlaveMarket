@@ -1,9 +1,12 @@
 package ru.cracker.model.database;
 
+import org.reflections.Reflections;
 import ru.cracker.exceptions.MerchandiseAlreadyBought;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
+import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.Merchandise;
+import ru.cracker.model.merchandises.SlaveInterface;
 import ru.cracker.model.merchandises.classes.Niger;
 
 import java.io.*;
@@ -82,13 +85,12 @@ public class MerchDb implements Database {
         try {
             objectOutputStream = new ObjectOutputStream(new FileOutputStream("data.dat"));
         } catch (IOException e) {
-            System.out
-                    .println("\u001B[31mCan't open/create data file create data.dat file in project directory\u001B[0m");
+            logger.logError("\u001B[31mCan't open/create data file create data.dat file in project directory\u001B[0m");
         }
         try {
             objectOutputStream.writeObject(merchants);
         } catch (IOException e) {
-            System.out.println("\u001B[31mCan't save changes\u001B[0m");
+            logger.logError("\u001B[31mCan't save changes\u001B[0m");
             logger.log("DataBase", "\u001B[31mSave failed\u001B[0m", "");
         }
 
@@ -136,7 +138,7 @@ public class MerchDb implements Database {
         if (merchants.get(id).isBought()) {
             throw new MerchandiseAlreadyBought(id);
         }
-        logger.log(user, "removed merchandise", getMerchantById(id).getAllInfo());
+        logger.log(user, "removed merchandise", findMerh(id).getAllInfo());
         merchants.remove(id);
         merchants.stream().filter(i -> i.getId() >= id)
                 .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
@@ -150,7 +152,7 @@ public class MerchDb implements Database {
      * @return List of Merchandises specified by query
      */
     //add niger name=nikolai age=41 gender=male height=180 weight=80 price=1000
-    public List<Merchandise> searchMerchandise(String querry) {
+    public List<String> searchMerchandise(String querry) {
         Stream<Merchandise> merchandises = merchants.stream();
         /**
          //	Dear maintainer:
@@ -213,9 +215,9 @@ public class MerchDb implements Database {
                     return false;
                 });
             }
-            return merchandises.collect(Collectors.toList());
+            return merchandises.map(Merchandise::getAllInfo).collect(Collectors.toList());
         }
-        return merchandises.collect(Collectors.toList());
+        return merchandises.map(Merchandise::getAllInfo).collect(Collectors.toList());
     }
 
     /**
@@ -248,7 +250,17 @@ public class MerchDb implements Database {
      * @return Founded merchandise or Exception
      */
     @Override
-    public Merchandise getMerchantById(int id) throws MerchandiseNotFoundException {
+    public String getMerchantById(int id) throws MerchandiseNotFoundException {
+        return merchants.stream().filter(i -> Integer.compare(i.getId(), id) == 0)
+                .collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
+                    if (list.size() != 1) {
+                        throw new MerchandiseNotFoundException(id);
+                    }
+                    return list.get(0).getAllInfo();
+                }));
+    }
+
+    private Merchandise findMerh(int id){
         return merchants.stream().filter(i -> Integer.compare(i.getId(), id) == 0)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
                     if (list.size() != 1) {
@@ -267,12 +279,12 @@ public class MerchDb implements Database {
      * @throws MerchandiseNotFoundException throws if merchandise can not be found
      */
     @Override
-    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
+    public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
         if (id >= merchants.size() || id < 0) {
             throw new MerchandiseNotFoundException(id);
         } else {
-            if (getMerchantById(id).buy(user)) {
-                logger.log(user, "bought merchandise", getMerchantById(id).getAllInfo());
+            if (findMerh(id).buy(user)) {
+                logger.log(user, "bought merchandise", getMerchantById(id));
                 saveData();
                 return getMerchantById(id);
             } else {
@@ -292,10 +304,38 @@ public class MerchDb implements Database {
         Map<String, String> kvs = Arrays.stream(params.trim().split(" "))
                 .map(elem -> elem.split("="))
                 .collect(Collectors.toMap(e -> e[0].toUpperCase(), e -> e[1]));
-        String merchIfo = "{Before: " + getMerchantById(id).getAllInfo() + "},";
-        getMerchantById(id).setParamsByMap(kvs);
+        String merchIfo = "{Before: " + findMerh(id).getAllInfo() + "},";
+        findMerh(id).setParamsByMap(kvs);
         logger.log(user, "Changed merchandise parameters", merchIfo + " {changed Values:" + kvs + "}");
         saveData();
+    }
+
+    /**
+     * Method for getting available types of merchandises
+     * @return list of available types for creation
+     */
+    @Override
+    public List<String> getAvailableClasses() {
+        Reflections reflection = new Reflections("ru.cracker.model.merchandises.classes");
+        return reflection.getSubTypesOf(SlaveInterface.class).stream().map(Class::getSimpleName).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<String> getMandatoryFields(String className) throws WrongClassCallException {
+        return Merchandise.getMandatoryFields(className);
+    }
+
+    @Override
+    public void addMerchandiseByMap(String className, Map<String, String> kvs, String user) {
+        try {
+            Class merchandise = Class.forName("ru.cracker.model.merchandises.classes." + className);
+            Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass()).invoke(null, kvs);
+            addMerchandise(merch, user);
+        } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
+            logger.logError(e.getMessage());
+            e.printStackTrace();
+//            throw new IllegalArgumentException("Error while adding. We're sorry");
+        }
     }
 
 }

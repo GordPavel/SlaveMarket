@@ -1,12 +1,15 @@
 package ru.cracker.controller;
 
 import ru.cracker.exceptions.MerchandiseNotFoundException;
+import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.Model;
 import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.view.View;
 import ru.cracker.view.cli.CLView;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -62,7 +65,7 @@ public class SlaveController implements Controller {
      * @param querry querry for search
      * @return list of founded slaves
      */
-    public List<Merchandise> searchMerchant(String querry) {
+    public List<String> searchMerchant(String querry) {
         return model.searchMerchandise(querry);
     }
 
@@ -84,7 +87,7 @@ public class SlaveController implements Controller {
      * @return Founded merchandise or Exception
      */
     @Override
-    public Merchandise getMerchantById(int id) throws MerchandiseNotFoundException {
+    public String  getMerchantById(int id) throws MerchandiseNotFoundException {
         return model.getMerchantById(id);
     }
 
@@ -97,7 +100,7 @@ public class SlaveController implements Controller {
      * @throws MerchandiseNotFoundException throws if merchandise with that id is not found
      */
     @Override
-    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
+    public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
         return model.buyMerchandise(id, user);
     }
 
@@ -110,5 +113,19 @@ public class SlaveController implements Controller {
      */
     public void setValuesToMerchandise(int id, String params, String user) {
         model.setValuesToMerchandise(id, params, user);
+    }
+
+    public List<String> getAvailableClasses(){
+        return model.getAvailableClasses();
+    }
+
+    @Override
+    public List<String> getMandatoryFields(String className) throws WrongClassCallException {
+        return model.getMandatoryFields(className);
+    }
+
+    @Override
+    public void addMerchantByMap(String className, Map<String, String> kvs, String user) {
+        model.addMerchandiseByMap(className, kvs, user);
     }
 }

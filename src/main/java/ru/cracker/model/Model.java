@@ -1,10 +1,13 @@
 package ru.cracker.model;
 
 import ru.cracker.exceptions.MerchandiseNotFoundException;
+import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.Merchandise;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Provides interface to manage slaves
@@ -46,7 +49,7 @@ public interface Model {
      * @param query query string
      * @return list of founed slaves
      */
-    public List<Merchandise> searchMerchandise(String query) throws WrongQueryException;
+    public List<String> searchMerchandise(String query) throws WrongQueryException;
 
     /**
      * Returns merchandise by id or exception
@@ -54,7 +57,7 @@ public interface Model {
      * @param id id of Merchandise
      * @return Founded merchandise or Exception
      */
-    public Merchandise getMerchantById(int id) throws MerchandiseNotFoundException;
+    public String getMerchantById(int id) throws MerchandiseNotFoundException;
 
     /**
      * Marks merchandise as bought
@@ -64,7 +67,7 @@ public interface Model {
      * @return bought merchandise
      * @throws MerchandiseNotFoundException
      */
-    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
+    public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
 
     /**
      * Set new values  to merchandise.
@@ -74,4 +77,18 @@ public interface Model {
      * @param user   user who performed action
      */
     public void setValuesToMerchandise(int id, String params, String user);
+
+    /**
+     * Method for getting available types of merchandises
+     * @return list of available types for creation
+     */
+    List<String> getAvailableClasses();
+
+    /**
+     * Returns minimum of required fields for create an object of chosen class
+     * @return field names
+     */
+    public List<String>getMandatoryFields(String className) throws WrongClassCallException;
+
+    void addMerchandiseByMap(String className, Map<String, String> kvs, String user);
 }

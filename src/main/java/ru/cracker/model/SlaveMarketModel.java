@@ -1,6 +1,7 @@
 package ru.cracker.model;
 
 import ru.cracker.exceptions.MerchandiseNotFoundException;
+import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.database.Database;
 import ru.cracker.model.database.MerchDb;
 import ru.cracker.model.merchandises.Merchandise;
@@ -8,6 +9,7 @@ import ru.cracker.view.Observer;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -110,7 +112,7 @@ public class SlaveMarketModel implements Observable, Model {
      * @param query query string
      * @return list of founed slaves
      */
-    public List<Merchandise> searchMerchandise(String query) {
+    public List<String> searchMerchandise(String query) {
         return database.searchMerchandise(query);
     }
 
@@ -121,7 +123,7 @@ public class SlaveMarketModel implements Observable, Model {
      * @return Founded merchandise or Exception
      */
     @Override
-    public Merchandise getMerchantById(int id) throws MerchandiseNotFoundException {
+    public String  getMerchantById(int id) throws MerchandiseNotFoundException {
         return database.getMerchantById(id);
     }
 
@@ -134,7 +136,7 @@ public class SlaveMarketModel implements Observable, Model {
      * @throws MerchandiseNotFoundException
      */
     @Override
-    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
+    public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
         return database.buyMerchandise(id, user);
     }
 
@@ -148,5 +150,24 @@ public class SlaveMarketModel implements Observable, Model {
     public void setValuesToMerchandise(int id, String params, String user) {
         database.setValuesToMerchandise(id, params, user);
         changed(id);
+    }
+
+    /**
+     * Method for getting available types of merchandises
+     * @return list of available types for creation
+     */
+    @Override
+    public List<String> getAvailableClasses() {
+       return database.getAvailableClasses();
+    }
+
+    @Override
+    public List<String> getMandatoryFields(String className) throws WrongClassCallException {
+        return database.getMandatoryFields(className);
+    }
+
+    @Override
+    public void addMerchandiseByMap(String className, Map<String, String> kvs, String user) {
+        database.addMerchandiseByMap(className, kvs, user);
     }
 }

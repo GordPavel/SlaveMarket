@@ -1,9 +1,11 @@
 package ru.cracker.model.database;
 
 import ru.cracker.exceptions.MerchandiseNotFoundException;
+import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.merchandises.Merchandise;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -42,7 +44,7 @@ public interface Database {
      * @param querry querry to filter results
      * @return List of Merchandises specified by query
      */
-    public List<Merchandise> searchMerchandise(String querry);
+    public List<String> searchMerchandise(String querry);
 
     /**
      * Returns merchandise by id or exception
@@ -50,7 +52,7 @@ public interface Database {
      * @param id id of Merchandise
      * @return Founded merchandise or Exception
      */
-    public Merchandise getMerchantById(int id) throws MerchandiseNotFoundException;
+    public String getMerchantById(int id) throws MerchandiseNotFoundException;
 
     /**
      * Marks merchandise as bought
@@ -60,7 +62,7 @@ public interface Database {
      * @return bought merchandise
      * @throws MerchandiseNotFoundException throws if merchandise can not be found
      */
-    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
+    public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
 
     /**
      * Set new values  to merchandise.
@@ -71,4 +73,19 @@ public interface Database {
      */
     public void setValuesToMerchandise(int id, String params, String user);
 
+    /**
+     * Method for getting available types of merchandises
+     *
+     * @return list of available types for creation
+     */
+    List<String> getAvailableClasses();
+
+    /**
+     * Returns minimum of required fields for create an object of chosen class
+     *
+     * @return field names
+     */
+    List<String> getMandatoryFields(String className) throws WrongClassCallException;
+
+    void addMerchandiseByMap(String className, Map<String, String> kvs, String user);
 }

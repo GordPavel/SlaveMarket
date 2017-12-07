@@ -51,4 +51,14 @@ public class Logger {
         userWriter.flush();
     }
 
+    public void logError(String error){
+        try {
+            userWriter = new PrintWriter(new FileOutputStream(new File(mainLogFile+ "errors.log"), true), true);
+            userWriter.flush();
+        } catch (FileNotFoundException ignored) {
+
+        }
+
+    }
+
 }
