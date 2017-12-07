@@ -3,3 +3,7 @@ target/*
 .settings/*
 logs/users/*
 !logs/users/admin.log
+.classpath
+data.dat
+*.iml
+.project

@@ -1,6 +1,11 @@
 package ru.cracker.model.merchandises;
 
+import ru.cracker.exceptions.WrongClassCallException;
+
 import java.io.Serializable;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -18,6 +23,18 @@ public interface Merchandise extends Serializable {
 ////            return (Merchandise) className.getMethod("buildFromMap", map.getClass()).invoke(null, map);
 //        return null;
 //    }
+
+    /**
+     * Returns minimum of required fields for create an object of chosen class
+     *
+     * @return field names
+     */
+    public static List<String> getMandatoryFields(String className) throws WrongClassCallException {
+        if (className.toUpperCase().equals("NIGER")) {
+           return Arrays.asList("Name", "Gender", "Height", "Weight", "Age", "price");
+        }
+        throw new WrongClassCallException("wrong class called");
+    }
 
     /**
      * get Merchandise's id

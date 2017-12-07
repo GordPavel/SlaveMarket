@@ -3,18 +3,17 @@ package ru.cracker.view.cli;
 import ru.cracker.controller.Controller;
 import ru.cracker.exceptions.MerchandiseAlreadyBought;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
+import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.Model;
 import ru.cracker.model.Observable;
-import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.view.Observer;
 import ru.cracker.view.View;
 
-import java.lang.reflect.InvocationTargetException;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 
 /**
@@ -93,7 +92,7 @@ public class CLView implements Observer, View {
             } else if (infoMatcher.lookingAt()) {
                 System.out.println("Slave's info :");
                 try {
-                    System.out.println(controller.getMerchantById(slaveId).getAllInfo());
+                    System.out.println(controller.getMerchantById(slaveId));
                 } catch (UnsupportedOperationException e) {
                     System.out.println(e.getMessage());
                 }
@@ -150,7 +149,7 @@ public class CLView implements Observer, View {
                 "^(\\bSEARCH \\b)((" + namePattern + "(>=|<=|>|<|!=|=)" + valuePattern + "+)((\\b AND \\b)(" + namePattern + "(>=|<=|>|<|!=|=)" + valuePattern + "))*|ALL)", Pattern.CASE_INSENSITIVE);
         Pattern slaveMenu = Pattern.compile("(\\bMERCH \\b)(\\d*)", Pattern.CASE_INSENSITIVE);
         Pattern addMerchandise = Pattern
-                .compile("(\\bADD \\b)([A-Z]+)(( (" + namePattern + "=" + valuePattern + "))+)", Pattern.CASE_INSENSITIVE);
+                .compile("(\\bADD\\b)", Pattern.CASE_INSENSITIVE);
         Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
         Matcher exitMatcher;
         Matcher searchMatcher;
@@ -177,7 +176,6 @@ public class CLView implements Observer, View {
                     }
                 } else {
                     try {
-//            System.out.println("search of \"" + searchMatcher.group(2).trim() + "\" performed");
                         controller.searchMerchant(searchMatcher.group(2).trim()).forEach(System.out::println);
                     } catch (UnsupportedOperationException | WrongQueryException e) {
                         System.out.println(e.getMessage());
@@ -202,29 +200,44 @@ public class CLView implements Observer, View {
                     }
                 }
             } else if (addMatcher.lookingAt()) {
-                String className = addMatcher.group(2);
-                className = className.toLowerCase();
-                className = Character.toUpperCase(className.charAt(0)) + className.substring(1);
+                List<String> classes = controller.getAvailableClasses();
+                System.out.println("You can create these types of merchandise:");
+                IntStream.range(0, classes.size()).forEach(i -> {
+                    System.out.println(" " + i + 1 + " | " + classes.get(i));
+                });
+                System.out.println("please enter your choice's index or name");
+                System.out.print(">");
+                Pattern number = Pattern.compile("[0-9]+");
+                String className = scanner.nextLine();
                 try {
-                    //This code sucks, you know it and I know it.
-                    //Move on and call me an idiot later.
-                    Class merchandise = Class.forName("ru.cracker.model.merchandises.classes." + className);
-                    Map<String, String> kvs = Arrays.stream(addMatcher.group(3).trim().split(" "))
-                            .map(elem -> elem.split("="))
-                            .collect(Collectors.toMap(e -> e[0].toUpperCase(), e -> e[1]));
-                    Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass())
-                            .invoke(null, kvs);
-                    controller.addMerchant(merch, user);
-                    // Catching exceptions is for communists
-                } catch (ClassNotFoundException e) {
-                    System.out.println("Can not find that Type of merchandise");
-                } catch (IllegalAccessException | NoSuchMethodException e) {
-                    System.out.println("Error while building");
-                } catch (WrongQueryException e) {
-                    System.out.println(e.getMessage());
-                } catch (InvocationTargetException e) {
-                    System.out.println(e.getCause().getMessage());
+                    if (number.matcher(className).lookingAt()) {
+                        int index = Integer.parseInt(className) - 1;
+                        if (index > classes.size() - 1) {
+                            System.out.println("wrong index");
+                        } else {
+                            className = classes.get(index);
+                        }
+                    }
+                    List<String> fields = controller.getMandatoryFields(className);
+                    className = className.toLowerCase();
+                    className = Character.toUpperCase(className.charAt(0)) + className.substring(1);
+
+                    Map<String, String> kvs = new HashMap<>();
+                    for (String field : fields) {
+                        System.out.println("Please enter value of " + field);
+                        System.out.print(">");
+                        kvs.put(field.toUpperCase(), scanner.nextLine());
+                    }
+                    System.out.println("Do you want to add merchandise with this params? " + kvs + "\nY/N");
+                    String ans = scanner.nextLine();
+                    if (ans.trim().toUpperCase().equals("Y")) {
+                        controller.addMerchantByMap(className, kvs, user);
+                    }
                 }
+                catch (WrongClassCallException e){
+                    System.out.println(e.getMessage());
+                }
+                System.out.println("backed in the main menu");
             } else {
                 System.out.println("Unknown command");
             }

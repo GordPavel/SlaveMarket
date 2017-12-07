@@ -2,10 +2,12 @@ package ru.cracker.controller;
 
 
 import ru.cracker.exceptions.MerchandiseNotFoundException;
+import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.Merchandise;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  *
@@ -45,7 +47,7 @@ public interface Controller {
      * @param querry querry for search
      * @return list of founded slaves
      */
-    public List<Merchandise> searchMerchant(String querry) throws WrongQueryException;
+    public List<String> searchMerchant(String querry) throws WrongQueryException;
 
     /**
      * Returns merchandise by id or exception
@@ -53,7 +55,7 @@ public interface Controller {
      * @param id id of Merchandise
      * @return Founded merchandise or Exception
      */
-    public Merchandise getMerchantById(int id) throws MerchandiseNotFoundException;
+    public String getMerchantById(int id) throws MerchandiseNotFoundException;
 
     /**
      * Marks merchandise as bought
@@ -63,7 +65,7 @@ public interface Controller {
      * @return bought merchandise
      * @throws MerchandiseNotFoundException
      */
-    public Merchandise buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
+    public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
 
     /**
      * Set new values  to merchandise.
@@ -74,4 +76,20 @@ public interface Controller {
      */
     public void setValuesToMerchandise(int id, String params, String user);
 
+
+    /**
+     * Method for getting available types of merchandises
+     *
+     * @return list of available types for creation
+     */
+    public List<String> getAvailableClasses();
+
+    /**
+     * Returns minimum of required fields for create an object of chosen class
+     *
+     * @return field names
+     */
+    public List<String> getMandatoryFields(String className) throws WrongClassCallException;
+
+    void addMerchantByMap(String className, Map<String, String> kvs, String user);
 }

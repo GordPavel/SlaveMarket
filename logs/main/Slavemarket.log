@@ -888,3 +888,7 @@
 2017-11-26 03:05:53 add merchandise [Slave Niger id:401 height:182.0 weight:85.0 age:34 gender:MALE name:2PAC benefit:55.0] performed by s3rius
 2017-11-26 03:33:47 add merchandise [Slave Niger id:402 height:179.0 weight:85.0 age:40 gender:male name:Snoop benefit:80.375] performed by s3rius
 2017-11-26 03:36:24 Changed merchandise parameters [{Before: Slave Niger id:0 height:191.0 weight:71.0 age:46 gender:male name:Julia benefit:94.80435}, {changed Values:{GENDER=female}}] performed by s3rius
+2017-12-07 02:45:21 add merchandise [Slave Niger id:403 height:1245.0 weight:3123.0 age:23 gender:male name:niawd benefit:49.34375] performed by s3rius
+2017-12-07 02:48:14 add merchandise [Slave Niger id:404 height:1.0 weight:1.0 age:1 gender:1 name:niger benefit:1.0] performed by s3rius
+2017-12-07 02:48:47 removed merchandise [Slave Niger id:404 height:1.0 weight:1.0 age:1 gender:1 name:niger benefit:1.0] performed by s3rius
+2017-12-07 02:49:01 removed merchandise [Slave Niger id:403 height:1245.0 weight:3123.0 age:23 gender:male name:niawd benefit:49.34375] performed by s3rius
