@@ -7,7 +7,6 @@ import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.view.View;
 import ru.cracker.view.cli.CLView;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -87,7 +86,7 @@ public class SlaveController implements Controller {
      * @return Founded merchandise or Exception
      */
     @Override
-    public String  getMerchantById(int id) throws MerchandiseNotFoundException {
+    public String getMerchantById(int id) throws MerchandiseNotFoundException {
         return model.getMerchantById(id);
     }
 
@@ -115,7 +114,7 @@ public class SlaveController implements Controller {
         model.setValuesToMerchandise(id, params, user);
     }
 
-    public List<String> getAvailableClasses(){
+    public List<String> getAvailableClasses() {
         return model.getAvailableClasses();
     }
 

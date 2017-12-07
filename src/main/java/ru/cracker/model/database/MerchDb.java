@@ -55,7 +55,17 @@ public class MerchDb implements Database {
         try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream("data.dat"))) {
             merchants = (List<Merchandise>) stream.readObject();
         } catch (IOException | ClassNotFoundException e) {
-            System.out.println("\u001B[31mCan't read data because: \u001B[0m" + e.getMessage());
+            try {
+                boolean newFile = new File("data.dat").createNewFile();
+                if (newFile) {
+                    merchants.clear();
+                } else {
+                    System.out.println("Serious error happen. We're sorry.");
+                    System.exit(-1);
+                }
+            } catch (IOException e1) {
+                e1.printStackTrace();
+            }
         }
     }
 
@@ -260,7 +270,7 @@ public class MerchDb implements Database {
                 }));
     }
 
-    private Merchandise findMerh(int id){
+    private Merchandise findMerh(int id) {
         return merchants.stream().filter(i -> Integer.compare(i.getId(), id) == 0)
                 .collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
                     if (list.size() != 1) {
@@ -312,6 +322,7 @@ public class MerchDb implements Database {
 
     /**
      * Method for getting available types of merchandises
+     *
      * @return list of available types for creation
      */
     @Override
