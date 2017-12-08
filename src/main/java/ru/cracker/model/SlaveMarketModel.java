@@ -23,7 +23,7 @@ public class SlaveMarketModel implements Observable, Model {
      * Default constructor
      */
     public SlaveMarketModel() {
-        database = new MerchDb();
+        database = new MerchDb(true);
         observers = new ArrayList<>();
     }
 

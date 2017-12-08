@@ -42,13 +42,15 @@ public class MerchDb implements Database {
     private Logger logger = new Logger();
 
     /**
-     * Default constructor
+     * Constructor to create/open database.
+     * @param load boolean to load data from file. If true data file
      */
-    public MerchDb() {
+    public MerchDb(boolean load) {
         merchants = new ArrayList<Merchandise>();
 
 //        generateData(400);
-        loadFromFile();
+        if (load)
+            loadFromFile();
     }
 
     private void loadFromFile() {
@@ -164,7 +166,7 @@ public class MerchDb implements Database {
     //add niger name=nikolai age=41 gender=male height=180 weight=80 price=1000
     public List<String> searchMerchandise(String querry) {
         Stream<Merchandise> merchandises = merchants.stream();
-        /**
+        /*
          //	Dear maintainer:
          //
          // Once you are done trying to 'optimize' this routine,
@@ -195,19 +197,6 @@ public class MerchDb implements Database {
                 String value = finalMatcher.group(3);
                 QueryComparator<String, String> finalComparator = createComparator(finalMatcher.group(2));
                 merchandises = merchandises.filter(merchandise -> {
-//                    Field[] fields = merchandise.getClass().getDeclaredFields();
-//                    for (Field fieldName : fields) {
-//                        fieldName.setAccessible(true);
-//                        try {
-//                            if (fieldName.getName().toUpperCase().equals(field) && !merchandise.isBought()
-//                                    && finalComparator.apply(String.valueOf(fieldName.get(merchandise)), value)) {
-//                                return true;
-//                            }
-//                        } catch (IllegalAccessException e) {
-//                            e.printStackTrace();
-//                        }
-//                    }
-//                    return false;
                     Method[] methods = merchandise.getClass().getMethods();
                     for (Method method : methods) {
                         if (!method.getName().startsWith("get")) continue;

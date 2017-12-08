@@ -4,14 +4,17 @@ import ru.cracker.model.Model;
 import ru.cracker.model.Observable;
 import ru.cracker.model.SlaveMarketModel;
 import ru.cracker.model.database.MerchDb;
+import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.model.merchandises.classes.Niger;
 import ru.cracker.view.Observer;
 
 import java.util.ArrayList;
 import java.util.regex.Pattern;
 
+import static java.util.stream.Collectors.toList;
+
 public class Tests {
-    MerchDb db = new MerchDb();
+    MerchDb db = new MerchDb(false);
     ArrayList<Niger> slaves = new ArrayList<>();
     String user = "test";
 
@@ -44,14 +47,14 @@ public class Tests {
 
     @Test
     public void searchMerchandiseTest() {
-        Assert.assertEquals(slaves.get(2), db.searchMerchandise("GENDER=male AND NAME=Luise").get(0));
+        Assert.assertEquals(slaves.get(2).getAllInfo(), db.searchMerchandise("GENDER=male AND NAME=Luise").get(0));
     }
 
     @Test
     public void searchMerchandiseEuqalsAndGreaterTest() {
         slaves.remove(1);
         slaves.remove(1);
-        Assert.assertEquals(slaves, db.searchMerchandise("id<=0"));
+        Assert.assertEquals(slaves.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("id<=0"));
     }
 
     @Test
@@ -62,15 +65,15 @@ public class Tests {
         ArrayList<Niger> list = new ArrayList<>();
         list.add(Niger.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addGender("male")
                 .addPrice(100).build());
-        list.add(Niger.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
+        list.add(Niger.newBuilder().addId(1).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
                 .addPrice(300).build());
-        Assert.assertEquals(list, db.searchMerchandise("ALL"));
+        Assert.assertEquals(list.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
     }
 
     @Test
     public void getMerchantByIdTest() {
         Assert.assertEquals(Niger.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
-                .addGender("male").addPrice(300).build(), db.getMerchantById(2));
+                .addGender("male").addPrice(300).build().getAllInfo(), db.getMerchantById(2));
     }
 
     @Test
@@ -79,9 +82,9 @@ public class Tests {
         db.removeMerchandise(0, user);
         ArrayList<Niger> list = new ArrayList<>();
         //        list.add(new Slave(185, 85, 20, "male", 1, "Luise", 300));
-        list.add(Niger.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
+        list.add(Niger.newBuilder().addId(0).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
                 .addPrice(300).build());
-        Assert.assertEquals(list, db.searchMerchandise("ALL"));
+        Assert.assertEquals(list.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
     }
 
     @Test
@@ -99,8 +102,8 @@ public class Tests {
                 .addAge(3).build();
         db.addMerchandise(slave, user);
         slaves.add(Niger.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320)
-                .addAge(3).build());
-        Assert.assertEquals(slaves, db.searchMerchandise("ALL"));
+                .addId(3).addAge(3).build());
+        Assert.assertEquals(slaves.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
     }
 
     @Test

@@ -162,7 +162,7 @@ public class Niger implements SlaveInterface {
      */
     public String getAllInfo() {
         return "Slave Niger id:" + id + " height:" + height + " weight:" + weight + " age:" + age + " gender:" + gender
-                + " name:" + name + " benefit:" + getBenefit();
+                + " name:" + name + " benefit:" + getBenefit() +  " price:" + price;
     }
 
     @Override
