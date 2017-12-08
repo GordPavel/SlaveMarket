@@ -1,5 +1,6 @@
 package ru.cracker.model.database;
 
+import ru.cracker.exceptions.CreateMerchandiseException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.merchandises.Merchandise;
@@ -87,5 +88,5 @@ public interface Database {
      */
     List<String> getMandatoryFields(String className) throws WrongClassCallException;
 
-    void addMerchandiseByMap(String className, Map<String, String> kvs, String user);
+    void addMerchandiseByMap(String className, Map<String, String> kvs, String user) throws CreateMerchandiseException;
 }

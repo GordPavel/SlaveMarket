@@ -1,5 +1,6 @@
 package ru.cracker.model;
 
+import ru.cracker.exceptions.CreateMerchandiseException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.database.Database;
@@ -167,7 +168,7 @@ public class SlaveMarketModel implements Observable, Model {
     }
 
     @Override
-    public void addMerchandiseByMap(String className, Map<String, String> kvs, String user) {
+    public void addMerchandiseByMap(String className, Map<String, String> kvs, String user) throws CreateMerchandiseException {
         database.addMerchandiseByMap(className, kvs, user);
     }
 }

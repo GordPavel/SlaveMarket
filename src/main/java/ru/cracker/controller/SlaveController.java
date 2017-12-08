@@ -1,5 +1,6 @@
 package ru.cracker.controller;
 
+import ru.cracker.exceptions.CreateMerchandiseException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.Model;
@@ -124,7 +125,7 @@ public class SlaveController implements Controller {
     }
 
     @Override
-    public void addMerchantByMap(String className, Map<String, String> kvs, String user) {
+    public void addMerchantByMap(String className, Map<String, String> kvs, String user) throws CreateMerchandiseException {
         model.addMerchandiseByMap(className, kvs, user);
     }
 }

@@ -1,10 +1,7 @@
 package ru.cracker.model.database;
 
 import gigadot.rebound.Rebound;
-import ru.cracker.exceptions.MerchandiseAlreadyBought;
-import ru.cracker.exceptions.MerchandiseNotFoundException;
-import ru.cracker.exceptions.WrongClassCallException;
-import ru.cracker.exceptions.WrongQueryException;
+import ru.cracker.exceptions.*;
 import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.model.merchandises.classes.Niger;
 
@@ -326,14 +323,13 @@ public class MerchDb implements Database {
     }
 
     @Override
-    public void addMerchandiseByMap(String className, Map<String, String> kvs, String user) {
+    public void addMerchandiseByMap(String className, Map<String, String> kvs, String user) throws CreateMerchandiseException {
         try {
             Class merchandise = Class.forName("ru.cracker.model.merchandises.classes." + className);
             Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass()).invoke(null, kvs);
             addMerchandise(merch, user);
         } catch (ClassNotFoundException | IllegalAccessException | InvocationTargetException | NoSuchMethodException e) {
-            logger.logError(e.getMessage());
-            e.printStackTrace();
+            throw new CreateMerchandiseException("Can't create merchandise. Wrong values");
 //            throw new IllegalArgumentException("Error while adding. We're sorry");
         }
     }

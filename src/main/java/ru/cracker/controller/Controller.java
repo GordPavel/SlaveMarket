@@ -1,6 +1,7 @@
 package ru.cracker.controller;
 
 
+import ru.cracker.exceptions.CreateMerchandiseException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.exceptions.WrongQueryException;
@@ -91,5 +92,5 @@ public interface Controller {
      */
     public List<String> getMandatoryFields(String className) throws WrongClassCallException;
 
-    void addMerchantByMap(String className, Map<String, String> kvs, String user);
+    void addMerchantByMap(String className, Map<String, String> kvs, String user) throws CreateMerchandiseException;
 }

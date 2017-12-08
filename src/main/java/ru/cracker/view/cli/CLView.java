@@ -1,10 +1,7 @@
 package ru.cracker.view.cli;
 
 import ru.cracker.controller.Controller;
-import ru.cracker.exceptions.MerchandiseAlreadyBought;
-import ru.cracker.exceptions.MerchandiseNotFoundException;
-import ru.cracker.exceptions.WrongClassCallException;
-import ru.cracker.exceptions.WrongQueryException;
+import ru.cracker.exceptions.*;
 import ru.cracker.model.Model;
 import ru.cracker.model.Observable;
 import ru.cracker.view.Observer;
@@ -233,8 +230,7 @@ public class CLView implements Observer, View {
                     if (ans.trim().toUpperCase().equals("Y")) {
                         controller.addMerchantByMap(className, kvs, user);
                     }
-                }
-                catch (WrongClassCallException e){
+                } catch (WrongClassCallException | CreateMerchandiseException e) {
                     System.out.println(e.getMessage());
                 }
                 System.out.println("backed in the main menu");
