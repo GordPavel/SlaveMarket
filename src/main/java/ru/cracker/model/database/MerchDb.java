@@ -1,12 +1,11 @@
 package ru.cracker.model.database;
 
-import org.reflections.Reflections;
+import gigadot.rebound.Rebound;
 import ru.cracker.exceptions.MerchandiseAlreadyBought;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.Merchandise;
-import ru.cracker.model.merchandises.SlaveInterface;
 import ru.cracker.model.merchandises.classes.Niger;
 
 import java.io.*;
@@ -43,6 +42,7 @@ public class MerchDb implements Database {
 
     /**
      * Constructor to create/open database.
+     *
      * @param load boolean to load data from file. If true data file
      */
     public MerchDb(boolean load) {
@@ -65,8 +65,7 @@ public class MerchDb implements Database {
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
-        }
-        catch (IOException e){
+        } catch (IOException e) {
             logger.logError("can't open data.dat file");
         }
     }
@@ -227,17 +226,17 @@ public class MerchDb implements Database {
      */
     private QueryComparator<String, String> createComparator(String sign) {
         QueryComparator<String, String> comparator = null;
-        if (sign.equals(">"))
+        if (">".equals(sign))
             comparator = (left, right) -> Double.parseDouble(left) > Double.parseDouble(right);
-        if (sign.equals("<"))
+        if ("<".equals(sign))
             comparator = (left, right) -> Double.parseDouble(left) < Double.parseDouble(right);
-        if (sign.equals("<="))
+        if ("<=".equals(sign))
             comparator = (left, right) -> Double.parseDouble(left) <= Double.parseDouble(right);
-        if (sign.equals(">="))
+        if (">=".equals(sign))
             comparator = (left, right) -> Double.parseDouble(left) >= Double.parseDouble(right);
-        if (sign.equals("="))
+        if ("=".equals(sign))
             comparator = String::equals;
-        if (sign.equals("!="))
+        if ("!=".equals(sign))
             comparator = (left, right) -> !left.equals(right);
         return comparator;
     }
@@ -316,8 +315,9 @@ public class MerchDb implements Database {
      */
     @Override
     public List<String> getAvailableClasses() {
-        Reflections reflection = new Reflections("ru.cracker.model.merchandises.classes");
-        return reflection.getSubTypesOf(SlaveInterface.class).stream().map(Class::getSimpleName).collect(Collectors.toList());
+
+        Rebound rebound = new Rebound("ru.cracker.model.merchandises.classes");
+        return rebound.getSubClassesOf(Merchandise.class).stream().map(Class::getSimpleName).collect(Collectors.toList());
     }
 
     @Override

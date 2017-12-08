@@ -30,7 +30,7 @@ public interface Merchandise extends Serializable {
      * @return field names
      */
     public static List<String> getMandatoryFields(String className) throws WrongClassCallException {
-        if (className.toUpperCase().equals("NIGER")) {
+        if ("NIGER".equals(className.toUpperCase())) {
            return Arrays.asList("Name", "Gender", "Height", "Weight", "Age", "price");
         }
         throw new WrongClassCallException("wrong class called");
