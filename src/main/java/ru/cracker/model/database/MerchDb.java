@@ -56,18 +56,18 @@ public class MerchDb implements Database {
     private void loadFromFile() {
         try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream("data.dat"))) {
             merchants = (List<Merchandise>) stream.readObject();
-        } catch (IOException | ClassNotFoundException e) {
+        } catch (ClassNotFoundException e) {
             try {
                 boolean newFile = new File("data.dat").createNewFile();
                 if (newFile) {
                     merchants.clear();
-                } else {
-                    System.out.println("Serious error happen. We're sorry.");
-                    System.exit(-1);
                 }
             } catch (IOException e1) {
                 e1.printStackTrace();
             }
+        }
+        catch (IOException e){
+            logger.logError("can't open data.dat file");
         }
     }
 

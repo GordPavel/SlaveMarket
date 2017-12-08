@@ -40,8 +40,6 @@ public class Logger {
                 boolean file = new File(mainLogFile).createNewFile();
                 if (file) {
                     errorWriter = new PrintWriter(new FileOutputStream(new File(mainPath + "errors.log"), true), true);
-                } else {
-                    System.out.println("Fatal error. File with name " + mainPath + "errors.log can not be created");
                 }
             } catch (IOException ignored) {
             }
@@ -53,8 +51,6 @@ public class Logger {
                 boolean file = new File(mainLogFile).createNewFile();
                 if (file) {
                     writer = new PrintWriter(new FileOutputStream(new File(mainLogFile), true), true);
-                } else {
-                    System.out.println("Fatal error. File with name " + mainLogFile + " can not be created");
                 }
             } catch (IOException ignored) {
             }
@@ -73,8 +69,6 @@ public class Logger {
                 boolean file = new File(userDir + user + ".log").createNewFile();
                 if (file) {
                     userWriter = new PrintWriter(new FileOutputStream(new File(userDir + user + ".log"), true), true);
-                } else {
-                    logError("Can't create user file " + userDir + user + ".log");
                 }
             } catch (IOException ignored) {
             }
