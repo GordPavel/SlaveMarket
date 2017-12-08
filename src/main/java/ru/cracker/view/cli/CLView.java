@@ -164,19 +164,15 @@ public class CLView implements Observer, View {
                 System.out.println("bye");
                 System.exit(0);
             } else if (searchMatcher.lookingAt()) {
-                if (searchMatcher.group(2).equals(" ")) {
-                    System.out.println("search of all db performed");
-                    try {
-                        controller.searchMerchant(searchMatcher.group(2));
-                    } catch (UnsupportedOperationException e) {
-                        System.out.println(e.getMessage());
+                try {
+                    List<String> found = controller.searchMerchant(searchMatcher.group(2).trim());
+                    if (found.size() == 0) {
+                        System.out.println("there's no data found");
+                    } else {
+                        found.forEach(System.out::println);
                     }
-                } else {
-                    try {
-                        controller.searchMerchant(searchMatcher.group(2).trim()).forEach(System.out::println);
-                    } catch (UnsupportedOperationException | WrongQueryException e) {
-                        System.out.println(e.getMessage());
-                    }
+                } catch (UnsupportedOperationException | WrongQueryException e) {
+                    System.out.println(e.getMessage());
                 }
             } else if (slaveMenuMatcher.lookingAt()) {
                 try {

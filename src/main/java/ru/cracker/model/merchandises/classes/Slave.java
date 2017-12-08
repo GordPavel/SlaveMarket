@@ -4,13 +4,12 @@ import ru.cracker.exceptions.MerchandiseAlreadyBought;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.SlaveInterface;
 
-import java.lang.reflect.Array;
 import java.util.*;
 
 /**
  *
  */
-public class Niger implements SlaveInterface {
+public class Slave implements SlaveInterface {
 
     /**
      * Human height or stature is the distance from the bottom of the feet to the top of the head in a human body, standing erect.
@@ -52,7 +51,7 @@ public class Niger implements SlaveInterface {
     /**
      * Default constructor
      */
-    private Niger() {
+    private Slave() {
     }
 
     /**
@@ -61,7 +60,7 @@ public class Niger implements SlaveInterface {
      * @return new builder with method for creating new instance
      */
     public static Builder newBuilder() {
-        return new Niger().new Builder();
+        return new Slave().new Builder();
     }
 
     /**
@@ -70,26 +69,35 @@ public class Niger implements SlaveInterface {
      * @param map map for creating. Where key - field Name, value - field value.
      * @return new Instance of class made by map.
      */
-    public static Niger buildFromMap(HashMap<String, String> map) {
+    public static Slave buildFromMap(HashMap<String, String> map) {
         // This is crap code but it’s 3 a.m. and I need to get this working
-        Niger niger = new Niger();
-        String[] requiredFields = new String[]{"AGE", "WEIGHT", "HEIGHT", "PRICE", "GENDER", "NAME"};
+        Slave slave = new Slave();
+        List<String> requiredFields = mandatoryFields();
         for (String s : requiredFields) {
-            if (!map.containsKey(s))
+            if (!map.containsKey(s.toUpperCase()))
                 throw new WrongQueryException("Missed key \"" + s + "\"");
         }
         try {
-            niger.age = Integer.parseInt(map.get("AGE"));
-            niger.weight = Float.parseFloat(map.get("WEIGHT"));
-            niger.height = Float.parseFloat(map.get("HEIGHT"));
-            niger.price = Integer.parseInt(map.get("PRICE"));
-            niger.gender = map.get("GENDER");
-            niger.name = map.get("NAME");
-            niger.bought = false;
+            slave.age = Integer.parseInt(map.get("AGE"));
+            slave.weight = Float.parseFloat(map.get("WEIGHT"));
+            slave.height = Float.parseFloat(map.get("HEIGHT"));
+            slave.price = Integer.parseInt(map.get("PRICE"));
+            slave.gender = map.get("GENDER");
+            slave.name = map.get("NAME");
+            slave.bought = false;
         } catch (Exception e) {
             throw new WrongQueryException(e.getMessage());
         }
-        return niger;
+        return slave;
+    }
+
+    /**
+     * Method to list all of params required to create object. And that fields can be changed.
+     *
+     * @return list of strings with minimum required fields for creating instance of class
+     */
+    public static List<String> mandatoryFields() {
+        return Arrays.asList("Name", "Gender", "Height", "Weight", "Age", "price");
     }
 
     /**
@@ -99,11 +107,11 @@ public class Niger implements SlaveInterface {
      */
     public void setParamsByMap(Map<String, String> map) {
         if (!bought) {
-            String[] fields = new String[]{"AGE", "WEIGHT", "HEIGHT", "PRICE", "GENDER", "NAME"};
+            List<String> fields = mandatoryFields();
             map.forEach((key, value) -> {
                 boolean contains = false;
                 for (String field : fields) {
-                    if (field.equals(key)) {
+                    if (field.equals(key.toUpperCase())) {
                         contains = true;
                     }
                 }
@@ -161,23 +169,23 @@ public class Niger implements SlaveInterface {
      * Formatted like "ClassName Param1:Value1 Param2:Value2 ..."
      */
     public String getAllInfo() {
-        return "Slave Niger id:" + id + " height:" + height + " weight:" + weight + " age:" + age + " gender:" + gender
-                + " name:" + name + " benefit:" + getBenefit() +  " price:" + price;
+        return "Slave Slave id:" + id + " height:" + height + " weight:" + weight + " age:" + age + " gender:" + gender
+                + " name:" + name + " benefit:" + getBenefit() + " price:" + price;
     }
 
     @Override
     public String toString() {
-        return "Slave Niger id:" + id + " height:" + height + " weight:" + weight + " age:" + age + " gender:" + gender
+        return "Slave Slave id:" + id + " height:" + height + " weight:" + weight + " age:" + age + " gender:" + gender
                 + " name:" + name + " benefit:" + getBenefit() + " price:" + price;
     }
 
     @Override
     public boolean equals(Object obj) {
         if (obj.getClass().getName().equals(this.getClass().getName())) {
-            if (((Niger) obj).name.equals(name) && ((Niger) obj).gender.equals(gender)
-                    && Objects.equals(((Niger) obj).getBenefit(), getBenefit()) && ((Niger) obj).age == age
-                    && ((Niger) obj).weight == weight && ((Niger) obj).bought == bought && ((Niger) obj).price == price
-                    && ((Niger) obj).boughtBy.equals(boughtBy)) {
+            if (((Slave) obj).name.equals(name) && ((Slave) obj).gender.equals(gender)
+                    && Objects.equals(((Slave) obj).getBenefit(), getBenefit()) && ((Slave) obj).age == age
+                    && ((Slave) obj).weight == weight && ((Slave) obj).bought == bought && ((Slave) obj).price == price
+                    && ((Slave) obj).boughtBy.equals(boughtBy)) {
                 return true;
             }
         }
@@ -278,7 +286,7 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addHeight(int height) {
-            Niger.this.height = height;
+            Slave.this.height = height;
             return this;
         }
 
@@ -289,7 +297,7 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addWeight(int weight) {
-            Niger.this.weight = weight;
+            Slave.this.weight = weight;
             return this;
         }
 
@@ -300,7 +308,7 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addAge(int age) {
-            Niger.this.age = age;
+            Slave.this.age = age;
             return this;
         }
 
@@ -311,7 +319,7 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addGender(String gender) {
-            Niger.this.gender = gender;
+            Slave.this.gender = gender;
             return this;
         }
 
@@ -322,7 +330,7 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addPrice(int price) {
-            Niger.this.price = price;
+            Slave.this.price = price;
             return this;
         }
 
@@ -333,7 +341,7 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addId(int id) {
-            Niger.this.id = id;
+            Slave.this.id = id;
             return this;
         }
 
@@ -342,28 +350,28 @@ public class Niger implements SlaveInterface {
          *
          * @return Instance of new object
          */
-        public Niger build() {
-            Niger niger = new Niger();
-            niger.name = Niger.this.name;
-            niger.id = Niger.this.id;
-            niger.gender = Niger.this.gender;
-            niger.price = Niger.this.price;
-            niger.age = Niger.this.age;
-            niger.weight = Niger.this.weight;
-            niger.height = Niger.this.height;
-            return niger;
+        public Slave build() {
+            Slave slave = new Slave();
+            slave.name = Slave.this.name;
+            slave.id = Slave.this.id;
+            slave.gender = Slave.this.gender;
+            slave.price = Slave.this.price;
+            slave.age = Slave.this.age;
+            slave.weight = Slave.this.weight;
+            slave.height = Slave.this.height;
+            return slave;
         }
 
-        public Niger buildDefault() {
-            Niger niger = new Niger();
-            niger.name = "";
-            niger.id = -1;
-            niger.gender = "";
-            niger.price = 0;
-            niger.age = -1;
-            niger.weight = -1;
-            niger.height = -1;
-            return niger;
+        public Slave buildDefault() {
+            Slave slave = new Slave();
+            slave.name = "";
+            slave.id = -1;
+            slave.gender = "";
+            slave.price = 0;
+            slave.age = -1;
+            slave.weight = -1;
+            slave.height = -1;
+            return slave;
         }
 
         /**
@@ -373,7 +381,7 @@ public class Niger implements SlaveInterface {
          * @return
          */
         public Builder addName(String name) {
-            Niger.this.name = name;
+            Slave.this.name = name;
             return this;
         }
 

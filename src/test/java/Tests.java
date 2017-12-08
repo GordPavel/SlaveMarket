@@ -5,7 +5,7 @@ import ru.cracker.model.Observable;
 import ru.cracker.model.SlaveMarketModel;
 import ru.cracker.model.database.MerchDb;
 import ru.cracker.model.merchandises.Merchandise;
-import ru.cracker.model.merchandises.classes.Niger;
+import ru.cracker.model.merchandises.classes.Slave;
 import ru.cracker.view.Observer;
 
 import java.util.ArrayList;
@@ -15,18 +15,18 @@ import static java.util.stream.Collectors.toList;
 
 public class Tests {
     MerchDb db = new MerchDb(false);
-    ArrayList<Niger> slaves = new ArrayList<>();
+    ArrayList<Slave> slaves = new ArrayList<>();
     String user = "test";
 
     {
         //        Slave slave = Slave.newBuilder().addId(0).addAge(12).addGender("male").addHeight(140).addWeight(35).build();
         //        Slave slave = Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addPrice(100).build();
         //                new Slave(140, 35, 12, "male", 0, "Pete", 100);
-        db.addMerchandise(Niger.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35)
+        db.addMerchandise(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35)
                 .addGender("male").addPrice(100).build(), user);
-        db.addMerchandise(Niger.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
+        db.addMerchandise(Slave.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
                 .addGender("female").addPrice(200).build(), user);
-        db.addMerchandise(Niger.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+        db.addMerchandise(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
                 .addGender("male").addPrice(300).build(), user);
         //        db.addMerchandise(new Slave(174, 44, 16, "female", 1, "Diana", 200));
         //        db.addMerchandise(new Slave(185, 85, 20, "male", 2, "Luise", 300));
@@ -35,12 +35,12 @@ public class Tests {
         //        slaves.add(new Slave(174, 44, 16, "female", 1, "Diana", 200));
         //        slaves.add(new Slave(185, 85, 20, "male", 2, "Luise", 300));
 
-        slaves.add(Niger.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addGender("male")
+        slaves.add(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addGender("male")
                 .addPrice(100).build());
-        slaves.add(Niger.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
+        slaves.add(Slave.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
                 .addGender("female")
                 .addPrice(200).build());
-        slaves.add(Niger.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+        slaves.add(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
                 .addGender("male")
                 .addPrice(300).build());
     }
@@ -59,20 +59,20 @@ public class Tests {
 
     @Test
     public void removeMerchandiseTest() {
-        db.removeMerchandise(Niger.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
+        db.removeMerchandise(Slave.newBuilder().addId(1).addName("Diana").addAge(16).addHeight(174).addWeight(44)
                 .addGender("female").addPrice(200).build(), user);
         slaves.remove(1);
-        ArrayList<Niger> list = new ArrayList<>();
-        list.add(Niger.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addGender("male")
+        ArrayList<Slave> list = new ArrayList<>();
+        list.add(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addGender("male")
                 .addPrice(100).build());
-        list.add(Niger.newBuilder().addId(1).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
+        list.add(Slave.newBuilder().addId(1).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
                 .addPrice(300).build());
         Assert.assertEquals(list.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
     }
 
     @Test
     public void getMerchantByIdTest() {
-        Assert.assertEquals(Niger.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+        Assert.assertEquals(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
                 .addGender("male").addPrice(300).build().getAllInfo(), db.getMerchantById(2));
     }
 
@@ -80,9 +80,9 @@ public class Tests {
     public void removeMerchandiseByIdTest() {
         db.removeMerchandise(1, user);
         db.removeMerchandise(0, user);
-        ArrayList<Niger> list = new ArrayList<>();
+        ArrayList<Slave> list = new ArrayList<>();
         //        list.add(new Slave(185, 85, 20, "male", 1, "Luise", 300));
-        list.add(Niger.newBuilder().addId(0).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
+        list.add(Slave.newBuilder().addId(0).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
                 .addPrice(300).build());
         Assert.assertEquals(list.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
     }
@@ -90,7 +90,7 @@ public class Tests {
     @Test
     public void slaveEqualsTest() {
         Assert.assertEquals(true, slaves.get(0)
-                .equals(Niger.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140)
+                .equals(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140)
                         .addWeight(35).addGender("male").addPrice(100).build()));
     }
 
@@ -98,10 +98,10 @@ public class Tests {
 //    @Ignore
     public void addSlaveTest() {
         //        Slave slave = new Slave(1, 2, 3, "male", "David", 320);
-        Niger slave = Niger.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320)
+        Slave slave = Slave.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320)
                 .addAge(3).build();
         db.addMerchandise(slave, user);
-        slaves.add(Niger.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320)
+        slaves.add(Slave.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male").addPrice(320)
                 .addId(3).addAge(3).build());
         Assert.assertEquals(slaves.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
     }

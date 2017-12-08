@@ -3,9 +3,9 @@ package ru.cracker.model.database;
 import gigadot.rebound.Rebound;
 import ru.cracker.exceptions.*;
 import ru.cracker.model.merchandises.Merchandise;
-import ru.cracker.model.merchandises.classes.Niger;
+import ru.cracker.model.merchandises.classes.Slave;
 
-import java.io.*;
+import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -36,6 +36,7 @@ public class MerchDb implements Database {
      * Logger object to log all operations into file.
      */
     private Logger logger = new Logger();
+    private String fileName = "data.sb";
 
     /**
      * Constructor to create/open database.
@@ -48,23 +49,16 @@ public class MerchDb implements Database {
 //        generateData(400);
         if (load)
             loadFromFile();
+        else {
+            fileName = "newData.sb";
+        }
     }
 
+    /**
+     * Method to load data from file
+     */
     private void loadFromFile() {
-        try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream("data.dat"))) {
-            merchants = (List<Merchandise>) stream.readObject();
-        } catch (ClassNotFoundException e) {
-            try {
-                boolean newFile = new File("data.dat").createNewFile();
-                if (newFile) {
-                    merchants.clear();
-                }
-            } catch (IOException e1) {
-                e1.printStackTrace();
-            }
-        } catch (IOException e) {
-            logger.logError("can't open data.dat file");
-        }
+        merchants = FileManager.readMerchandises(fileName);
     }
 
     /**
@@ -75,7 +69,7 @@ public class MerchDb implements Database {
     private void generateData(int quantity) {
         Random random = new Random();
         IntStream.range(0, quantity).forEach(i ->
-                addMerchandise(Niger.newBuilder().addName(random.nextBoolean() ? "Brian" : random
+                addMerchandise(Slave.newBuilder().addName(random.nextBoolean() ? "Brian" : random
                         .nextBoolean() ? "Julia" : random.nextBoolean() ? "Mark" : "Mary")
                         .addAge(random.nextInt(60) + 23)
                         .addGender(random.nextBoolean() ? "male" : "female")
@@ -90,18 +84,7 @@ public class MerchDb implements Database {
      * Saves all data into file.
      */
     private void saveData() {
-        try {
-            objectOutputStream = new ObjectOutputStream(new FileOutputStream("data.dat"));
-        } catch (IOException e) {
-            logger.logError("\u001B[31mCan't open/create data file create data.dat file in project directory\u001B[0m");
-        }
-        try {
-            objectOutputStream.writeObject(merchants);
-        } catch (IOException e) {
-            logger.logError("\u001B[31mCan't save changes\u001B[0m");
-            logger.log("DataBase", "\u001B[31mSave failed\u001B[0m", "");
-        }
-
+        FileManager.writeSerialaizableToFile(merchants, fileName);
     }
 
     /**

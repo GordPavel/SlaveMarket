@@ -3,8 +3,6 @@ package ru.cracker.model.merchandises;
 import ru.cracker.exceptions.WrongClassCallException;
 
 import java.io.Serializable;
-import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 
@@ -30,10 +28,11 @@ public interface Merchandise extends Serializable {
      * @return field names
      */
     public static List<String> getMandatoryFields(String className) throws WrongClassCallException {
-        if ("NIGER".equals(className.toUpperCase())) {
-           return Arrays.asList("Name", "Gender", "Height", "Weight", "Age", "price");
+        try {
+            return MandatoryFields.valueOf(className).getFields();
+        } catch (IllegalArgumentException e) {
+            throw new WrongClassCallException("wrong class called");
         }
-        throw new WrongClassCallException("wrong class called");
     }
 
     /**
