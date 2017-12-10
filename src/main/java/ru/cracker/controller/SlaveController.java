@@ -1,131 +1,134 @@
 package ru.cracker.controller;
 
+import java.util.List;
+import java.util.Map;
 import ru.cracker.exceptions.CreateMerchandiseException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.Model;
 import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.view.View;
-import ru.cracker.view.cli.CLView;
+import ru.cracker.view.cli.CommandLineView;
 
-import java.util.List;
-import java.util.Map;
 
 /**
- *
+ * Implementation of Controller interface.
  */
 public class SlaveController implements Controller {
 
-    /**
-     *
-     */
-    private Model model;
+  /**
+   * Model to access data.
+   */
+  private Model model;
 
-    /**
-     *
-     */
-    private View view;
+  /**
+   * View to send data to it.
+   */
+  private View view;
 
-    /**
-     * Initial constructor with model
-     *
-     * @param model model to manage.
-     */
-    public SlaveController(Model model) {
-        this.model = model;
-        view = new CLView(model, this);
-        view.launch();
-    }
+  /**
+   * Initial constructor with model.
+   *
+   * @param model model to manage.
+   */
+  public SlaveController(Model model) {
+    this.model = model;
+    view = new CommandLineView(model, this);
 
-    /**
-     * Add slave in model
-     *
-     * @param merch Slave to add
-     * @param user  user who performed action
-     * @return
-     */
-    public void addMerchant(Merchandise merch, String user) {
-        model.addMerchandise(merch, user);
-    }
+  }
 
-    /**
-     * tells to model for remove the slave
-     *
-     * @param merch slave to remove
-     * @param user  user who performed action
-     * @return
-     */
-    public void removeMerchant(Merchandise merch, String user) {
-        model.removeMerchandise(merch, user);
-    }
+  /**
+   * Add slave in model.
+   *
+   * @param merch Slave to add
+   * @param user user who performed action
+   */
+  public void addMerchant(Merchandise merch, String user) {
+    model.addMerchandise(merch, user);
+  }
 
-    /**
-     * tells to model for search  the slave by the query
-     *
-     * @param querry querry for search
-     * @return list of founded slaves
-     */
-    public List<String> searchMerchant(String querry) {
-        return model.searchMerchandise(querry);
-    }
+  /**
+   * tells to model for remove the slave.
+   *
+   * @param merch slave to remove
+   * @param user user who performed action
+   */
+  public void removeMerchant(Merchandise merch, String user) {
+    model.removeMerchandise(merch, user);
+  }
 
-    /**
-     * tells to model for remove the slave by id
-     *
-     * @param id   slaves's id to remove the slave by it.
-     * @param user user who performed action
-     * @return
-     */
-    public void removeMerchant(int id, String user) {
-        model.removeMerchandise(id, user);
-    }
+  /**
+   * tells to model for remove the slave by id.
+   *
+   * @param id slaves's id to remove the slave by it.
+   * @param user user who performed action
+   */
+  public void removeMerchant(int id, String user) {
+    model.removeMerchandise(id, user);
+  }
 
-    /**
-     * Returns merchandise by id or exception
-     *
-     * @param id id of Merchandise
-     * @return Founded merchandise or Exception
-     */
-    @Override
-    public String getMerchantById(int id) throws MerchandiseNotFoundException {
-        return model.getMerchantById(id);
-    }
+  /**
+   * tells to model for search  the slave by the query.
+   *
+   * @param querry querry for search
+   * @return list of founded slaves
+   */
+  public List<String> searchMerchant(String querry) {
+    return model.searchMerchandise(querry);
+  }
 
-    /**
-     * Marks merchandise as bought
-     *
-     * @param id   unique merchandise identity
-     * @param user user who performed action
-     * @return bought merchandise
-     * @throws MerchandiseNotFoundException throws if merchandise with that id is not found
-     */
-    @Override
-    public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
-        return model.buyMerchandise(id, user);
-    }
 
-    /**
-     * Set new values  to merchandise.
-     *
-     * @param id     id of merchandise to be changed
-     * @param params String of parameters with values to change
-     * @param user   user who performed action
-     */
-    public void setValuesToMerchandise(int id, String params, String user) {
-        model.setValuesToMerchandise(id, params, user);
-    }
+  /**
+   * Returns merchandise by id or exception.
+   *
+   * @param id id of Merchandise
+   * @return Founded merchandise or Exception
+   */
+  @Override
+  public String getMerchantById(int id) throws MerchandiseNotFoundException {
+    return model.getMerchantById(id);
+  }
 
-    public List<String> getAvailableClasses() {
-        return model.getAvailableClasses();
-    }
+  /**
+   * Marks merchandise as bought.
+   *
+   * @param id unique merchandise identity
+   * @param user user who performed action
+   * @return bought merchandise
+   * @throws MerchandiseNotFoundException throws if merchandise with that id is not found
+   */
+  @Override
+  public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
+    return model.buyMerchandise(id, user);
+  }
 
-    @Override
-    public List<String> getMandatoryFields(String className) throws WrongClassCallException {
-        return model.getMandatoryFields(className);
-    }
+  /**
+   * Set new values  to merchandise.
+   *
+   * @param id id of merchandise to be changed
+   * @param params String of parameters with values to change
+   * @param user user who performed action
+   */
+  public void setValuesToMerchandise(int id, String params, String user) {
+    model.setValuesToMerchandise(id, params, user);
+  }
 
-    @Override
-    public void addMerchantByMap(String className, Map<String, String> kvs, String user) throws CreateMerchandiseException {
-        model.addMerchandiseByMap(className, kvs, user);
-    }
+  public List<String> getAvailableClasses() {
+    return model.getAvailableClasses();
+  }
+
+  @Override
+  public List<String> getMandatoryFields(String className) throws WrongClassCallException {
+    return model.getMandatoryFields(className);
+  }
+
+  @Override
+  public void addMerchantByMap(String className, Map<String, String> kvs, String user)
+      throws CreateMerchandiseException {
+    model.addMerchandiseByMap(className, kvs, user);
+  }
+
+  public void start() {
+    view.launch();
+  }
 }

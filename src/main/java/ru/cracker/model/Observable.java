@@ -1,44 +1,43 @@
 package ru.cracker.model;
 
-
 import ru.cracker.view.Observer;
 
 /**
- *
+ * Class to send notifications to Observers.
  */
 public interface Observable {
 
-    /**
-     * Subscribes observer to notifications
-     *
-     * @param observer observer to add.
-     */
-    public void addObserver(Observer observer);
+  /**
+   * Subscribes observer to notifications.
+   *
+   * @param observer observer to add.
+   */
+  void addObserver(Observer observer);
 
-    /**
-     * Triggers all available observers to do something
-     */
-    public void notifyAllObservers();
+  /**
+   * Triggers all available observers to do something.
+   */
+  void notifyAllObservers();
 
-    /**
-     * Notifies observers that data with that id has changed
-     *
-     * @param id id of changed data
-     */
-    public void changed(int id);
+  /**
+   * Notifies observers that data with that id has changed.
+   *
+   * @param id id of changed data
+   */
+  void changed(int id);
 
-    /**
-     * Notifies observer s that data with that id has deleted
-     *
-     * @param id id of deleted data
-     */
-    public void deleted(int id);
+  /**
+   * Notifies observer s that data with that id has deleted.
+   *
+   * @param id id of deleted data
+   */
+  void deleted(int id);
 
-    /**
-     * unsubscribes observer from notifies.
-     *
-     * @param observer observer to delete
-     */
-    public void deleteObserver(Observer observer);
+  /**
+   * unsubscribes observer from notifies.
+   *
+   * @param observer observer to delete
+   */
+  void deleteObserver(Observer observer);
 
 }

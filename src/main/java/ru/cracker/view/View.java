@@ -2,14 +2,14 @@ package ru.cracker.view;
 
 
 /**
- *
+ * View interface to create new Views, CLI or GUI for main app.
  */
 public interface View {
 
 
-    /**
-     * Launch the view or CLI
-     */
-    public void launch();
+  /**
+   * Launch the view or CLI.
+   */
+  void launch();
 
 }
