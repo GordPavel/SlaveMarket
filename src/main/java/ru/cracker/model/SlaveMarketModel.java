@@ -1,8 +1,5 @@
 package ru.cracker.model;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import ru.cracker.exceptions.CreateMerchandiseException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
@@ -10,6 +7,10 @@ import ru.cracker.model.database.Database;
 import ru.cracker.model.database.MerchDb;
 import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.view.Observer;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Realization of Model and Observable.
@@ -75,10 +76,11 @@ public class SlaveMarketModel implements Observable, Model {
    * Adding slave in database or something like that.
    *
    * @param merch Slave to add
-   * @param user user who performed action
+   * @param user  user who performed action
+   * @param price merchandise's price
    */
-  public void addMerchandise(Merchandise merch, String user) {
-    database.addMerchandise(merch, user);
+  public void addMerchandise(Merchandise merch, String user, String token, int price) {
+    database.addMerchandise(merch, user, token, price);
     notifyAllObservers();
   }
 
@@ -86,22 +88,21 @@ public class SlaveMarketModel implements Observable, Model {
    * removes slave out our collection.
    *
    * @param merch merch to remove
-   * @param user user who performed action
+   * @param user  user who performed action
    */
-  public void removeMerchandise(Merchandise merch, String user) {
-    int id = observers.indexOf(merch);
-    observers.remove(id);
-    deleted(id);
+  public void removeMerchandise(Merchandise merch, String user, String token) {
+    database.removeMerchandise(merch, user, token);
+    deleted(merch.getId());
   }
 
   /**
    * removes slave out our collection using only unique id.
    *
-   * @param id id of merch to remove
+   * @param id   id of merch to remove
    * @param user user who performed action
    */
-  public void removeMerchandise(int id, String user) {
-    database.removeMerchandise(id, user);
+  public void removeMerchandise(int id, String user, String token) {
+    database.removeMerchandise(id, user, token);
     deleted(id);
   }
 
@@ -130,24 +131,24 @@ public class SlaveMarketModel implements Observable, Model {
   /**
    * Marks merchandise as bought.
    *
-   * @param id unique merchandise identity
+   * @param id   unique merchandise identity
    * @param user user who performed action
    * @return bought merchandise
    */
   @Override
-  public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
-    return database.buyMerchandise(id, user);
+  public String buyMerchandise(int id, String user, String token) throws MerchandiseNotFoundException {
+    return database.buyMerchandise(id, user, token);
   }
 
   /**
    * Set new values  to merchandise.
    *
-   * @param id id of merchandise to be changed
-   * @param user user who performed action
+   * @param id     id of merchandise to be changed
+   * @param user   user who performed action
    * @param params String of parameters with values to change
    */
-  public void setValuesToMerchandise(int id, String params, String user) {
-    database.setValuesToMerchandise(id, params, user);
+  public void setValuesToMerchandise(int id, String params, String user, String token) {
+    database.setValuesToMerchandise(id, params, user, token);
     changed(id);
   }
 
@@ -167,8 +168,28 @@ public class SlaveMarketModel implements Observable, Model {
   }
 
   @Override
-  public void addMerchandiseByMap(String className, Map<String, String> kvs, String user)
-      throws CreateMerchandiseException {
-    database.addMerchandiseByMap(className, kvs, user);
+  public void addMerchandiseByMap(String className, Map<String, String> kvs, String user, String token, int price)
+          throws CreateMerchandiseException {
+    database.addMerchandiseByMap(className, kvs, user, token, price);
+  }
+
+  @Override
+  public String login(String username, String password) {
+    return database.login(username, password);
+  }
+
+  @Override
+  public boolean register(String username, String pass) {
+    return database.register(username, pass);
+  }
+
+  @Override
+  public void disconnect(String username, String token) {
+    database.disconnect(username, token);
+  }
+
+  @Override
+  public List<String> getDealsByUser(String username, String token) {
+    return database.getDealsByUser(username, token);
   }
 }

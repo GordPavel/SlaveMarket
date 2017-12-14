@@ -1,11 +1,12 @@
 package ru.cracker.model.database;
 
-import java.util.List;
-import java.util.Map;
 import ru.cracker.exceptions.CreateMerchandiseException;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.merchandises.Merchandise;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * Database interface to manage the data adn provide it to view through controller.
@@ -17,24 +18,24 @@ public interface Database {
    * Puts merch into the vault.
    *
    * @param merch Merch to put in vault
-   * @param user user who performed action
+   * @param user  user who performed action
    */
-  void addMerchandise(Merchandise merch, String user);
+  void addMerchandise(Merchandise merch, String user, String token, int price);
 
   /**
    * Removes merchandise from database.
    *
    * @param merch Removes merchandise from vault
-   * @param user user who performed action
+   * @param user  user who performed action
    */
-  void removeMerchandise(Merchandise merch, String user);
+  void removeMerchandise(Merchandise merch, String user, String token);
 
   /**
    * remove merchandise from vault by id.
    *
    * @param user user who performed action
    */
-  void removeMerchandise(int id, String user);
+  void removeMerchandise(int id, String user, String token);
 
   /**
    * Method to find specified Merchandises.
@@ -55,21 +56,21 @@ public interface Database {
   /**
    * Marks merchandise as bought.
    *
-   * @param id unique merchandise identity
+   * @param id   unique merchandise identity
    * @param user user who performed action
    * @return bought merchandise
    * @throws MerchandiseNotFoundException throws if merchandise can not be found
    */
-  String buyMerchandise(int id, String user) throws MerchandiseNotFoundException;
+  String buyMerchandise(int id, String user, String token) throws MerchandiseNotFoundException;
 
   /**
    * Set new values  to merchandise.
    *
-   * @param id id of merchandise to be changed
-   * @param user user who performed action
+   * @param id     id of merchandise to be changed
+   * @param user   user who performed action
    * @param params String of parameters with values to change
    */
-  void setValuesToMerchandise(int id, String params, String user);
+  void setValuesToMerchandise(int id, String params, String user, String token);
 
   /**
    * Method for getting available types of merchandises.
@@ -80,11 +81,63 @@ public interface Database {
 
   /**
    * Returns minimum of required fields for create an object of chosen class.
+   * To see all available classes call {@link #getAvailableClasses()} Method
    *
    * @return field names
    */
   List<String> getMandatoryFields(String className) throws WrongClassCallException;
 
-  void addMerchandiseByMap(String className, Map<String, String> kvs, String user)
-      throws CreateMerchandiseException;
+  /**
+   * Method to add new Merchandise item.
+   *
+   * @param className merchandise's type
+   * @param kvs       map with params.
+   *                  To get valid keys call {@link #getMandatoryFields(String className)}
+   * @param user      current user
+   * @param token     current user's token
+   * @param price     merchandise's price
+   * @throws CreateMerchandiseException throws if can't create merchandise by map.
+   */
+  void addMerchandiseByMap(
+          String className,
+          Map<String, String> kvs,
+          String user, String token,
+          int price)
+          throws CreateMerchandiseException;
+
+  /**
+   * Method to connect to shop.
+   *
+   * @param username username
+   * @param password password
+   * @return new created token
+   */
+  String login(String username, String password);
+
+  /**
+   * Method to create and add new user.
+   *
+   * @param username new profile username
+   * @param pass     new password
+   * @return true if registration complete, false if registration failed.
+   */
+  boolean register(String username, String pass);
+
+  /**
+   * Method to disconnect user and reset token.
+   *
+   * @param username user's login
+   * @param token    user's current token
+   * @throws ru.cracker.exceptions.InvalidToken if user token is invalid.
+   */
+  void disconnect(String username, String token);
+
+  /**
+   * Method to see all of user's deals
+   *
+   * @param username user, that make deals.
+   * @return list of deals strings.
+   * @throws ru.cracker.exceptions.InvalidToken if user token is invalid.
+   */
+  List<String> getDealsByUser(String username, String token);
 }

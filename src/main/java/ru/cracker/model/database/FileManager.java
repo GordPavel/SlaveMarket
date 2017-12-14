@@ -1,14 +1,10 @@
 package ru.cracker.model.database;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import ru.cracker.model.merchandises.Merchandise;
+
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
-import ru.cracker.model.merchandises.Merchandise;
 
 public class FileManager {
 
@@ -17,7 +13,7 @@ public class FileManager {
   /**
    * Method to write data in specified file.
    *
-   * @param o data to write.
+   * @param o    data to write.
    * @param file file.
    */
   public static void writeSerialaizableToFile(Object o, String file) {
@@ -26,9 +22,9 @@ public class FileManager {
       objectOutputStream = new ObjectOutputStream(new FileOutputStream(file));
     } catch (IOException e) {
       logger.logError(
-          "\u001B[31mCan't open/create data file create"
-              + file
-              + "file in project directory\u001B[0m");
+              "\u001B[31mCan't open/create data file create"
+                      + file
+                      + "file in project directory\u001B[0m");
     }
     try {
       objectOutputStream.writeObject(o);
@@ -45,20 +41,44 @@ public class FileManager {
    * @return List of merchandises
    */
   public static List<Merchandise> readMerchandises(String fileName) {
-    List<Merchandise> merchants = new ArrayList<>();
-    try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(fileName))) {
-      merchants = (List<Merchandise>) stream.readObject();
+    Object o = read(fileName);
+    if (null != o) {
+      return (List<Merchandise>) o;
+    } else {
+      return new ArrayList<>();
+    }
+  }
+
+  public static DealList readDeals(String dealFile) {
+    Object o = read(dealFile);
+    if (null != o) {
+      return (DealList) o;
+    } else {
+      return new DealList();
+    }
+  }
+
+  public static List<User> readUsers(String userFile) {
+    Object o = read(userFile);
+    if (null != o) {
+      return (List<User>) o;
+    } else {
+      return new ArrayList<>();
+    }
+  }
+
+  private static Object read(String datafile) {
+    Object merchants = null;
+    try (ObjectInputStream stream = new ObjectInputStream(new FileInputStream(datafile))) {
+      merchants = stream.readObject();
     } catch (ClassNotFoundException e) {
       try {
-        boolean newFile = new File(fileName).createNewFile();
-        if (newFile) {
-          merchants.clear();
-        }
+        boolean newFile = new File(datafile).createNewFile();
       } catch (IOException e1) {
         e1.printStackTrace();
       }
     } catch (IOException e) {
-      logger.logError("can't open data file");
+      logger.logError("can't open data file" + datafile);
     }
     return merchants;
   }

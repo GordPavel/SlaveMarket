@@ -1,22 +1,18 @@
 package ru.cracker.model.database;
 
 import gigadot.rebound.Rebound;
+import ru.cracker.exceptions.*;
+import ru.cracker.model.merchandises.Merchandise;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
-import ru.cracker.exceptions.CreateMerchandiseException;
-import ru.cracker.exceptions.MerchandiseAlreadyBought;
-import ru.cracker.exceptions.MerchandiseNotFoundException;
-import ru.cracker.exceptions.WrongClassCallException;
-import ru.cracker.exceptions.WrongQueryException;
-import ru.cracker.model.merchandises.Merchandise;
+
+import static java.util.stream.Collectors.toList;
 
 
 /**
@@ -30,10 +26,34 @@ public class MerchDb implements Database {
   private List<Merchandise> merchants;
 
   /**
+   * Deal manager.
+   */
+  private DealList deals;
+
+  /**
    * Logger object to log all operations into file.
    */
   private Logger logger = new Logger();
-  private String fileName = "data.sb";
+
+  /**
+   * File to write all merchandises.
+   */
+  private String merchFile = "data.sb";
+
+  /**
+   * File to write all deals.
+   */
+  private String dealFile = "deals.dl";
+
+  /**
+   * List of users.
+   */
+  private List<User> users;
+
+  /**
+   * File to write user's list.
+   */
+  private String userFile = "users.us";
 
   /**
    * Constructor to create/open database.
@@ -42,20 +62,30 @@ public class MerchDb implements Database {
    */
   public MerchDb(boolean load) {
     merchants = new ArrayList<Merchandise>();
+    users = new ArrayList<User>();
+    deals = new DealList();
+    users.add(new User("s3rius", "GYrcN+xQe/XMRDn5sz2whg=="));
 
     //    generateData(400);
     if (load) {
       loadFromFile();
+      unblockAll();
     } else {
-      fileName = "newData.sb";
+      merchFile = "newData.sb";
     }
+  }
+
+  private void unblockAll() {
+    users.forEach(user -> user.setToken(""));
   }
 
   /**
    * Method to load data from file.
    */
   private void loadFromFile() {
-    merchants = FileManager.readMerchandises(fileName);
+    merchants = FileManager.readMerchandises(merchFile);
+    deals = FileManager.readDeals(dealFile);
+    users = FileManager.readUsers(userFile);
   }
 
   //    /**
@@ -81,18 +111,27 @@ public class MerchDb implements Database {
    * Saves all data into file.
    */
   private void saveData() {
-    FileManager.writeSerialaizableToFile(merchants, fileName);
+    FileManager.writeSerialaizableToFile(merchants, merchFile);
+    FileManager.writeSerialaizableToFile(deals, dealFile);
+    FileManager.writeSerialaizableToFile(users, userFile);
   }
 
   /**
    * Puts merch into the vault.
    *
    * @param merch Merch to put in vault
-   * @param user user who performed action
+   * @param user  user who performed action
    */
-  public void addMerchandise(Merchandise merch, String user) {
+  public void addMerchandise(Merchandise merch, String user, String token, int price) {
     merch.setId(merchants.size());
     merchants.add(merch);
+    deals.addDeal(
+            new Deal(getUser(user),
+                    merch,
+                    price,
+                    DealState.FOR_SALE,
+                    deals.getDeals().size()
+            ));
     logger.log(user, "add merchandise", merchants.get(merchants.size() - 1).getAllInfo());
     saveData();
   }
@@ -101,14 +140,20 @@ public class MerchDb implements Database {
    * Removes merchandise from database.
    *
    * @param merch Removes merchandise from vault
-   * @param user user who performed action
+   * @param user  user who performed action
    */
-  public void removeMerchandise(Merchandise merch, String user) {
+  public void removeMerchandise(Merchandise merch, String user, String token) {
     int id = merchants.indexOf(merch);
     if (id != -1) {
       merchants.stream().filter(i -> i.getId() >= id)
-          .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
-      merchants.remove(id);
+              .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
+      deals.addDeal(
+              new Deal(
+                      getUser(user),
+                      merch, lastDeal(merch).getPrice(),
+                      DealState.Bought,
+                      deals.getDeals().size()
+              ));
       logger.log(user, "removed merchandise", merch.getAllInfo());
       saveData();
     } else {
@@ -119,22 +164,29 @@ public class MerchDb implements Database {
   /**
    * remove merchandise from vault by id.
    *
-   * @param id merchandise unique identification
+   * @param id   merchandise unique identification
    * @param user user who performed action
    */
-  public void removeMerchandise(int id, String user) {
+  public void removeMerchandise(int id, String user, String token) {
     if (id >= merchants.size() || id < 0) {
       throw new MerchandiseNotFoundException(id);
     }
-    if (merchants.get(id).isBought()) {
+    if (lastDeal(merchants.get(id)).getState().equals(DealState.Bought)) {
       throw new MerchandiseAlreadyBought(id);
     }
     logger.log(user, "removed merchandise", findMerh(id).getAllInfo());
+    deals.addDeal(
+            new Deal(getUser(user),
+                    merchants.get(id),
+                    lastDeal(merchants.get(id)).getPrice(),
+                    DealState.Bought, deals.getDeals().size())
+    );
     merchants.remove(id);
     merchants.stream().filter(i -> i.getId() >= id)
-        .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
+            .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
     saveData();
   }
+
 
   /**
    * Method to find specified Merchandises.
@@ -158,7 +210,7 @@ public class MerchDb implements Database {
     if (!Pattern.compile("all", Pattern.CASE_INSENSITIVE).matcher(querry.trim()).lookingAt()) {
       String namePattern = "([a-zA-z]+[[0-9]*[a-zA-z]]*)";
       Pattern pattern = Pattern.compile("\\sAND\\s", Pattern.CASE_INSENSITIVE);
-      Pattern notEqQuerySplitter = Pattern.compile(namePattern + "(>|>=|<|<=)([\\d]+[.\\d]*)");
+      Pattern notEqQuerySplitter = Pattern.compile(namePattern + "(>|>=|<|< =)([\\d]+[.\\d]*)");
       Pattern eqQuerySplitter = Pattern.compile(namePattern + "(=|!=)([\\w]+[.\\w]*)");
       String[] strings = pattern.split(querry);
       for (String subQuery : strings) {
@@ -175,7 +227,7 @@ public class MerchDb implements Database {
         String field = finalMatcher.group(1).toUpperCase();
         String value = finalMatcher.group(3);
         QueryComparator<String, String> finalComparator = createComparator(finalMatcher.group(2),
-            subQuery);
+                subQuery);
         merchandises = merchandises.filter(merchandise -> {
           Method[] methods = merchandise.getClass().getMethods();
           for (Method method : methods) {
@@ -190,8 +242,9 @@ public class MerchDb implements Database {
             }
             try {
               if (method.getName().substring(3).toUpperCase().equals(field)
-                  && !merchandise.isBought()
-                  && finalComparator.apply(String.valueOf(method.invoke(merchandise)), value)) {
+                      && null == lastDeal(merchandise)
+                      && lastDeal(merchandise).getState().equals(DealState.FOR_SALE)
+                      && finalComparator.apply(String.valueOf(method.invoke(merchandise)), value)) {
                 return true;
               }
             } catch (IllegalAccessException | InvocationTargetException e) {
@@ -201,9 +254,9 @@ public class MerchDb implements Database {
           return false;
         });
       }
-      return merchandises.map(Merchandise::getAllInfo).collect(Collectors.toList());
+      return merchandises.map(Merchandise::getAllInfo).collect(toList());
     }
-    return merchandises.map(Merchandise::getAllInfo).collect(Collectors.toList());
+    return merchandises.map(Merchandise::getAllInfo).collect(toList());
   }
 
   /**
@@ -268,38 +321,61 @@ public class MerchDb implements Database {
   @Override
   public String getMerchantById(int id) throws MerchandiseNotFoundException {
     return merchants.stream().filter(i -> Integer.compare(i.getId(), id) == 0)
-        .collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
-          if (list.size() != 1) {
-            throw new MerchandiseNotFoundException(id);
-          }
-          return list.get(0).getAllInfo();
-        }));
+            .collect(Collectors.collectingAndThen(toList(), list -> {
+              if (list.size() != 1) {
+                throw new MerchandiseNotFoundException(id);
+              }
+              Deal deal = lastDeal(list.get(0));
+              return list.get(0).getAllInfo() + deal.getState() + deal.getUser().getUsername();
+            }));
   }
 
+  /**
+   * Method to find merchandise by id.
+   *
+   * @param id merchandise's id
+   * @return Merchandise
+   */
   private Merchandise findMerh(int id) {
     return merchants.stream().filter(i -> Integer.compare(i.getId(), id) == 0)
-        .collect(Collectors.collectingAndThen(Collectors.toList(), list -> {
-          if (list.size() != 1) {
-            throw new MerchandiseNotFoundException(id);
-          }
-          return list.get(0);
-        }));
+            .collect(Collectors.collectingAndThen(toList(), list -> {
+              if (list.size() != 1) {
+                throw new MerchandiseNotFoundException(id);
+              }
+              return list.get(0);
+            }));
   }
+
+//  private Deal lastDeal(Merchandise merchandise, Expression expression) {
+//    deals.getDeals().stream()
+//            .filter(deal -> deal.getMerchandise().equals(merchandise)
+//                    && expression.execute();
+//            .collect(toList());
+//  }
+
 
   /**
    * Marks merchandise as bought.
    *
-   * @param id unique merchandise identity
+   * @param id   unique merchandise identity
    * @param user user who performed action
    * @return bought merchandise
    * @throws MerchandiseNotFoundException throws if merchandise can not be found
    */
   @Override
-  public String buyMerchandise(int id, String user) throws MerchandiseNotFoundException {
+  public String buyMerchandise(int id, String user, String token)
+          throws MerchandiseNotFoundException {
     if (id >= merchants.size() || id < 0) {
       throw new MerchandiseNotFoundException(id);
     } else {
-      if (findMerh(id).buy(user)) {
+      Deal deal = lastDeal(findMerh(id));
+      if (deal.getState().equals(DealState.FOR_SALE)) {
+        deals.addDeal(
+                new Deal(getUser(user),
+                        deal.getMerchandise(),
+                        deal.getPrice(),
+                        DealState.Bought,
+                        deals.getDeals().size()));
         logger.log(user, "bought merchandise", getMerchantById(id));
         saveData();
         return getMerchantById(id);
@@ -309,17 +385,27 @@ public class MerchDb implements Database {
     }
   }
 
+  private Deal lastDeal(Merchandise merh) {
+    List<Deal> deals = this.deals.getDeals();
+    for (int i = deals.size() - 1; i >= 0; i--) {
+      if (deals.get(i).getMerchandise().equals(merh)) {
+        return deals.get(i);
+      }
+    }
+    return null;
+  }
+
   /**
    * Set new values  to merchandise.
    *
-   * @param id id of merchandise to be changed
+   * @param id     id of merchandise to be changed
    * @param params String of parameters with values to change
-   * @param user user who performed action
+   * @param user   user who performed action
    */
-  public void setValuesToMerchandise(int id, String params, String user) {
+  public void setValuesToMerchandise(int id, String params, String user, String token) {
     Map<String, String> kvs = Arrays.stream(params.trim().split(" "))
-        .map(elem -> elem.split("="))
-        .collect(Collectors.toMap(e -> e[0].toUpperCase(), e -> e[1]));
+            .map(elem -> elem.split("="))
+            .collect(Collectors.toMap(e -> e[0].toUpperCase(), e -> e[1]));
     String merchIfo = "{Before: " + findMerh(id).getAllInfo() + "},";
     findMerh(id).setParamsByMap(kvs);
     logger.log(user, "Changed merchandise parameters", merchIfo + " {changed Values:" + kvs + "}");
@@ -336,29 +422,98 @@ public class MerchDb implements Database {
 
     Rebound rebound = new Rebound("ru.cracker.model.merchandises.classes");
     return rebound.getSubClassesOf(Merchandise.class).stream().map(Class::getSimpleName)
-        .collect(Collectors.toList());
+            .collect(toList());
   }
 
   @Override
-  public List<String> getMandatoryFields(String className) throws WrongClassCallException {
+  public List<String> getMandatoryFields(String className)
+          throws WrongClassCallException {
     return Merchandise.getMandatoryFields(className);
   }
 
   @Override
-  public void addMerchandiseByMap(String className, Map<String, String> kvs, String user)
-      throws CreateMerchandiseException {
+  public void addMerchandiseByMap(
+          String className,
+          Map<String, String> kvs,
+          String user, String token,
+          int price)
+          throws CreateMerchandiseException {
     try {
       Class merchandise = Class.forName("ru.cracker.model.merchandises.classes." + className);
       Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass())
-          .invoke(null, kvs);
-      addMerchandise(merch, user);
+              .invoke(null, kvs);
+      addMerchandise(merch, user, token, price);
     } catch (ClassNotFoundException
-        | IllegalAccessException
-        | InvocationTargetException
-        | NoSuchMethodException e) {
+            | IllegalAccessException
+            | InvocationTargetException
+            | NoSuchMethodException e) {
       throw new CreateMerchandiseException("Can't create merchandise. Wrong values");
       // throw new IllegalArgumentException("Error while adding. We're sorry");
     }
   }
 
+  @Override
+  public String login(String username, String password) {
+    return users.stream().filter(user -> user.getUsername().equals(username)).limit(1).map(user -> {
+      if (user.verifyPassword(password) && user.getToken().equals("")) {
+        return user.generateToken();
+      } else {
+        return "-1";
+      }
+    }).collect(Collectors.collectingAndThen(toList(), list -> {
+      if (list.size() == 1) {
+        return list.get(0);
+      } else {
+        throw new UserException("Wrong login");
+      }
+    }));
+  }
+
+  @Override
+  public boolean register(String username, String pass) {
+    List<User> users1 = users.stream().filter(user -> {
+      if (username.equals(user.getUsername())) {
+        return true;
+      }
+      return false;
+    }).collect(toList());
+    if (users1.size() != 0) {
+      return false;
+    }
+    users.add(new User(username, pass));
+    return true;
+  }
+
+  @Override
+  public void disconnect(String username, String token) {
+    User user = getUser(username);
+    if (user.getToken().equals(token)) {
+      user.setToken("");
+    } else
+      throw new InvalidToken();
+    logger.log(username, "disconnected", "");
+  }
+
+  private User getUser(String username) {
+    return users.stream().filter(user -> {
+      if (username.equals(user.getUsername())) {
+        return true;
+      }
+      return false;
+    }).collect(Collectors.collectingAndThen(toList(), list -> {
+      if (list.size() != 1) {
+        throw new UserException("Can't find user");
+      }
+      return list.get(0);
+    }));
+  }
+
+  public List<String> getDealsByUser(String username, String token) {
+    if (getUser(username).getToken().equals(token))
+      return deals.getDeals().stream()
+              .sorted(Collections.reverseOrder())
+              .filter(deal -> deal.getUser().getUsername().equals(username))
+              .map(Deal::toString).collect(toList());
+    else throw new InvalidToken();
+  }
 }

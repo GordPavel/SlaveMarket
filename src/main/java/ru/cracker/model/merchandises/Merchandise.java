@@ -52,21 +52,10 @@ public interface Merchandise extends Serializable {
   void setId(int id);
 
   /**
-   * Returns price value for current merchandise.
-   *
-   * @return price
-   */
-  int getPrice();
-
-  /**
    * Returns merchandise quality in percentage.
    */
   float getBenefit();
 
-  /**
-   * Method mark merchandise as bought.
-   */
-  boolean buy(String user);
 
   /**
    * Get merchant's name.
@@ -82,12 +71,6 @@ public interface Merchandise extends Serializable {
    */
   String getAllInfo();
 
-  /**
-   * Returns merchandise boughtFlag.
-   *
-   * @return true if merchandise already bought.
-   */
-  boolean isBought();
 
   /**
    * Set up object params with map values.

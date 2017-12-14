@@ -1,13 +1,9 @@
 package ru.cracker.model.merchandises.classes;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import ru.cracker.exceptions.MerchandiseAlreadyBought;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.SlaveInterface;
+
+import java.util.*;
 
 /**
  * Realization of SlaveInterface. Model of Slave. Slave is a person who is the property of and
@@ -20,17 +16,14 @@ public class Slave implements SlaveInterface {
    * human body, standing erect.
    */
   private float height;
-  /**
-   * A parameter indicating whether there are goods in stock.
-   */
-  private boolean bought;
+
   /**
    * The term human body weight is used colloquially and in the biological and medical sciences to
    * refer to a person's mass or weight.
    */
   private float weight;
   /**
-   * The mesuare to calculate human ageing. Where the Ageing or aging (see spelling differences) is
+   * The measure to calculate human ageing. Where the Ageing or aging (see spelling differences) is
    * the process of becoming older.
    */
   private int age;
@@ -49,13 +42,6 @@ public class Slave implements SlaveInterface {
    * slave.
    */
   private int id;
-  /**
-   * In modern economies, prices are generally expressed in units of some form of currency. Although
-   * prices could be quoted as quantities of other goods or services this sort of barter exchange is
-   * rarely seen.
-   */
-  private int price;
-  private String boughtBy = "";
 
   /**
    * Default constructor.
@@ -63,13 +49,8 @@ public class Slave implements SlaveInterface {
   private Slave() {
   }
 
-  /**
-   * Returns new Builder instance for adding parameters in new slave.
-   *
-   * @return new builder with method for creating new instance
-   */
   public static Builder newBuilder() {
-    return new Slave().new Builder();
+    return newBuilder();
   }
 
   /**
@@ -91,10 +72,8 @@ public class Slave implements SlaveInterface {
       slave.age = Integer.parseInt(map.get("AGE"));
       slave.weight = Float.parseFloat(map.get("WEIGHT"));
       slave.height = Float.parseFloat(map.get("HEIGHT"));
-      slave.price = Integer.parseInt(map.get("PRICE"));
       slave.gender = map.get("GENDER");
       slave.name = map.get("NAME");
-      slave.bought = false;
     } catch (Exception e) {
       throw new WrongQueryException(e.getMessage());
     }
@@ -107,7 +86,7 @@ public class Slave implements SlaveInterface {
    * @return list of strings with minimum required fields for creating instance of class
    */
   public static List<String> mandatoryFields() {
-    return Arrays.asList("Name", "Gender", "Height", "Weight", "Age", "price");
+    return Arrays.asList("Name", "Gender", "Height", "Weight", "Age");
   }
 
   /**
@@ -116,59 +95,39 @@ public class Slave implements SlaveInterface {
    * @param map of params. Where key is field name and value is field value.
    */
   public void setParamsByMap(Map<String, String> map) {
-    if (!bought) {
-      List<String> fields = mandatoryFields();
-      map.forEach((key, value) -> {
-        boolean contains = false;
-        for (String field : fields) {
-          if (field.equals(key.toUpperCase())) {
-            contains = true;
-          }
+    List<String> fields = mandatoryFields();
+    map.forEach((key, value) -> {
+      boolean contains = false;
+      for (String field : fields) {
+        if (field.equals(key.toUpperCase())) {
+          contains = true;
         }
-        if (!contains) {
-          throw new WrongQueryException(key + "=" + value);
-        }
-        switch (key) {
-          case "AGE":
-            this.age = Integer.parseInt(value);
-            break;
-          case "WEIGHT":
-            this.weight = Float.parseFloat(value);
-            break;
-          case "HEIGHT":
-            this.height = Float.parseFloat(value);
-            break;
-          case "PRICE":
-            this.price = Integer.parseInt(value);
-            break;
-          case "GENDER":
-            this.gender = value;
-            break;
-          case "NAME":
-            this.name = value;
-            break;
-          default:
-            break;
-        }
-      });
-    } else {
-      throw new MerchandiseAlreadyBought(id);
-    }
+      }
+      if (!contains) {
+        throw new WrongQueryException(key + "=" + value);
+      }
+      switch (key) {
+        case "AGE":
+          this.age = Integer.parseInt(value);
+          break;
+        case "WEIGHT":
+          this.weight = Float.parseFloat(value);
+          break;
+        case "HEIGHT":
+          this.height = Float.parseFloat(value);
+          break;
+        case "GENDER":
+          this.gender = value;
+          break;
+        case "NAME":
+          this.name = value;
+          break;
+        default:
+          break;
+      }
+    });
   }
 
-  /**
-   * Method mark merchandise as bought.
-   *
-   * @return is this bought success?
-   */
-  public boolean buy(String user) {
-    if (bought) {
-      throw new MerchandiseAlreadyBought(id);
-    }
-    bought = true;
-    boughtBy = user;
-    return true;
-  }
 
   /**
    * Returns merchandise quality in percentage.
@@ -184,39 +143,35 @@ public class Slave implements SlaveInterface {
    */
   public String getAllInfo() {
     return "Slave Slave id:" + id + " height:" + height + " weight:" + weight + " age:" + age
-        + " gender:" + gender
-        + " name:" + name + " benefit:" + getBenefit() + " price:" + price;
+            + " gender:" + gender
+            + " name:" + name + " benefit:" + getBenefit();
   }
 
   @Override
   public String toString() {
     return "Slave Slave id:" + id + " height:" + height + " weight:" + weight + " age:" + age
-        + " gender:" + gender
-        + " name:" + name + " benefit:" + getBenefit() + " price:" + price;
+            + " gender:" + gender
+            + " name:" + name + " benefit:" + getBenefit();
   }
 
   @Override
   public boolean equals(Object obj) {
     return obj.getClass().getName().equals(this.getClass().getName())
-        && ((Slave) obj).name.equals(name)
-        && ((Slave) obj).gender.equals(gender)
-        && Objects.equals(((Slave) obj).getBenefit(), getBenefit())
-        && ((Slave) obj).age == age
-        && ((Slave) obj).weight == weight
-        && ((Slave) obj).bought == bought
-        && ((Slave) obj).price == price
-        && ((Slave) obj).boughtBy.equals(boughtBy);
+            && ((Slave) obj).name.equals(name)
+            && ((Slave) obj).gender.equals(gender)
+            && Objects.equals(((Slave) obj).getBenefit(), getBenefit())
+            && ((Slave) obj).age == age
+            && ((Slave) obj).weight == weight;
   }
 
   @Override
   public int hashCode() {
     return id
-        + name.hashCode()
-        + gender.hashCode()
-        + age
-        + Float.floatToIntBits(weight)
-        + Float.floatToIntBits(height)
-        + price;
+            + name.hashCode()
+            + gender.hashCode()
+            + age
+            + Float.floatToIntBits(weight)
+            + Float.floatToIntBits(height);
   }
 
   /**
@@ -283,28 +238,9 @@ public class Slave implements SlaveInterface {
     return name;
   }
 
-  public int getPrice() {
-    return price;
-  }
 
-  /**
-   * Returns merchandise boughtFlag.
-   *
-   * @return true if merchandise already bought.
-   */
-  public boolean isBought() {
-    return bought;
-  }
-
-
-  /**
-   * Builder class for realization of builder pattern.
-   */
   public class Builder {
 
-    /**
-     * Default constructor.
-     */
     private Builder() {
     }
 
@@ -351,16 +287,6 @@ public class Slave implements SlaveInterface {
     /**
      * Sets up age to new Object.
      *
-     * @param price new Object's price
-     */
-    public Builder addPrice(int price) {
-      Slave.this.price = price;
-      return this;
-    }
-
-    /**
-     * Sets up age to new Object.
-     *
      * @param id new Object's id
      */
     public Builder addId(int id) {
@@ -375,13 +301,12 @@ public class Slave implements SlaveInterface {
      */
     public Slave build() {
       Slave slave = new Slave();
-      slave.name = Slave.this.name;
-      slave.id = Slave.this.id;
-      slave.gender = Slave.this.gender;
-      slave.price = Slave.this.price;
-      slave.age = Slave.this.age;
-      slave.weight = Slave.this.weight;
-      slave.height = Slave.this.height;
+      slave.name = name;
+      slave.id = id;
+      slave.gender = gender;
+      slave.age = age;
+      slave.weight = weight;
+      slave.height = height;
       return slave;
     }
 
@@ -395,7 +320,6 @@ public class Slave implements SlaveInterface {
       slave.name = "";
       slave.id = -1;
       slave.gender = "";
-      slave.price = 0;
       slave.age = -1;
       slave.weight = -1;
       slave.height = -1;

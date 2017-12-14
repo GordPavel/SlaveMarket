@@ -9,3 +9,7 @@ data.dat
 .project
 logs/*
 *.sb
+
+deals\.dl
+
+users\.us
