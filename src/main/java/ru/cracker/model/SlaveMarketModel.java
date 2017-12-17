@@ -1,6 +1,7 @@
 package ru.cracker.model;
 
 import ru.cracker.exceptions.CreateMerchandiseException;
+import ru.cracker.exceptions.MerchandiseAlreadyBought;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.database.Database;
@@ -17,8 +18,8 @@ import java.util.Map;
  */
 public class SlaveMarketModel implements Observable, Model {
 
-  private Database database;
-  private List<Observer> observers;
+  private final Database database;
+  private final List<Observer> observers;
 
   /**
    * Default constructor.
@@ -101,7 +102,7 @@ public class SlaveMarketModel implements Observable, Model {
    * @param id   id of merch to remove
    * @param user user who performed action
    */
-  public void removeMerchandise(int id, String user, String token) {
+  public void removeMerchandise(int id, String user, String token) throws MerchandiseAlreadyBought {
     database.removeMerchandise(id, user, token);
     deleted(id);
   }

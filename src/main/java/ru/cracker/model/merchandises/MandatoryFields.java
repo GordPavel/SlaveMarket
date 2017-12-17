@@ -6,7 +6,7 @@ public enum MandatoryFields {
   Slave(ru.cracker.model.merchandises.classes.Slave.mandatoryFields());
 
 
-  private List<String> fields;
+  private final List<String> fields;
 
   MandatoryFields(List<String> fields) {
     this.fields = fields;

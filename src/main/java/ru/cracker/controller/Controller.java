@@ -1,9 +1,6 @@
 package ru.cracker.controller;
 
-import ru.cracker.exceptions.CreateMerchandiseException;
-import ru.cracker.exceptions.MerchandiseNotFoundException;
-import ru.cracker.exceptions.WrongClassCallException;
-import ru.cracker.exceptions.WrongQueryException;
+import ru.cracker.exceptions.*;
 import ru.cracker.model.merchandises.Merchandise;
 
 import java.util.List;
@@ -36,7 +33,7 @@ public interface Controller {
    * @param id   slaves's id to remove the slave by it.
    * @param user user who performed action
    */
-  void removeMerchant(int id, String user, String token);
+  void removeMerchant(int id, String user, String token) throws MerchandiseAlreadyBought;
 
   /**
    * tells to model for search  the slave by the query.
@@ -135,7 +132,7 @@ public interface Controller {
   void start();
 
   /**
-   * Method to see all of user's deals
+   * Method to see all of user's deals.
    *
    * @param username user, that make deals.
    * @return list of deals strings.

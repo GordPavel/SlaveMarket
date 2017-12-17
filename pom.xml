@@ -109,11 +109,11 @@
         </dependencies>
         <executions>
           <execution>
-            <!--<id>pmd-validation</id>-->
-            <!--<phase>process-test-classes</phase>-->
-            <!--<goals>-->
-              <!--<goal>check</goal>-->
-            <!--</goals>-->
+            <id>pmd-validation</id>
+            <phase>process-test-classes</phase>
+            <goals>
+              <goal>check</goal>
+            </goals>
           </execution>
         </executions>
         <configuration>

@@ -133,7 +133,7 @@ public interface Database {
   void disconnect(String username, String token);
 
   /**
-   * Method to see all of user's deals
+   * Method to see all of user's deals.
    *
    * @param username user, that make deals.
    * @return list of deals strings.

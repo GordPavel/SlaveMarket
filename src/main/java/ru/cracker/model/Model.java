@@ -1,9 +1,6 @@
 package ru.cracker.model;
 
-import ru.cracker.exceptions.CreateMerchandiseException;
-import ru.cracker.exceptions.MerchandiseNotFoundException;
-import ru.cracker.exceptions.WrongClassCallException;
-import ru.cracker.exceptions.WrongQueryException;
+import ru.cracker.exceptions.*;
 import ru.cracker.model.merchandises.Merchandise;
 
 import java.util.List;
@@ -36,7 +33,7 @@ public interface Model {
    *
    * @param user user who performed action
    */
-  void removeMerchandise(int id, String user, String token);
+  void removeMerchandise(int id, String user, String token) throws MerchandiseAlreadyBought;
 
   /**
    * Search slave by the string  query like "height>150 productivity>40 weight<90 age=22".
@@ -91,11 +88,12 @@ public interface Model {
    * Method to add new Merchandise item
    *
    * @param className merchandise's type
-   * @param kvs       map with params. To get valid keys call {@link #getMandatoryFields(String className)}
+   * @param kvs       map with params.
+   *                  To get valid keys call {@link #getMandatoryFields(String className)}
    * @param user      current user
    * @param token     current user's token
    * @param price     merchandise's price
-   * @throws CreateMerchandiseException
+   * @throws CreateMerchandiseException throws if can't create merchandise
    */
   void addMerchandiseByMap(String className, Map<String, String> kvs, String user, String token, int price)
           throws CreateMerchandiseException;
@@ -127,7 +125,7 @@ public interface Model {
   void disconnect(String username, String token);
 
   /**
-   * Method to see all of user's deals
+   * Method to see all of user's deals.
    *
    * @param username user, that make deals.
    * @return list of deals strings.

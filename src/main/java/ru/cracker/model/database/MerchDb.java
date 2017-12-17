@@ -21,39 +21,29 @@ import static java.util.stream.Collectors.toList;
 public class MerchDb implements Database {
 
   /**
+   * Logger object to log all operations into file.
+   */
+  private final Logger logger = new Logger();
+  /**
+   * File to write all deals.
+   */
+  private final String dealFile = "deals.dl";
+  /**
+   * File to write user's list.
+   */
+  private final String userFile = "users.us";
+  /**
    * List of merchandise.
    */
   private List<Merchandise> merchants;
-
   /**
    * Deal manager.
    */
   private DealList deals;
-
-  /**
-   * Logger object to log all operations into file.
-   */
-  private Logger logger = new Logger();
-
-  /**
-   * File to write all merchandises.
-   */
-  private String merchFile = "data.sb";
-
-  /**
-   * File to write all deals.
-   */
-  private String dealFile = "deals.dl";
-
   /**
    * List of users.
    */
   private List<User> users;
-
-  /**
-   * File to write user's list.
-   */
-  private String userFile = "users.us";
 
   /**
    * Constructor to create/open database.
@@ -70,8 +60,6 @@ public class MerchDb implements Database {
     if (load) {
       loadFromFile();
       unblockAll();
-    } else {
-      merchFile = "newData.sb";
     }
   }
 
@@ -83,9 +71,9 @@ public class MerchDb implements Database {
    * Method to load data from file.
    */
   private void loadFromFile() {
-    merchants = FileManager.readMerchandises(merchFile);
     deals = FileManager.readDeals(dealFile);
     users = FileManager.readUsers(userFile);
+    merchants = deals.getDeals().stream().map(Deal::getMerchandise).distinct().collect(toList());
   }
 
   //    /**
@@ -111,7 +99,6 @@ public class MerchDb implements Database {
    * Saves all data into file.
    */
   private void saveData() {
-    FileManager.writeSerialaizableToFile(merchants, merchFile);
     FileManager.writeSerialaizableToFile(deals, dealFile);
     FileManager.writeSerialaizableToFile(users, userFile);
   }
@@ -167,7 +154,7 @@ public class MerchDb implements Database {
    * @param id   merchandise unique identification
    * @param user user who performed action
    */
-  public void removeMerchandise(int id, String user, String token) {
+  public void removeMerchandise(int id, String user, String token) throws MerchandiseAlreadyBought {
     if (id >= merchants.size() || id < 0) {
       throw new MerchandiseNotFoundException(id);
     }
@@ -242,7 +229,7 @@ public class MerchDb implements Database {
             }
             try {
               if (method.getName().substring(3).toUpperCase().equals(field)
-                      && null == lastDeal(merchandise)
+                      && null != lastDeal(merchandise)
                       && lastDeal(merchandise).getState().equals(DealState.FOR_SALE)
                       && finalComparator.apply(String.valueOf(method.invoke(merchandise)), value)) {
                 return true;
@@ -254,9 +241,15 @@ public class MerchDb implements Database {
           return false;
         });
       }
-      return merchandises.map(Merchandise::getAllInfo).collect(toList());
+      return merchandises.map(merchandise -> merchandise.getAllInfo()
+              + lastDeal(merchandise).getState()
+              + lastDeal(merchandise).getUser().getUsername())
+              .collect(toList());
     }
-    return merchandises.map(Merchandise::getAllInfo).collect(toList());
+    return merchandises.map(merchandise -> merchandise.getAllInfo()
+            + lastDeal(merchandise).getState()
+            + lastDeal(merchandise).getUser().getUsername())
+            .collect(toList());
   }
 
   /**
@@ -385,6 +378,12 @@ public class MerchDb implements Database {
     }
   }
 
+  /**
+   * Method to find last deal with {@link Merchandise}.
+   *
+   * @param merh {@link Merchandise} to find deals with
+   * @return last {@link Deal} with merchandise
+   */
   private Deal lastDeal(Merchandise merh) {
     List<Deal> deals = this.deals.getDeals();
     for (int i = deals.size() - 1; i >= 0; i--) {
@@ -472,10 +471,7 @@ public class MerchDb implements Database {
   @Override
   public boolean register(String username, String pass) {
     List<User> users1 = users.stream().filter(user -> {
-      if (username.equals(user.getUsername())) {
-        return true;
-      }
-      return false;
+      return username.equals(user.getUsername());
     }).collect(toList());
     if (users1.size() != 0) {
       return false;
@@ -495,12 +491,8 @@ public class MerchDb implements Database {
   }
 
   private User getUser(String username) {
-    return users.stream().filter(user -> {
-      if (username.equals(user.getUsername())) {
-        return true;
-      }
-      return false;
-    }).collect(Collectors.collectingAndThen(toList(), list -> {
+    return users.stream().filter(user -> username.equals(user.getUsername())
+    ).collect(Collectors.collectingAndThen(toList(), list -> {
       if (list.size() != 1) {
         throw new UserException("Can't find user");
       }
@@ -508,12 +500,21 @@ public class MerchDb implements Database {
     }));
   }
 
+  /**
+   * Method to get all user's deals.
+   *
+   * @param username user, that make deals.
+   * @param token    user's token
+   * @return {@link List} of {@link Deal}s
+   */
   public List<String> getDealsByUser(String username, String token) {
-    if (getUser(username).getToken().equals(token))
+    if (getUser(username).getToken().equals(token)) {
       return deals.getDeals().stream()
               .sorted(Collections.reverseOrder())
               .filter(deal -> deal.getUser().getUsername().equals(username))
               .map(Deal::toString).collect(toList());
-    else throw new InvalidToken();
+    } else {
+      throw new InvalidToken();
+    }
   }
 }

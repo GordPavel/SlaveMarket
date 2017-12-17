@@ -1,6 +1,7 @@
 package ru.cracker.controller;
 
 import ru.cracker.exceptions.CreateMerchandiseException;
+import ru.cracker.exceptions.MerchandiseAlreadyBought;
 import ru.cracker.exceptions.MerchandiseNotFoundException;
 import ru.cracker.exceptions.WrongClassCallException;
 import ru.cracker.model.Model;
@@ -31,12 +32,12 @@ public class SlaveController implements Controller {
   /**
    * Model to access data.
    */
-  private Model model;
+  private final Model model;
 
   /**
    * View to send data to it.
    */
-  private View view;
+  private final View view;
 
   /**
    * Initial constructor with model.
@@ -78,7 +79,7 @@ public class SlaveController implements Controller {
    * @param id   slaves's id to remove the slave by it.
    * @param user user who performed action
    */
-  public void removeMerchant(int id, String user, String token) {
+  public void removeMerchant(int id, String user, String token) throws MerchandiseAlreadyBought {
     model.removeMerchandise(id, user, token);
   }
 

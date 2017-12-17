@@ -4,8 +4,9 @@ import ru.cracker.model.merchandises.Merchandise;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
-public class Deal implements Serializable {
+public class Deal implements Serializable, Comparable<Deal> {
   private final DealState state;
   LocalDateTime time;
   private User user;
@@ -29,11 +30,11 @@ public class Deal implements Serializable {
     this.price = price;
     this.state = state;
     this.id = id;
-    time = LocalDateTime.now();
+    this.time = LocalDateTime.now();
   }
 
   public User getUser() {
-    return user;
+    return this.user;
   }
 
   public void setUser(User user) {
@@ -41,7 +42,7 @@ public class Deal implements Serializable {
   }
 
   public Merchandise getMerchandise() {
-    return merchandise;
+    return this.merchandise;
   }
 
   public void setMerchandise(Merchandise merchandise) {
@@ -49,7 +50,7 @@ public class Deal implements Serializable {
   }
 
   public int getPrice() {
-    return price;
+    return this.price;
   }
 
   public void setPrice(int price) {
@@ -57,7 +58,7 @@ public class Deal implements Serializable {
   }
 
   public int getId() {
-    return id;
+    return this.id;
   }
 
   public void setId(int id) {
@@ -65,15 +66,21 @@ public class Deal implements Serializable {
   }
 
   public DealState getState() {
-    return state;
+    return this.state;
   }
 
   @Override
   public String toString() {
-    return time +
-            ", merchandise=" + merchandise +
-            ", price=" + price +
-            ", state=" + state.getState() +
-            ", dealId=" + id;
+    return this.time.format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))
+            + ", merchandise=" + this.merchandise
+            + ", price=" + this.price
+            + ", state=" + this.state
+            + this.user.getUsername()
+            + ", dealId=" + this.id;
+  }
+
+  @Override
+  public int compareTo(Deal o) {
+    return Integer.compare(this.id, o.id);
   }
 }

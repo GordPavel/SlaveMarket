@@ -22,11 +22,7 @@ public class User implements Serializable {
   }
 
   public boolean verifyPassword(String password) {
-    if (this.password.equals(password)) {
-      return true;
-    } else {
-      return false;
-    }
+    return this.password.equals(password);
   }
 
   public String getPassword() {
@@ -46,7 +42,7 @@ public class User implements Serializable {
   }
 
   public String generateToken() {
-    token = UUID.randomUUID().toString() + ":" + System.currentTimeMillis();
+    token = UUID.randomUUID() + ":" + System.currentTimeMillis();
     return token;
   }
 }

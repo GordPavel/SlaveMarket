@@ -1,5 +1,6 @@
 package ru.cracker.view.cli;
 
+
 import ru.cracker.controller.Controller;
 import ru.cracker.exceptions.*;
 import ru.cracker.model.Model;
@@ -18,9 +19,9 @@ import java.util.stream.IntStream;
  */
 public class CommandLineView implements Observer, View {
 
-  private ResourceBundle resources = ResourceBundle.getBundle("app");
-  private Controller controller;
-  private String user = "s3rius";
+  private final ResourceBundle resources = ResourceBundle.getBundle("app");
+  private final Controller controller;
+  private String user = "";
   private String token = "";
 
   /**
@@ -69,17 +70,21 @@ public class CommandLineView implements Observer, View {
       buyMatcher = buy.matcher(action);
       if (deleteMatcher.lookingAt()) {
         try {
-          controller.removeMerchant(slaveId, user, token);
-        } catch (UnsupportedOperationException e) {
-          System.out.println("You try to delete slave but that operation is ");
-          System.out.println(e.getMessage());
+          this.controller.removeMerchant(slaveId, this.user, this.token);
+          return;
+        } catch (MerchandiseAlreadyBought e) {
+          System.out.println(e.getMessage() + " not by you");
         }
-        return;
       } else if (exitMatcher.lookingAt()) {
         return;
       } else if (setMatcher.lookingAt()) {
         try {
-          controller.setValuesToMerchandise(slaveId, setMatcher.group(2), user, token);
+          this.controller.setValuesToMerchandise(
+                  slaveId,
+                  setMatcher.group(2),
+                  this.user,
+                  this.token
+          );
         } catch (MerchandiseAlreadyBought e) {
           System.out.println("Can not change merchandise. It's already bought.");
         } catch (WrongQueryException e) {
@@ -87,11 +92,11 @@ public class CommandLineView implements Observer, View {
         }
       } else if (helpMatcher.lookingAt()) {
         if (helpMatcher.group(2) == null) {
-          System.out.println(resources.getString("slaveMenuHelp"));
+          System.out.println(this.resources.getString("slaveMenuHelp"));
         } else {
           try {
             System.out
-                    .println(resources.getString("HELPMERCH"
+                    .println(this.resources.getString("HELPMERCH"
                             + helpMatcher.group(2)
                             .trim()
                             .toUpperCase()
@@ -102,14 +107,10 @@ public class CommandLineView implements Observer, View {
         }
       } else if (infoMatcher.lookingAt()) {
         System.out.println("Slave's info :");
-        try {
-          System.out.println(controller.getMerchantById(slaveId));
-        } catch (UnsupportedOperationException e) {
-          System.out.println(e.getMessage());
-        }
+        System.out.println(this.controller.getMerchantById(slaveId));
       } else if (buyMatcher.lookingAt()) {
         try {
-          controller.buyMerchandise(slaveId, user, token);
+          this.controller.buyMerchandise(slaveId, this.user, this.token);
         } catch (MerchandiseAlreadyBought e) {
           System.out.println(e.getMessage());
         }
@@ -150,11 +151,11 @@ public class CommandLineView implements Observer, View {
    * Launch the view or CLI.
    */
   public void launch() {
-    startLogin();
+    this.startLogin();
   }
 
   private void startLogin() {
-    System.out.println(resources.getString("login"));
+    System.out.println(this.resources.getString("login"));
     Scanner scanner = new Scanner(System.in);
     Pattern login = Pattern.compile("\\bLOGIN\\b", Pattern.CASE_INSENSITIVE);
     Pattern register = Pattern.compile("\\bREGISTER\\b", Pattern.CASE_INSENSITIVE);
@@ -169,18 +170,18 @@ public class CommandLineView implements Observer, View {
         System.exit(0);
       } else if (login.matcher(command).lookingAt()) {
         System.out.println("Enter your login");
-        String username = scanner.nextLine();
+        this.user = scanner.nextLine();
         System.out.println("Enter your password");
         String pass = scanner.nextLine();
         try {
-          token = controller.login(username, pass);
+          this.token = this.controller.login(this.user, pass);
         } catch (UserException e) {
           System.out.println(e.getMessage());
         }
-        if (!token.equals("-1") && !token.equals("")) {
-          startMenu(scanner);
-        } else if (!token.equals("")) {
-          token = "";
+        if (!this.token.equals("-1") && !this.token.equals("")) {
+          this.startMenu(scanner);
+        } else if (!this.token.equals("")) {
+          this.token = "";
           System.out.println("Wrong password or user already in");
         }
       } else if (register.matcher(command).lookingAt()) {
@@ -189,7 +190,7 @@ public class CommandLineView implements Observer, View {
         System.out.println("Enter your password");
         String pass = scanner.nextLine();
 
-        boolean state = controller.register(username, pass);
+        boolean state = this.controller.register(username, pass);
         if (state) {
           System.out.println("Successfully registered");
         } else {
@@ -197,11 +198,11 @@ public class CommandLineView implements Observer, View {
         }
       } else if (helpMatcher.lookingAt()) {
         if (helpMatcher.group(2) == null) {
-          System.out.println(resources.getString("HELPLOGIN"));
+          System.out.println(this.resources.getString("HELPLOGIN"));
         } else {
           try {
             System.out.println(
-                    resources.getString("HELPLOGIN"
+                    this.resources.getString("HELPLOGIN"
                             + help.matcher(command)
                             .group(2)
                             .trim()
@@ -222,7 +223,7 @@ public class CommandLineView implements Observer, View {
    * Method to enter main menu of program.
    */
   private void startMenu(Scanner scanner) {
-    System.out.println(resources.getString("welcomeBasics"));
+    System.out.println(this.resources.getString("welcomeBasics"));
     System.out.print(">");
     String namePattern = "([a-zA-Z]*[a-zA-Z0-9]*)";
     String valuePattern = "([a-zA-Z0-9]+[.\\w]*)";
@@ -252,12 +253,12 @@ public class CommandLineView implements Observer, View {
       helpMatcher = help.matcher(line);
       profileMatcher = profile.matcher(line);
       if (exitMatcher.lookingAt()) {
-        controller.disconnect(user, token);
+        this.controller.disconnect(this.user, this.token);
         System.out.println("bye");
         System.exit(0);
       } else if (searchMatcher.lookingAt()) {
         try {
-          List<String> found = controller.searchMerchant(searchMatcher.group(2).trim());
+          List<String> found = this.controller.searchMerchant(searchMatcher.group(2).trim());
           if (found.size() == 0) {
             System.out.println("there's no data found");
           } else {
@@ -268,25 +269,25 @@ public class CommandLineView implements Observer, View {
         }
       } else if (slaveMenuMatcher.lookingAt()) {
         try {
-          controller.getMerchantById(Integer.parseInt(slaveMenuMatcher.group(2)));
-          openSlaveMenu(Integer.parseInt(slaveMenuMatcher.group(2)), scanner);
+          this.controller.getMerchantById(Integer.parseInt(slaveMenuMatcher.group(2)));
+          this.openSlaveMenu(Integer.parseInt(slaveMenuMatcher.group(2)), scanner);
           System.out.println("backed into main menu");
         } catch (MerchandiseNotFoundException e) {
           System.out.println("Merchandise with that id doesn't exist");
         }
       } else if (helpMatcher.lookingAt()) {
         if (null == helpMatcher.group(2)) {
-          System.out.println(resources.getString("help"));
+          System.out.println(this.resources.getString("help"));
         } else {
           try {
             System.out.println(
-                    resources.getString("HELPMAIN" + helpMatcher.group(2).trim().toUpperCase()));
+                    this.resources.getString("HELPMAIN" + helpMatcher.group(2).trim().toUpperCase()));
           } catch (MissingResourceException e) {
             System.out.println("Unknown option \"" + helpMatcher.group(2).trim() + "\"");
           }
         }
       } else if (addMatcher.lookingAt()) {
-        List<String> classes = controller.getAvailableClasses();
+        List<String> classes = this.controller.getAvailableClasses();
         System.out.println("You can create these types of merchandise:");
         IntStream.range(0, classes.size()).forEach(i -> {
           System.out.println(" " + i + 1 + " | " + classes.get(i));
@@ -304,7 +305,7 @@ public class CommandLineView implements Observer, View {
               className = classes.get(index);
             }
           }
-          List<String> fields = controller.getMandatoryFields(className);
+          List<String> fields = this.controller.getMandatoryFields(className);
           className = className.toLowerCase();
           className = Character.toUpperCase(className.charAt(0)) + className.substring(1);
 
@@ -325,7 +326,7 @@ public class CommandLineView implements Observer, View {
                     + "\nY/N");
             String ans = scanner.nextLine();
             if (ans.trim().toUpperCase().equals("Y")) {
-              controller.addMerchandiseByMap(className, kvs, user, token, price);
+              this.controller.addMerchandiseByMap(className, kvs, this.user, this.token, price);
             }
           } catch (NumberFormatException e) {
             System.out.println("Wrong input " + e.getMessage());
@@ -335,7 +336,7 @@ public class CommandLineView implements Observer, View {
         }
         System.out.println("backed in the main menu");
       } else if (profileMatcher.lookingAt()) {
-        userMenu(scanner);
+        this.userMenu(scanner);
       } else {
         System.out.println("Unknown command");
       }
@@ -344,7 +345,7 @@ public class CommandLineView implements Observer, View {
   }
 
   private void userMenu(Scanner scanner) {
-    System.out.println(resources.getString("USERMENU"));
+    System.out.println(this.resources.getString("USERMENU"));
     Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
     Pattern exit = Pattern.compile("(\\bEXIT\\b)([ ]*)([\\w]*)", Pattern.CASE_INSENSITIVE);
     Pattern deals = Pattern.compile("\\bdeals\\b", Pattern.CASE_INSENSITIVE);
@@ -362,17 +363,17 @@ public class CommandLineView implements Observer, View {
         break;
       } else if (helpMatcher.lookingAt()) {
         if (null == helpMatcher.group(2)) {
-          System.out.println(resources.getString("HELPPROFILE"));
+          System.out.println(this.resources.getString("HELPPROFILE"));
         } else {
           try {
             System.out.println(
-                    resources.getString("HELPPROFILE" + helpMatcher.group(2).trim().toUpperCase()));
+                    this.resources.getString("HELPPROFILE" + helpMatcher.group(2).trim().toUpperCase()));
           } catch (MissingResourceException e) {
             System.out.println("Unknown option \"" + helpMatcher.group(2).trim() + "\"");
           }
         }
       } else if (dealsMatcher.lookingAt()) {
-        controller.getDealsByUser(user, token).forEach(System.out::println);
+        this.controller.getDealsByUser(this.user, this.token).forEach(System.out::println);
       } else {
         System.out.println("Unknown command");
       }
