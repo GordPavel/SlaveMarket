@@ -69,9 +69,9 @@ public class Slave implements SlaveInterface {
       }
     }
     try {
-      slave.age = Integer.parseInt(map.get("AGE"));
-      slave.weight = Float.parseFloat(map.get("WEIGHT"));
-      slave.height = Float.parseFloat(map.get("HEIGHT"));
+      slave.age = parseAndCheck(map.get("AGE")).intValue();
+      slave.weight = parseAndCheck(map.get("WEIGHT"));
+      slave.height = parseAndCheck(map.get("HEIGHT"));
       slave.gender = map.get("GENDER");
       slave.name = map.get("NAME");
     } catch (Exception e) {
@@ -87,6 +87,24 @@ public class Slave implements SlaveInterface {
    */
   public static List<String> mandatoryFields() {
     return Arrays.asList("Name", "Gender", "Height", "Weight", "Age");
+  }
+
+  /**
+   * Method to check and parse values that comes out from map.
+   *
+   * @param value value with integer or float.
+   * @return value from string in float if it's >=1
+   */
+  private static Float parseAndCheck(String value) {
+    Float dValue;
+    try {
+      dValue = Float.parseFloat(value);
+      if (dValue >= 0)
+        throw new WrongQueryException("Wrong value \"" + value + "\"");
+    } catch (Exception e) {
+      throw new WrongQueryException(e.getMessage());
+    }
+    return dValue;
   }
 
   /**
