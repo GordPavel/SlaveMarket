@@ -7,12 +7,12 @@
 - [x] Change merchandise.
 - [x] Get all info about specified merchandise.
 - [x] See log of performed operation.
+- [x] Serialization.
+- [x] Separation of the functional.
+- [x] Highlighting of administrator role.
 
 **Planned features:**
-- [ ] Serialization.
 - [ ] Networking.
-- [ ] Separation of the functional.
-- [ ] Highlighting of administrator role.
 
 **Our project must have:**
 - [ ] Flexible and extedable UI.
