@@ -1,4 +1,4 @@
-package ru.cracker.controller;
+package ru.cracker.controllers;
 
 import ru.cracker.exceptions.CreateMerchandiseException;
 import ru.cracker.exceptions.MerchandiseAlreadyBought;
@@ -27,7 +27,7 @@ import java.util.Map;
 /**
  * Implementation of Controller interface.
  */
-public class SlaveController implements Controller {
+public class NativeController implements Controller {
 
   /**
    * Model to access data.
@@ -44,7 +44,7 @@ public class SlaveController implements Controller {
    *
    * @param model model to manage.
    */
-  public SlaveController(Model model) {
+  public NativeController(Model model) {
     this.model = model;
     view = new CommandLineView(model, this);
 
@@ -86,11 +86,11 @@ public class SlaveController implements Controller {
   /**
    * tells to model for search  the slave by the query.
    *
-   * @param querry querry for search
+   * @param query querry for search
    * @return list of founded slaves
    */
-  public List<String> searchMerchant(String querry) {
-    return model.searchMerchandise(querry);
+  public List<String> searchMerchant(String query) {
+    return model.searchMerchandise(query);
   }
 
 
@@ -155,6 +155,26 @@ public class SlaveController implements Controller {
   @Override
   public List<String> getDealsByUser(String username, String token) {
     return model.getDealsByUser(username, token);
+  }
+
+  @Override
+  public boolean changeLogin(String username, String newLogin, String token) {
+    return model.changeLogin(username, newLogin, token);
+  }
+
+  @Override
+  public void changePassword(String username, String newPassword, String token) {
+    model.changePassword(username, newPassword, token);
+  }
+
+  @Override
+  public boolean exportAllData(String fileName) {
+    return model.exportAllData(fileName);
+  }
+
+  @Override
+  public boolean importAllData(String filename) {
+    return model.importAllData(filename);
   }
 
   @Override

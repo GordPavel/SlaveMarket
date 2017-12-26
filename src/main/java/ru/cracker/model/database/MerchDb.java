@@ -131,6 +131,7 @@ public class MerchDb implements Database {
    */
   public void removeMerchandise(Merchandise merch, String user, String token) {
     int id = merchants.indexOf(merch);
+    merchants.remove(merch);
     if (id != -1) {
       merchants.stream().filter(i -> i.getId() >= id)
               .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
@@ -470,13 +471,15 @@ public class MerchDb implements Database {
 
   @Override
   public boolean register(String username, String pass) {
-    List<User> users1 = users.stream().filter(user -> {
-      return username.equals(user.getUsername());
-    }).collect(toList());
+    List<User> users1 = users.stream()
+            .filter(
+                    user -> username.equals(user.getUsername())
+            ).collect(toList());
     if (users1.size() != 0) {
       return false;
     }
     users.add(new User(username, pass));
+//    saveData();
     return true;
   }
 
@@ -516,5 +519,29 @@ public class MerchDb implements Database {
     } else {
       throw new InvalidToken();
     }
+  }
+
+  @Override
+  public boolean changeLogin(String username, String newLogin, String token) {
+    User user = getUser(username);
+    if (user.getToken().equals(token)) {
+      return false;
+    }
+    throw new InvalidToken();
+  }
+
+  @Override
+  public void changePassword(String username, String newPassword, String token) {
+
+  }
+
+  @Override
+  public boolean exportAllData(String fileName) {
+    return false;
+  }
+
+  @Override
+  public boolean importAllData(String filename) {
+    return false;
   }
 }

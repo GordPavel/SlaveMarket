@@ -131,4 +131,39 @@ public interface Model {
    * @return list of deals strings.
    */
   List<String> getDealsByUser(String username, String token);
+
+  /**
+   * Method to change user's username.
+   *
+   * @param username current username
+   * @param newLogin new username
+   * @param token    current token
+   * @return true if login successfully changed
+   */
+  boolean changeLogin(String username, String newLogin, String token);
+
+  /**
+   * Method to change user's password.
+   *
+   * @param username    user who want to change password.
+   * @param newPassword new user's password.
+   * @param token       current user's token.
+   */
+  void changePassword(String username, String newPassword, String token);
+
+  /**
+   * Method to export all database into xml file.
+   *
+   * @param fileName file to export
+   * @return true if export successful
+   */
+  boolean exportAllData(String fileName);
+
+  /**
+   * Method to import data from xml file.
+   *
+   * @param filename file to import
+   * @return true if import successful
+   */
+  boolean importAllData(String filename);
 }

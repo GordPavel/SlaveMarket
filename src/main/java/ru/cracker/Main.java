@@ -1,9 +1,6 @@
 package ru.cracker;
 
-import ru.cracker.controller.Controller;
-import ru.cracker.controller.SlaveController;
-import ru.cracker.model.Model;
-import ru.cracker.model.SlaveMarketModel;
+import ru.cracker.execute.StartServer;
 
 /**
  * Start of program.
@@ -16,8 +13,8 @@ public class Main {
    * @param args some arguments.
    */
   public static void main(String[] args) {
-    Model model = new SlaveMarketModel();
-    Controller controller = new SlaveController(model);
-    controller.start();
+    StartServer server = new StartServer();
+    Thread thread = new Thread(() -> server.main(new String[]{}));
+    thread.start();
   }
 }

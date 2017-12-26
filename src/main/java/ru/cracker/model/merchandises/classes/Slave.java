@@ -50,7 +50,7 @@ public class Slave implements SlaveInterface {
   }
 
   public static Builder newBuilder() {
-    return newBuilder();
+    return new Slave().new Builder();
   }
 
   /**

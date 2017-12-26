@@ -4,7 +4,6 @@ import ru.cracker.model.Model;
 import ru.cracker.model.Observable;
 import ru.cracker.model.SlaveMarketModel;
 import ru.cracker.model.database.MerchDb;
-import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.model.merchandises.classes.Slave;
 import ru.cracker.view.Observer;
 
@@ -50,14 +49,14 @@ public class Tests {
 
   @Test
   public void searchMerchandiseTest() {
-    Assert.assertEquals(slaves.get(2).getAllInfo(), db.searchMerchandise("GENDER=male AND NAME=Luise").get(0));
+    Assert.assertEquals(slaves.get(2).getAllInfo() + " on sale by test", db.searchMerchandise("GENDER=male AND NAME=Luise").get(0));
   }
 
   @Test
   public void searchMerchandiseEuqalsAndGreaterTest() {
     slaves.remove(1);
     slaves.remove(1);
-    Assert.assertEquals(slaves.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("id=0"));
+    Assert.assertEquals(slaves.stream().map(merch -> merch.getAllInfo() + " on sale by test").collect(toList()), db.searchMerchandise("id=0"));
   }
 
   @Test
@@ -70,13 +69,13 @@ public class Tests {
             .build());
     list.add(Slave.newBuilder().addId(1).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
             .build());
-    Assert.assertEquals(list.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
+    Assert.assertEquals(list.stream().map(merch -> merch.getAllInfo() + " on sale by test").collect(toList()), db.searchMerchandise("ALL"));
   }
 
   @Test
   public void getMerchantByIdTest() {
     Assert.assertEquals(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
-            .addGender("male").build().getAllInfo(), db.getMerchantById(2));
+            .addGender("male").build().getAllInfo() + " on sale by test", db.getMerchantById(2));
   }
 
   @Test
@@ -87,7 +86,7 @@ public class Tests {
     //        list.add(new Slave(185, 85, 20, "male", 1, "Luise", 300));
     list.add(Slave.newBuilder().addId(0).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
             .build());
-    Assert.assertEquals(list.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
+    Assert.assertEquals(list.stream().map(slave -> slave.getAllInfo() + " on sale by test").collect(toList()), db.searchMerchandise("ALL"));
   }
 
   @Test
@@ -106,7 +105,7 @@ public class Tests {
     db.addMerchandise(slave, user, token, 100);
     slaves.add(Slave.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male")
             .addId(3).addAge(3).build());
-    Assert.assertEquals(slaves.stream().map(Merchandise::getAllInfo).collect(toList()), db.searchMerchandise("ALL"));
+    Assert.assertEquals(slaves.stream().map(merch -> merch.getAllInfo() + " on sale by test").collect(toList()), db.searchMerchandise("ALL"));
   }
 
   @Test

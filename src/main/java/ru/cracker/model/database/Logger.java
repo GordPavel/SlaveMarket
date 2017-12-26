@@ -18,10 +18,12 @@ public class Logger {
   private final String mainPath = "logs/main/";
   private final String mainLogFile = this.mainPath + "Slavemarket.log";
   private final String userDir = "logs/users/";
+  private final String systemFile = this.mainPath + "System.log";
   private final String datePattern = "YYYY-MM-dd HH:mm:ss";
   PrintWriter writer;
   PrintWriter userWriter;
   PrintWriter errorWriter;
+  PrintWriter systemWriter;
 
   /**
    * Default constructor.
@@ -68,6 +70,22 @@ public class Logger {
         System.exit(-1);
       }
     }
+    try {
+      this.systemWriter = new PrintWriter(new FileOutputStream(new File(this.systemFile), true), true);
+    } catch (FileNotFoundException e) {
+      try {
+        boolean file = new File(this.systemFile).createNewFile();
+        if (file) {
+          this.writer = new PrintWriter(
+                  new FileOutputStream(
+                          new File(this.systemFile),
+                          true),
+                  true);
+        }
+      } catch (IOException ignored) {
+        System.exit(-1);
+      }
+    }
   }
 
   /**
@@ -99,10 +117,6 @@ public class Logger {
             .format(new Date(System.currentTimeMillis()));
     this.writer.write('\n' + date + " " + action + " [" + merchInfo + "] performed by " + user);
     this.userWriter.write('\n' + date + " " + action + " [" + merchInfo + "]");
-    System.out.println(
-            new SimpleDateFormat(this.datePattern)
-                    .format(new Date(System.currentTimeMillis())) + " "
-                    + action + " performed by " + user);
     this.writer.flush();
     this.userWriter.flush();
   }
@@ -120,4 +134,10 @@ public class Logger {
     this.errorWriter.flush();
   }
 
+  public void systemLog(String message) {
+    String date = new SimpleDateFormat(this.datePattern)
+            .format(new Date(System.currentTimeMillis()));
+    this.systemWriter.write(date + " " + message + '\n');
+    this.systemWriter.flush();
+  }
 }

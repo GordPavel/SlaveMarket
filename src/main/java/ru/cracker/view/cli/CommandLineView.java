@@ -1,7 +1,7 @@
 package ru.cracker.view.cli;
 
 
-import ru.cracker.controller.Controller;
+import ru.cracker.controllers.Controller;
 import ru.cracker.exceptions.*;
 import ru.cracker.model.Model;
 import ru.cracker.model.Observable;
@@ -25,7 +25,7 @@ public class CommandLineView implements Observer, View {
   private String token = "";
 
   /**
-   * Constructor to subscribe new view as observer . And link controller.
+   * Constructor to subscribe new view as observer . And link controllers.
    *
    * @param model      to register itself
    * @param controller to manage inputs

@@ -193,4 +193,24 @@ public class SlaveMarketModel implements Observable, Model {
   public List<String> getDealsByUser(String username, String token) {
     return database.getDealsByUser(username, token);
   }
+
+  @Override
+  public boolean changeLogin(String username, String newLogin, String token) {
+    return false;
+  }
+
+  @Override
+  public void changePassword(String username, String newPassword, String token) {
+
+  }
+
+  @Override
+  public boolean exportAllData(String fileName) {
+    return false;
+  }
+
+  @Override
+  public boolean importAllData(String filename) {
+    return false;
+  }
 }

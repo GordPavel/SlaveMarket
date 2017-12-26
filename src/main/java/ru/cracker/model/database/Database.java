@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * Database interface to manage the data adn provide it to view through controller.
+ * Database interface to manage the data adn provide it to view through controllers.
  */
 public interface Database {
 
@@ -140,4 +140,39 @@ public interface Database {
    * @throws ru.cracker.exceptions.InvalidToken if user token is invalid.
    */
   List<String> getDealsByUser(String username, String token);
+
+  /**
+   * Method to change user's username.
+   *
+   * @param username current username
+   * @param newLogin new username
+   * @param token    current token
+   * @return true if login successfully changed
+   */
+  boolean changeLogin(String username, String newLogin, String token);
+
+  /**
+   * Method to change user's password.
+   *
+   * @param username    user who want to change password.
+   * @param newPassword new user's password.
+   * @param token       current user's token.
+   */
+  void changePassword(String username, String newPassword, String token);
+
+  /**
+   * Method to export all database into xml file.
+   *
+   * @param fileName file to export
+   * @return true if export successful
+   */
+  boolean exportAllData(String fileName);
+
+  /**
+   * Method to import data from xml file.
+   *
+   * @param filename file to import
+   * @return true if import successful
+   */
+  boolean importAllData(String filename);
 }
