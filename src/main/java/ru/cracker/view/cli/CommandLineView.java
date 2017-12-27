@@ -8,6 +8,7 @@ import ru.cracker.model.Observable;
 import ru.cracker.view.Observer;
 import ru.cracker.view.View;
 
+import java.io.File;
 import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -246,11 +247,16 @@ public class CommandLineView implements Observer, View {
             .compile("(\\bADD\\b)", Pattern.CASE_INSENSITIVE);
     Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
     Pattern profile = Pattern.compile("\\bprofile\\b", Pattern.CASE_INSENSITIVE);
+//    Pattern dataExport = Pattern.compile("\\bexport \\b([a-zA-Z]:(\\\\w+)*\\\\[a-zA-Z0_9]+)?.xml", Pattern.CASE_INSENSITIVE);
+    Pattern dataExport = Pattern.compile("\\bexport \\b([\\w.-]*\\b.xml\\b)", Pattern.CASE_INSENSITIVE);
+    Pattern dataImport = Pattern.compile("\\bimport \\b([\\w.-]*\\b.xml\\b)", Pattern.CASE_INSENSITIVE);
     Matcher exitMatcher;
     Matcher searchMatcher;
     Matcher slaveMenuMatcher;
     Matcher helpMatcher;
     Matcher addMatcher;
+    Matcher dataImportMatcher;
+    Matcher dataExportMatcher;
     Matcher profileMatcher;
     while (scanner.hasNext()) {
       String line = scanner.nextLine();
@@ -260,6 +266,8 @@ public class CommandLineView implements Observer, View {
       slaveMenuMatcher = slaveMenu.matcher(line);
       helpMatcher = help.matcher(line);
       profileMatcher = profile.matcher(line);
+      dataExportMatcher = dataExport.matcher(line);
+      dataImportMatcher = dataImport.matcher(line);
       if (exitMatcher.lookingAt()) {
         this.controller.disconnect(this.user, this.token);
         System.out.println("bye");
@@ -348,6 +356,18 @@ public class CommandLineView implements Observer, View {
         System.out.println("backed in the main menu");
       } else if (profileMatcher.lookingAt()) {
         this.userMenu(scanner);
+      } else if (dataExportMatcher.lookingAt()) {
+        if (controller.exportAllData(dataExportMatcher.group(1).trim())) {
+          File file = new File(dataExportMatcher.group(1).trim());
+          System.out.println("Successfully exported in " + file.getAbsolutePath());
+        } else {
+          System.out.println("Something went wrong");
+        }
+      } else if (dataImportMatcher.lookingAt()) {
+//        System.out.println("f:" + dataImportMatcher.group(1).trim());
+        if (controller.importAllData(dataImportMatcher.group(1).trim())) {
+          System.out.println("successfully imported");
+        }
       } else {
         System.out.println("Unknown command");
       }

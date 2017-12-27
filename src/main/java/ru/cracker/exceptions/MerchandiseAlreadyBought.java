@@ -11,6 +11,6 @@ public class MerchandiseAlreadyBought extends IllegalArgumentException {
    * @param id id of bought merchandise
    */
   public MerchandiseAlreadyBought(int id) {
-    super("Merchandise with id " + id + " already bought");
+    super("You can't change that merchandise before you bought it");
   }
 }

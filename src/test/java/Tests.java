@@ -245,8 +245,8 @@ public class Tests {
 
   @Test
   public void exportTest() {
-    db.exportAllData("file.xml");
+    db.exportAllData("testExport.xml");
     MerchDb db1 = new MerchDb(false);
-    db1.importAllData("file.xml");
+    db1.importAllData("testExport.xml");
   }
 }

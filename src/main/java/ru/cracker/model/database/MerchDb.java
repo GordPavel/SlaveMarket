@@ -177,8 +177,7 @@ public class MerchDb implements Database {
     if (id >= merchants.size() || id < 0) {
       throw new MerchandiseNotFoundException(id);
     }
-    if (lastDeal(merchants.get(id)).getState().equals(DealState.Bought)
-            && !lastDeal(merchants.get(id)).getUser().getUsername().equals(user)) {
+    if (!lastDeal(merchants.get(id)).getUser().getUsername().equals(user)) {
       throw new MerchandiseAlreadyBought(id);
     }
     logger.log(user, "removed merchandise", findMerh(id).getAllInfo());
@@ -460,6 +459,9 @@ public class MerchDb implements Database {
             .map(elem -> elem.split("="))
             .collect(Collectors.toMap(e -> e[0].toUpperCase(), e -> e[1]));
     String merchIfo = "{Before: " + findMerh(id).getAllInfo() + "},";
+    if (!lastDeal(merchants.get(id)).getUser().getUsername().equals(user)) {
+      throw new MerchandiseAlreadyBought(id);
+    }
     findMerh(id).setParamsByMap(kvs);
     logger.log(user, "Changed merchandise parameters", merchIfo + " {changed Values:" + kvs + "}");
     saveData();
