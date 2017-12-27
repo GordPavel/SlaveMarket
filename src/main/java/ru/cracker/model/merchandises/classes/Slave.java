@@ -5,12 +5,18 @@ import com.google.gson.JsonPrimitive;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.SlaveInterface;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlValue;
 import java.util.*;
 
 /**
  * Realization of SlaveInterface. Model of Slave. Slave is a person who is the property of and
  * wholly subject to another; a bond servant.
  */
+@XmlRootElement(name = "slave")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Slave implements SlaveInterface {
 
   /**

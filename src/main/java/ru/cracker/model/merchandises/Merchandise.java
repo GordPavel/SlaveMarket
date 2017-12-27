@@ -5,9 +5,12 @@ import java.util.List;
 import java.util.Map;
 import ru.cracker.exceptions.WrongClassCallException;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  * Model of Merchandise. That can be anything what we can sell or buy.
  */
+@XmlRootElement
 public interface Merchandise extends Serializable {
 
   //    public static Merchandise buildFromMap(Class className, Map<String, String> map)

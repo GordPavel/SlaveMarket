@@ -242,4 +242,11 @@ public class Tests {
   public void changeNameTest() {
     db.changeLogin("test", "test2", token);
   }
+
+  @Test
+  public void exportTest() {
+    db.exportAllData("file.xml");
+    MerchDb db1 = new MerchDb(false);
+    db1.importAllData("file.xml");
+  }
 }

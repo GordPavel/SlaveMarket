@@ -1,12 +1,17 @@
 package ru.cracker.model.database;
 
+import javax.xml.bind.annotation.XmlRootElement;
 import java.io.Serializable;
 import java.util.UUID;
 
+@XmlRootElement(name = "user")
 public class User implements Serializable {
   private String username;
   private String password;
   private String token = "";
+
+  public User() {
+  }
 
   public User(String username, String password) {
     this.username = username;
@@ -44,5 +49,14 @@ public class User implements Serializable {
   public String generateToken() {
     token = UUID.randomUUID() + ":" + System.currentTimeMillis();
     return token;
+  }
+
+  @Override
+  public String toString() {
+    return "User{" +
+            "username='" + username + '\'' +
+            ", password='" + password + '\'' +
+            ", token='" + token + '\'' +
+            '}';
   }
 }
