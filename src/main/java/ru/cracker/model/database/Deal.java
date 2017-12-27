@@ -1,5 +1,7 @@
 package ru.cracker.model.database;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import ru.cracker.model.merchandises.Merchandise;
 
 import java.io.Serializable;
@@ -71,12 +73,24 @@ public class Deal implements Serializable, Comparable<Deal> {
 
   @Override
   public String toString() {
-    return this.time.format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))
-            + ", merchandise=" + this.merchandise
-            + ", price=" + this.price
-            + ", state=" + this.state
-            + this.user.getUsername()
-            + ", dealId=" + this.id;
+    JsonObject object = new JsonObject();
+    object.add("date",
+            new JsonPrimitive(
+                    this.time
+                            .format(
+                                    DateTimeFormatter
+                                            .ofPattern("YYYY-MM-dd HH:mm:ss"))));
+    object.add("merchandise", new JsonPrimitive(merchandise.getAllInfo()));
+    object.add("price", new JsonPrimitive(price));
+    object.add("id", new JsonPrimitive(id));
+    object.add("state", new JsonPrimitive(state.equals(DealState.Bought) ? "bought" : state.equals(DealState.FOR_SALE) ? "sold" : "removed"));
+//    return this.time.format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))
+//            + ", merchandise=" + this.merchandise
+//            + ", price=" + this.price
+//            + ", state=" + this.state
+//            + this.user.getUsername()
+//            + ", dealId=" + this.id;
+    return object.toString();
   }
 
   @Override

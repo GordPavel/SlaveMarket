@@ -23,6 +23,7 @@ public class CommandLineView implements Observer, View {
   private final Controller controller;
   private String user = "";
   private String token = "";
+  private String password = "";
 
   /**
    * Constructor to subscribe new view as observer . And link controllers.
@@ -151,7 +152,13 @@ public class CommandLineView implements Observer, View {
    * Launch the view or CLI.
    */
   public void launch() {
-    this.startLogin();
+    try {
+      startLogin();
+    } catch (InvalidToken e) {
+      System.out.println(e.getMessage());
+      System.out.println("please generate new one");
+      System.exit(0);
+    }
   }
 
   private void startLogin() {
@@ -163,6 +170,7 @@ public class CommandLineView implements Observer, View {
     Pattern exit = Pattern.compile("\\bEXIT\\b", Pattern.CASE_INSENSITIVE);
     Matcher helpMatcher;
     while (true) {
+      System.out.println("Please enter your command");
       String command = scanner.nextLine();
       helpMatcher = help.matcher(command);
       if (exit.matcher(command).lookingAt()) {
@@ -172,9 +180,9 @@ public class CommandLineView implements Observer, View {
         System.out.println("Enter your login");
         this.user = scanner.nextLine();
         System.out.println("Enter your password");
-        String pass = scanner.nextLine();
+        password = scanner.nextLine();
         try {
-          this.token = this.controller.login(this.user, pass);
+          this.token = this.controller.login(this.user, password);
         } catch (UserException e) {
           System.out.println(e.getMessage());
         }
@@ -255,7 +263,10 @@ public class CommandLineView implements Observer, View {
       if (exitMatcher.lookingAt()) {
         this.controller.disconnect(this.user, this.token);
         System.out.println("bye");
-        System.exit(0);
+        user = "";
+        token = "";
+        password = "";
+        startLogin();
       } else if (searchMatcher.lookingAt()) {
         try {
           List<String> found = this.controller.searchMerchant(searchMatcher.group(2).trim());
@@ -331,7 +342,7 @@ public class CommandLineView implements Observer, View {
           } catch (NumberFormatException e) {
             System.out.println("Wrong input " + e.getMessage());
           }
-        } catch (WrongClassCallException | CreateMerchandiseException e) {
+        } catch (CreateMerchandiseException e) {
           System.out.println(e.getMessage());
         }
         System.out.println("backed in the main menu");
@@ -349,15 +360,21 @@ public class CommandLineView implements Observer, View {
     Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
     Pattern exit = Pattern.compile("(\\bEXIT\\b)([ ]*)([\\w]*)", Pattern.CASE_INSENSITIVE);
     Pattern deals = Pattern.compile("\\bdeals\\b", Pattern.CASE_INSENSITIVE);
+    Pattern newLogin = Pattern.compile("\\bchange login\\b", Pattern.CASE_INSENSITIVE);
+    Pattern newPassword = Pattern.compile("\\bchange password\\b", Pattern.CASE_INSENSITIVE);
     Matcher dealsMatcher;
     Matcher exitMatcher;
     Matcher helpMatcher;
+    Matcher newLoginMatcher;
+    Matcher newPasswordMatcher;
     System.out.print(">");
     while (scanner.hasNext()) {
       String line = scanner.nextLine();
       exitMatcher = exit.matcher(line);
       helpMatcher = help.matcher(line);
       dealsMatcher = deals.matcher(line);
+      newLoginMatcher = newLogin.matcher(line);
+      newPasswordMatcher = newPassword.matcher(line);
       if (exitMatcher.lookingAt()) {
         System.out.println("backed in main menu");
         break;
@@ -374,6 +391,26 @@ public class CommandLineView implements Observer, View {
         }
       } else if (dealsMatcher.lookingAt()) {
         this.controller.getDealsByUser(this.user, this.token).forEach(System.out::println);
+      } else if (newLoginMatcher.lookingAt()) {
+        System.out.println("Please enter new Login");
+        String newUsername = scanner.nextLine();
+        if (controller.changeLogin(user, newUsername, token)) {
+          user = newUsername;
+          controller.changePassword(user, password, token);
+          System.out.println("Login changed successfully");
+        } else {
+          System.out.println("Can't change login");
+        }
+      } else if (newPasswordMatcher.lookingAt()) {
+        System.out.println("Please enter new password");
+        String firstTry = scanner.nextLine();
+        System.out.println("one more time, please");
+        String secondTry = scanner.nextLine();
+        if (firstTry.equals(secondTry)) {
+          controller.changePassword(user, secondTry, token);
+        } else {
+          System.out.println("Passwords does not match");
+        }
       } else {
         System.out.println("Unknown command");
       }

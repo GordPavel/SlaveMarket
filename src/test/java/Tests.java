@@ -1,3 +1,6 @@
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import org.junit.Assert;
 import org.junit.Test;
 import ru.cracker.model.Model;
@@ -49,14 +52,38 @@ public class Tests {
 
   @Test
   public void searchMerchandiseTest() {
-    Assert.assertEquals(slaves.get(2).getAllInfo() + " on sale by test", db.searchMerchandise("GENDER=male AND NAME=Luise").get(0));
+    Assert.assertEquals(slaves.stream().map(merchandise -> {
+      JsonObject object = new JsonParser()
+              .parse(merchandise.getAllInfo())
+              .getAsJsonObject();
+      object.add("state",
+              new JsonPrimitive(" on sale by "));
+      object.add("user",
+              new JsonPrimitive("test"));
+      object.add("price",
+              new JsonPrimitive(100));
+      return object.toString();
+    })
+            .collect(toList()).get(2), db.searchMerchandise("GENDER=male AND NAME=Luise").get(0));
   }
 
   @Test
   public void searchMerchandiseEuqalsAndGreaterTest() {
     slaves.remove(1);
     slaves.remove(1);
-    Assert.assertEquals(slaves.stream().map(merch -> merch.getAllInfo() + " on sale by test").collect(toList()), db.searchMerchandise("id=0"));
+    Assert.assertEquals(slaves.stream().map(merchandise -> {
+      JsonObject object = new JsonParser()
+              .parse(merchandise.getAllInfo())
+              .getAsJsonObject();
+      object.add("state",
+              new JsonPrimitive(" on sale by "));
+      object.add("user",
+              new JsonPrimitive("test"));
+      object.add("price",
+              new JsonPrimitive(100));
+      return object.toString();
+    })
+            .collect(toList()), db.searchMerchandise("id=0"));
   }
 
   @Test
@@ -69,13 +96,35 @@ public class Tests {
             .build());
     list.add(Slave.newBuilder().addId(1).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
             .build());
-    Assert.assertEquals(list.stream().map(merch -> merch.getAllInfo() + " on sale by test").collect(toList()), db.searchMerchandise("ALL"));
+    Assert.assertEquals(list.stream().map(merch -> {
+      JsonObject object = new JsonParser()
+              .parse(merch.getAllInfo())
+              .getAsJsonObject();
+      object.add("state",
+              new JsonPrimitive(" on sale by "));
+      object.add("user",
+              new JsonPrimitive("test"));
+      object.add("price",
+              new JsonPrimitive(100));
+      return object.toString();
+    }).collect(toList()), db.searchMerchandise("ALL"));
   }
 
   @Test
   public void getMerchantByIdTest() {
-    Assert.assertEquals(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
-            .addGender("male").build().getAllInfo() + " on sale by test", db.getMerchantById(2));
+    JsonObject object = new JsonParser()
+            .parse(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
+                    .addGender("male").build().getAllInfo())
+            .getAsJsonObject();
+    object.add("state",
+            new JsonPrimitive(" on sale by "));
+    object.add("user",
+            new JsonPrimitive("test"));
+    object.add("price",
+            new JsonPrimitive(100));
+    object.toString();
+
+    Assert.assertEquals(object.toString(), db.getMerchantById(2));
   }
 
   @Test
@@ -86,7 +135,18 @@ public class Tests {
     //        list.add(new Slave(185, 85, 20, "male", 1, "Luise", 300));
     list.add(Slave.newBuilder().addId(0).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
             .build());
-    Assert.assertEquals(list.stream().map(slave -> slave.getAllInfo() + " on sale by test").collect(toList()), db.searchMerchandise("ALL"));
+    Assert.assertEquals(list.stream().map(merch -> {
+      JsonObject object = new JsonParser()
+              .parse(merch.getAllInfo())
+              .getAsJsonObject();
+      object.add("state",
+              new JsonPrimitive(" on sale by "));
+      object.add("user",
+              new JsonPrimitive("test"));
+      object.add("price",
+              new JsonPrimitive(100));
+      return object.toString();
+    }).collect(toList()), db.searchMerchandise("ALL"));
   }
 
   @Test
@@ -105,7 +165,18 @@ public class Tests {
     db.addMerchandise(slave, user, token, 100);
     slaves.add(Slave.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male")
             .addId(3).addAge(3).build());
-    Assert.assertEquals(slaves.stream().map(merch -> merch.getAllInfo() + " on sale by test").collect(toList()), db.searchMerchandise("ALL"));
+    Assert.assertEquals(slaves.stream().map(merch -> {
+      JsonObject object = new JsonParser()
+              .parse(merch.getAllInfo())
+              .getAsJsonObject();
+      object.add("state",
+              new JsonPrimitive(" on sale by "));
+      object.add("user",
+              new JsonPrimitive("test"));
+      object.add("price",
+              new JsonPrimitive(100));
+      return object.toString();
+    }).collect(toList()), db.searchMerchandise("ALL"));
   }
 
   @Test
@@ -157,6 +228,10 @@ public class Tests {
     ////        System.out.println(matcher.group(2).toUpperCase());
     ////        System.out.println(matcher.group(3).toUpperCase());
     System.out.println("\u001B[32m}\u001B[0m");
+  }
 
+  @Test
+  public void changeNameTest() {
+    db.changeLogin("test", "test2", token);
   }
 }

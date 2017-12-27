@@ -85,7 +85,7 @@ public interface Database {
    *
    * @return field names
    */
-  List<String> getMandatoryFields(String className) throws WrongClassCallException;
+  List<String> getMandatoryFields(String className);
 
   /**
    * Method to add new Merchandise item.

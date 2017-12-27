@@ -8,9 +8,16 @@ Text{
 }
 
 #logo{
-    -fx-font-size: 46px;
+   -fx-font-family: "Trench";
+   -fx-font-size: 40px;
 }
 
 #CurrentUser{
+   -fx-font-family: "TimeBurner";
     -fx-font-size: 19px;
+}
+
+#search{
+    -fx-font-size: 14px;
+   -fx-font-family: "TimeBurner"
 }

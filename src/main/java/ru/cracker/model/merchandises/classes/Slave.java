@@ -1,5 +1,7 @@
 package ru.cracker.model.merchandises.classes;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.merchandises.SlaveInterface;
 
@@ -99,7 +101,7 @@ public class Slave implements SlaveInterface {
     Float dValue;
     try {
       dValue = Float.parseFloat(value);
-      if (dValue >= 0)
+      if (dValue <= 0)
         throw new WrongQueryException("Wrong value \"" + value + "\"");
     } catch (Exception e) {
       throw new WrongQueryException(e.getMessage());
@@ -117,7 +119,7 @@ public class Slave implements SlaveInterface {
     map.forEach((key, value) -> {
       boolean contains = false;
       for (String field : fields) {
-        if (field.equals(key.toUpperCase())) {
+        if (field.toUpperCase().equals(key.toUpperCase())) {
           contains = true;
         }
       }
@@ -160,9 +162,16 @@ public class Slave implements SlaveInterface {
    * @return Complicated string of merchandise info. Formatted like "ClassName Param1:Value1 etc.
    */
   public String getAllInfo() {
-    return "Slave Slave id:" + id + " height:" + height + " weight:" + weight + " age:" + age
-            + " gender:" + gender
-            + " name:" + name + " benefit:" + getBenefit();
+    JsonObject info = new JsonObject();
+    info.add("class", new JsonPrimitive("Slave"));
+    info.add("id", new JsonPrimitive(id));
+    info.add("name", new JsonPrimitive(name));
+    info.add("gender", new JsonPrimitive(gender));
+    info.add("age", new JsonPrimitive(age));
+    info.add("height", new JsonPrimitive(height));
+    info.add("weight", new JsonPrimitive(weight));
+    info.add("benefit", new JsonPrimitive(getBenefit()));
+    return info.toString();
   }
 
   @Override

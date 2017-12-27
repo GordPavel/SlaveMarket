@@ -1,10 +1,10 @@
 package ru.cracker.controllers;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
 import javafx.scene.control.Alert;
-import ru.cracker.exceptions.*;
+import ru.cracker.exceptions.MerchandiseAlreadyBought;
+import ru.cracker.exceptions.MerchandiseNotFoundException;
+import ru.cracker.exceptions.WrongQueryException;
 import ru.cracker.model.database.Logger;
 import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.view.View;
@@ -23,10 +23,7 @@ import java.net.Socket;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.Arrays;
-import java.util.Base64;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class ClientController implements Controller {
   Socket socket;
@@ -75,12 +72,29 @@ public class ClientController implements Controller {
 
   @Override
   public void removeMerchant(int id, String user, String token) throws MerchandiseAlreadyBought {
-
+    JsonObject request = new JsonObject();
+    request.add("action", new JsonPrimitive("Remove merchandise"));
+    request.add("username", new JsonPrimitive(user));
+    request.add("id", new JsonPrimitive(id));
+    request.add("token", new JsonPrimitive(token));
+    JsonObject object = writeAndGetResponse(request.toString());
   }
 
   @Override
   public List<String> searchMerchant(String query) throws WrongQueryException {
-    return null;
+    JsonObject request = new JsonObject();
+    request.add("action", new JsonPrimitive("search"));
+    request.add("query", new JsonPrimitive(query));
+    JsonObject object = writeAndGetResponse(request.toString());
+    List<String> response = new ArrayList<>();
+    if (object.get("status").getAsInt() == 200) {
+      JsonArray array = object.get("merchandises").getAsJsonArray();
+      for (int i = 0; i < array.size(); i++) {
+        JsonObject element = array.get(i).getAsJsonObject();
+        response.add(element.toString());
+      }
+    }
+    return response;
   }
 
   @Override
@@ -90,27 +104,68 @@ public class ClientController implements Controller {
 
   @Override
   public String buyMerchandise(int id, String user, String token) throws MerchandiseNotFoundException {
-    return null;
+    JsonObject request = new JsonObject();
+    request.add("action", new JsonPrimitive("Buy merchandise"));
+    request.add("username", new JsonPrimitive(user));
+    request.add("id", new JsonPrimitive(id));
+    request.add("token", new JsonPrimitive(token));
+    JsonObject object = writeAndGetResponse(request.toString());
+    return null != object.get("merchandise") ? object.get("merchandise").getAsString() : "";
   }
 
   @Override
   public void setValuesToMerchandise(int id, String params, String user, String token) {
-
+    JsonObject object = new JsonObject();
+    object.add("action", new JsonPrimitive("new Values"));
+    object.add("id", new JsonPrimitive(id));
+    object.add("values", new JsonPrimitive(params));
+    object.add("username", new JsonPrimitive(user));
+    object.add("token", new JsonPrimitive(token));
+    writeAndGetResponse(object.toString());
   }
 
   @Override
   public List<String> getAvailableClasses() {
-    return null;
+    JsonObject object = new JsonObject();
+    object.add("action", new JsonPrimitive("getClasses"));
+    JsonObject response = writeAndGetResponse(object.toString());
+    List<String> classes = new ArrayList<>();
+    if (null != response.get("classes")) {
+      JsonArray array = response.get("classes").getAsJsonArray();
+      for (JsonElement e : array) {
+        classes.add(e.getAsString());
+      }
+    }
+    return classes;
   }
 
   @Override
-  public List<String> getMandatoryFields(String className) throws WrongClassCallException {
-    return null;
+  public List<String> getMandatoryFields(String className) {
+    JsonObject object = new JsonObject();
+    object.add("action", new JsonPrimitive("mandatoryFields"));
+    object.add("className", new JsonPrimitive(className));
+    JsonObject response = writeAndGetResponse(object.toString());
+    List<String> fields = new ArrayList<>();
+    if (null != response.get("fields")) {
+      JsonArray array = response.get("fields").getAsJsonArray();
+      for (JsonElement e : array) {
+        fields.add(e.getAsString());
+      }
+    }
+    return fields;
   }
 
   @Override
-  public void addMerchandiseByMap(String className, Map<String, String> kvs, String user, String token, int price) throws CreateMerchandiseException {
-
+  public void addMerchandiseByMap(String className, Map<String, String> kvs, String user, String token, int price) {
+    JsonObject request = new JsonObject();
+    request.add("action", new JsonPrimitive("add merchandise"));
+    request.add("className", new JsonPrimitive(className));
+    Gson gson = new GsonBuilder().create();
+    request.add("merchandise", new JsonPrimitive(gson.toJson(kvs)));
+    request.add("username", new JsonPrimitive(user));
+    request.add("token", new JsonPrimitive(token));
+    request.add("price", new JsonPrimitive(price));
+    writeAndGetResponse(request.toString());
   }
 
   @Override
@@ -137,7 +192,12 @@ public class ClientController implements Controller {
       Object response = input.readObject();
       JsonParser parser = new JsonParser();
       JsonObject answer = parser.parse((String) response).getAsJsonObject();
-      if (answer.get("status").getAsInt() == 400) {
+      if (answer.get("status").getAsInt() == 400
+              && !parser.parse(object)
+              .getAsJsonObject()
+              .get("action")
+              .getAsString()
+              .equals("search")) {
         Util.runAlert(Alert.AlertType.ERROR, "Error",
                 answer.get("info").getAsString(),
                 "server returned status 400 with message: " + answer.get("info").getAsString());
@@ -145,9 +205,15 @@ public class ClientController implements Controller {
       return answer;
     } catch (IOException | ClassNotFoundException | NullPointerException e) {
       if (null == input && null == output) {
-        Util.runAlert(Alert.AlertType.ERROR, "error", "Can't connect to the server", e.getMessage());
+        Util.runAlert(Alert.AlertType.ERROR,
+                "error",
+                "Can't connect to the server",
+                e.getMessage());
       } else {
-        Util.runAlert(Alert.AlertType.ERROR, "error", "some errors occurred. We're sorry.", e.getMessage());
+        Util.runAlert(Alert.AlertType.ERROR,
+                "error",
+                "some errors occurred. We're sorry.\nTry again later",
+                e.getMessage());
       }
     }
     return null;
@@ -182,17 +248,40 @@ public class ClientController implements Controller {
 
   @Override
   public List<String> getDealsByUser(String username, String token) {
-    return null;
+    JsonObject object = new JsonObject();
+    object.add("action", new JsonPrimitive("deals"));
+    object.add("username", new JsonPrimitive(username));
+    object.add("token", new JsonPrimitive(token));
+    JsonObject response = writeAndGetResponse(object.toString());
+    List<String> responseDeals = new ArrayList<>();
+    if (null != response) {
+      JsonArray deals = response.getAsJsonArray("deals");
+      for (int i = 0; i < deals.size(); i++) {
+        responseDeals.add(deals.get(i).toString());
+      }
+    }
+    return responseDeals;
   }
 
   @Override
   public boolean changeLogin(String username, String newLogin, String token) {
-    return false;
+    JsonObject object = new JsonObject();
+    object.add("action", new JsonPrimitive("changeUsername"));
+    object.add("username", new JsonPrimitive(username));
+    object.add("newLogin", new JsonPrimitive(newLogin));
+    object.add("token", new JsonPrimitive(token));
+    JsonObject response = writeAndGetResponse(object.toString());
+    return null != response.get("changed") && response.get("changed").getAsBoolean();
   }
 
   @Override
   public void changePassword(String username, String newPassword, String token) {
-
+    JsonObject object = new JsonObject();
+    object.add("action", new JsonPrimitive("changePassword"));
+    object.add("username", new JsonPrimitive(username));
+    object.add("newPassword", new JsonPrimitive(encrypt(username, newPassword)));
+    object.add("token", new JsonPrimitive(token));
+    writeAndGetResponse(object.toString());
   }
 
   @Override

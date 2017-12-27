@@ -29,11 +29,11 @@ public interface Merchandise extends Serializable {
    *
    * @return field names
    */
-  static List<String> getMandatoryFields(String className) throws WrongClassCallException {
+  static List<String> getMandatoryFields(String className) {
     try {
       return MandatoryFields.valueOf(className).getFields();
     } catch (IllegalArgumentException e) {
-      throw new WrongClassCallException("wrong class called");
+      throw new IllegalArgumentException("wrong class called");
     }
   }
 

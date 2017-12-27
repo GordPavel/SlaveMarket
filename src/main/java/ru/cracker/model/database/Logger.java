@@ -20,10 +20,10 @@ public class Logger {
   private final String userDir = "logs/users/";
   private final String systemFile = this.mainPath + "System.log";
   private final String datePattern = "YYYY-MM-dd HH:mm:ss";
-  PrintWriter writer;
-  PrintWriter userWriter;
-  PrintWriter errorWriter;
-  PrintWriter systemWriter;
+  private PrintWriter writer;
+  private PrintWriter userWriter;
+  private PrintWriter errorWriter;
+  private PrintWriter systemWriter;
 
   /**
    * Default constructor.

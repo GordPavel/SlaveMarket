@@ -1,5 +1,8 @@
 package ru.cracker.model.database;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import gigadot.rebound.Rebound;
 import ru.cracker.exceptions.*;
 import ru.cracker.model.merchandises.Merchandise;
@@ -139,7 +142,7 @@ public class MerchDb implements Database {
               new Deal(
                       getUser(user),
                       merch, lastDeal(merch).getPrice(),
-                      DealState.Bought,
+                      DealState.REMOVED,
                       deals.getDeals().size()
               ));
       logger.log(user, "removed merchandise", merch.getAllInfo());
@@ -159,7 +162,8 @@ public class MerchDb implements Database {
     if (id >= merchants.size() || id < 0) {
       throw new MerchandiseNotFoundException(id);
     }
-    if (lastDeal(merchants.get(id)).getState().equals(DealState.Bought)) {
+    if (lastDeal(merchants.get(id)).getState().equals(DealState.Bought)
+            && !lastDeal(merchants.get(id)).getUser().getUsername().equals(user)) {
       throw new MerchandiseAlreadyBought(id);
     }
     logger.log(user, "removed merchandise", findMerh(id).getAllInfo());
@@ -167,7 +171,7 @@ public class MerchDb implements Database {
             new Deal(getUser(user),
                     merchants.get(id),
                     lastDeal(merchants.get(id)).getPrice(),
-                    DealState.Bought, deals.getDeals().size())
+                    DealState.REMOVED, deals.getDeals().size())
     );
     merchants.remove(id);
     merchants.stream().filter(i -> i.getId() >= id)
@@ -179,11 +183,11 @@ public class MerchDb implements Database {
   /**
    * Method to find specified Merchandises.
    *
-   * @param querry querry to filter results
+   * @param query query to filter results
    * @return List of Merchandises specified by query
    */
   //add niger name=nikolai age=41 gender=male height=180 weight=80 price=1000
-  public List<String> searchMerchandise(String querry) {
+  public List<String> searchMerchandise(String query) {
     Stream<Merchandise> merchandises = merchants.stream();
     /*
   //Dear maintainer:
@@ -195,12 +199,12 @@ public class MerchDb implements Database {
   //
   // total_hours_wasted_here = 42
   */
-    if (!Pattern.compile("all", Pattern.CASE_INSENSITIVE).matcher(querry.trim()).lookingAt()) {
+    if (!Pattern.compile("all", Pattern.CASE_INSENSITIVE).matcher(query.trim()).lookingAt()) {
       String namePattern = "([a-zA-z]+[[0-9]*[a-zA-z]]*)";
       Pattern pattern = Pattern.compile("\\sAND\\s", Pattern.CASE_INSENSITIVE);
       Pattern notEqQuerySplitter = Pattern.compile(namePattern + "(>|>=|<|< =)([\\d]+[.\\d]*)");
       Pattern eqQuerySplitter = Pattern.compile(namePattern + "(=|!=)([\\w]+[.\\w]*)");
-      String[] strings = pattern.split(querry);
+      String[] strings = pattern.split(query);
       for (String subQuery : strings) {
         Matcher notEqualsMatcher = notEqQuerySplitter.matcher(subQuery);
         Matcher equalsMatcher = eqQuerySplitter.matcher(subQuery);
@@ -242,15 +246,40 @@ public class MerchDb implements Database {
           return false;
         });
       }
-      return merchandises.map(merchandise -> merchandise.getAllInfo()
-              + lastDeal(merchandise).getState()
-              + lastDeal(merchandise).getUser().getUsername())
-              .collect(toList());
+      return merchandises
+              .sorted(Comparator
+                      .comparingInt(Merchandise::getId)
+                      .reversed())
+              .map(merchandise -> {
+                JsonObject object = new JsonParser()
+                        .parse(merchandise.getAllInfo())
+                        .getAsJsonObject();
+                Deal deal = lastDeal(merchandise);
+                object.add("state",
+                        new JsonPrimitive(deal.getState().toString()));
+                object.add("user",
+                        new JsonPrimitive(deal.getUser().getUsername()));
+                object.add("price",
+                        new JsonPrimitive(deal.getPrice()));
+                return object.toString();
+              }).collect(toList());
     }
-    return merchandises.map(merchandise -> merchandise.getAllInfo()
-            + lastDeal(merchandise).getState()
-            + lastDeal(merchandise).getUser().getUsername())
-            .collect(toList());
+    return merchandises.sorted(Comparator
+            .comparingInt(Merchandise::getId)
+            .reversed())
+            .map(merchandise -> {
+              JsonObject object = new JsonParser()
+                      .parse(merchandise.getAllInfo())
+                      .getAsJsonObject();
+              Deal deal = lastDeal(merchandise);
+              object.add("state",
+                      new JsonPrimitive(deal.getState().toString()));
+              object.add("user",
+                      new JsonPrimitive(deal.getUser().getUsername()));
+              object.add("price",
+                      new JsonPrimitive(deal.getPrice()));
+              return object.toString();
+            }).collect(toList());
   }
 
   /**
@@ -320,7 +349,16 @@ public class MerchDb implements Database {
                 throw new MerchandiseNotFoundException(id);
               }
               Deal deal = lastDeal(list.get(0));
-              return list.get(0).getAllInfo() + deal.getState() + deal.getUser().getUsername();
+              JsonObject object = new JsonParser()
+                      .parse(list.get(0).getAllInfo())
+                      .getAsJsonObject();
+              object.add("state",
+                      new JsonPrimitive(deal.getState().toString()));
+              object.add("user",
+                      new JsonPrimitive(deal.getUser().getUsername()));
+              object.add("price",
+                      new JsonPrimitive(deal.getPrice()));
+              return object.toString();
             }));
   }
 
@@ -426,8 +464,7 @@ public class MerchDb implements Database {
   }
 
   @Override
-  public List<String> getMandatoryFields(String className)
-          throws WrongClassCallException {
+  public List<String> getMandatoryFields(String className) {
     return Merchandise.getMandatoryFields(className);
   }
 
@@ -479,7 +516,7 @@ public class MerchDb implements Database {
       return false;
     }
     users.add(new User(username, pass));
-//    saveData();
+    saveData();
     return true;
   }
 
@@ -493,6 +530,13 @@ public class MerchDb implements Database {
     logger.log(username, "disconnected", "");
   }
 
+  /**
+   * Get user by username.
+   *
+   * @param username username.
+   * @return {@link User} with specified username.
+   * @throws UserException if user can not be founded.
+   */
   private User getUser(String username) {
     return users.stream().filter(user -> username.equals(user.getUsername())
     ).collect(Collectors.collectingAndThen(toList(), list -> {
@@ -525,14 +569,32 @@ public class MerchDb implements Database {
   public boolean changeLogin(String username, String newLogin, String token) {
     User user = getUser(username);
     if (user.getToken().equals(token)) {
-      return false;
+      try {
+        getUser(newLogin);
+        return false;
+      } catch (UserException e) {
+        user.setUsername(newLogin);
+        deals.getDeals().stream().forEach(deal -> {
+          if (deal.getUser().getUsername().equals(username)) {
+            deal.getUser().setUsername(newLogin);
+          }
+        });
+        saveData();
+      }
+      return true;
     }
     throw new InvalidToken();
   }
 
   @Override
   public void changePassword(String username, String newPassword, String token) {
-
+    User user = getUser(username);
+    if (user.getToken().equals(token)) {
+      user.setPassword(newPassword);
+      saveData();
+    } else {
+      throw new InvalidToken();
+    }
   }
 
   @Override
@@ -544,4 +606,24 @@ public class MerchDb implements Database {
   public boolean importAllData(String filename) {
     return false;
   }
+
+//  private String encrypt(String username, String pass) {
+//    try {
+//      String key = username;
+//      if (username.length() < 16) {
+//        char[] chars = new char[16 - username.length()];
+//        Arrays.fill(chars, '1');
+//        key = username + new String(chars);
+//      }
+//      Cipher cipher = Cipher.getInstance("AES");
+//      Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
+//      cipher.init(Cipher.ENCRYPT_MODE, aesKey);
+//      byte[] encrypted = cipher.doFinal(pass.getBytes());
+//      Base64.Encoder encoder = Base64.getEncoder();
+//      pass = encoder.encodeToString(encrypted);
+//    } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
+//      logger.logError(e.getMessage());
+//    }
+//    return pass;
+//  }
 }

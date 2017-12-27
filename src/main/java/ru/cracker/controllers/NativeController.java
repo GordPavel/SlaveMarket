@@ -134,7 +134,7 @@ public class NativeController implements Controller {
   }
 
   @Override
-  public List<String> getMandatoryFields(String className) throws WrongClassCallException {
+  public List<String> getMandatoryFields(String className){
     return model.getMandatoryFields(className);
   }
 
@@ -164,7 +164,7 @@ public class NativeController implements Controller {
 
   @Override
   public void changePassword(String username, String newPassword, String token) {
-    model.changePassword(username, newPassword, token);
+    model.changePassword(username, encrypt(username, newPassword), token);
   }
 
   @Override

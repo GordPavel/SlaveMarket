@@ -164,7 +164,7 @@ public class SlaveMarketModel implements Observable, Model {
   }
 
   @Override
-  public List<String> getMandatoryFields(String className) throws WrongClassCallException {
+  public List<String> getMandatoryFields(String className) {
     return database.getMandatoryFields(className);
   }
 
@@ -196,21 +196,21 @@ public class SlaveMarketModel implements Observable, Model {
 
   @Override
   public boolean changeLogin(String username, String newLogin, String token) {
-    return false;
+    return database.changeLogin(username, newLogin, token);
   }
 
   @Override
   public void changePassword(String username, String newPassword, String token) {
-
+    database.changePassword(username, newPassword, token);
   }
 
   @Override
   public boolean exportAllData(String fileName) {
-    return false;
+    return database.exportAllData(fileName);
   }
 
   @Override
   public boolean importAllData(String filename) {
-    return false;
+    return database.importAllData(filename);
   }
 }

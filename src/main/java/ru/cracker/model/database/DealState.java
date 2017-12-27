@@ -1,7 +1,7 @@
 package ru.cracker.model.database;
 
 public enum DealState {
-  Bought(" bought by "), FOR_SALE(" on sale by ");
+  Bought(" bought by "), FOR_SALE(" on sale by "), REMOVED(" removed by ");
 
   private final String state;
 
