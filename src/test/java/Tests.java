@@ -7,10 +7,12 @@ import ru.cracker.model.Model;
 import ru.cracker.model.Observable;
 import ru.cracker.model.SlaveMarketModel;
 import ru.cracker.model.database.MerchDb;
+import ru.cracker.model.merchandises.Merchandise;
 import ru.cracker.model.merchandises.classes.Slave;
 import ru.cracker.view.Observer;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toList;
@@ -94,9 +96,11 @@ public class Tests {
     ArrayList<Slave> list = new ArrayList<>();
     list.add(Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addGender("male")
             .build());
-    list.add(Slave.newBuilder().addId(1).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
+    list.add(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
             .build());
-    Assert.assertEquals(list.stream().map(merch -> {
+    Assert.assertEquals(list.stream().sorted(Comparator
+            .comparingInt(Merchandise::getId)
+            .reversed()).map(merch -> {
       JsonObject object = new JsonParser()
               .parse(merch.getAllInfo())
               .getAsJsonObject();
@@ -133,9 +137,11 @@ public class Tests {
     db.removeMerchandise(0, user, token);
     ArrayList<Slave> list = new ArrayList<>();
     //        list.add(new Slave(185, 85, 20, "male", 1, "Luise", 300));
-    list.add(Slave.newBuilder().addId(0).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
+    list.add(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85).addGender("male")
             .build());
-    Assert.assertEquals(list.stream().map(merch -> {
+    Assert.assertEquals(list.stream().sorted(Comparator
+            .comparingInt(Merchandise::getId)
+            .reversed()).map(merch -> {
       JsonObject object = new JsonParser()
               .parse(merch.getAllInfo())
               .getAsJsonObject();
@@ -165,7 +171,9 @@ public class Tests {
     db.addMerchandise(slave, user, token, 100);
     slaves.add(Slave.newBuilder().addName("niger").addWeight(3).addHeight(3).addGender("male")
             .addId(3).addAge(3).build());
-    Assert.assertEquals(slaves.stream().map(merch -> {
+    Assert.assertEquals(slaves.stream().sorted(Comparator
+            .comparingInt(Merchandise::getId)
+            .reversed()).map(merch -> {
       JsonObject object = new JsonParser()
               .parse(merch.getAllInfo())
               .getAsJsonObject();

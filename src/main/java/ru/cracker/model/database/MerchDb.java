@@ -109,7 +109,7 @@ public class MerchDb implements Database {
   /**
    * Puts merch into the vault.
    *
-   * @param merch Merch to put in vault
+   * @param merch Merchandise to put in vault
    * @param user  user who performed action
    */
   public void addMerchandise(Merchandise merch, String user, String token, int price) {
@@ -134,10 +134,10 @@ public class MerchDb implements Database {
    */
   public void removeMerchandise(Merchandise merch, String user, String token) {
     int id = merchants.indexOf(merch);
-    merchants.remove(merch);
+//    merchants.remove(merch);
     if (id != -1) {
-      merchants.stream().filter(i -> i.getId() >= id)
-              .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
+//      merchants.stream().filter(i -> i.getId() >= id)
+//              .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
       deals.addDeal(
               new Deal(
                       getUser(user),
@@ -167,16 +167,15 @@ public class MerchDb implements Database {
       throw new MerchandiseAlreadyBought(id);
     }
     logger.log(user, "removed merchandise", findMerh(id).getAllInfo());
-    deals.addDeal(
-            new Deal(getUser(user),
-                    merchants.get(id),
-                    lastDeal(merchants.get(id)).getPrice(),
-                    DealState.REMOVED, deals.getDeals().size())
+    deals.addDeal(new Deal(getUser(user),
+            merchants.get(id),
+            lastDeal(merchants.get(id)).getPrice(),
+            DealState.REMOVED, deals.getDeals().size())
     );
-    merchants.remove(id);
-    merchants.stream().filter(i -> i.getId() >= id)
-            .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
-    saveData();
+//    merchants.remove(id);
+//    merchants.stream().filter(i -> i.getId() >= id)
+//            .forEach(merchandise -> merchandise.setId(merchandise.getId() - 1));
+//    saveData();
   }
 
 
@@ -267,6 +266,7 @@ public class MerchDb implements Database {
     return merchandises.sorted(Comparator
             .comparingInt(Merchandise::getId)
             .reversed())
+            .filter(merchandise -> lastDeal(merchandise).getState().equals(DealState.FOR_SALE))
             .map(merchandise -> {
               JsonObject object = new JsonParser()
                       .parse(merchandise.getAllInfo())
