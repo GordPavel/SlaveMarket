@@ -6,7 +6,14 @@ import com.google.gson.JsonPrimitive;
 import gigadot.rebound.Rebound;
 import ru.cracker.exceptions.*;
 import ru.cracker.model.merchandises.Merchandise;
+import ru.cracker.model.merchandises.classes.Slave;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
+import javax.xml.bind.annotation.*;
+import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
@@ -21,6 +28,8 @@ import static java.util.stream.Collectors.toList;
 /**
  * Realization of Database interface.
  */
+@XmlRootElement(name = "database")
+@XmlAccessorType(XmlAccessType.NONE)
 public class MerchDb implements Database {
 
   /**
@@ -42,11 +51,17 @@ public class MerchDb implements Database {
   /**
    * Deal manager.
    */
+  @XmlElement(name = "dealList")
   private DealList deals;
   /**
    * List of users.
    */
+  @XmlElementWrapper
+  @XmlAnyElement(lax = true)
   private List<User> users;
+
+  public MerchDb() {
+  }
 
   /**
    * Constructor to create/open database.
@@ -57,7 +72,6 @@ public class MerchDb implements Database {
     merchants = new ArrayList<Merchandise>();
     users = new ArrayList<User>();
     deals = new DealList();
-    users.add(new User("s3rius", "GYrcN+xQe/XMRDn5sz2whg=="));
 
     //    generateData(400);
     if (load) {
@@ -69,6 +83,7 @@ public class MerchDb implements Database {
   private void unblockAll() {
     users.forEach(user -> user.setToken(""));
   }
+
 
   /**
    * Method to load data from file.
@@ -599,12 +614,55 @@ public class MerchDb implements Database {
 
   @Override
   public boolean exportAllData(String fileName) {
-    return false;
+    try {
+      JAXBContext context = JAXBContext.newInstance(MerchDb.class, DealList.class, Deal.class, User.class, Slave.class);
+      Marshaller m = context.createMarshaller();
+      m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+      m.marshal(this, new File(fileName));
+      register("test", "123");
+      register("test2", "1235");
+//      m.marshal(users, System.out);
+    } catch (JAXBException e) {
+//      logger.logError(e.getMessage());
+      e.printStackTrace();
+      return false;
+    }
+    return true;
   }
 
   @Override
   public boolean importAllData(String filename) {
-    return false;
+    try {
+      JAXBContext context = JAXBContext.newInstance(MerchDb.class, DealList.class, Deal.class, User.class, Slave.class);
+      Unmarshaller unmarshaller = context.createUnmarshaller();
+      MerchDb db = (MerchDb) unmarshaller.unmarshal(new File(filename));
+//      System.out.println(db.getUsers());
+//      System.out.println("USERS:");
+//      db.getUsers().stream().forEach(System.out::println);
+//      System.out.println("DEALS:");
+//      db.getDeals().getDeals().stream().forEach(System.out::println)
+//      if (null == this.users && null == this.deals) {
+//        this.deals = new DealList();
+//        this.users = new ArrayList<>();
+//      }
+      db.deals.getDeals().stream().forEach(deal -> {
+        try {
+          getUser(deal.getUser().getUsername());
+        } catch (UserException e) {
+          deals.addDeal(deal);
+        }
+      });
+      db.users.stream().forEach(user -> {
+        try {
+          getUser(user.getUsername());
+        } catch (UserException e) {
+          register(user.getUsername(), user.getPassword());
+        }
+      });
+    } catch (JAXBException e) {
+      return false;
+    }
+    return true;
   }
 
 //  private String encrypt(String username, String pass) {

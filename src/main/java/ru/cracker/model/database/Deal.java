@@ -2,19 +2,30 @@ package ru.cracker.model.database;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import org.joda.time.LocalDateTime;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 import ru.cracker.model.merchandises.Merchandise;
+import ru.cracker.model.merchandises.classes.Slave;
 
+import javax.xml.bind.annotation.*;
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
+@XmlRootElement(name = "deal")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Deal implements Serializable, Comparable<Deal> {
-  private final DealState state;
   LocalDateTime time;
+  private DealState state;
   private User user;
+  @XmlElements({
+          @XmlElement(type = Slave.class, name = "slave")
+  })
   private Merchandise merchandise;
   private int price;
   private int id;
+
+  public Deal() {
+  }
 
   /**
    * Constructor to create {@link Deal} object.
@@ -74,12 +85,9 @@ public class Deal implements Serializable, Comparable<Deal> {
   @Override
   public String toString() {
     JsonObject object = new JsonObject();
+    DateTimeFormatter fmt = DateTimeFormat.forPattern("YYYY-MM-dd HH:mm:ss");
     object.add("date",
-            new JsonPrimitive(
-                    this.time
-                            .format(
-                                    DateTimeFormatter
-                                            .ofPattern("YYYY-MM-dd HH:mm:ss"))));
+            new JsonPrimitive(fmt.print(time)));
     object.add("merchandise", new JsonPrimitive(merchandise.getAllInfo()));
     object.add("price", new JsonPrimitive(price));
     object.add("id", new JsonPrimitive(id));
