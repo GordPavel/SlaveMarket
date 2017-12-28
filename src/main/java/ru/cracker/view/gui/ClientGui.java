@@ -343,7 +343,6 @@ public class ClientGui extends Application implements View, Observer {
                             "");
                   }
                 }
-
               },
               "Please enter this fields to change your password");
     }
@@ -646,14 +645,6 @@ public class ClientGui extends Application implements View, Observer {
           });
         });
         box.getChildren().add(merch);
-//        Text lBarce = new Text("{");
-//        box.getChildren().addAll(merch, lBarce);
-//        for (Map.Entry<String, JsonElement> inner : object.entrySet()) {
-//          Text info = new Text("  " + inner.getKey() + ": " + inner.getValue().getAsString());
-//          box.getChildren().add(info);
-//        }
-//        Text rBarce = new Text("}");
-//        box.getChildren().add(rBarce);
       } else {
         Text info = new Text(entry.getKey() + ": " + entry.getValue().getAsString());
         box.getChildren().add(info);

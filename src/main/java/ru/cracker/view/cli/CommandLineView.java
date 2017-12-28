@@ -128,7 +128,7 @@ public class CommandLineView implements Observer, View {
    */
 
   public void update() {
-    System.out.println("Updated merchandise");
+
   }
 
   /**
@@ -137,7 +137,7 @@ public class CommandLineView implements Observer, View {
    * @param id id of changed element
    */
   public void deleted(int id) {
-    System.out.println("deleted merchandise " + id);
+
   }
 
   /**
@@ -146,7 +146,7 @@ public class CommandLineView implements Observer, View {
    * @param id id of changed element
    */
   public void changed(int id) {
-    System.out.println("changed merchandise " + id);
+
   }
 
   /**
