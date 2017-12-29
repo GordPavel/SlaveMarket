@@ -189,11 +189,12 @@ public class Slave implements SlaveInterface {
   @Override
   public boolean equals(Object obj) {
     return obj.getClass().getName().equals(this.getClass().getName())
-            && ((Slave) obj).name.equals(name)
-            && ((Slave) obj).gender.equals(gender)
-            && Objects.equals(((Slave) obj).getBenefit(), getBenefit())
-            && ((Slave) obj).age == age
-            && ((Slave) obj).weight == weight;
+            && ((Slave) obj).id == this.id
+            && ((Slave) obj).name.equals(this.name)
+            && ((Slave) obj).gender.equals(this.gender)
+            && Objects.equals(((Slave) obj).getBenefit(), this.getBenefit())
+            && ((Slave) obj).age == this.age
+            && ((Slave) obj).weight == this.weight;
   }
 
   @Override

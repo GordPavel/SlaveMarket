@@ -405,6 +405,7 @@ public class ClientGui extends Application implements View, Observer {
         }
         labels.add(entry.getKey());
       }
+      lastScreen = () -> openMerchandise(currentMerchandise.toString());
       generateForm(labels,
               labels.stream().map(s -> false).collect(toList()),
               (fieldMap) -> {
@@ -590,6 +591,7 @@ public class ClientGui extends Application implements View, Observer {
 
 
   private void openMerchandise(String values) {
+//    lastScreen = ()->{}
     mainContent.getChildren().clear();
     setActions(GuiActions.MERCHANDISE, menu);
     JsonParser parser = new JsonParser();
@@ -608,7 +610,7 @@ public class ClientGui extends Application implements View, Observer {
     JsonParser parser = new JsonParser();
     JsonObject merchandise = parser.parse(deal).getAsJsonObject();
     VBox box = new VBox(4);
-    box.setPadding(new Insets(0, 0, 0, 8));
+    box.setPadding(new Insets(0, 0, 0, 12));
     box.setAlignment(Pos.TOP_LEFT);
     box.setPrefSize(mainContent.getPrefWidth(), mainContent.getPrefHeight());
     for (Map.Entry<String, JsonElement> entry : merchandise.entrySet()) {
@@ -620,6 +622,7 @@ public class ClientGui extends Application implements View, Observer {
                 .append(" name: ")
                 .append(object.get("name").getAsString());
         Hyperlink merch = new Hyperlink("merchandise: " + builder.toString());
+        merch.setPadding(new Insets(0, 0, 0, -2));
         merch.setOnMouseClicked(event -> {
           openMerchandise(object.toString());
           backButton.setVisible(true);

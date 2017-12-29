@@ -44,6 +44,7 @@ public class StartServer {
       }
     } catch (IOException e) {
       logger.logError("Can't open server socket");
+      System.out.println("Can't open server socket");
       System.exit(-1);
     }
   }

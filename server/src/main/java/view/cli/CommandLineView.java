@@ -168,7 +168,7 @@ public class CommandLineView implements Observer, View {
     Pattern login = Pattern.compile("\\bLOGIN\\b", Pattern.CASE_INSENSITIVE);
     Pattern register = Pattern.compile("\\bREGISTER\\b", Pattern.CASE_INSENSITIVE);
     Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
-    Pattern exit = Pattern.compile("\\bEXIT\\b", Pattern.CASE_INSENSITIVE);
+    Pattern exit = Pattern.compile("\\bSHUTDOWN\\b", Pattern.CASE_INSENSITIVE);
     Matcher helpMatcher;
     while (true) {
       System.out.println("Please enter your command");

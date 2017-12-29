@@ -72,7 +72,7 @@ public class ClientController implements Controller {
     request.add("username", new JsonPrimitive(user));
     request.add("id", new JsonPrimitive(id));
     request.add("token", new JsonPrimitive(token));
-    JsonObject object = writeAndGetResponse(request.toString());
+    writeAndGetResponse(request.toString());
   }
 
   @Override
