@@ -44,6 +44,7 @@ public class MerchDb implements Database {
    * File to write user's list.
    */
   private final String userFile = "users.us";
+  private final String classesPackage = "model.merchandises.classes";
   /**
    * List of merchandise.
    */
@@ -522,7 +523,7 @@ public class MerchDb implements Database {
   @Override
   public List<String> getAvailableClasses() {
 
-    Rebound rebound = new Rebound("model.merchandises.classes");
+    Rebound rebound = new Rebound(classesPackage);
     return rebound.getSubClassesOf(Merchandise.class).stream().map(Class::getSimpleName)
             .collect(toList());
   }
@@ -540,7 +541,7 @@ public class MerchDb implements Database {
           int price)
           throws CreateMerchandiseException {
     try {
-      Class merchandise = Class.forName("ru.cracker.model.merchandises.classes." + className);
+      Class merchandise = Class.forName(classesPackage + "." + className);
       Merchandise merch = (Merchandise) merchandise.getMethod("buildFromMap", kvs.getClass())
               .invoke(null, kvs);
       addMerchandise(merch, user, token, price);
