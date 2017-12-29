@@ -117,8 +117,6 @@ public class ServerController implements Controller {
                 json.get("username").getAsString(),
                 json.get("token").getAsString()
         )));
-      } else if (json.get("action").getAsString().equals("set values")) {
-        System.out.println("lol");
       } else if (json.get("action").getAsString().equals("Remove merchandise")) {
         model.removeMerchandise(
                 json.get("id").getAsInt(),

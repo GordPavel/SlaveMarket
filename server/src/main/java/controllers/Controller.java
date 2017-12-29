@@ -129,6 +129,10 @@ public interface Controller {
    */
   void disconnect(String username, String token);
 
+  /**
+   * Start point of controller.
+   * Initialize all important resources.
+   */
   void start();
 
   /**
