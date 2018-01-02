@@ -1,6 +1,7 @@
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+import exceptions.CreateMerchandiseException;
 import model.Model;
 import model.Observable;
 import model.SlaveMarketModel;
@@ -11,8 +12,7 @@ import org.junit.Assert;
 import org.junit.Test;
 import view.Observer;
 
-import java.util.ArrayList;
-import java.util.Comparator;
+import java.util.*;
 import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toList;
@@ -245,8 +245,33 @@ public class Tests {
 
   @Test
   public void exportTest() {
-    db.exportAllData("export.xml");
+    db.exportAllData("testExport.xml");
     MerchDb db1 = new MerchDb(false);
-    db1.importAllData("export.xml");
+    db1.importAllData("testExport.xml");
+  }
+
+  @Test
+  public void availableClassesTest() {
+    Assert.assertEquals(Arrays.asList("Food", "Slave"), db.getAvailableClasses());
+  }
+
+  @Test
+  public void mandatoryFieldsTest() {
+    System.out.println(db.getMandatoryFields("Food"));
+  }
+
+  @Test
+  public void addFood() {
+    List<String> fields = db.getMandatoryFields("Food");
+    Map<String, String> map = new HashMap<>();
+    fields.forEach(field -> {
+      map.put(field.toUpperCase(), String.valueOf(new Random().nextFloat()));
+    });
+    try {
+      db.addMerchandiseByMap("Food", map, user, token, 1000);
+    } catch (CreateMerchandiseException e) {
+      e.printStackTrace();
+    }
+    db.searchMerchandise("All").forEach(System.out::println);
   }
 }

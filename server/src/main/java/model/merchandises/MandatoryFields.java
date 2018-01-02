@@ -3,7 +3,8 @@ package model.merchandises;
 import java.util.List;
 
 public enum MandatoryFields {
-  Slave(model.merchandises.classes.Slave.mandatoryFields());
+  Slave(model.merchandises.classes.Slave.mandatoryFields()),
+  Food(model.merchandises.classes.Food.mandatoryFields());
 
 
   private final List<String> fields;

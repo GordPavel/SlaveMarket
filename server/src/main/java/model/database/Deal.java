@@ -3,6 +3,7 @@ package model.database;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import model.merchandises.Merchandise;
+import model.merchandises.classes.Food;
 import model.merchandises.classes.Slave;
 import org.joda.time.LocalDateTime;
 import org.joda.time.format.DateTimeFormat;
@@ -18,7 +19,8 @@ public class Deal implements Serializable, Comparable<Deal> {
   private DealState state;
   private User user;
   @XmlElements({
-          @XmlElement(type = Slave.class, name = "slave")
+          @XmlElement(type = Slave.class, name = "slave"),
+          @XmlElement(type = Food.class, name = "food")
   })
   private Merchandise merchandise;
   private int price;

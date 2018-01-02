@@ -70,55 +70,55 @@ public class ServerController implements Controller {
       } else if (json.get("action").getAsString().equals("disconnect")) {
         disconnect(json.get("username").getAsString(), json.get("token").getAsString());
       } else if (json.get("action").getAsString().equals("search")) {
-        List<String> merchandises = model.searchMerchandise(json.get("query").getAsString());
+        List<String> merchandises = searchMerchant(json.get("query").getAsString());
         JsonArray array = new JsonArray();
         JsonParser parser = new JsonParser();
         merchandises.forEach(merchandise -> array.add(parser.parse(merchandise)));
         response.add("merchandises", array);
       } else if (json.get("action").getAsString().equals("deals")) {
-        List<String> deals = model.getDealsByUser(json.get("username").getAsString(), json.get("token").getAsString());
+        List<String> deals = getDealsByUser(json.get("username").getAsString(), json.get("token").getAsString());
         JsonArray array = new JsonArray();
         JsonParser parser = new JsonParser();
         deals.forEach(deal -> array.add(parser.parse(deal)));
         response.add("deals", array);
       } else if (json.get("action").getAsString().equals("changeLogin")) {
-        response.add("changed", new JsonPrimitive(model.changeLogin(
+        response.add("changed", new JsonPrimitive(changeLogin(
                 json.get("username").getAsString(),
                 json.get("newUsername").getAsString(),
                 json.get("token").getAsString())));
       } else if (json.get("action").getAsString().equals("getClasses")) {
         JsonArray array = new JsonArray();
         for (String classString :
-                model.getAvailableClasses()) {
+                getAvailableClasses()) {
           array.add(classString);
         }
         response.add("classes", array);
       } else if (json.get("action").getAsString().equals("mandatoryFields")) {
-        List<String> fields = model.getMandatoryFields(json.get("className").getAsString());
+        List<String> fields = getMandatoryFields(json.get("className").getAsString());
         JsonArray array = new JsonArray();
         for (String field : fields) {
           array.add(field);
         }
         response.add("fields", array);
       } else if (json.get("action").getAsString().equals("changeUsername")) {
-        response.add("changed", new JsonPrimitive(model.changeLogin(
+        response.add("changed", new JsonPrimitive(changeLogin(
                 json.get("username").getAsString(),
                 json.get("newLogin").getAsString(),
                 json.get("token").getAsString())));
       } else if (json.get("action").getAsString().equals("changePassword")) {
-        model.changePassword(
+        changePassword(
                 json.get("username").getAsString(),
                 json.get("newPassword").getAsString(),
                 json.get("token").getAsString()
         );
       } else if (json.get("action").getAsString().equals("Buy merchandise")) {
-        response.add("merchandise", new JsonPrimitive(model.buyMerchandise(
+        response.add("merchandise", new JsonPrimitive(buyMerchandise(
                 json.get("id").getAsInt(),
                 json.get("username").getAsString(),
                 json.get("token").getAsString()
         )));
       } else if (json.get("action").getAsString().equals("Remove merchandise")) {
-        model.removeMerchandise(
+        removeMerchant(
                 json.get("id").getAsInt(),
                 json.get("username").getAsString(),
                 json.get("token").getAsString()
@@ -129,18 +129,22 @@ public class ServerController implements Controller {
         }.getType();
         Gson gson = new GsonBuilder().create();
 //        Map<String, String> merchandise = ;
-        model.addMerchandiseByMap(
+        addMerchandiseByMap(
                 json.get("className").getAsString(),
                 gson.fromJson(json.get("merchandise").getAsString(), type),
                 json.get("username").getAsString(),
                 json.get("token").getAsString(),
                 json.get("price").getAsInt());
       } else if (json.get("action").getAsString().equals("new Values")) {
-        model.setValuesToMerchandise(
+        setValuesToMerchandise(
                 json.get("id").getAsInt(),
                 json.get("values").getAsString(),
                 json.get("username").getAsString(),
                 json.get("token").getAsString());
+      } else if (json.get("action").getAsString().equals("getMerchant")) {
+        response.add("merchandise", new JsonPrimitive(
+                getMerchantById(json.get("id").getAsInt())
+        ));
       }
       sendResponse(response);
     } catch (Exception e) {
@@ -197,7 +201,7 @@ public class ServerController implements Controller {
 
   @Override
   public void setValuesToMerchandise(int id, String params, String user, String token) {
-    model.buyMerchandise(id, user, token);
+    model.setValuesToMerchandise(id, params, user, token);
   }
 
   @Override

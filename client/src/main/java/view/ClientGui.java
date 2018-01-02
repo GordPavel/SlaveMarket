@@ -50,6 +50,7 @@ public class ClientGui extends Application implements View, Observer {
   private List<String> deals;
   private ImageView backButton;
   private FunctionalUtil lastScreen;
+  private FunctionalUtil mainScreen;
   private Text currentUser;
   private JsonObject currentMerchandise;
 
@@ -216,11 +217,15 @@ public class ClientGui extends Application implements View, Observer {
     menu = (ListView) mainScene.lookup("#actions");
     setActions(GuiActions.MAIN, menu);
     currentMenu = GuiActions.MAIN;
-    menu.setOnMouseClicked(event -> action(menu.getSelectionModel().getSelectedItem()));
+    menu.setOnMouseClicked(event ->
+    {
+      if (event.getClickCount() == 2) {
+        action(menu.getSelectionModel().getSelectedItem());
+      }
+    });
     showSearch("all");
     TextField searchField = (TextField) mainScene.lookup("#search");
     searchField.editableProperty().setValue(true);
-    searchField.setOnMouseClicked(event -> searchField.requestFocus());
     searchField.onActionProperty();
     searchField.textProperty().addListener((observable, oldValue, newValue) -> {
       if ("".equals(newValue)) {
@@ -239,6 +244,10 @@ public class ClientGui extends Application implements View, Observer {
    */
   private void showSearch(String query) {
     merchandises = controller.searchMerchant(query);
+    mainScreen = () -> {
+      setActions(GuiActions.MAIN, menu);
+      showSearch("all");
+    };
     List<String> viewList = new ArrayList<>();
     JsonParser parser = new JsonParser();
     for (int i = 0; i < merchandises.size(); i++) {
@@ -290,18 +299,18 @@ public class ClientGui extends Application implements View, Observer {
       showDeals();
     }
     if (selectedItem.equals("Go back")) {
-      lastScreen.openLastScreen();
+      lastScreen.apply();
 //      setActions(mainMenu, menu);
 //      currentMenu = mainMenu;
 //      setMainListListeners();
 //      showSearch("all");
     }
     if (selectedItem.equals("Show Merchandises")) {
-      showSearch("all");
       lastScreen = () -> {
         setActions(GuiActions.MAIN, menu);
         showSearch("all");
       };
+      showSearch("all");
 //      showList(controller.searchMerchant("all"));
     }
     if (selectedItem.equals("Change password")) {
@@ -386,12 +395,17 @@ public class ClientGui extends Application implements View, Observer {
     if (selectedItem.equals("Buy merchandise")) {
       String merchandise = controller.buyMerchandise(currentMerchandise.get("id").getAsInt(), username, token);
       if (!merchandise.equals("")) {
+        Util.runAlert(Alert.AlertType.INFORMATION,
+                "information",
+                "Merchandise successfully bought",
+                "Bought merchandise with id " + currentMerchandise.get("id").getAsInt());
         openMerchandise(merchandise);
+        lastScreen = mainScreen;
       }
     }
     if (selectedItem.equals("delete")) {
       controller.removeMerchant(currentMerchandise.get("id").getAsInt(), username, token);
-      lastScreen.openLastScreen();
+      lastScreen.apply();
     }
     if (selectedItem.equals("Set new values")) {
       List<String> labels = new ArrayList<>();
@@ -405,7 +419,17 @@ public class ClientGui extends Application implements View, Observer {
         }
         labels.add(entry.getKey());
       }
-      lastScreen = () -> openMerchandise(currentMerchandise.toString());
+      lastScreen = () -> {
+        openMerchandise(controller.getMerchantById(currentMerchandise.get("id").getAsInt()));
+        lastScreen = () -> {
+          mainScreen.apply();
+          backButton.setVisible(false);
+          lastScreen = () -> {
+            setActions(GuiActions.MAIN, menu);
+            showSearch("all");
+          };
+        };
+      };
       generateForm(labels,
               labels.stream().map(s -> false).collect(toList()),
               (fieldMap) -> {
@@ -422,7 +446,7 @@ public class ClientGui extends Application implements View, Observer {
                         builder.toString().trim(),
                         username,
                         token);
-                lastScreen.openLastScreen();
+                lastScreen.apply();
               },
               "Change values that you want to change");
     }
@@ -434,40 +458,44 @@ public class ClientGui extends Application implements View, Observer {
     Platform.runLater(() ->
             mainList.setOnMouseClicked(event -> {
 //              System.out.println(classes.get(mainList.getSelectionModel().getSelectedIndex()));
-              List<String> fields = controller
-                      .getMandatoryFields(
-                              classes.get(mainList.getSelectionModel().getSelectedIndex()));
-              fields.add("price");
-              generateForm(fields,
-                      fields.stream().map(s -> false).collect(toList()),
-                      (map) -> {
-                        Boolean good = true;
-                        Map<String, String> request = new HashMap<>();
-                        for (String key : map.keySet()) {
-                          if (!checkFields(map.get(key))) {
-                            good = false;
-                          } else {
-                            if (!key.equals("price")) {
-                              request.put(key.toUpperCase(), map.get(key).getText().trim());
+              if (event.getClickCount() == 2) {
+                List<String> fields = controller
+                        .getMandatoryFields(
+                                classes.get(mainList.getSelectionModel().getSelectedIndex()));
+                fields.add("price");
+                generateForm(fields,
+                        fields.stream().map(s -> false).collect(toList()),
+                        (map) -> {
+                          Boolean good = true;
+                          Map<String, String> request = new HashMap<>();
+                          for (String key : map.keySet()) {
+                            if (!checkFields(map.get(key))) {
+                              good = false;
+                            } else {
+                              if (!key.equals("price")) {
+                                request.put(key.toUpperCase(), map.get(key).getText().trim());
+                              }
                             }
                           }
-                        }
-                        if (good) {
-                          try {
-                            controller.addMerchandiseByMap(classes.get(mainList.getSelectionModel().getSelectedIndex()), request, username, token, Integer.parseInt(map.get("price").getText()));
-                            Util.runAlert(Alert.AlertType.INFORMATION,
-                                    "success",
-                                    "Merchandise added successfully",
-                                    "");
-                            showSearch("all");
-                          } catch (CreateMerchandiseException | NumberFormatException e) {
-                            Util.runAlert(Alert.AlertType.ERROR,
-                                    "error",
-                                    e.getMessage(),
-                                    "");
+                          if (good) {
+                            try {
+                              controller.addMerchandiseByMap(classes.get(mainList.getSelectionModel().getSelectedIndex()), request, username, token, Integer.parseInt(map.get("price").getText()));
+                              Util.runAlert(Alert.AlertType.INFORMATION,
+                                      "success",
+                                      "Merchandise added successfully",
+                                      "");
+                              showSearch("all");
+                            } catch (CreateMerchandiseException | NumberFormatException e) {
+                              if (e instanceof NumberFormatException) {
+                                Util.runAlert(Alert.AlertType.ERROR,
+                                        "error",
+                                        e.getMessage(),
+                                        "");
+                              }
+                            }
                           }
-                        }
-                      }, "You must fill in all the fields to create an item");
+                        }, "You must fill in all the fields to create an item");
+              }
             }));
   }
 
@@ -519,6 +547,10 @@ public class ClientGui extends Application implements View, Observer {
    */
   private void showDeals() {
     deals = controller.getDealsByUser(username, token);
+    mainScreen = () -> {
+      setActions(GuiActions.PROFILE, menu);
+      showDeals();
+    };
     JsonParser parser = new JsonParser();
     showList(deals.stream().map(value -> {
       JsonObject deal = parser.parse(value).getAsJsonObject();

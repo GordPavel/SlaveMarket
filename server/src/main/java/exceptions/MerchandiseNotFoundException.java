@@ -13,7 +13,7 @@ public class MerchandiseNotFoundException extends IllegalArgumentException {
    * @param id id of missed merchandise
    */
   public MerchandiseNotFoundException(int id) {
-    super("Merchandise with " + id + " cannot be founded in database");
+    super("Merchandise with id equals to " + id + " cannot be founded in database");
   }
 
   public MerchandiseNotFoundException(Merchandise merchandise) {

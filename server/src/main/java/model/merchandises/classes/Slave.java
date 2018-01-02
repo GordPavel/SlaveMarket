@@ -8,7 +8,10 @@ import model.merchandises.SlaveInterface;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.*;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * Realization of SlaveInterface. Model of Slave. Slave is a person who is the property of and
@@ -189,12 +192,13 @@ public class Slave implements SlaveInterface {
   @Override
   public boolean equals(Object obj) {
     return obj.getClass().getName().equals(this.getClass().getName())
-            && ((Slave) obj).id == this.id
-            && ((Slave) obj).name.equals(this.name)
-            && ((Slave) obj).gender.equals(this.gender)
-            && Objects.equals(((Slave) obj).getBenefit(), this.getBenefit())
-            && ((Slave) obj).age == this.age
-            && ((Slave) obj).weight == this.weight;
+            && ((Slave) obj).getAllInfo().equals(getAllInfo());
+//            && ((Slave) obj).id == this.id
+//            && ((Slave) obj).name.equals(this.name)
+//            && ((Slave) obj).gender.equals(this.gender)
+//            && Objects.equals(((Slave) obj).getBenefit(), this.getBenefit())
+//            && ((Slave) obj).age == this.age
+//            && ((Slave) obj).weight == this.weight;
   }
 
   @Override

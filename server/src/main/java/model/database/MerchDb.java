@@ -6,6 +6,7 @@ import com.google.gson.JsonPrimitive;
 import exceptions.*;
 import gigadot.rebound.Rebound;
 import model.merchandises.Merchandise;
+import model.merchandises.classes.Food;
 import model.merchandises.classes.Slave;
 
 import javax.xml.bind.JAXBContext;
@@ -92,7 +93,12 @@ public class MerchDb implements Database {
   private void loadFromFile() {
     deals = FileManager.readDeals(dealFile);
     users = FileManager.readUsers(userFile);
-    merchants = deals.getDeals().stream().map(Deal::getMerchandise).distinct().collect(toList());
+    merchants = deals.getDeals()
+            .stream()
+            .map(Deal::getMerchandise)
+            .distinct()
+            .sorted(Comparator.comparingInt(Merchandise::getId))
+            .collect(toList());
   }
 
 //  /**
@@ -164,7 +170,7 @@ public class MerchDb implements Database {
                     DealState.FOR_SALE,
                     deals.getDeals().size()
             ));
-    logger.log(user, "add merchandise", merchants.get(merchants.size() - 1).getAllInfo());
+    logger.log(user, "add merchandise", getMerchandise(merchants.size() - 1).getAllInfo());
     saveData();
   }
 
@@ -204,16 +210,16 @@ public class MerchDb implements Database {
     if (id >= merchants.size() || id < 0) {
       throw new MerchandiseNotFoundException(id);
     }
-    if (!lastDeal(merchants.get(id)).getUser().getToken().equals(token)) {
+    if (!lastDeal(getMerchandise(id)).getUser().getToken().equals(token)) {
       throw new MerchandiseAlreadyBought("That merchandise not yours.");
     }
-    if (lastDeal(merchants.get(id)).getState().equals(DealState.REMOVED)) {
+    if (lastDeal(getMerchandise(id)).getState().equals(DealState.REMOVED)) {
       throw new MerchandiseAlreadyBought("Merchandise already removed.");
     }
     logger.log(user, "removed merchandise", findMerh(id).getAllInfo());
     deals.addDeal(new Deal(getUser(user, token),
-            merchants.get(id),
-            lastDeal(merchants.get(id)).getPrice(),
+            getMerchandise(id),
+            lastDeal(getMerchandise(id)).getPrice(),
             DealState.REMOVED, deals.getDeals().size())
     );
 //    merchants.remove(id);
@@ -392,17 +398,18 @@ public class MerchDb implements Database {
               if (list.size() != 1) {
                 throw new MerchandiseNotFoundException(id);
               }
-              Deal deal = lastDeal(list.get(0));
-              JsonObject object = new JsonParser()
-                      .parse(list.get(0).getAllInfo())
-                      .getAsJsonObject();
-              object.add("state",
-                      new JsonPrimitive(deal.getState().toString()));
-              object.add("user",
-                      new JsonPrimitive(deal.getUser().getUsername()));
-              object.add("price",
-                      new JsonPrimitive(deal.getPrice()));
-              return object.toString();
+//              Deal deal = lastDeal(list.get(0));
+//              JsonObject object = new JsonParser()
+//                      .parse(list.get(0).getAllInfo())
+//                      .getAsJsonObject();
+//              object.add("state",
+//                      new JsonPrimitive(deal.getState().toString()));
+//              object.add("user",
+//                      new JsonPrimitive(deal.getUser().getUsername()));
+//              object.add("price",
+//                      new JsonPrimitive(deal.getPrice()));
+//              return object.toString();
+              return list.get(0).getAllInfo();
             }));
   }
 
@@ -504,15 +511,26 @@ public class MerchDb implements Database {
             .map(elem -> elem.split("="))
             .collect(Collectors.toMap(e -> e[0].toUpperCase(), e -> e[1]));
     String merchIfo = "{Before: " + findMerh(id).getAllInfo() + "},";
-    if (!lastDeal(merchants.get(id)).getUser().getToken().equals(token)) {
+    if (!lastDeal(getMerchandise(id)).getUser().getToken().equals(token)) {
       throw new MerchandiseAlreadyBought("That merchandise not yours.");
     }
-    if (lastDeal(merchants.get(id)).getState().equals(DealState.REMOVED)) {
+    if (lastDeal(getMerchandise(id)).getState().equals(DealState.REMOVED)) {
       throw new MerchandiseAlreadyBought("Merchandise was removed.");
     }
     findMerh(id).setParamsByMap(kvs);
     logger.log(user, "Changed merchandise parameters", merchIfo + " {changed Values:" + kvs + "}");
     saveData();
+  }
+
+  private Merchandise getMerchandise(int id) {
+    return merchants.stream()
+            .filter(merchandise -> merchandise.getId() == id)
+            .collect(Collectors.collectingAndThen(toList(), list -> {
+              if (list.size() != 1) {
+                throw new MerchandiseNotFoundException(id);
+              }
+              return list.get(0);
+            }));
   }
 
   /**
@@ -698,7 +716,7 @@ public class MerchDb implements Database {
   @Override
   public boolean exportAllData(String fileName) {
     try {
-      JAXBContext context = JAXBContext.newInstance(MerchDb.class, DealList.class, Deal.class, User.class, Slave.class);
+      JAXBContext context = JAXBContext.newInstance(MerchDb.class, DealList.class, Deal.class, User.class, Slave.class, Food.class);
       Marshaller m = context.createMarshaller();
       m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
       m.marshal(this, new File(fileName));
@@ -713,11 +731,11 @@ public class MerchDb implements Database {
   @Override
   public boolean importAllData(String filename) {
     try {
-      JAXBContext context = JAXBContext.newInstance(MerchDb.class, DealList.class, Deal.class, User.class, Slave.class);
+      JAXBContext context = JAXBContext.newInstance(MerchDb.class, DealList.class, Deal.class, User.class, Slave.class, Food.class);
       Unmarshaller unmarshaller = context.createUnmarshaller();
       MerchDb db = (MerchDb) unmarshaller.unmarshal(new File(filename));
-      db.deals.getDeals().stream().forEach(deal -> deals.addDeal(deal));
-      db.users.stream().forEach(user -> {
+      db.deals.getDeals().forEach(deal -> deals.addDeal(deal));
+      db.users.forEach(user -> {
         user.setToken("");
         users.add(user);
       });
@@ -725,7 +743,12 @@ public class MerchDb implements Database {
       return false;
     }
     saveData();
-    merchants = deals.getDeals().stream().map(Deal::getMerchandise).distinct().collect(toList());
+    merchants = deals.getDeals()
+            .stream()
+            .map(Deal::getMerchandise)
+            .distinct()
+            .sorted(Comparator.comparingInt(Merchandise::getId))
+            .collect(toList());
     return true;
   }
 

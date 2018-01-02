@@ -248,8 +248,8 @@ public class CommandLineView implements Observer, View {
     Pattern help = Pattern.compile("(\\bHELP\\b)( [\\w]*)?", Pattern.CASE_INSENSITIVE);
     Pattern profile = Pattern.compile("\\bprofile\\b", Pattern.CASE_INSENSITIVE);
 //    Pattern dataExport = Pattern.compile("\\bexport \\b([a-zA-Z]:(\\\\w+)*\\\\[a-zA-Z0_9]+)?.xml", Pattern.CASE_INSENSITIVE);
-    Pattern dataExport = Pattern.compile("\\bexport \\b([\\w.-]*\\b.xml\\b)", Pattern.CASE_INSENSITIVE);
-    Pattern dataImport = Pattern.compile("\\bimport \\b([\\w.-]*\\b.xml\\b)", Pattern.CASE_INSENSITIVE);
+    Pattern dataExport = Pattern.compile("export ([.a-zA-Z0-9\\/-]+.xml)", Pattern.CASE_INSENSITIVE);
+    Pattern dataImport = Pattern.compile("import ([.a-zA-Z0-9\\/-]+.xml)", Pattern.CASE_INSENSITIVE);
     Matcher exitMatcher;
     Matcher searchMatcher;
     Matcher slaveMenuMatcher;
@@ -361,12 +361,14 @@ public class CommandLineView implements Observer, View {
           File file = new File(dataExportMatcher.group(1).trim());
           System.out.println("Successfully exported in " + file.getAbsolutePath());
         } else {
-          System.out.println("Something went wrong");
+          System.out.println("export failed");
         }
       } else if (dataImportMatcher.lookingAt()) {
 //        System.out.println("f:" + dataImportMatcher.group(1).trim());
         if (controller.importAllData(dataImportMatcher.group(1).trim())) {
           System.out.println("successfully imported");
+        } else {
+          System.out.println("import failed");
         }
       } else {
         System.out.println("Unknown command");

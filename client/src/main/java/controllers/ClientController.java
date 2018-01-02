@@ -1,6 +1,7 @@
 package controllers;
 
 import com.google.gson.*;
+import exceptions.CreateMerchandiseException;
 import exceptions.MerchandiseAlreadyBought;
 import exceptions.MerchandiseNotFoundException;
 import exceptions.WrongQueryException;
@@ -94,7 +95,13 @@ public class ClientController implements Controller {
 
   @Override
   public String getMerchantById(int id) throws MerchandiseNotFoundException {
-    return null;
+    JsonObject request = new JsonObject();
+    request.add("action", new JsonPrimitive("getMerchant"));
+    request.add("id", new JsonPrimitive(id));
+    JsonObject response = writeAndGetResponse(request.toString());
+    return response.get("status").getAsInt() == 400 ? ""
+            : response.get("merchandise")
+            .getAsString();
   }
 
   @Override
@@ -151,7 +158,7 @@ public class ClientController implements Controller {
   }
 
   @Override
-  public void addMerchandiseByMap(String className, Map<String, String> kvs, String user, String token, int price) {
+  public void addMerchandiseByMap(String className, Map<String, String> kvs, String user, String token, int price) throws CreateMerchandiseException {
     JsonObject request = new JsonObject();
     request.add("action", new JsonPrimitive("add merchandise"));
     request.add("className", new JsonPrimitive(className));
@@ -160,7 +167,10 @@ public class ClientController implements Controller {
     request.add("username", new JsonPrimitive(user));
     request.add("token", new JsonPrimitive(token));
     request.add("price", new JsonPrimitive(price));
-    writeAndGetResponse(request.toString());
+    JsonObject object = writeAndGetResponse(request.toString());
+    if (object.get("status").getAsInt() == 400) {
+      throw new CreateMerchandiseException(object.get("info").getAsString());
+    }
   }
 
   @Override
