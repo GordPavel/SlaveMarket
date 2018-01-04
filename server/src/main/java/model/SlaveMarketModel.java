@@ -204,6 +204,11 @@ public class SlaveMarketModel implements Observable, Model {
   }
 
   @Override
+  public String getDealById(int id) {
+    return database.getDealById(id);
+  }
+
+  @Override
   public boolean exportAllData(String fileName) {
     return database.exportAllData(fileName);
   }

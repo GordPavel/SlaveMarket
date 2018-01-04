@@ -62,7 +62,24 @@ public class MerchDb implements Database {
   @XmlAnyElement(lax = true)
   private List<User> users;
 
+
+  /**
+   * Classes, that used in import
+   */
+  private Class[] importClasses = new Class[]{
+          MerchDb.class,
+          DealList.class,
+          Deal.class,
+          User.class,
+          Slave.class,
+          Food.class
+  };
+
+  /**
+   * Default constructor, for xml import.
+   */
   public MerchDb() {
+
   }
 
   /**
@@ -392,7 +409,7 @@ public class MerchDb implements Database {
    * @return Founded merchandise or Exception
    */
   @Override
-  public String getMerchantById(int id) throws MerchandiseNotFoundException {
+  public synchronized String getMerchantById(int id) throws MerchandiseNotFoundException {
     return merchants.stream().filter(i -> Integer.compare(i.getId(), id) == 0)
             .collect(Collectors.collectingAndThen(toList(), list -> {
               if (list.size() != 1) {
@@ -518,6 +535,11 @@ public class MerchDb implements Database {
       throw new MerchandiseAlreadyBought("Merchandise was removed.");
     }
     findMerh(id).setParamsByMap(kvs);
+    deals.getDeals().forEach(deal -> {
+      if (deal.getMerchandise().getId() == id) {
+        deal.getMerchandise().setParamsByMap(kvs);
+      }
+    });
     logger.log(user, "Changed merchandise parameters", merchIfo + " {changed Values:" + kvs + "}");
     saveData();
   }
@@ -631,7 +653,7 @@ public class MerchDb implements Database {
    * @return {@link User} with specified username.
    * @throws UserException if user can not be founded.
    */
-  private User getUser(String username) {
+  private synchronized User getUser(String username) {
     return users.stream().filter(user -> username.equals(user.getUsername())
     ).collect(Collectors.collectingAndThen(toList(), list -> {
       if (list.size() != 1) {
@@ -650,7 +672,7 @@ public class MerchDb implements Database {
    * @return {@link User} with specified username.
    * @throws UserException if user can not be founded.
    */
-  private User getUser(String username, String token) {
+  private synchronized User getUser(String username, String token) {
     return users.stream().filter(
             user -> username.equals(user.getUsername())
                     && token.equals(user.getToken())
@@ -714,9 +736,23 @@ public class MerchDb implements Database {
   }
 
   @Override
+  public synchronized String getDealById(int id) {
+    return deals.getDeals()
+            .stream()
+            .filter(deal -> deal.getId() == id)
+            .collect(Collectors.collectingAndThen(
+                    toList(), list -> {
+                      if (list.size() != 1) {
+                        throw new IllegalArgumentException("can't find deal with id " + id);
+                      }
+                      return list.get(0).toString();
+                    }));
+  }
+
+  @Override
   public boolean exportAllData(String fileName) {
     try {
-      JAXBContext context = JAXBContext.newInstance(MerchDb.class, DealList.class, Deal.class, User.class, Slave.class, Food.class);
+      JAXBContext context = JAXBContext.newInstance(importClasses);
       Marshaller m = context.createMarshaller();
       m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
       m.marshal(this, new File(fileName));
@@ -731,7 +767,7 @@ public class MerchDb implements Database {
   @Override
   public boolean importAllData(String filename) {
     try {
-      JAXBContext context = JAXBContext.newInstance(MerchDb.class, DealList.class, Deal.class, User.class, Slave.class, Food.class);
+      JAXBContext context = JAXBContext.newInstance(importClasses);
       Unmarshaller unmarshaller = context.createUnmarshaller();
       MerchDb db = (MerchDb) unmarshaller.unmarshal(new File(filename));
       db.deals.getDeals().forEach(deal -> deals.addDeal(deal));
@@ -751,6 +787,5 @@ public class MerchDb implements Database {
             .collect(toList());
     return true;
   }
-
 
 }

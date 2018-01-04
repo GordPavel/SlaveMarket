@@ -167,6 +167,11 @@ public class NativeController implements Controller {
   }
 
   @Override
+  public String getDealById(int id) {
+    return model.getDealById(id);
+  }
+
+  @Override
   public boolean exportAllData(String fileName) {
     return model.exportAllData(fileName);
   }

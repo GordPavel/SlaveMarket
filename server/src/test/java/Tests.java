@@ -120,14 +120,6 @@ public class Tests {
             .parse(Slave.newBuilder().addId(2).addName("Luise").addAge(20).addHeight(185).addWeight(85)
                     .addGender("male").build().getAllInfo())
             .getAsJsonObject();
-    object.add("state",
-            new JsonPrimitive(" on sale "));
-    object.add("user",
-            new JsonPrimitive("test"));
-    object.add("price",
-            new JsonPrimitive(100));
-    object.toString();
-
     Assert.assertEquals(object.toString(), db.getMerchantById(2));
   }
 
@@ -250,23 +242,12 @@ public class Tests {
     db1.importAllData("testExport.xml");
   }
 
-  @Test
-  public void availableClassesTest() {
-    Assert.assertEquals(Arrays.asList("Food", "Slave"), db.getAvailableClasses());
-  }
-
-  @Test
-  public void mandatoryFieldsTest() {
-    System.out.println(db.getMandatoryFields("Food"));
-  }
 
   @Test
   public void addFood() {
     List<String> fields = db.getMandatoryFields("Food");
     Map<String, String> map = new HashMap<>();
-    fields.forEach(field -> {
-      map.put(field.toUpperCase(), String.valueOf(new Random().nextFloat()));
-    });
+    fields.forEach(field -> map.put(field.toUpperCase(), String.valueOf(new Random().nextFloat())));
     try {
       db.addMerchandiseByMap("Food", map, user, token, 1000);
     } catch (CreateMerchandiseException e) {

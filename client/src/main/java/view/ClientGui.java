@@ -568,7 +568,12 @@ public class ClientGui extends Application implements View, Observer {
     }).collect(toList()));
     Platform.runLater(() -> mainList.setOnMouseClicked(event -> {
       if (event.getClickCount() == 2 && !deals.isEmpty()) {
-        openDeal(deals.get(mainList.getSelectionModel().getSelectedIndex()));
+        int id = new JsonParser()
+                .parse(deals.get(mainList
+                        .getSelectionModel()
+                        .getSelectedIndex()))
+                .getAsJsonObject().get("id").getAsInt();
+        openDeal(id);
         backButton.setVisible(true);
         backButton.setOnMouseClicked(event1 -> {
           showDeals();
@@ -637,7 +642,8 @@ public class ClientGui extends Application implements View, Observer {
     mainContent.getChildren().add(box);
   }
 
-  private void openDeal(String deal) {
+  private void openDeal(int dealId) {
+    String deal = controller.getDealById(dealId);
     mainContent.getChildren().clear();
     JsonParser parser = new JsonParser();
     JsonObject merchandise = parser.parse(deal).getAsJsonObject();
@@ -672,7 +678,7 @@ public class ClientGui extends Application implements View, Observer {
               showSearch("all");
             };
 //            backButton.setVisible(false);
-            openDeal(deal);
+            openDeal(parser.parse(deal).getAsJsonObject().get("id").getAsInt());
           });
         });
         box.getChildren().add(merch);

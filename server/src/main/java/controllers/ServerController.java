@@ -145,6 +145,10 @@ public class ServerController implements Controller {
         response.add("merchandise", new JsonPrimitive(
                 getMerchantById(json.get("id").getAsInt())
         ));
+      } else if (json.get("action").getAsString().equals("getDeal")) {
+        response.add("deal", new JsonPrimitive(
+                getDealById(json.get("id").getAsInt())
+        ));
       }
       sendResponse(response);
     } catch (Exception e) {
@@ -258,6 +262,11 @@ public class ServerController implements Controller {
   @Override
   public void changePassword(String username, String newPassword, String token) {
     model.changePassword(username, newPassword, token);
+  }
+
+  @Override
+  public String getDealById(int id) {
+    return model.getDealById(id);
   }
 
   @Override

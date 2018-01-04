@@ -290,6 +290,15 @@ public class ClientController implements Controller {
   }
 
   @Override
+  public String getDealById(int id) {
+    JsonObject object = new JsonObject();
+    object.add("action", new JsonPrimitive("getDeal"));
+    object.add("id", new JsonPrimitive(id));
+    JsonObject response = writeAndGetResponse(object.toString());
+    return null != response.get("deal") ? response.get("deal").getAsString() : "";
+  }
+
+  @Override
   public boolean exportAllData(String fileName) {
     return false;
   }

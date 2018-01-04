@@ -164,6 +164,14 @@ public interface Controller {
    */
   void changePassword(String username, String newPassword, String token);
 
+  /**
+   * Method to get deal specified by id.
+   *
+   * @param id deal's id.
+   * @return deal in json format string
+   */
+  String getDealById(int id);
+
 
   /**
    * Method to export all database into xml file.
