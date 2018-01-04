@@ -13,3 +13,7 @@ logs/*
 deals\.dl
 
 users\.us
+client/target/*
+server/target/*
+
+*.log

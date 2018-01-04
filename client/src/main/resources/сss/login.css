@@ -1,0 +1,10 @@
+.root{
+    -fx-font-family: "Trench";
+    -fx-font-size: 16px;
+}
+
+#welcome{
+    -fx-font-family: "TimeBurner";
+    -fx-font-size: 25px;
+    -fx-alignment: center;
+}

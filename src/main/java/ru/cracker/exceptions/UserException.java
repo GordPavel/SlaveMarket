@@ -1,7 +1,0 @@
-package ru.cracker.exceptions;
-
-public class UserException extends IllegalArgumentException {
-  public UserException(String message) {
-    super(message);
-  }
-}
