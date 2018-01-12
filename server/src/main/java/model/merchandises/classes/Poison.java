@@ -7,10 +7,7 @@ import exceptions.WrongQueryException;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlRootElement;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 @XmlRootElement(name = "poison")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -183,4 +180,8 @@ public class Poison implements FoodInterface {
             && ((Poison) obj).getAllInfo().equals(getAllInfo());
   }
 
+  @Override
+  public int hashCode() {
+    return Objects.hash(onset, id, frequency, effect, chance, weight, type, name);
+  }
 }
