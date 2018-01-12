@@ -136,13 +136,13 @@ public class Slave implements SlaveInterface {
       }
       switch (key) {
         case "AGE":
-          this.age = Integer.parseInt(value);
+          this.age = parseAndCheck(value).intValue();
           break;
         case "WEIGHT":
-          this.weight = Float.parseFloat(value);
+          this.weight = parseAndCheck(value);
           break;
         case "HEIGHT":
-          this.height = Float.parseFloat(value);
+          this.height = parseAndCheck(value);
           break;
         case "GENDER":
           this.gender = value;
@@ -193,12 +193,6 @@ public class Slave implements SlaveInterface {
   public boolean equals(Object obj) {
     return obj.getClass().getName().equals(this.getClass().getName())
             && ((Slave) obj).getAllInfo().equals(getAllInfo());
-//            && ((Slave) obj).id == this.id
-//            && ((Slave) obj).name.equals(this.name)
-//            && ((Slave) obj).gender.equals(this.gender)
-//            && Objects.equals(((Slave) obj).getBenefit(), this.getBenefit())
-//            && ((Slave) obj).age == this.age
-//            && ((Slave) obj).weight == this.weight;
   }
 
   @Override

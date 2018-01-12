@@ -20,9 +20,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.layout.AnchorPane;
-import javafx.scene.layout.GridPane;
-import javafx.scene.layout.VBox;
+import javafx.scene.layout.*;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
@@ -513,19 +511,23 @@ public class ClientGui extends Application implements View, Observer {
     gridPane.setVgap(10);
     gridPane.setPadding(new Insets(25, 25, 25, 25));
     Text info = new Text(infoText);
+    HBox.setHgrow(gridPane, Priority.ALWAYS);
     gridPane.add(info, 0, 0, 2, 1);
     ArrayList<TextField> area = new ArrayList<>();
     for (int i = 0; i < fields.size(); i++) {
       gridPane.add(new Text(fields.get(i)), 0, i + 1);
+      TextField field;
       if (passwords.get(i)) {
-        PasswordField field = new PasswordField();
+        field = new PasswordField();
         area.add(field);
-        gridPane.add(field, 1, i + 1);
       } else {
-        TextField field = new TextField();
+        field = new TextField();
         area.add(field);
-        gridPane.add(field, 1, i + 1);
       }
+
+//      field.setMaxHeight(Double.POSITIVE_INFINITY);
+//      HBox.setHgrow(field, Priority.ALWAYS);
+      gridPane.add(field, 1, i + 1);
     }
     Button submitButton = new Button("Submit");
     submitButton.setOnAction(event -> {
@@ -637,9 +639,13 @@ public class ClientGui extends Application implements View, Observer {
     box.setPadding(new Insets(0, 0, 0, 8));
     for (Map.Entry<String, JsonElement> entry : currentMerchandise.entrySet()) {
       Text info = new Text(entry.getKey() + ": " + entry.getValue().getAsString());
+      info.setWrappingWidth(mainContent.getPrefWidth() - 8);
       box.getChildren().add(info);
+      box.setPrefHeight(Region.USE_PREF_SIZE);
     }
-    mainContent.getChildren().add(box);
+    ScrollPane pane = new ScrollPane(box);
+    pane.setPrefSize(mainContent.getPrefWidth(), mainContent.getPrefHeight());
+    mainContent.getChildren().add(pane);
   }
 
   private void openDeal(int dealId) {
