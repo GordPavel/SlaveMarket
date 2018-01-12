@@ -134,10 +134,10 @@ public class Food implements FoodInterface {
       }
       switch (key) {
         case "WEIGHT":
-          this.weight = Float.parseFloat(value);
+          this.weight = parseAndCheck(value);
           break;
         case "ENERGY VALUE":
-          this.energy = Float.parseFloat(value);
+          this.energy = parseAndCheck(value);
           break;
         case "COMPOSITION":
           this.composition = value;
@@ -154,7 +154,7 @@ public class Food implements FoodInterface {
   @Override
   public boolean equals(Object obj) {
     return obj.getClass().getName().equals(this.getClass().getName())
-            && getAllInfo().equals(getAllInfo());
+            && ((Food) obj).getAllInfo().equals(getAllInfo());
   }
 
   @Override

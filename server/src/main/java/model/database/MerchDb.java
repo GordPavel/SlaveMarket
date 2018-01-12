@@ -6,7 +6,9 @@ import com.google.gson.JsonPrimitive;
 import exceptions.*;
 import gigadot.rebound.Rebound;
 import model.merchandises.Merchandise;
+import model.merchandises.classes.Alien;
 import model.merchandises.classes.Food;
+import model.merchandises.classes.Poison;
 import model.merchandises.classes.Slave;
 
 import javax.xml.bind.JAXBContext;
@@ -72,7 +74,9 @@ public class MerchDb implements Database {
           Deal.class,
           User.class,
           Slave.class,
-          Food.class
+          Food.class,
+          Alien.class,
+          Poison.class
   };
 
   /**

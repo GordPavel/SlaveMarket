@@ -4,7 +4,9 @@ import java.util.List;
 
 public enum MandatoryFields {
   Slave(model.merchandises.classes.Slave.mandatoryFields()),
-  Food(model.merchandises.classes.Food.mandatoryFields());
+  Alien(model.merchandises.classes.Alien.mandatoryFields()),
+  Food(model.merchandises.classes.Food.mandatoryFields()),
+  Poison(model.merchandises.classes.Poison.mandatoryFields());
 
 
   private final List<String> fields;
