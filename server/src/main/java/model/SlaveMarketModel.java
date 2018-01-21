@@ -25,7 +25,7 @@ public class SlaveMarketModel implements Observable, Model {
    */
   public SlaveMarketModel() {
     database = new MerchDb(true);
-    observers = new ArrayList<Observer>();
+    observers = new ArrayList<>();
   }
 
   /**

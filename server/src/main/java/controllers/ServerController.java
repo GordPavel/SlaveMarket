@@ -154,7 +154,7 @@ public class ServerController implements Controller {
     } catch (Exception e) {
       response = new JsonObject();
       response.add("status", new JsonPrimitive(400));
-      response.add("info", new JsonPrimitive(e.getMessage()));
+      response.add("info", new JsonPrimitive(null == e.getMessage() ? "Unknown exception" : e.getMessage()));
       sendResponse(response);
     }
   }

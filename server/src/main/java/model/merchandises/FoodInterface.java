@@ -1,4 +1,4 @@
-package model.merchandises.classes;
+package model.merchandises;
 
 import model.merchandises.Merchandise;
 

@@ -3,6 +3,7 @@ package model.merchandises.classes;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import exceptions.WrongQueryException;
+import model.merchandises.FoodInterface;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;

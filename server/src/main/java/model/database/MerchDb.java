@@ -754,7 +754,7 @@ public class MerchDb implements Database {
   }
 
   @Override
-  public boolean exportAllData(String fileName) {
+  public synchronized boolean exportAllData(String fileName) {
     try {
       JAXBContext context = JAXBContext.newInstance(importClasses);
       Marshaller m = context.createMarshaller();
@@ -768,13 +768,29 @@ public class MerchDb implements Database {
     return true;
   }
 
+
   @Override
-  public boolean importAllData(String filename) {
+  public synchronized boolean importAllData(String filename) {
     try {
       JAXBContext context = JAXBContext.newInstance(importClasses);
       Unmarshaller unmarshaller = context.createUnmarshaller();
       MerchDb db = (MerchDb) unmarshaller.unmarshal(new File(filename));
-      db.deals.getDeals().forEach(deal -> deals.addDeal(deal));
+      int lastId = merchants.size();
+      for (Deal deal : db.deals.getDeals()) {
+        try {
+          getMerchandise(deal.getMerchandise().getId());
+          for (Deal merchDeal :
+                  deals.getDeals()) {
+            if (merchDeal.getMerchandise().getId() == deal.getMerchandise().getId()) {
+              merchDeal.getMerchandise().setId(lastId);
+            }
+          }
+          lastId++;
+          deals.addDeal(deal);
+        } catch (MerchandiseNotFoundException e) {
+          deals.addDeal(deal);
+        }
+      }
       db.users.forEach(user -> {
         user.setToken("");
         users.add(user);

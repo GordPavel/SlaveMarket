@@ -167,14 +167,11 @@
         </dependency>
 
     </dependencies>
-
     <repositories>
-
         <repository>
             <id>gigadot.net</id>
             <url>https://maven2.gigadot.net/</url>
         </repository>
-
     </repositories>
 
     <reporting>
