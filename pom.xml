@@ -23,7 +23,6 @@
         <sevntu.checkstyle.plugin.version>1.25.0</sevntu.checkstyle.plugin.version>
     </properties>
 
-
     <build>
         <plugins>
 
@@ -137,7 +136,6 @@
     </build>
 
     <dependencies>
-
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
@@ -170,18 +168,14 @@
         </dependency>
 
         <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-impl</artifactId>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
             <version>2.3.0</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.sun.xml.bind</groupId>
-            <artifactId>jaxb-core</artifactId>
-            <version>2.2.11</version>
-        </dependency>
-
     </dependencies>
+
+    
     <repositories>
         <repository>
             <id>gigadot.net</id>
@@ -192,6 +186,18 @@
     <reporting>
 
         <plugins>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.1</version>
+                <configuration>
+                    <compilerArguments>
+                        <arg>--add-modules</arg>
+                        <arg>java.xml.bind</arg>
+                    </compilerArguments>
+                </configuration>
+            </plugin>
 
             <plugin>
                 <artifactId>maven-pmd-plugin</artifactId>
