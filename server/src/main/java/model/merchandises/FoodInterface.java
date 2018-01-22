@@ -1,7 +1,5 @@
 package model.merchandises;
 
-import model.merchandises.Merchandise;
-
 public interface FoodInterface extends Merchandise {
 
   /**
