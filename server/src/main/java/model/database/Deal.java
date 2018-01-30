@@ -15,7 +15,7 @@ import java.io.Serializable;
 @XmlRootElement(name = "deal")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Deal implements Serializable, Comparable<Deal> {
-  LocalDateTime time;
+  private LocalDateTime time;
   private DealState state;
   private User user;
   @XmlElements({
@@ -46,6 +46,15 @@ public class Deal implements Serializable, Comparable<Deal> {
     this.state = state;
     this.id = id;
     this.time = LocalDateTime.now();
+  }
+
+  public Deal(Deal deal) {
+    this.id = deal.id;
+    this.merchandise = deal.merchandise;
+    this.price = deal.price;
+    this.state = deal.state;
+    this.time = deal.time;
+    this.user = deal.user;
   }
 
   public User getUser() {

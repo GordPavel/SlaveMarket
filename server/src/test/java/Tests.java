@@ -255,4 +255,38 @@ public class Tests {
     }
     db.searchMerchandise("All").forEach(System.out::println);
   }
+
+  @Test
+  public void importTest() {
+    MerchDb db = new MerchDb(false);
+    List<String> fields = db.getMandatoryFields("Food");
+    String user3 = "Christ";
+    String pass3 = "12334";
+    db.register(user3, pass3);
+    String token3 = db.login(user3, pass3);
+    Map<String, String> map = new HashMap<>();
+    for (int i = 0; i < 2; i++) {
+      fields.forEach(field -> map.put(field.toUpperCase(), String.valueOf(new Random().nextFloat())));
+      try {
+        db.addMerchandiseByMap("Food", map, user3, token3, 1000);
+      } catch (CreateMerchandiseException e) {
+        e.printStackTrace();
+      }
+    }
+    db.buyMerchandise(0,  user3, token3);
+    db.exportAllData("importTest.xml");
+    MerchDb db2 = new MerchDb(false);
+    fields = db2.getMandatoryFields("Poison");
+    String user2 = "Buddha";
+    String pass2 = "12334";
+    db2.register(user2, pass2);
+    String token2 = db2.login(user2, pass2);
+    fields.forEach(field -> map.put(field.toUpperCase(), String.valueOf(new Random().nextFloat())));
+    try {
+      db2.addMerchandiseByMap("Poison", map, user2, token2, 2000);
+    } catch (CreateMerchandiseException e) {
+      e.printStackTrace();
+    }
+    db2.importAllData("importTest.xml");
+  }
 }

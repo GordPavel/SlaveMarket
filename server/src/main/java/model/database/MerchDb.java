@@ -775,22 +775,46 @@ public class MerchDb implements Database {
       JAXBContext context = JAXBContext.newInstance(importClasses);
       Unmarshaller unmarshaller = context.createUnmarshaller();
       MerchDb db = (MerchDb) unmarshaller.unmarshal(new File(filename));
-      int lastId = merchants.size();
-      for (Deal deal : db.deals.getDeals()) {
+      int lastMerch = merchants.size();
+      int lastDeal = deals.getDeals().get(deals.getDeals().size() - 1).getId();
+      for (Deal dbDeal : db.deals.getDeals()) {
+        Deal newDeal = new Deal(dbDeal);
         try {
-          getMerchandise(deal.getMerchandise().getId());
-          for (Deal merchDeal :
-                  deals.getDeals()) {
-            if (merchDeal.getMerchandise().getId() == deal.getMerchandise().getId()) {
-              merchDeal.getMerchandise().setId(lastId);
+          int oldId = dbDeal.getMerchandise().getId();
+          getMerchandise(oldId);
+          lastMerch++;
+          for (Deal deal : db.deals.getDeals()) {
+            if (deal.getMerchandise().getId() == oldId) {
+              deal.getMerchandise().setId(lastMerch);
             }
           }
-          lastId++;
-          deals.addDeal(deal);
+          if (dbDeal.getId() <= lastDeal) {
+            lastDeal++;
+            newDeal.setId(lastDeal);
+          }
         } catch (MerchandiseNotFoundException e) {
-          deals.addDeal(deal);
+          if (dbDeal.getId() <= lastDeal) {
+            lastDeal++;
+            newDeal.setId(lastDeal);
+          }
         }
+        deals.addDeal(newDeal);
       }
+//      for (Deal deal : db.deals.getDeals()) {
+//        try {
+//          getMerchandise(deal.getMerchandise().getId());
+//          lastId++;
+//          for (Deal merchDeal :
+//                  deals.getDeals()) {
+//            if (merchDeal.getMerchandise().getId() == deal.getMerchandise().getId()) {
+//              merchDeal.getMerchandise().setId(lastId);
+//            }
+//          }
+//          deals.addDeal(deal);
+//        } catch (MerchandiseNotFoundException e) {
+//          deals.addDeal(deal);
+//        }
+//      }
       db.users.forEach(user -> {
         user.setToken("");
         users.add(user);
