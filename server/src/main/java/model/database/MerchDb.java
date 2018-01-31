@@ -776,7 +776,7 @@ public class MerchDb implements Database {
       Unmarshaller unmarshaller = context.createUnmarshaller();
       MerchDb db = (MerchDb) unmarshaller.unmarshal(new File(filename));
       int lastMerch = merchants.size();
-      int lastDeal = deals.getDeals().get(deals.getDeals().size() - 1).getId();
+      int lastDeal = deals.getDeals().size() == 0 ? 0 : deals.getDeals().get(deals.getDeals().size() - 1).getId();
       for (Deal dbDeal : db.deals.getDeals()) {
         Deal newDeal = new Deal(dbDeal);
         try {

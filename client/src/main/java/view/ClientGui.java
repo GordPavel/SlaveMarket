@@ -9,6 +9,7 @@ import controllers.Controller;
 import exceptions.CreateMerchandiseException;
 import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
@@ -212,7 +213,7 @@ public class ClientGui extends Application implements View, Observer {
     mainContent = (AnchorPane) mainScene.lookup("#mainContent");
     currentUser = (Text) mainScene.lookup("#CurrentUser");
     currentUser.setText("Current user: " + username);
-    menu = (ListView) mainScene.lookup("#actions");
+    menu = (ListView<String>) mainScene.lookup("#actions");
     setActions(GuiActions.MAIN, menu);
     currentMenu = GuiActions.MAIN;
     menu.setOnMouseClicked(event ->
@@ -246,30 +247,83 @@ public class ClientGui extends Application implements View, Observer {
       setActions(GuiActions.MAIN, menu);
       showSearch("all");
     };
-    List<String> viewList = new ArrayList<>();
     JsonParser parser = new JsonParser();
+    ObservableList<JsonObject> objects = FXCollections.observableArrayList();
+//    List<String> viewList = new ArrayList<>();
     for (int i = 0; i < merchandises.size(); i++) {
-      JsonObject element = parser.parse(merchandises.get(i)).getAsJsonObject();
-      StringBuilder builder = new StringBuilder();
-      builder.append("class: ")
-              .append(element.get("class").getAsString())
-              .append(" name: ")
-              .append(element.get("name").getAsString())
-              .append(" price: ")
-              .append(element.get("price").getAsString());
-      viewList.add(builder.toString());
+      objects.add(parser.parse(merchandises.get(i)).getAsJsonObject());
+//      String builder = "class: " +
+//              element.get("class").getAsString() +
+//              "\n" +
+//              " name: " +
+//              element.get("name").getAsString() +
+//              "\n" +
+//              " price: " +
+//              element.get("price").getAsString();
+//      viewList.add(builder);
     }
-    showList(viewList);
-    Platform.runLater(() -> mainList.setOnMouseClicked(event -> {
+    TableView<JsonObject> tableView = new TableView<>();
+
+    tableView.prefHeightProperty().bind(mainContent.heightProperty());
+    tableView.prefWidthProperty().bind(mainContent.widthProperty());
+    TableColumn<JsonObject, String> classColumn = new TableColumn<>("Class");
+    classColumn.setMinWidth(150);
+    classColumn.setCellValueFactory(object -> new SimpleStringProperty(object.getValue().get("class").getAsString()));
+    classColumn.prefWidthProperty().bind(tableView.widthProperty().divide(6));
+
+    TableColumn<JsonObject, String> priceColumn = new TableColumn<>("Price");
+    priceColumn.setMinWidth(150);
+    priceColumn.setCellValueFactory(object -> new SimpleStringProperty(object.getValue().get("price").getAsString()));
+    priceColumn.prefWidthProperty().bind(tableView.widthProperty().divide(6));
+
+    TableColumn<JsonObject, String> nameColumn = new TableColumn<>("Name");
+    nameColumn.setMinWidth(150);
+    nameColumn.setCellValueFactory(object -> new SimpleStringProperty(object.getValue().get("name").getAsString()));
+    nameColumn.prefWidthProperty().bind(tableView.widthProperty().divide(3));
+
+
+    showTable(objects, tableView, new TableColumn[]{classColumn, nameColumn, priceColumn});
+
+    tableView.setOnMouseClicked(event -> {
       if (event.getClickCount() == 2 && !merchandises.isEmpty()) {
-        openMerchandise(merchandises.get(mainList.getSelectionModel().getSelectedIndex()));
+        openMerchandise(merchandises.get(tableView.getSelectionModel().getSelectedIndex()));
         setActions(GuiActions.MERCHANDISE, menu);
         lastScreen = () -> {
           setActions(GuiActions.MAIN, menu);
           showSearch("all");
         };
       }
-    }));
+    });
+//    showList(viewList);
+//    Platform.runLater(() -> mainList.setOnMouseClicked(event -> {
+//      if (event.getClickCount() == 2 && !merchandises.isEmpty()) {
+//        openMerchandise(merchandises.get(mainList.getSelectionModel().getSelectedIndex()));
+//        setActions(GuiActions.MERCHANDISE, menu);
+//        lastScreen = () -> {
+//          setActions(GuiActions.MAIN, menu);
+//          showSearch("all");
+//        };
+//      }
+//    }));
+
+
+//    GridPane pane = new GridPane();
+//    showGrid(viewList, pane);
+//    Platform.runLater(() -> {
+//      pane.setOnMouseClicked(event -> {
+//        if (event.getClickCount() == 2) {
+//          for (Node node : pane.getChildren()) {
+//            if (node instanceof TextArea) {
+//              if (node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
+////              System.out.println("Node: " + node + " at " + GridPane.getRowIndex(node) + "/" + GridPane.getColumnIndex(node));
+//                System.out.println(viewList.get((GridPane.getRowIndex(node) - 1) * 4 + (GridPane.getColumnIndex(node) - 1)));
+//              }
+//            }
+//          }
+//        }
+//      });
+//    });
+
   }
 
   /**
@@ -554,39 +608,88 @@ public class ClientGui extends Application implements View, Observer {
       showDeals();
     };
     JsonParser parser = new JsonParser();
-    showList(deals.stream().map(value -> {
-      JsonObject deal = parser.parse(value).getAsJsonObject();
-      StringBuilder builder = new StringBuilder();
-      builder.append(deal.get("date").getAsString())
-              .append(" ")
-              .append(deal.get("state").getAsString())
-              .append(" ")
-              .append(parser
-                      .parse(deal.get("merchandise").getAsString())
-                      .getAsJsonObject()
-                      .get("name")
-                      .getAsString());
-      return builder.toString();
-    }).collect(toList()));
-    Platform.runLater(() -> mainList.setOnMouseClicked(event -> {
-      if (event.getClickCount() == 2 && !deals.isEmpty()) {
-        int id = new JsonParser()
-                .parse(deals.get(mainList
-                        .getSelectionModel()
-                        .getSelectedIndex()))
-                .getAsJsonObject().get("id").getAsInt();
-        openDeal(id);
-        backButton.setVisible(true);
-        backButton.setOnMouseClicked(event1 -> {
-          showDeals();
-          backButton.setVisible(false);
-        });
+    ObservableList<JsonObject> dealsView = FXCollections.observableArrayList();
+    deals.forEach(deal -> dealsView.add(parser.parse(deal).getAsJsonObject()));
+
+    TableView<JsonObject> tableView = new TableView<>();
+
+    tableView.prefHeightProperty().bind(mainContent.heightProperty());
+    tableView.prefWidthProperty().bind(mainContent.widthProperty());
+    TableColumn<JsonObject, String> timeColumn = new TableColumn<>("Time");
+    timeColumn.setMinWidth(150);
+    timeColumn.setCellValueFactory(object -> new SimpleStringProperty(object.getValue().get("date").getAsString()));
+    timeColumn.prefWidthProperty().bind(tableView.widthProperty().divide(6));
+
+    TableColumn<JsonObject, String> stateColumn = new TableColumn<>("State");
+    stateColumn.setMinWidth(150);
+    stateColumn.setCellValueFactory(object -> new SimpleStringProperty(object.getValue().get("state").getAsString()));
+    stateColumn.prefWidthProperty().bind(tableView.widthProperty().divide(6));
+
+    TableColumn<JsonObject, String> merchandiseColumn = new TableColumn<>("Merchandise");
+    merchandiseColumn.setMinWidth(150);
+    merchandiseColumn.setCellValueFactory(object -> new SimpleStringProperty(
+            parser.parse(object.getValue().get("merchandise").getAsString())
+                    .getAsJsonObject()
+                    .get("name")
+                    .getAsString()));
+    merchandiseColumn.prefWidthProperty().bind(tableView.widthProperty().divide(3));
+
+    showTable(dealsView, tableView, new TableColumn[]{timeColumn, stateColumn, merchandiseColumn});
+
+    Platform.runLater(() -> {
+      tableView.setOnMouseClicked(event -> {
+        if (event.getClickCount() == 2 && !deals.isEmpty()) {
+          int id = new JsonParser()
+                  .parse(deals.get(tableView
+                          .getSelectionModel()
+                          .getSelectedIndex()))
+                  .getAsJsonObject().get("id").getAsInt();
+          openDeal(id);
+          backButton.setVisible(true);
+          backButton.setOnMouseClicked(event1 -> {
+            showDeals();
+            backButton.setVisible(false);
+          });
+          lastScreen = () -> {
+            setActions(GuiActions.PROFILE, menu);
+            showDeals();
+          };
+        }
+      });
+    });
+//    showList(deals.stream().map(value -> {
+//      JsonObject deal = parser.parse(value).getAsJsonObject();
+//      StringBuilder builder = new StringBuilder();
+//      builder.append(deal.get("date").getAsString())
+//              .append(" ")
+//              .append(deal.get("state").getAsString())
+//              .append(" ")
+//              .append(parser
+//                      .parse(deal.get("merchandise").getAsString())
+//                      .getAsJsonObject()
+//                      .get("name")
+//                      .getAsString());
+//      return builder.toString();
+//    }).collect(toList()));
+//    Platform.runLater(() -> mainList.setOnMouseClicked(event -> {
+//      if (event.getClickCount() == 2 && !deals.isEmpty()) {
+//        int id = new JsonParser()
+//                .parse(deals.get(mainList
+//                        .getSelectionModel()
+//                        .getSelectedIndex()))
+//                .getAsJsonObject().get("id").getAsInt();
+//        openDeal(id);
+//        backButton.setVisible(true);
+//        backButton.setOnMouseClicked(event1 -> {
+//          showDeals();
+//          backButton.setVisible(false);
+//        });
 //          lastScreen = () -> {
 //            setActions(GuiActions.PROFILE, menu);
 //            showDeals();
 //          };
-      }
-    }));
+//      }
+//    }));
 
   }
 
@@ -616,8 +719,80 @@ public class ClientGui extends Application implements View, Observer {
     });
   }
 
+//
+//  /**
+//   * Method to show list of strings in gridPane
+//   *
+//   * @param strings list of strings to show
+//   * @param pane    gridPane
+//   */
+//  private void showGrid(List<String> strings, GridPane pane) {
+//    if (!mainContent.getChildren().isEmpty()) {
+//      mainContent.getChildren().clear();
+//    }
+//    Platform.runLater(() -> {
+//
+////      pane.setAlignment(Pos.CENTER);
+//      HBox.setHgrow(pane, Priority.ALWAYS);
+//      VBox.setVgrow(pane, Priority.ALWAYS);
+//      pane.setHgap(10);
+//      pane.setVgap(5);
+//      pane.prefHeightProperty().bind(mainContent.heightProperty());
+//      pane.prefWidthProperty().bind(mainContent.widthProperty());
+////      pane.setGridLinesVisible(true);
+//      int row = 0;
+//      int column = 0;
+//      for (int i = 0; i < strings.size(); i++) {
+//        TextArea label = new TextArea(strings.get(i));
+////        label.setPrefHeight(250);
+////        label.setMaxWidth(200);
+////        label.setDisable(true);
+//        label.setWrapText(true);
+//        label.setEditable(false);
+//        label.setMouseTransparent(true);
+//        label.setFocusTraversable(false);
+////        int finalI = i;
+////        label.setOnMouseClicked(event -> System.out.println(strings.get(finalI)));
+//        pane.add(label, column, row);
+//        column++;
+//        if (column == 4) {
+//          row++;
+//          column = 0;
+//        }
+//      }
+////      for (Node node : pane.getChildren()) {
+////        if (node instanceof TextArea) {
+////          node.setOnMouseClicked(event -> {
+////            System.out.println(((TextArea) node).getText());
+////          });
+////        }
+////      }
+////      ScrollPane scrollPane = new ScrollPane(pane);
+//      mainContent.getChildren().add(pane);
+//    });
+//  }
+
   /**
-   * Set "actions" value to ListView
+   * Method to show list of strings in tableView.
+   *
+   * @param strings   list of {@link JsonObject}s to display
+   * @param columns   massive of {@link TableColumn}s for tableView
+   * @param tableView tableView for displaying data
+   */
+  private void showTable(ObservableList<JsonObject> strings, TableView<JsonObject> tableView, TableColumn[] columns) {
+
+    Platform.runLater(() -> {
+      tableView.setItems(strings);
+      tableView.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+      tableView.getColumns().addAll(columns);
+
+      mainContent.getChildren().clear();
+      mainContent.getChildren().add(tableView);
+    });
+  }
+
+  /**
+   * Set "actions" value to ListView.
    *
    * @param actions  {@link GuiActions} enum field with actions
    * @param listView listView to commit actions
@@ -630,7 +805,6 @@ public class ClientGui extends Application implements View, Observer {
 
 
   private void openMerchandise(String values) {
-//    lastScreen = ()->{}
     mainContent.getChildren().clear();
     setActions(GuiActions.MERCHANDISE, menu);
     JsonParser parser = new JsonParser();
