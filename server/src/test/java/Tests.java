@@ -273,7 +273,7 @@ public class Tests {
         e.printStackTrace();
       }
     }
-    db.buyMerchandise(0,  user3, token3);
+    db.buyMerchandise(0, user3, token3);
     db.exportAllData("importTest.xml");
     MerchDb db2 = new MerchDb(false);
     fields = db2.getMandatoryFields("Poison");
