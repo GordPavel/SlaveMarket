@@ -39,7 +39,6 @@ public class ClientGui extends Application implements View, Observer {
   private String token = "";
   private String username = "";
   private String password = "";
-  //  private Logger logger = new Logger();
   private AnchorPane mainContent;
   private Stage rootStage;
   private GuiActions currentMenu;
@@ -96,8 +95,7 @@ public class ClientGui extends Application implements View, Observer {
                     .getResource("fxml/login.fxml")
     );
     stage.getIcons().add(new Image("images/icon.png"));
-    Font.loadFont(getClass().getClassLoader().getResource("fonts/trench100free.ttf").toExternalForm(), 20);
-    Font.loadFont(getClass().getClassLoader().getResource("fonts/timeburnernormal.ttf").toExternalForm(), 20);
+    loadFonts();
     Parent content = loader.load();
     rootStage.setResizable(false);
     controller = new ClientController(this);
@@ -106,6 +104,11 @@ public class ClientGui extends Application implements View, Observer {
     rootStage.setScene(scene);
     setListeners(scene);
     rootStage.show();
+  }
+
+  private void loadFonts() {
+    Font.loadFont(getClass().getClassLoader().getResource("fonts/trench100free.ttf").toExternalForm(), 20);
+    Font.loadFont(getClass().getClassLoader().getResource("fonts/timeburnernormal.ttf").toExternalForm(), 20);
   }
 
   /**
@@ -117,12 +120,12 @@ public class ClientGui extends Application implements View, Observer {
     TextField login = (TextField) scene.lookup("#loginField");
     PasswordField pass = (PasswordField) scene.lookup("#passField");
     Button exitButton = (Button) scene.lookup("#exitButton");
+    Button loginButton = (Button) scene.lookup("#loginButton");
 
     exitButton.setOnAction(event -> Platform.exit());
 
-    Button loginButton = (Button) scene.lookup("#loginButton");
     loginButton.setDefaultButton(true);
-    loginButton.setOnAction(event -> new Thread(() -> {
+    loginButton.setOnAction(event -> {
       Platform.runLater(() -> scene.setCursor(Cursor.WAIT));
       if (checkFields(login) && checkFields(pass)) {
         password = pass.getText().trim();
@@ -144,13 +147,12 @@ public class ClientGui extends Application implements View, Observer {
             e.printStackTrace();
           }
         }
-//        System.out.println("token: " + token);
       }
       Platform.runLater(() -> scene.setCursor(Cursor.DEFAULT));
-    }).start());
+    });
 
     Button registerButton = (Button) scene.lookup("#registerButton");
-    registerButton.setOnAction(event -> new Thread(() -> {
+    registerButton.setOnAction(event -> {
       Platform.runLater(() -> scene.setCursor(Cursor.WAIT));
       if (checkFields(login) && checkFields(pass)) {
         Boolean register = controller.register(login.getText().trim(), pass.getText().trim());
@@ -159,7 +161,6 @@ public class ClientGui extends Application implements View, Observer {
                   "registered",
                   "Successfully registered",
                   "Successfully registered");
-          System.out.println("successfully registered");
         } else {
           Util.runAlert(
                   Alert.AlertType.ERROR,
@@ -169,7 +170,7 @@ public class ClientGui extends Application implements View, Observer {
         }
       }
       Platform.runLater(() -> scene.setCursor(Cursor.DEFAULT));
-    }).start());
+    });
   }
 
   /**
@@ -249,18 +250,9 @@ public class ClientGui extends Application implements View, Observer {
     };
     JsonParser parser = new JsonParser();
     ObservableList<JsonObject> objects = FXCollections.observableArrayList();
-//    List<String> viewList = new ArrayList<>();
     for (int i = 0; i < merchandises.size(); i++) {
       objects.add(parser.parse(merchandises.get(i)).getAsJsonObject());
-//      String builder = "class: " +
-//              element.get("class").getAsString() +
-//              "\n" +
-//              " name: " +
-//              element.get("name").getAsString() +
-//              "\n" +
-//              " price: " +
-//              element.get("price").getAsString();
-//      viewList.add(builder);
+
     }
     TableView<JsonObject> tableView = new TableView<>();
 
@@ -286,7 +278,8 @@ public class ClientGui extends Application implements View, Observer {
 
     tableView.setOnMouseClicked(event -> {
       if (event.getClickCount() == 2 && !merchandises.isEmpty()) {
-        openMerchandise(merchandises.get(tableView.getSelectionModel().getSelectedIndex()));
+
+        openMerchandise(tableView.getItems().get(tableView.getSelectionModel().getFocusedIndex()).toString());
         setActions(GuiActions.MERCHANDISE, menu);
         lastScreen = () -> {
           setActions(GuiActions.MAIN, menu);
@@ -294,35 +287,6 @@ public class ClientGui extends Application implements View, Observer {
         };
       }
     });
-//    showList(viewList);
-//    Platform.runLater(() -> mainList.setOnMouseClicked(event -> {
-//      if (event.getClickCount() == 2 && !merchandises.isEmpty()) {
-//        openMerchandise(merchandises.get(mainList.getSelectionModel().getSelectedIndex()));
-//        setActions(GuiActions.MERCHANDISE, menu);
-//        lastScreen = () -> {
-//          setActions(GuiActions.MAIN, menu);
-//          showSearch("all");
-//        };
-//      }
-//    }));
-
-
-//    GridPane pane = new GridPane();
-//    showGrid(viewList, pane);
-//    Platform.runLater(() -> {
-//      pane.setOnMouseClicked(event -> {
-//        if (event.getClickCount() == 2) {
-//          for (Node node : pane.getChildren()) {
-//            if (node instanceof TextArea) {
-//              if (node.getBoundsInParent().contains(event.getSceneX(), event.getSceneY())) {
-////              System.out.println("Node: " + node + " at " + GridPane.getRowIndex(node) + "/" + GridPane.getColumnIndex(node));
-//                System.out.println(viewList.get((GridPane.getRowIndex(node) - 1) * 4 + (GridPane.getColumnIndex(node) - 1)));
-//              }
-//            }
-//          }
-//        }
-//      });
-//    });
 
   }
 
@@ -352,10 +316,6 @@ public class ClientGui extends Application implements View, Observer {
     }
     if (selectedItem.equals("Go back")) {
       lastScreen.apply();
-//      setActions(mainMenu, menu);
-//      currentMenu = mainMenu;
-//      setMainListListeners();
-//      showSearch("all");
     }
     if (selectedItem.equals("Show Merchandises")) {
       lastScreen = () -> {
@@ -363,153 +323,182 @@ public class ClientGui extends Application implements View, Observer {
         showSearch("all");
       };
       showSearch("all");
-//      showList(controller.searchMerchant("all"));
     }
     if (selectedItem.equals("Change password")) {
-      generateForm(
-              Arrays.asList(
-                      "Current password",
-                      "New password",
-                      "Submit new password"),
-              Arrays.asList(true, true, true),
-              (map) -> {
-                Boolean good = true;
-                for (String key : map.keySet()) {
-                  if (!checkFields(map.get(key))) {
-                    good = false;
-                  }
-                }
-                if (good) {
-                  if (map.get("Current password").getText().trim().equals(password)) {
-                    if (map.get("New password").getText().trim().equals(map.get("Submit new password").getText().trim())) {
-                      controller.changePassword(username, map.get("New password").getText().trim(), token);
-                      Util.runAlert(Alert.AlertType.INFORMATION,
-                              "success",
-                              "password successfully changed",
-                              "");
-                    } else {
-                      Util.runAlert(Alert.AlertType.ERROR,
-                              "error",
-                              "passwords does not match",
-                              "");
-                    }
-                  } else {
-                    Util.runAlert(Alert.AlertType.ERROR,
-                            "error",
-                            "Wrong current password",
-                            "");
-                  }
-                }
-              },
-              "Please enter this fields to change your password");
+      openChangePasswordForm();
     }
     if (selectedItem.equals("Change login")) {
-      generateForm(
-              Arrays.asList(
-                      "Current password",
-                      "New login"),
-              Arrays.asList(true, false),
-              (map) -> {
-                Boolean good = true;
-                for (String key : map.keySet()) {
-                  if (!checkFields(map.get(key))) {
-                    good = false;
-                  }
-                }
-                if (good) {
-                  if (map.get("Current password").getText().trim().equals(password)) {
-                    if (controller.changeLogin(username, map.get("New login").getText().trim(), token)) {
-                      username = map.get("New login").getText().trim();
-                      controller.changePassword(username, password, token);
-                      currentUser.setText("Current user: " + username);
-                      Util.runAlert(Alert.AlertType.INFORMATION,
-                              "success",
-                              "login successfully changed",
-                              "changed login to " + map.get("New login").getText().trim());
-
-                    } else {
-                      Util.runAlert(Alert.AlertType.INFORMATION,
-                              "failed",
-                              "Failed to change username.\n" +
-                                      "chosen login already in use.", "");
-                    }
-                  } else {
-                    Util.runAlert(Alert.AlertType.ERROR,
-                            "error",
-                            "Wrong current password",
-                            "");
-                  }
-                }
-
-              },
-              "Please enter this fields to change your login");
+      openChangeLoginForm();
     }
     if (selectedItem.equals("Buy merchandise")) {
-      String merchandise = controller.buyMerchandise(currentMerchandise.get("id").getAsInt(), username, token);
-      if (!merchandise.equals("")) {
-        Util.runAlert(Alert.AlertType.INFORMATION,
-                "information",
-                "Merchandise successfully bought",
-                "Bought merchandise with id " + currentMerchandise.get("id").getAsInt());
-        openMerchandise(merchandise);
-        lastScreen = mainScreen;
-      }
+      buyCurrentMerchandise();
     }
     if (selectedItem.equals("delete")) {
       controller.removeMerchant(currentMerchandise.get("id").getAsInt(), username, token);
       lastScreen.apply();
     }
     if (selectedItem.equals("Set new values")) {
-      List<String> labels = new ArrayList<>();
-      for (Map.Entry<String, JsonElement> entry : currentMerchandise.entrySet()) {
-        if ("id".equals(entry.getKey())
-                || "class".equals(entry.getKey())
-                || "state".equals(entry.getKey())
-                || "user".equals(entry.getKey())
-                || "benefit".equals(entry.getKey())) {
-          continue;
-        }
-        labels.add(entry.getKey());
-      }
-      lastScreen = () -> {
-        openMerchandise(controller.getMerchantById(currentMerchandise.get("id").getAsInt()));
-        lastScreen = () -> {
-          mainScreen.apply();
-          backButton.setVisible(false);
-          lastScreen = () -> {
-            setActions(GuiActions.MAIN, menu);
-            showSearch("all");
-          };
-        };
-      };
-      generateForm(labels,
-              labels.stream().map(s -> false).collect(toList()),
-              (fieldMap) -> {
-                StringBuilder builder = new StringBuilder();
-                for (String key : fieldMap.keySet()) {
-                  if (fieldMap.get(key).getText().trim().equals("")) {
-                    continue;
-                  }
-//                  map.put(key, fieldMap.get(key).getText().trim());
-                  builder.append(key + "=" + fieldMap.get(key).getText().trim() + " ");
-                }
-                controller.setValuesToMerchandise(
-                        currentMerchandise.get("id").getAsInt(),
-                        builder.toString().trim(),
-                        username,
-                        token);
-                lastScreen.apply();
-              },
-              "Change values that you want to change");
+      setNewValuesToMerchandise();
     }
   }
 
+  /**
+   * Method to set new values to current merchandise.
+   */
+  private void setNewValuesToMerchandise() {
+    List<String> labels = new ArrayList<>();
+    for (Map.Entry<String, JsonElement> entry : currentMerchandise.entrySet()) {
+      if ("id".equals(entry.getKey())
+              || "class".equals(entry.getKey())
+              || "state".equals(entry.getKey())
+              || "user".equals(entry.getKey())
+              || "benefit".equals(entry.getKey())) {
+        continue;
+      }
+      labels.add(entry.getKey());
+    }
+    lastScreen = () -> {
+      openMerchandise(controller.getMerchantById(currentMerchandise.get("id").getAsInt()));
+      lastScreen = () -> {
+        mainScreen.apply();
+        backButton.setVisible(false);
+        lastScreen = () -> {
+          setActions(GuiActions.MAIN, menu);
+          showSearch("all");
+        };
+      };
+    };
+    generateForm(labels,
+            labels.stream().map(s -> false).collect(toList()),
+            (fieldMap) -> {
+              StringBuilder builder = new StringBuilder();
+              for (String key : fieldMap.keySet()) {
+                if (fieldMap.get(key).getText().trim().equals("")) {
+                  continue;
+                }
+//                  map.put(key, fieldMap.get(key).getText().trim());
+                builder.append(key + "=" + fieldMap.get(key).getText().trim() + " ");
+              }
+              controller.setValuesToMerchandise(
+                      currentMerchandise.get("id").getAsInt(),
+                      builder.toString().trim(),
+                      username,
+                      token);
+              lastScreen.apply();
+            },
+            "Change values that you want to change");
+  }
+
+  /**
+   * Method to buy currently opened merchandise.
+   */
+  private void buyCurrentMerchandise() {
+    String merchandise = controller.buyMerchandise(currentMerchandise.get("id").getAsInt(), username, token);
+    if (!merchandise.equals("")) {
+      Util.runAlert(Alert.AlertType.INFORMATION,
+              "information",
+              "Merchandise successfully bought",
+              "Bought merchandise with id " + currentMerchandise.get("id").getAsInt());
+      openMerchandise(merchandise);
+      lastScreen = mainScreen;
+    }
+  }
+
+  /**
+   * Open menu to change login.
+   */
+  private void openChangeLoginForm() {
+    generateForm(
+            Arrays.asList(
+                    "Current password",
+                    "New login"),
+            Arrays.asList(true, false),
+            (map) -> {
+              Boolean good = true;
+              for (String key : map.keySet()) {
+                if (!checkFields(map.get(key))) {
+                  good = false;
+                }
+              }
+              if (good) {
+                if (map.get("Current password").getText().trim().equals(password)) {
+                  if (controller.changeLogin(username, map.get("New login").getText().trim(), token)) {
+                    username = map.get("New login").getText().trim();
+                    controller.changePassword(username, password, token);
+                    currentUser.setText("Current user: " + username);
+                    Util.runAlert(Alert.AlertType.INFORMATION,
+                            "success",
+                            "login successfully changed",
+                            "changed login to " + map.get("New login").getText().trim());
+
+                  } else {
+                    Util.runAlert(Alert.AlertType.INFORMATION,
+                            "failed",
+                            "Failed to change username.\n" +
+                                    "chosen login already in use.", "");
+                  }
+                } else {
+                  Util.runAlert(Alert.AlertType.ERROR,
+                          "error",
+                          "Wrong current password",
+                          "");
+                }
+              }
+
+            },
+            "Please enter this fields to change your login");
+  }
+
+  /**
+   * Method generate form to change password
+   */
+  private void openChangePasswordForm() {
+    generateForm(
+            Arrays.asList(
+                    "Current password",
+                    "New password",
+                    "Submit new password"),
+            Arrays.asList(true, true, true),
+            (map) -> {
+              Boolean good = true;
+              for (String key : map.keySet()) {
+                if (!checkFields(map.get(key))) {
+                  good = false;
+                }
+              }
+              if (good) {
+                if (map.get("Current password").getText().trim().equals(password)) {
+                  if (map.get("New password").getText().trim().equals(map.get("Submit new password").getText().trim())) {
+                    controller.changePassword(username, map.get("New password").getText().trim(), token);
+                    Util.runAlert(Alert.AlertType.INFORMATION,
+                            "success",
+                            "password successfully changed",
+                            "");
+                  } else {
+                    Util.runAlert(Alert.AlertType.ERROR,
+                            "error",
+                            "passwords does not match",
+                            "");
+                  }
+                } else {
+                  Util.runAlert(Alert.AlertType.ERROR,
+                          "error",
+                          "Wrong current password",
+                          "");
+                }
+              }
+            },
+            "Please enter this fields to change your password");
+  }
+
+  /**
+   * Open adding merchandise menu.
+   */
   private void startAddingMerchandise() {
     List<String> classes = controller.getAvailableClasses();
     showList(classes);
     Platform.runLater(() ->
             mainList.setOnMouseClicked(event -> {
-//              System.out.println(classes.get(mainList.getSelectionModel().getSelectedIndex()));
               if (event.getClickCount() == 2) {
                 List<String> fields = controller
                         .getMandatoryFields(
@@ -578,9 +567,6 @@ public class ClientGui extends Application implements View, Observer {
         field = new TextField();
         area.add(field);
       }
-
-//      field.setMaxHeight(Double.POSITIVE_INFINITY);
-//      HBox.setHgrow(field, Priority.ALWAYS);
       gridPane.add(field, 1, i + 1);
     }
     Button submitButton = new Button("Submit");
@@ -636,61 +622,33 @@ public class ClientGui extends Application implements View, Observer {
 
     showTable(dealsView, tableView, new TableColumn[]{timeColumn, stateColumn, merchandiseColumn});
 
-    Platform.runLater(() -> {
-      tableView.setOnMouseClicked(event -> {
-        if (event.getClickCount() == 2 && !deals.isEmpty()) {
-          int id = new JsonParser()
-                  .parse(deals.get(tableView
-                          .getSelectionModel()
-                          .getSelectedIndex()))
-                  .getAsJsonObject().get("id").getAsInt();
-          openDeal(id);
-          backButton.setVisible(true);
-          backButton.setOnMouseClicked(event1 -> {
-            showDeals();
-            backButton.setVisible(false);
-          });
-          lastScreen = () -> {
-            setActions(GuiActions.PROFILE, menu);
-            showDeals();
-          };
-        }
-      });
-    });
-//    showList(deals.stream().map(value -> {
-//      JsonObject deal = parser.parse(value).getAsJsonObject();
-//      StringBuilder builder = new StringBuilder();
-//      builder.append(deal.get("date").getAsString())
-//              .append(" ")
-//              .append(deal.get("state").getAsString())
-//              .append(" ")
-//              .append(parser
-//                      .parse(deal.get("merchandise").getAsString())
-//                      .getAsJsonObject()
-//                      .get("name")
-//                      .getAsString());
-//      return builder.toString();
-//    }).collect(toList()));
-//    Platform.runLater(() -> mainList.setOnMouseClicked(event -> {
-//      if (event.getClickCount() == 2 && !deals.isEmpty()) {
+    Platform.runLater(() -> tableView.setOnMouseClicked(event -> {
+      if (event.getClickCount() == 2 && !deals.isEmpty()) {
 //        int id = new JsonParser()
-//                .parse(deals.get(mainList
+//                .parse(deals.get(tableView
 //                        .getSelectionModel()
 //                        .getSelectedIndex()))
 //                .getAsJsonObject().get("id").getAsInt();
-//        openDeal(id);
-//        backButton.setVisible(true);
-//        backButton.setOnMouseClicked(event1 -> {
-//          showDeals();
-//          backButton.setVisible(false);
-//        });
-//          lastScreen = () -> {
-//            setActions(GuiActions.PROFILE, menu);
-//            showDeals();
-//          };
-//      }
-//    }));
+        int id =tableView.getItems()
+                .get(tableView
+                        .getSelectionModel()
+                        .getSelectedIndex())
+                .get("id")
+                .getAsInt();
 
+
+        openDeal(id);
+        backButton.setVisible(true);
+        backButton.setOnMouseClicked(event1 -> {
+          showDeals();
+          backButton.setVisible(false);
+        });
+        lastScreen = () -> {
+          setActions(GuiActions.PROFILE, menu);
+          showDeals();
+        };
+      }
+    }));
   }
 
   /**
@@ -699,13 +657,6 @@ public class ClientGui extends Application implements View, Observer {
    * @param strings to show in listView
    */
   private void showList(List<String> strings) {
-//    List<String> merchandises = controller.searchMerchant(query);
-//    Uncomment if partitional downloading realized
-//    list.setOnScrollTo(e -> {
-//      if (e.getScrollTarget() >= list.getItems().size() -1) {
-//        doStuff();
-//      }
-//    });
     if (!mainContent.getChildren().isEmpty()) {
       mainContent.getChildren().clear();
     }
@@ -718,59 +669,6 @@ public class ClientGui extends Application implements View, Observer {
       mainList.prefWidthProperty().bind(mainContent.widthProperty());
     });
   }
-
-//
-//  /**
-//   * Method to show list of strings in gridPane
-//   *
-//   * @param strings list of strings to show
-//   * @param pane    gridPane
-//   */
-//  private void showGrid(List<String> strings, GridPane pane) {
-//    if (!mainContent.getChildren().isEmpty()) {
-//      mainContent.getChildren().clear();
-//    }
-//    Platform.runLater(() -> {
-//
-////      pane.setAlignment(Pos.CENTER);
-//      HBox.setHgrow(pane, Priority.ALWAYS);
-//      VBox.setVgrow(pane, Priority.ALWAYS);
-//      pane.setHgap(10);
-//      pane.setVgap(5);
-//      pane.prefHeightProperty().bind(mainContent.heightProperty());
-//      pane.prefWidthProperty().bind(mainContent.widthProperty());
-////      pane.setGridLinesVisible(true);
-//      int row = 0;
-//      int column = 0;
-//      for (int i = 0; i < strings.size(); i++) {
-//        TextArea label = new TextArea(strings.get(i));
-////        label.setPrefHeight(250);
-////        label.setMaxWidth(200);
-////        label.setDisable(true);
-//        label.setWrapText(true);
-//        label.setEditable(false);
-//        label.setMouseTransparent(true);
-//        label.setFocusTraversable(false);
-////        int finalI = i;
-////        label.setOnMouseClicked(event -> System.out.println(strings.get(finalI)));
-//        pane.add(label, column, row);
-//        column++;
-//        if (column == 4) {
-//          row++;
-//          column = 0;
-//        }
-//      }
-////      for (Node node : pane.getChildren()) {
-////        if (node instanceof TextArea) {
-////          node.setOnMouseClicked(event -> {
-////            System.out.println(((TextArea) node).getText());
-////          });
-////        }
-////      }
-////      ScrollPane scrollPane = new ScrollPane(pane);
-//      mainContent.getChildren().add(pane);
-//    });
-//  }
 
   /**
    * Method to show list of strings in tableView.
@@ -803,7 +701,10 @@ public class ClientGui extends Application implements View, Observer {
     listView.setItems(list);
   }
 
-
+  /**
+   * Open merchandise details menu.
+   * @param values string of JSON object merchandise
+   */
   private void openMerchandise(String values) {
     mainContent.getChildren().clear();
     setActions(GuiActions.MERCHANDISE, menu);
@@ -822,6 +723,10 @@ public class ClientGui extends Application implements View, Observer {
     mainContent.getChildren().add(pane);
   }
 
+  /**
+   * Method to open deal details menu
+   * @param dealId id of deal to show
+   */
   private void openDeal(int dealId) {
     String deal = controller.getDealById(dealId);
     mainContent.getChildren().clear();
@@ -845,9 +750,7 @@ public class ClientGui extends Application implements View, Observer {
           openMerchandise(object.toString());
           backButton.setVisible(true);
           backButton.setOnMouseClicked(event1 -> {
-//            lastScreen = (() -> {
-//              setActions(GuiActions.PROFILE, menu);
-//              openDeal(deal);
+
             backButton.setOnMouseClicked(event2 -> {
               showDeals();
               backButton.setVisible(false);
@@ -857,7 +760,6 @@ public class ClientGui extends Application implements View, Observer {
               setActions(GuiActions.MAIN, menu);
               showSearch("all");
             };
-//            backButton.setVisible(false);
             openDeal(parser.parse(deal).getAsJsonObject().get("id").getAsInt());
           });
         });

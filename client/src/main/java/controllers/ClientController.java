@@ -19,8 +19,9 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.ConnectException;
+import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -35,26 +36,25 @@ public class ClientController implements Controller {
 
   public ClientController(View view) {
     gui = view;
-    int connections = 0;
-    while (null == output && null == input && connections < 10000) {
-      connections++;
+    connectServer();
+  }
+
+  /**
+   * Method to update socket information
+   */
+  private void connectServer() {
+    if (input == null && output == null) {
       try {
-        socket = new Socket("localhost", 22033);
+        String address = ResourceBundle.getBundle("app").getString("serverAddress");
+        socket = new Socket(address, 22033);
         output = new ObjectOutputStream(socket.getOutputStream());
         input = new ObjectInputStream(socket.getInputStream());
-      } catch (ConnectException e) {
-        if (connections == 10000) {
-          Util.runAlert(
-                  Alert.AlertType.ERROR,
-                  "Error",
-                  "Can't connect servers",
-                  e.getMessage());
-        }
       } catch (IOException e) {
         logger.logError("Can't open socket or streams because: " + e.getMessage());
       }
     }
   }
+
 
   @Override
   public void addMerchant(Merchandise merch, String user, String token, int price) {
@@ -185,12 +185,13 @@ public class ClientController implements Controller {
   }
 
   /**
-   * Method to write objects to server and wait for response
+   * Method to write objects to server and wait for response.
    *
    * @param object String of object to write in json format
-   * @return
+   * @return response
    */
   private JsonObject writeAndGetResponse(String object) {
+    connectServer();
     try {
       output.writeUTF(object);
       output.flush();
@@ -323,7 +324,7 @@ public class ClientController implements Controller {
       Base64.Encoder encoder = Base64.getEncoder();
       pass = encoder.encodeToString(encrypted);
     } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
-      System.out.println("Can't send credentials");
+      logger.logError("Can't send credentials. Info: " + e.getMessage());
     }
     return pass;
   }

@@ -11,7 +11,7 @@ import java.util.List;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class DealList implements Serializable {
   @XmlElementWrapper
-  @XmlAnyElement(lax=true)
+  @XmlAnyElement(lax = true)
   List<Deal> deals = new ArrayList<Deal>();
 
   public List<Deal> getDeals() {
