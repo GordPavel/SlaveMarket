@@ -15,13 +15,14 @@
 
 
 # Screenshots
+At the start of client app you'll see login/register form.
+
 <h4 align="center">
   <img align="center" src="docs/screenshots/login.jpg">
   <br>
   Login screen
 </h4>
 
-At the start of client app you'll see login/register form.
 After successful login your app will show you main screen, that contains table of available merchandise.
 
 <h4 align="center">
@@ -30,7 +31,7 @@ After successful login your app will show you main screen, that contains table o
   Available merchandises
 </h4>
 
-If you choose and click twice on merchandise you will be redirected to merchandise details menu. Where you can buy or setup chosen merchandise  
+If you choose and click twice on merchandise you will be redirected to merchandise details menu. Where you can buy or setup chosen merchandise
 
 <h4 align="center">
   <img align="center" src="docs/screenshots/merch.jpg">
@@ -39,7 +40,6 @@ If you choose and click twice on merchandise you will be redirected to merchandi
 </h4>
 
 That app contains not only these screens.But for demo that's all.
-
 
 # Features
   

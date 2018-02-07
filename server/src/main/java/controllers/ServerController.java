@@ -59,13 +59,11 @@ public class ServerController implements Controller {
       if (json.get("action").getAsString().equals("login")) {
         response.add("token",
                 new JsonPrimitive(
-                        login(
-                                json.get("username").getAsString(),
+                        login(json.get("username").getAsString(),
                                 json.get("password").getAsString())));
       } else if (json.get("action").getAsString().equals("register")) {
         response.add("registered",
-                new JsonPrimitive(register(
-                        json.get("username").getAsString(),
+                new JsonPrimitive(register(json.get("username").getAsString(),
                         json.get("password").getAsString())));
       } else if (json.get("action").getAsString().equals("disconnect")) {
         disconnect(json.get("username").getAsString(), json.get("token").getAsString());

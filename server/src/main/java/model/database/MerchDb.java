@@ -158,9 +158,8 @@ public class MerchDb implements Database {
 //      Cipher cipher = Cipher.getInstance("AES");
 //      Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
 //      cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-//      byte[] encrypted = cipher.doFinal(pass.getBytes());
 //      Base64.Encoder encoder = Base64.getEncoder();
-//      pass = encoder.encodeToString(encrypted);
+//      pass = encoder.encodeToString(cipher.doFinal(pass.getBytes()));
 //    } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
 //      logger.logError(e.getMessage());
 //    }
@@ -762,7 +761,6 @@ public class MerchDb implements Database {
       m.marshal(this, new File(fileName));
     } catch (JAXBException e) {
       logger.logError(e.getMessage());
-//      e.printStackTrace();
       return false;
     }
     return true;
@@ -800,21 +798,6 @@ public class MerchDb implements Database {
         }
         deals.addDeal(newDeal);
       }
-//      for (Deal deal : db.deals.getDeals()) {
-//        try {
-//          getMerchandise(deal.getMerchandise().getId());
-//          lastId++;
-//          for (Deal merchDeal :
-//                  deals.getDeals()) {
-//            if (merchDeal.getMerchandise().getId() == deal.getMerchandise().getId()) {
-//              merchDeal.getMerchandise().setId(lastId);
-//            }
-//          }
-//          deals.addDeal(deal);
-//        } catch (MerchandiseNotFoundException e) {
-//          deals.addDeal(deal);
-//        }
-//      }
       db.users.forEach(user -> {
         user.setToken("");
         users.add(user);

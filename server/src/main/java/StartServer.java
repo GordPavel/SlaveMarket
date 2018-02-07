@@ -9,6 +9,8 @@ import view.cli.CommandLineView;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Start of program.
@@ -25,27 +27,25 @@ public class StartServer {
     Model model = new SlaveMarketModel();
     ServerSocket serverSocket;
     Logger logger = new Logger();
-    Thread adminPanel = new Thread(() -> {
+    Executors.newSingleThreadExecutor()
+            .execute(() -> {
       NativeController mainController = new NativeController(model);
       CommandLineView view = new CommandLineView(model, mainController);
       view.launch();
     });
-    adminPanel.start();
     try {
       serverSocket = new ServerSocket(port);
       while (!serverSocket.isClosed()) {
         Socket connection = serverSocket.accept();
-        Thread client = new Thread(() -> {
+        Executors.newSingleThreadExecutor()
+                .execute(() -> {
           Controller controller = new ServerController(model, connection);
           controller.start();
         });
-        client.start();
         logger.systemLog("Connection accepted");
       }
     } catch (IOException e) {
       logger.logError("Can't open server socket");
-      System.out.println("Can't open server socket");
-      System.exit(-1);
     }
   }
 }
