@@ -103,7 +103,7 @@ public class ClientGui extends Application implements View, Observer {
     controller = new ClientController(this,
             ResourceBundle.getBundle("app")
                     .getString("serverAddress"),
-            Integer.parseInt( ResourceBundle.getBundle("app")
+            Integer.parseInt(ResourceBundle.getBundle("app")
                     .getString("serverPort")));
     Scene scene = new Scene(content);
     rootStage.initStyle(StageStyle.UNIFIED);
@@ -374,7 +374,7 @@ public class ClientGui extends Application implements View, Observer {
                                 .equals(addressField.getText().trim())) {
                   address = addressField.getText().trim();
                   allCool = true;
-                }else {
+                } else {
                   allCool = false;
                   Util.runAlert(Alert.AlertType.INFORMATION,
                           "Wrong address",
@@ -384,8 +384,8 @@ public class ClientGui extends Application implements View, Observer {
               }
               if (!"".equals(portField.getText().trim())) {
                 try {
-                    port = Integer.parseInt(portField.getText().trim());
-                    allCool = true;
+                  port = Integer.parseInt(portField.getText().trim());
+                  allCool = true;
                 } catch (NumberFormatException e) {
                   allCool = false;
                   Util.runAlert(Alert.AlertType.INFORMATION,
@@ -467,10 +467,10 @@ public class ClientGui extends Application implements View, Observer {
                         builder.toString().trim(),
                         username,
                         token);
-              }catch (IllegalArgumentException e){
-                allGood=false;
-                for (String key: fieldMap.keySet()){
-                  if (e.getMessage().toUpperCase().equals(key.toUpperCase())){
+              } catch (IllegalArgumentException e) {
+                allGood = false;
+                for (String key : fieldMap.keySet()) {
+                  if (e.getMessage().toUpperCase().equals(key.toUpperCase())) {
                     parseNumberFields(fieldMap.get(key));
                   }
                 }
@@ -622,8 +622,8 @@ public class ClientGui extends Application implements View, Observer {
                             } catch (NumberFormatException e) {
                               parseNumberFields(map.get("price"));
                             } catch (CreateMerchandiseException e) {
-                              for (String key: map.keySet()){
-                                if (e.getMessage().toUpperCase().equals(key.toUpperCase())){
+                              for (String key : map.keySet()) {
+                                if (e.getMessage().toUpperCase().equals(key.toUpperCase())) {
                                   parseNumberFields(map.get(key));
                                 }
                               }
@@ -638,16 +638,16 @@ public class ClientGui extends Application implements View, Observer {
     field.setStyle("-fx-border-style: none;");
     boolean good = true;
     try {
-      if(Double.parseDouble(field.getText().trim()) < 0){
+      if (Double.parseDouble(field.getText().trim()) < 0) {
         good = false;
       }
-    }catch (NumberFormatException e){
+    } catch (NumberFormatException e) {
       good = false;
     }
     if (good)
       field.setStyle("-fx-border-style: none;");
     else
-    field.setStyle("-fx-border-color: red;");
+      field.setStyle("-fx-border-color: red;");
 
     return good;
   }

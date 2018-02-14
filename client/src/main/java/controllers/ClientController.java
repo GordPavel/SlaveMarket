@@ -38,7 +38,7 @@ public class ClientController implements Controller {
   public ClientController(View view, String address, int port) {
     gui = view;
     this.address = address;
-    this.port =port;
+    this.port = port;
     connectServer();
   }
 
@@ -53,7 +53,7 @@ public class ClientController implements Controller {
         input = new ObjectInputStream(socket.getInputStream());
         if (!ping(address, port)
                 && !address.equals(ResourceBundle.getBundle("app").getString("serverAddress"))
-                && port!=Integer.parseInt(ResourceBundle.getBundle("app").getString("serverPort"))){
+                && port != Integer.parseInt(ResourceBundle.getBundle("app").getString("serverPort"))) {
           address = ResourceBundle.getBundle("app").getString("serverAddress");
           port = Integer.parseInt(ResourceBundle.getBundle("app").getString("serverPort"));
           connectServer();
@@ -132,8 +132,8 @@ public class ClientController implements Controller {
     object.add("values", new JsonPrimitive(params));
     object.add("username", new JsonPrimitive(user));
     object.add("token", new JsonPrimitive(token));
-    JsonObject object1 =writeAndGetResponse(object.toString());
-    if (object1.get("status").getAsInt()==400){
+    JsonObject object1 = writeAndGetResponse(object.toString());
+    if (object1.get("status").getAsInt() == 400) {
       throw new IllegalArgumentException(object1.get("errorKey").getAsString());
     }
   }
@@ -215,9 +215,9 @@ public class ClientController implements Controller {
               .get("action")
               .getAsString();
       if (answer.get("status").getAsInt() == 400
-              && ! action.equals("search")
-              && ! action.equals("new Values")
-              && ! action.equals("add merchandise")) {
+              && !action.equals("search")
+              && !action.equals("new Values")
+              && !action.equals("add merchandise")) {
         Util.runAlert(Alert.AlertType.ERROR, "Error",
                 answer.get("info").getAsString(),
                 "server returned status 400 with message: " + answer.get("info").getAsString());
@@ -337,7 +337,7 @@ public class ClientController implements Controller {
       Object response = in.readUTF();
       JsonParser parser = new JsonParser();
       JsonObject answer = parser.parse((String) response).getAsJsonObject();
-      if (answer.get("status").getAsInt()==200){
+      if (answer.get("status").getAsInt() == 200) {
         return true;
       }
     } catch (Exception e) {

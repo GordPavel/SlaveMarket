@@ -149,7 +149,7 @@ public class Poison implements FoodInterface {
           this.onset = value;
           break;
         case "DEATH CHANCE":
-          this.chance = parseAndCheck(key ,value);
+          this.chance = parseAndCheck(key, value);
           break;
         case "POISONING TYPE":
           type = value;
