@@ -29,17 +29,25 @@ public class Poison implements FoodInterface {
    * @param value value with integer or float.
    * @return value from string in float if it's >=1
    */
-  private static Float parseAndCheck(String value) {
+  private static Float parseAndCheck(String key, String value) {
     Float dValue;
     try {
       dValue = Float.parseFloat(value);
-      if (dValue <= 0)
-        throw new WrongQueryException("Wrong value \"" + value + "\"");
+      if (dValue <= 0) {
+        JsonObject mistake = new JsonObject();
+        mistake.add("errorType", new JsonPrimitive("Must be grater than 0"));
+        mistake.add("errorKey", new JsonPrimitive(key));
+        throw new WrongQueryException(mistake.toString());
+      }
     } catch (Exception e) {
-      throw new WrongQueryException(e.getMessage());
+      JsonObject mistake = new JsonObject();
+      mistake.add("errorType", new JsonPrimitive("Can't parse"));
+      mistake.add("errorKey", new JsonPrimitive(key));
+      throw new WrongQueryException(mistake.toString());
     }
     return dValue;
   }
+
 
   /**
    * Method to list all of params required to create object. And that fields can be changed.
@@ -66,14 +74,14 @@ public class Poison implements FoodInterface {
     }
     try {
       poison.name = map.get("NAME");
-      poison.weight = parseAndCheck(map.get("WEIGHT"));
+      poison.weight = parseAndCheck("WEIGHT", map.get("WEIGHT"));
       poison.onset = map.get("ONSET");
       poison.type = map.get("POISONING TYPE");
       poison.frequency = map.get("FREQUENCY");
-      poison.chance = parseAndCheck(map.get("DEATH CHANCE"));
+      poison.chance = parseAndCheck("DEATH CHANCE", map.get("DEATH CHANCE"));
       poison.effect = map.get("EFFECT");
     } catch (Exception e) {
-      throw new WrongQueryException(e.getMessage());
+      throw new IllegalArgumentException(e.getMessage());
     }
     return poison;
   }
@@ -132,7 +140,7 @@ public class Poison implements FoodInterface {
       }
       switch (key) {
         case "WEIGHT":
-          this.weight = parseAndCheck(value);
+          this.weight = parseAndCheck(key, value);
           break;
         case "NAME":
           this.name = value;
@@ -141,7 +149,7 @@ public class Poison implements FoodInterface {
           this.onset = value;
           break;
         case "DEATH CHANCE":
-          this.chance = parseAndCheck(value);
+          this.chance = parseAndCheck(key ,value);
           break;
         case "POISONING TYPE":
           type = value;

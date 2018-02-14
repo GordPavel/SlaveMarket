@@ -418,17 +418,6 @@ public class MerchDb implements Database {
               if (list.size() != 1) {
                 throw new MerchandiseNotFoundException(id);
               }
-//              Deal deal = lastDeal(list.get(0));
-//              JsonObject object = new JsonParser()
-//                      .parse(list.get(0).getAllInfo())
-//                      .getAsJsonObject();
-//              object.add("state",
-//                      new JsonPrimitive(deal.getState().toString()));
-//              object.add("user",
-//                      new JsonPrimitive(deal.getUser().getUsername()));
-//              object.add("price",
-//                      new JsonPrimitive(deal.getPrice()));
-//              return object.toString();
               return list.get(0).getAllInfo();
             }));
   }
@@ -530,7 +519,7 @@ public class MerchDb implements Database {
     Map<String, String> kvs = Arrays.stream(params.trim().split(" "))
             .map(elem -> elem.split("="))
             .collect(Collectors.toMap(e -> e[0].toUpperCase(), e -> e[1]));
-    String merchIfo = "{Before: " + findMerh(id).getAllInfo() + "},";
+    String merchInfo = "{Before: " + findMerh(id).getAllInfo() + "},";
     if (!lastDeal(getMerchandise(id)).getUser().getToken().equals(token)) {
       throw new MerchandiseAlreadyBought("That merchandise not yours.");
     }
@@ -543,7 +532,7 @@ public class MerchDb implements Database {
         deal.getMerchandise().setParamsByMap(kvs);
       }
     });
-    logger.log(user, "Changed merchandise parameters", merchIfo + " {changed Values:" + kvs + "}");
+    logger.log(user, "Changed merchandise parameters", merchInfo + " {changed Values:" + kvs + "}");
     saveData();
   }
 
@@ -592,8 +581,7 @@ public class MerchDb implements Database {
             | IllegalAccessException
             | InvocationTargetException
             | NoSuchMethodException e) {
-      throw new CreateMerchandiseException("Can't create merchandise. Wrong values");
-      // throw new IllegalArgumentException("Error while adding. We're sorry");
+      throw new CreateMerchandiseException(e.getCause().getMessage());
     }
   }
 

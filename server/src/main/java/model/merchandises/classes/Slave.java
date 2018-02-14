@@ -79,13 +79,13 @@ public class Slave implements SlaveInterface {
       }
     }
     try {
-      slave.age = parseAndCheck(map.get("AGE")).intValue();
-      slave.weight = parseAndCheck(map.get("WEIGHT"));
-      slave.height = parseAndCheck(map.get("HEIGHT"));
+      slave.age = parseAndCheck("AGE", map.get("AGE")).intValue();
+      slave.weight = parseAndCheck("WEIGHT", map.get("WEIGHT"));
+      slave.height = parseAndCheck("HEIGHT", map.get("HEIGHT"));
       slave.gender = map.get("GENDER");
       slave.name = map.get("NAME");
     } catch (Exception e) {
-      throw new WrongQueryException(e.getMessage());
+      throw new IllegalArgumentException(e.getMessage());
     }
     return slave;
   }
@@ -105,14 +105,21 @@ public class Slave implements SlaveInterface {
    * @param value value with integer or float.
    * @return value from string in float if it's >=1
    */
-  private static Float parseAndCheck(String value) {
+  private static Float parseAndCheck(String key, String value) {
     Float dValue;
     try {
       dValue = Float.parseFloat(value);
-      if (dValue <= 0)
-        throw new WrongQueryException("Wrong value \"" + value + "\"");
+      if (dValue <= 0) {
+        JsonObject mistake = new JsonObject();
+        mistake.add("errorType", new JsonPrimitive("Must be grater than 0"));
+        mistake.add("errorKey", new JsonPrimitive(key));
+        throw new IllegalArgumentException(mistake.toString());
+      }
     } catch (Exception e) {
-      throw new WrongQueryException(e.getMessage());
+      JsonObject mistake = new JsonObject();
+      mistake.add("errorType", new JsonPrimitive("Can't parse"));
+      mistake.add("errorKey", new JsonPrimitive(key));
+      throw new IllegalArgumentException(mistake.toString());
     }
     return dValue;
   }
@@ -136,13 +143,13 @@ public class Slave implements SlaveInterface {
       }
       switch (key) {
         case "AGE":
-          this.age = parseAndCheck(value).intValue();
+          this.age = parseAndCheck(key, value).intValue();
           break;
         case "WEIGHT":
-          this.weight = parseAndCheck(value);
+          this.weight = parseAndCheck(key, value);
           break;
         case "HEIGHT":
-          this.height = parseAndCheck(value);
+          this.height = parseAndCheck(key, value);
           break;
         case "GENDER":
           this.gender = value;

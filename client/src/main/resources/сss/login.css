@@ -1,10 +1,29 @@
 .root{
     -fx-font-family: "Trench";
     -fx-font-size: 16px;
+    -fx-text-fill: #000000;
 }
 
 #welcome{
     -fx-font-family: "TimeBurner";
     -fx-font-size: 25px;
     -fx-alignment: center;
+}
+
+.loginButtons{
+    -fx-border-color: transparent;
+        -fx-border-width: 0;
+        -fx-background-radius: 0;
+        -fx-background-color: transparent;
+        -fx-font-size: 1em; /* 12 */
+}
+
+.loginButtons:focused {
+    -fx-border-color: transparent, black;
+    -fx-border-insets: 1 1 1 1, 0;
+}
+
+.loginButtons:pressed {
+    -fx-background-color: #39a0a6;
+    -fx-text-fill: white;
 }

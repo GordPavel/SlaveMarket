@@ -30,6 +30,8 @@ import util.Util;
 
 import java.io.IOException;
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import static java.util.stream.Collectors.toList;
 
@@ -98,7 +100,11 @@ public class ClientGui extends Application implements View, Observer {
     loadFonts();
     Parent content = loader.load();
     rootStage.setResizable(false);
-    controller = new ClientController(this);
+    controller = new ClientController(this,
+            ResourceBundle.getBundle("app")
+                    .getString("serverAddress"),
+            Integer.parseInt( ResourceBundle.getBundle("app")
+                    .getString("serverPort")));
     Scene scene = new Scene(content);
     rootStage.initStyle(StageStyle.UNIFIED);
     rootStage.setScene(scene);
@@ -121,9 +127,7 @@ public class ClientGui extends Application implements View, Observer {
     PasswordField pass = (PasswordField) scene.lookup("#passField");
     Button exitButton = (Button) scene.lookup("#exitButton");
     Button loginButton = (Button) scene.lookup("#loginButton");
-
     exitButton.setOnAction(event -> Platform.exit());
-
     loginButton.setDefaultButton(true);
     loginButton.setOnAction(event -> {
       Platform.runLater(() -> scene.setCursor(Cursor.WAIT));
@@ -340,6 +344,83 @@ public class ClientGui extends Application implements View, Observer {
     if (selectedItem.equals("Set new values")) {
       setNewValuesToMerchandise();
     }
+    if (selectedItem.equals("Open settings")) {
+      openSettings();
+    }
+  }
+
+  private void openSettings() {
+    mainContent.getChildren().clear();
+    List<String> settings = Arrays.asList("Server ip address", "Server port");
+    generateForm(settings,
+            settings.stream()
+                    .map(field -> false)
+                    .collect(toList()),
+            submitter -> {
+              String ipPatern = "^(?:(?:\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])\\.){3}" +
+                      "(?:\\d|[1-9]\\d|1\\d\\d|2[0-4]\\d|25[0-5])$";
+              TextField addressField = submitter.get("Server ip address");
+              TextField portField = submitter.get("Server port");
+              String address = ResourceBundle.getBundle("app").getString("serverAddress");
+              int port = Integer.parseInt(ResourceBundle.getBundle("app").getString("serverPort"));
+              boolean allCool = false;
+              if (!"".equals(addressField.getText().trim())) {
+                Matcher matcher = Pattern
+                        .compile(ipPatern)
+                        .matcher(addressField.getText().trim());
+                if (matcher.matches() &&
+                        !ResourceBundle.getBundle("app")
+                                .getString("serverAddress")
+                                .equals(addressField.getText().trim())) {
+                  address = addressField.getText().trim();
+                  allCool = true;
+                }else {
+                  allCool = false;
+                  Util.runAlert(Alert.AlertType.INFORMATION,
+                          "Wrong address",
+                          "Check address format",
+                          "");
+                }
+              }
+              if (!"".equals(portField.getText().trim())) {
+                try {
+                    port = Integer.parseInt(portField.getText().trim());
+                    allCool = true;
+                } catch (NumberFormatException e) {
+                  allCool = false;
+                  Util.runAlert(Alert.AlertType.INFORMATION,
+                          "Wrong port",
+                          "Port must be integer",
+                          "");
+                }
+              }
+              if (allCool) {
+                boolean ping = controller.ping(address, port);
+                if (ping) {
+                  controller.disconnect(username, token);
+                  controller = new ClientController(this, address, port);
+                  token = controller.login(username, password);
+                  Util.runAlert(Alert.AlertType.INFORMATION,
+                          "Reconnection",
+                          "Successfully reconnected",
+                          "reconnected to " + address + ":" + port);
+                } else {
+                  controller.disconnect(username, token);
+                  controller = new ClientController(this,
+                          ResourceBundle.getBundle("app")
+                                  .getString("serverAddress"),
+                          Integer.parseInt(ResourceBundle.getBundle("app")
+                                  .getString("serverPort")));
+                  token = controller.login(username, password);
+                  Util.runAlert(Alert.AlertType.INFORMATION,
+                          "Reconnection",
+                          "Can't ping chosen sever " + address + ":" + port
+                                  + "\nReconnected back to default server.",
+                          "reconnected back to " + address + ":" + port);
+                }
+              }
+
+            }, "Settings");
   }
 
   /**
@@ -379,12 +460,24 @@ public class ClientGui extends Application implements View, Observer {
 //                  map.put(key, fieldMap.get(key).getText().trim());
                 builder.append(key + "=" + fieldMap.get(key).getText().trim() + " ");
               }
-              controller.setValuesToMerchandise(
-                      currentMerchandise.get("id").getAsInt(),
-                      builder.toString().trim(),
-                      username,
-                      token);
-              lastScreen.apply();
+              boolean allGood = true;
+              try {
+                controller.setValuesToMerchandise(
+                        currentMerchandise.get("id").getAsInt(),
+                        builder.toString().trim(),
+                        username,
+                        token);
+              }catch (IllegalArgumentException e){
+                allGood=false;
+                for (String key: fieldMap.keySet()){
+                  if (e.getMessage().toUpperCase().equals(key.toUpperCase())){
+                    parseNumberFields(fieldMap.get(key));
+                  }
+                }
+              }
+              if (allGood) {
+                lastScreen.apply();
+              }
             },
             "Change values that you want to change");
   }
@@ -526,18 +619,37 @@ public class ClientGui extends Application implements View, Observer {
                                       "Merchandise added successfully",
                                       "");
                               showSearch("all");
-                            } catch (CreateMerchandiseException | NumberFormatException e) {
-                              if (e instanceof NumberFormatException) {
-                                Util.runAlert(Alert.AlertType.ERROR,
-                                        "error",
-                                        e.getMessage(),
-                                        "");
+                            } catch (NumberFormatException e) {
+                              parseNumberFields(map.get("price"));
+                            } catch (CreateMerchandiseException e) {
+                              for (String key: map.keySet()){
+                                if (e.getMessage().toUpperCase().equals(key.toUpperCase())){
+                                  parseNumberFields(map.get(key));
+                                }
                               }
                             }
                           }
                         }, "You must fill in all the fields to create an item");
               }
             }));
+  }
+
+  private boolean parseNumberFields(TextField field) {
+    field.setStyle("-fx-border-style: none;");
+    boolean good = true;
+    try {
+      if(Double.parseDouble(field.getText().trim()) < 0){
+        good = false;
+      }
+    }catch (NumberFormatException e){
+      good = false;
+    }
+    if (good)
+      field.setStyle("-fx-border-style: none;");
+    else
+    field.setStyle("-fx-border-color: red;");
+
+    return good;
   }
 
   /**
@@ -624,12 +736,7 @@ public class ClientGui extends Application implements View, Observer {
 
     Platform.runLater(() -> tableView.setOnMouseClicked(event -> {
       if (event.getClickCount() == 2 && !deals.isEmpty()) {
-//        int id = new JsonParser()
-//                .parse(deals.get(tableView
-//                        .getSelectionModel()
-//                        .getSelectedIndex()))
-//                .getAsJsonObject().get("id").getAsInt();
-        int id =tableView.getItems()
+        int id = tableView.getItems()
                 .get(tableView
                         .getSelectionModel()
                         .getSelectedIndex())
@@ -643,10 +750,10 @@ public class ClientGui extends Application implements View, Observer {
           showDeals();
           backButton.setVisible(false);
         });
-        lastScreen = () -> {
-          setActions(GuiActions.PROFILE, menu);
-          showDeals();
-        };
+//        lastScreen = () -> {
+//          setActions(GuiActions.PROFILE, menu);
+//          showDeals();
+//        };
       }
     }));
   }
@@ -703,6 +810,7 @@ public class ClientGui extends Application implements View, Observer {
 
   /**
    * Open merchandise details menu.
+   *
    * @param values string of JSON object merchandise
    */
   private void openMerchandise(String values) {
@@ -725,6 +833,7 @@ public class ClientGui extends Application implements View, Observer {
 
   /**
    * Method to open deal details menu
+   *
    * @param dealId id of deal to show
    */
   private void openDeal(int dealId) {

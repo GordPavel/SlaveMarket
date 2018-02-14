@@ -6,10 +6,12 @@ import exceptions.CreateMerchandiseException;
 import exceptions.MerchandiseAlreadyBought;
 import exceptions.MerchandiseNotFoundException;
 import exceptions.WrongQueryException;
+import javafx.util.Pair;
 import model.Model;
 import model.database.Logger;
 import model.merchandises.Merchandise;
 
+import javax.swing.text.html.parser.Parser;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
@@ -127,18 +129,31 @@ public class ServerController implements Controller {
         }.getType();
         Gson gson = new GsonBuilder().create();
 //        Map<String, String> merchandise = ;
-        addMerchandiseByMap(
-                json.get("className").getAsString(),
-                gson.fromJson(json.get("merchandise").getAsString(), type),
-                json.get("username").getAsString(),
-                json.get("token").getAsString(),
-                json.get("price").getAsInt());
+        try {
+          addMerchandiseByMap(
+                  json.get("className").getAsString(),
+                  gson.fromJson(json.get("merchandise").getAsString(), type),
+                  json.get("username").getAsString(),
+                  json.get("token").getAsString(),
+                  json.get("price").getAsInt());
+        }catch (CreateMerchandiseException e){
+          JsonParser parser = new JsonParser();
+          response = parser.parse(e.getMessage()).getAsJsonObject();
+          response.add("status", new JsonPrimitive(400));
+        }
       } else if (json.get("action").getAsString().equals("new Values")) {
+        try {
         setValuesToMerchandise(
                 json.get("id").getAsInt(),
                 json.get("values").getAsString(),
                 json.get("username").getAsString(),
                 json.get("token").getAsString());
+        }catch (IllegalArgumentException e){
+          System.out.println(e.getMessage());
+          JsonParser parser = new JsonParser();
+          response = parser.parse(e.getMessage()).getAsJsonObject();
+          response.add("status", new JsonPrimitive(400));
+        }
       } else if (json.get("action").getAsString().equals("getMerchant")) {
         response.add("merchandise", new JsonPrimitive(
                 getMerchantById(json.get("id").getAsInt())
@@ -147,6 +162,10 @@ public class ServerController implements Controller {
         response.add("deal", new JsonPrimitive(
                 getDealById(json.get("id").getAsInt())
         ));
+      } else if (json.get("action").getAsString().equals("ping")) {
+        response.add("ping", new JsonPrimitive("success"));
+      } else {
+        throw new IllegalArgumentException("Illegal query");
       }
       sendResponse(response);
     } catch (Exception e) {
@@ -164,7 +183,7 @@ public class ServerController implements Controller {
    */
   private void sendResponse(Object response) {
     try {
-      outputStream.writeObject(response.toString());
+      outputStream.writeUTF(response.toString());
       outputStream.flush();
     } catch (IOException e) {
       logger.logError(e.getMessage());
@@ -274,6 +293,11 @@ public class ServerController implements Controller {
 
   @Override
   public boolean importAllData(String filename) {
+    return false;
+  }
+
+  @Override
+  public boolean ping(String address, int port) {
     return false;
   }
 }

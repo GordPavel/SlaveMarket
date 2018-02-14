@@ -182,6 +182,11 @@ public class NativeController implements Controller {
   }
 
   @Override
+  public boolean ping(String address, int port) {
+    return true;
+  }
+
+  @Override
   public boolean register(String username, String pass) {
     return model.register(username, encrypt(username, pass));
   }

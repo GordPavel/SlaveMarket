@@ -188,4 +188,13 @@ public interface Controller {
    * @return true if import successful
    */
   boolean importAllData(String filename);
+
+  /**
+   * Method to check server availability.
+   *
+   * @param address server's address.
+   * @param port    server's port.
+   * @return true if server available.
+   */
+  boolean ping(String address, int port);
 }

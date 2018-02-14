@@ -42,8 +42,8 @@ public class Food implements FoodInterface {
     try {
       food.composition = map.get("COMPOSITION");
       food.name = map.get("NAME");
-      food.energy = parseAndCheck(map.get("ENERGY VALUE"));
-      food.weight = parseAndCheck(map.get("WEIGHT"));
+      food.energy = parseAndCheck("ENERGY VALUE", map.get("ENERGY VALUE"));
+      food.weight = parseAndCheck("WEIGHT", map.get("WEIGHT"));
     } catch (Exception e) {
       throw new WrongQueryException(e.getMessage());
     }
@@ -56,17 +56,25 @@ public class Food implements FoodInterface {
    * @param value value with integer or float.
    * @return value from string in float if it's >=1
    */
-  private static Float parseAndCheck(String value) {
+  private static Float parseAndCheck(String key, String value) {
     Float dValue;
     try {
       dValue = Float.parseFloat(value);
-      if (dValue <= 0)
-        throw new WrongQueryException("Wrong value \"" + value + "\"");
+      if (dValue <= 0) {
+        JsonObject mistake = new JsonObject();
+        mistake.add("errorType", new JsonPrimitive("Must be grater than 0"));
+        mistake.add("errorKey", new JsonPrimitive(key));
+        throw new WrongQueryException(mistake.toString());
+      }
     } catch (Exception e) {
-      throw new WrongQueryException(e.getMessage());
+      JsonObject mistake = new JsonObject();
+      mistake.add("errorType", new JsonPrimitive("Can't parse"));
+      mistake.add("errorKey", new JsonPrimitive(key));
+      throw new IllegalArgumentException(mistake.toString());
     }
     return dValue;
   }
+
 
   @Override
   public String getComposition() {
@@ -135,10 +143,10 @@ public class Food implements FoodInterface {
       }
       switch (key) {
         case "WEIGHT":
-          this.weight = parseAndCheck(value);
+          this.weight = parseAndCheck(key, value);
           break;
         case "ENERGY VALUE":
-          this.energy = parseAndCheck(value);
+          this.energy = parseAndCheck(key, value);
           break;
         case "COMPOSITION":
           this.composition = value;

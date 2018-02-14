@@ -6,7 +6,8 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity"
             prefHeight="470.0" prefWidth="712.0" stylesheets="/сss/main.css"
             xmlns="http://javafx.com/javafx/9">
     <children>
@@ -20,12 +21,6 @@
                 </TextField>
                 <Text fx:id="CurrentUser" fill="WHITE" fontSmoothingType="LCD" layoutX="14.0" layoutY="28.0"
                       strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="90.98307228088379"/>
-                <!--<ImageView fx:id="update" fitHeight="24.0" fitWidth="24.0" layoutX="686.0" layoutY="69.0"-->
-                <!--pickOnBounds="true" preserveRatio="true">-->
-                <!--<image>-->
-                <!--<Image url="/images/update.png"/>-->
-                <!--</image>-->
-                <!--</ImageView>-->
                 <Text fx:id="logo" layoutX="168.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0"
                       text="SLAVE MARKET" textAlignment="CENTER" wrappingWidth="312.126953125">
                     <font>

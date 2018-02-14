@@ -43,13 +43,13 @@ public class Alien implements SlaveInterface {
     try {
       slave.planet = map.get("PLANET");
       slave.race = map.get("RACE");
-      slave.age = parseAndCheck(map.get("AGE")).intValue();
-      slave.weight = parseAndCheck(map.get("WEIGHT"));
-      slave.height = parseAndCheck(map.get("HEIGHT"));
+      slave.age = parseAndCheck("AGE", map.get("AGE")).intValue();
+      slave.weight = parseAndCheck("WEIGHT", map.get("WEIGHT"));
+      slave.height = parseAndCheck("HEIGHT", map.get("HEIGHT"));
       slave.color = map.get("COLOR");
       slave.name = map.get("NAME");
     } catch (Exception e) {
-      throw new WrongQueryException(e.getMessage());
+      throw new IllegalArgumentException(e.getMessage());
     }
     return slave;
   }
@@ -64,14 +64,21 @@ public class Alien implements SlaveInterface {
    * @param value value with integer or float.
    * @return value from string in float if it's >=1
    */
-  private static Float parseAndCheck(String value) {
+  private static Float parseAndCheck(String key, String value) {
     Float dValue;
     try {
       dValue = Float.parseFloat(value);
-      if (dValue <= 0)
-        throw new WrongQueryException("Wrong value \"" + value + "\"");
+      if (dValue <= 0) {
+        JsonObject mistake = new JsonObject();
+        mistake.add("errorType", new JsonPrimitive("Must be grater than 0"));
+        mistake.add("errorKey", new JsonPrimitive(key));
+        throw new WrongQueryException(mistake.toString());
+      }
     } catch (Exception e) {
-      throw new WrongQueryException(e.getMessage());
+      JsonObject mistake = new JsonObject();
+      mistake.add("errorType", new JsonPrimitive("Can't parse"));
+      mistake.add("errorKey", new JsonPrimitive(key));
+      throw new IllegalArgumentException(mistake.toString());
     }
     return dValue;
   }
@@ -158,13 +165,13 @@ public class Alien implements SlaveInterface {
           this.planet = value;
           break;
         case "AGE":
-          this.age = Integer.parseInt(value);
+          this.age = parseAndCheck(key, value).intValue();
           break;
         case "WEIGHT":
-          this.weight = Float.parseFloat(value);
+          this.weight = parseAndCheck(key, value);
           break;
         case "HEIGHT":
-          this.height = Float.parseFloat(value);
+          this.height = parseAndCheck(key, value);
           break;
         case "NAME":
           this.name = value;

@@ -19,9 +19,8 @@ import javax.crypto.spec.SecretKeySpec;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
-import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
@@ -33,9 +32,13 @@ public class ClientController implements Controller {
   ObjectOutputStream output;
   ObjectInputStream input;
   View gui;
+  String address;
+  int port;
 
-  public ClientController(View view) {
+  public ClientController(View view, String address, int port) {
     gui = view;
+    this.address = address;
+    this.port =port;
     connectServer();
   }
 
@@ -45,10 +48,16 @@ public class ClientController implements Controller {
   private void connectServer() {
     if (input == null && output == null) {
       try {
-        String address = ResourceBundle.getBundle("app").getString("serverAddress");
-        socket = new Socket(address, 22033);
+        socket = new Socket(address, port);
         output = new ObjectOutputStream(socket.getOutputStream());
         input = new ObjectInputStream(socket.getInputStream());
+        if (!ping(address, port)
+                && !address.equals(ResourceBundle.getBundle("app").getString("serverAddress"))
+                && port!=Integer.parseInt(ResourceBundle.getBundle("app").getString("serverPort"))){
+          address = ResourceBundle.getBundle("app").getString("serverAddress");
+          port = Integer.parseInt(ResourceBundle.getBundle("app").getString("serverPort"));
+          connectServer();
+        }
       } catch (IOException e) {
         logger.logError("Can't open socket or streams because: " + e.getMessage());
       }
@@ -123,7 +132,10 @@ public class ClientController implements Controller {
     object.add("values", new JsonPrimitive(params));
     object.add("username", new JsonPrimitive(user));
     object.add("token", new JsonPrimitive(token));
-    writeAndGetResponse(object.toString());
+    JsonObject object1 =writeAndGetResponse(object.toString());
+    if (object1.get("status").getAsInt()==400){
+      throw new IllegalArgumentException(object1.get("errorKey").getAsString());
+    }
   }
 
   @Override
@@ -169,7 +181,7 @@ public class ClientController implements Controller {
     request.add("price", new JsonPrimitive(price));
     JsonObject object = writeAndGetResponse(request.toString());
     if (object.get("status").getAsInt() == 400) {
-      throw new CreateMerchandiseException(object.get("info").getAsString());
+      throw new CreateMerchandiseException(object.get("errorKey").getAsString());
     }
   }
 
@@ -195,21 +207,23 @@ public class ClientController implements Controller {
     try {
       output.writeUTF(object);
       output.flush();
-      Object response = input.readObject();
+      Object response = input.readUTF();
       JsonParser parser = new JsonParser();
       JsonObject answer = parser.parse((String) response).getAsJsonObject();
-      if (answer.get("status").getAsInt() == 400
-              && !parser.parse(object)
+      String action = parser.parse(object)
               .getAsJsonObject()
               .get("action")
-              .getAsString()
-              .equals("search")) {
+              .getAsString();
+      if (answer.get("status").getAsInt() == 400
+              && ! action.equals("search")
+              && ! action.equals("new Values")
+              && ! action.equals("add merchandise")) {
         Util.runAlert(Alert.AlertType.ERROR, "Error",
                 answer.get("info").getAsString(),
                 "server returned status 400 with message: " + answer.get("info").getAsString());
       }
       return answer;
-    } catch (IOException | ClassNotFoundException | NullPointerException e) {
+    } catch (IOException | NullPointerException e) {
       if (null == input && null == output) {
         Util.runAlert(Alert.AlertType.ERROR,
                 "error",
@@ -309,6 +323,29 @@ public class ClientController implements Controller {
     return false;
   }
 
+  @Override
+  public boolean ping(String address, int port) {
+    try {
+      socket = new Socket();
+      socket.connect(new InetSocketAddress(address, port), 4000);
+      ObjectOutputStream out = new ObjectOutputStream(socket.getOutputStream());
+      ObjectInputStream in = new ObjectInputStream(socket.getInputStream());
+      JsonObject object = new JsonObject();
+      object.add("action", new JsonPrimitive("ping"));
+      out.writeUTF(object.toString());
+      out.flush();
+      Object response = in.readUTF();
+      JsonParser parser = new JsonParser();
+      JsonObject answer = parser.parse((String) response).getAsJsonObject();
+      if (answer.get("status").getAsInt()==200){
+        return true;
+      }
+    } catch (Exception e) {
+      return false;
+    }
+    return false;
+  }
+
   private String encrypt(String username, String pass) {
     try {
       String key = username;
@@ -320,9 +357,8 @@ public class ClientController implements Controller {
       Cipher cipher = Cipher.getInstance("AES");
       Key aesKey = new SecretKeySpec(key.getBytes(), "AES");
       cipher.init(Cipher.ENCRYPT_MODE, aesKey);
-      byte[] encrypted = cipher.doFinal(pass.getBytes());
       Base64.Encoder encoder = Base64.getEncoder();
-      pass = encoder.encodeToString(encrypted);
+      pass = encoder.encodeToString(cipher.doFinal(pass.getBytes()));
     } catch (NoSuchAlgorithmException | NoSuchPaddingException | InvalidKeyException | BadPaddingException | IllegalBlockSizeException e) {
       logger.logError("Can't send credentials. Info: " + e.getMessage());
     }
