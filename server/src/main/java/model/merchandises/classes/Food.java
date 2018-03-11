@@ -58,14 +58,15 @@ public class Food implements FoodInterface {
    */
   private static Float parseAndCheck(String key, String value) {
     Float dValue;
+    dValue = getaFloat(key, value);
+    return dValue;
+  }
+
+  static Float getaFloat(String key, String value) {
+    Float dValue;
     try {
       dValue = Float.parseFloat(value);
-      if (dValue <= 0) {
-        JsonObject mistake = new JsonObject();
-        mistake.add("errorType", new JsonPrimitive("Must be grater than 0"));
-        mistake.add("errorKey", new JsonPrimitive(key));
-        throw new WrongQueryException(mistake.toString());
-      }
+      Poison.check(key, dValue);
     } catch (Exception e) {
       JsonObject mistake = new JsonObject();
       mistake.add("errorType", new JsonPrimitive("Can't parse"));

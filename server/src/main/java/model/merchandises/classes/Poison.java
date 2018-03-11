@@ -33,12 +33,7 @@ public class Poison implements FoodInterface {
     Float dValue;
     try {
       dValue = Float.parseFloat(value);
-      if (dValue <= 0) {
-        JsonObject mistake = new JsonObject();
-        mistake.add("errorType", new JsonPrimitive("Must be grater than 0"));
-        mistake.add("errorKey", new JsonPrimitive(key));
-        throw new WrongQueryException(mistake.toString());
-      }
+      check(key, dValue);
     } catch (Exception e) {
       JsonObject mistake = new JsonObject();
       mistake.add("errorType", new JsonPrimitive("Can't parse"));
@@ -46,6 +41,15 @@ public class Poison implements FoodInterface {
       throw new WrongQueryException(mistake.toString());
     }
     return dValue;
+  }
+
+  static void check(String key, Float dValue) {
+    if (dValue <= 0) {
+      JsonObject mistake = new JsonObject();
+      mistake.add("errorType", new JsonPrimitive("Must be grater than 0"));
+      mistake.add("errorKey", new JsonPrimitive(key));
+      throw new WrongQueryException(mistake.toString());
+    }
   }
 
 

@@ -65,21 +65,7 @@ public class Alien implements SlaveInterface {
    * @return value from string in float if it's >=1
    */
   private static Float parseAndCheck(String key, String value) {
-    Float dValue;
-    try {
-      dValue = Float.parseFloat(value);
-      if (dValue <= 0) {
-        JsonObject mistake = new JsonObject();
-        mistake.add("errorType", new JsonPrimitive("Must be grater than 0"));
-        mistake.add("errorKey", new JsonPrimitive(key));
-        throw new WrongQueryException(mistake.toString());
-      }
-    } catch (Exception e) {
-      JsonObject mistake = new JsonObject();
-      mistake.add("errorType", new JsonPrimitive("Can't parse"));
-      mistake.add("errorKey", new JsonPrimitive(key));
-      throw new IllegalArgumentException(mistake.toString());
-    }
+    Float dValue = Food.getaFloat(key, value);
     return dValue;
   }
 
