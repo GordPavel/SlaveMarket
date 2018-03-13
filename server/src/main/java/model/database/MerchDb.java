@@ -10,12 +10,13 @@ import model.merchandises.classes.Alien;
 import model.merchandises.classes.Food;
 import model.merchandises.classes.Poison;
 import model.merchandises.classes.Slave;
+import org.xml.sax.SAXException;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.JAXBException;
-import javax.xml.bind.Marshaller;
-import javax.xml.bind.Unmarshaller;
+import javax.xml.XMLConstants;
+import javax.xml.bind.*;
 import javax.xml.bind.annotation.*;
+import javax.xml.validation.Schema;
+import javax.xml.validation.SchemaFactory;
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
@@ -733,11 +734,15 @@ public class MerchDb implements Database {
     @Override
     public synchronized boolean exportAllData(String fileName) {
         try {
+            SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = sf.newSchema(new File(getClass().getResource("/format.xsd").getFile()));
             JAXBContext context = JAXBContext.newInstance(importClasses);
             Marshaller m = context.createMarshaller();
-            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
+            m.setSchema(schema);
+            m.setEventHandler(getHandler());
+            m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
             m.marshal(this, new File(fileName));
-        } catch (JAXBException e) {
+        } catch (JAXBException | SAXException e) {
             logger.logError(e.getMessage());
             return false;
         }
@@ -745,11 +750,34 @@ public class MerchDb implements Database {
     }
 
 
+    private ValidationEventHandler getHandler() {
+        return event -> {
+            System.out.println("\nEVENT");
+            System.out.println("SEVERITY:  " + event.getSeverity());
+            System.out.println("MESSAGE:  " + event.getMessage());
+            System.out.println("LINKED EXCEPTION:  " + event.getLinkedException());
+            System.out.println("LOCATOR");
+            System.out.println("    LINE NUMBER:  " + event.getLocator().getLineNumber());
+            System.out.println("    COLUMN NUMBER:  " + event.getLocator().getColumnNumber());
+            System.out.println("    OFFSET:  " + event.getLocator().getOffset());
+            System.out.println("    OBJECT:  " + event.getLocator().getObject());
+            System.out.println("    NODE:  " + event.getLocator().getNode());
+            System.out.println("    URL:  " + event.getLocator().getURL());
+            return true;
+        };
+    }
+
+
     @Override
     public synchronized boolean importAllData(String filename) {
         try {
+
+            SchemaFactory sf = SchemaFactory.newInstance(XMLConstants.W3C_XML_SCHEMA_NS_URI);
+            Schema schema = sf.newSchema(new File(getClass().getResource("/format.xsd").getFile()));
             JAXBContext context = JAXBContext.newInstance(importClasses);
             Unmarshaller unmarshaller = context.createUnmarshaller();
+            unmarshaller.setSchema(schema);
+            unmarshaller.setEventHandler(getHandler());
             MerchDb db = (MerchDb) unmarshaller.unmarshal(new File(filename));
             int lastMerch = merchants.size();
             int lastDeal = deals.getDeals().size() == 0 ? 0 : deals.getDeals().get(deals.getDeals().size() - 1).getId();
@@ -780,7 +808,7 @@ public class MerchDb implements Database {
                 user.setToken("");
                 users.add(user);
             });
-        } catch (JAXBException e) {
+        } catch (JAXBException | SAXException e) {
             return false;
         }
         saveData();
