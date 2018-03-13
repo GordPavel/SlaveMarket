@@ -28,54 +28,54 @@
                                                             <xs:sequence>
                                                                 <xs:element type="xs:float" name="height"/>
                                                                 <xs:element type="xs:float" name="weight"/>
-                                                                <xs:element type="xs:byte" name="age"/>
+                                                                <xs:element type="xs:int" name="age"/>
                                                                 <xs:element type="xs:string" name="gender"/>
                                                                 <xs:element type="xs:string" name="name"/>
-                                                                <xs:element type="xs:short" name="id"/>
+                                                                <xs:element type="xs:int" name="id"/>
                                                             </xs:sequence>
                                                         </xs:complexType>
                                                     </xs:element>
                                                     <xs:element name="alien" minOccurs="0">
                                                         <xs:complexType>
                                                             <xs:sequence>
-                                                                <xs:element type="xs:float" name="planet"/>
+                                                                <xs:element type="xs:string" name="planet"/>
                                                                 <xs:element type="xs:float" name="weight"/>
                                                                 <xs:element type="xs:float" name="height"/>
-                                                                <xs:element type="xs:float" name="color"/>
-                                                                <xs:element type="xs:float" name="name"/>
-                                                                <xs:element type="xs:byte" name="age"/>
-                                                                <xs:element type="xs:float" name="race"/>
-                                                                <xs:element type="xs:short" name="id"/>
+                                                                <xs:element type="xs:string" name="color"/>
+                                                                <xs:element type="xs:string" name="name"/>
+                                                                <xs:element type="xs:int" name="age"/>
+                                                                <xs:element type="xs:string" name="race"/>
+                                                                <xs:element type="xs:int" name="id"/>
                                                             </xs:sequence>
                                                         </xs:complexType>
                                                     </xs:element>
                                                     <xs:element name="food" minOccurs="0">
                                                         <xs:complexType>
                                                             <xs:sequence>
-                                                                <xs:element type="xs:float" name="composition"/>
+                                                                <xs:element type="xs:string" name="composition"/>
                                                                 <xs:element type="xs:float" name="energy"/>
                                                                 <xs:element type="xs:float" name="weight"/>
-                                                                <xs:element type="xs:short" name="id"/>
-                                                                <xs:element type="xs:float" name="name"/>
+                                                                <xs:element type="xs:int" name="id"/>
+                                                                <xs:element type="xs:string" name="name"/>
                                                             </xs:sequence>
                                                         </xs:complexType>
                                                     </xs:element>
                                                     <xs:element name="poison" minOccurs="0">
                                                         <xs:complexType>
                                                             <xs:sequence>
-                                                                <xs:element type="xs:float" name="onset"/>
-                                                                <xs:element type="xs:short" name="id"/>
-                                                                <xs:element type="xs:float" name="frequency"/>
-                                                                <xs:element type="xs:float" name="effect"/>
+                                                                <xs:element type="xs:string" name="onset"/>
+                                                                <xs:element type="xs:int" name="id"/>
+                                                                <xs:element type="xs:string" name="frequency"/>
+                                                                <xs:element type="xs:string" name="effect"/>
                                                                 <xs:element type="xs:float" name="chance"/>
                                                                 <xs:element type="xs:float" name="weight"/>
-                                                                <xs:element type="xs:float" name="type"/>
-                                                                <xs:element type="xs:float" name="name"/>
+                                                                <xs:element type="xs:string" name="type"/>
+                                                                <xs:element type="xs:string" name="name"/>
                                                             </xs:sequence>
                                                         </xs:complexType>
                                                     </xs:element>
-                                                    <xs:element type="xs:short" name="price"/>
-                                                    <xs:element type="xs:short" name="id"/>
+                                                    <xs:element type="xs:int" name="price"/>
+                                                    <xs:element type="xs:int" name="id"/>
                                                 </xs:sequence>
                                             </xs:complexType>
                                         </xs:element>
