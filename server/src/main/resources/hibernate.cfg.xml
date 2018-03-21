@@ -13,10 +13,17 @@
         <!--<property name="show_sql">true</property>-->
 
         <!-- SQL dialect -->
-        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL95Dialect</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</property>
         <property name="hibernate.current_session_context_class">
             org.hibernate.context.internal.ThreadLocalSessionContext
         </property>
         <mapping class="model.postgresqlModel.Users"/>
+        <mapping class="model.postgresqlModel.tables.merchandises.Aliens"/>
+        <mapping class="model.postgresqlModel.tables.Merchandises"/>
+        <mapping class="model.postgresqlModel.tables.merchandises.Slaves"/>
+        <mapping class="model.postgresqlModel.tables.merchandises.Foods"/>
+        <mapping class="model.postgresqlModel.tables.merchandises.Poisons"/>
+        <mapping class="model.postgresqlModel.tables.Classes"/>
+        <mapping class="model.postgresqlModel.tables.Deals"/>
     </session-factory>
 </hibernate-configuration>

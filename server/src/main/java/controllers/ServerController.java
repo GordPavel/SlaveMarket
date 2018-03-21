@@ -90,7 +90,7 @@ public class ServerController implements Controller {
                 getAvailableClasses()) {
           array.add(classString);
         }
-        response.add("classes", array);
+        response.add("tables", array);
       } else if (json.get("action").getAsString().equals("mandatoryFields")) {
         List<String> fields = getMandatoryFields(json.get("className").getAsString());
         JsonArray array = new JsonArray();

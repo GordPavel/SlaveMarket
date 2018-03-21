@@ -1,7 +1,7 @@
 package model.database;
 
 public enum DealState {
-  BOUGHT(" bought "), FOR_SALE(" on sale "), REMOVED(" removed "), SOLD(" sold ");
+  BOUGHT("bought"), FOR_SALE("on sale"), REMOVED("removed"), SOLD("sold");
 
   private final String state;
 

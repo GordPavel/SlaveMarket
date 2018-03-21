@@ -58,6 +58,12 @@ public class Food implements FoodInterface {
    */
   private static Float parseAndCheck(String key, String value) {
     Float dValue;
+    dValue = getaFloat(key, value);
+    return dValue;
+  }
+
+  static Float getaFloat(String key, String value) {
+    Float dValue;
     try {
       dValue = Float.parseFloat(value);
       if (dValue <= 0) {

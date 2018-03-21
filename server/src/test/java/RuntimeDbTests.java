@@ -2,6 +2,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import exceptions.CreateMerchandiseException;
+import exceptions.UserException;
 import model.Model;
 import model.Observable;
 import model.PostgresModel;
@@ -9,23 +10,32 @@ import model.SlaveMarketModel;
 import model.database.MerchDb;
 import model.merchandises.Merchandise;
 import model.merchandises.classes.Slave;
+import org.apache.log4j.BasicConfigurator;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
 import org.junit.Assert;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
 import view.Observer;
 
+import java.io.File;
 import java.util.*;
-import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
 import static java.util.stream.Collectors.toList;
 
-public class Tests {
-    MerchDb db = new MerchDb(false);
-    ArrayList<Slave> slaves = new ArrayList<>();
-    String user = "test";
-    String token;
+@FixMethodOrder(MethodSorters.NAME_ASCENDING)
+public class RuntimeDbTests {
+    private MerchDb db = new MerchDb(false);
+    private ArrayList<Slave> slaves = new ArrayList<>();
+    private String user = "test";
+    private String token;
+    private boolean sqlConnection;
 
     {
+        sqlConnection = true;
         //        Slave slave = Slave.newBuilder().addId(0).addAge(12).addGender("male").addHeight(140).addWeight(35).build();
         //        Slave slave = Slave.newBuilder().addId(0).addName("Pete").addAge(12).addHeight(140).addWeight(35).addPrice(100).build();
         //                new Slave(140, 35, 12, "male", 0, "Pete", 100);
@@ -56,9 +66,7 @@ public class Tests {
 
     @Test
     public void searchMerchandiseTest() {
-        Assert.assertEquals(slaves.stream().map(merchandise -> {
-            return toJsonObj(merchandise);
-        })
+        Assert.assertEquals(slaves.stream().map(this::toJsonObj)
                 .collect(toList()).get(2), db.searchMerchandise("GENDER=male AND NAME=Luise").get(0));
     }
 
@@ -66,9 +74,7 @@ public class Tests {
     public void searchMerchandiseEuqalsAndGreaterTest() {
         slaves.remove(1);
         slaves.remove(1);
-        Assert.assertEquals(slaves.stream().map(merchandise -> {
-            return toJsonObj(merchandise);
-        })
+        Assert.assertEquals(slaves.stream().map(this::toJsonObj)
                 .collect(toList()), db.searchMerchandise("id=0"));
     }
 
@@ -183,14 +189,7 @@ public class Tests {
     public void queryTest() {
         System.out.println("\u001B[32mQuery test\u001B[0m testBlock started{");
         System.out.println(db.searchMerchandise("id>=0 and id!=1"));
-        //        String query = "id<=213";
-        Pattern pattern = Pattern.compile("(\\bnot \\b)?[b]*");
-        //        Pattern querySplitter = Pattern.compile("([a-zA-z]+[[0-9]*[a-zA-z]]*)(=)([\\w]+[.\\w]*)");
-        //        Matcher matcher = pattern.matcher(query);
-        //        System.out.println(matcher.lookingAt());
-        //        System.out.println(matcher.groupCount());
-        ////        System.out.println(matcher.group(2).toUpperCase());
-        ////        System.out.println(matcher.group(3).toUpperCase());
+//        Pattern pattern = Pattern.compile("(\\bnot \\b)?[b]*");
         System.out.println("\u001B[32m}\u001B[0m");
     }
 
@@ -201,6 +200,7 @@ public class Tests {
 
     @Test
     public void exportTest() {
+        testBlock("exportTest{");
         for (int i = 0; i < 123; i++) {
             addMerchandise("Alien");
             addMerchandise("Food");
@@ -210,6 +210,9 @@ public class Tests {
         db.exportAllData("testExport.xml");
         MerchDb db1 = new MerchDb(false);
         db1.importAllData("testExport.xml");
+        new File("testExport.xml").delete();
+        System.out.println("Test passed successfully");
+        testBlock("}");
     }
 
 
@@ -238,6 +241,7 @@ public class Tests {
     }
 
     private void addMerchandise(String merchClass) {
+        testBlock("Adding Merchandise{");
         List<String> fields = db.getMandatoryFields(merchClass);
         Map<String, String> map = new HashMap<>();
         fields.forEach(field -> map.put(field.toUpperCase(), String.valueOf(new Random().nextFloat() * 10)));
@@ -246,10 +250,15 @@ public class Tests {
         } catch (CreateMerchandiseException e) {
             e.printStackTrace();
         }
+        System.out.println(merchClass + " with values:");
+        System.out.println(map);
+        System.out.println("Added successfully");
+        testBlock("}");
     }
 
     @Test
     public void importTest() {
+        testBlock("Import test{");
         MerchDb db = new MerchDb(false);
         List<String> fields = db.getMandatoryFields("Food");
         String user3 = "Christ";
@@ -280,56 +289,20 @@ public class Tests {
             e.printStackTrace();
         }
         db2.importAllData("importTest.xml");
+        new File("importTest.xml").delete();
+        System.out.println("Test passed successfully");
+        testBlock("}");
     }
 
-    @Test
-    public void postgresTest() {
-//        BasicConfigurator.configure();
-//        SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
-//        Session session = sessionFactory.openSession();
-//        Users users = session.get(Users.class, 1);
-//        if (null == users) {
-//            System.out.println("succ");
-//        } else {
-//            System.out.println(users.getUsername());
-//            System.out.println("succ ess");
-//        }
-//        StoredProcedureQuery login = session.createStoredProcedureQuery("login")
-//                .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
-//                .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
-//                .registerStoredProcedureParameter(3, String.class, ParameterMode.OUT)
-//                .setParameter(1, "s3rius")
-//                .setParameter(2, "19216211");
-//        try {
-//            Transaction transaction = session.beginTransaction();
-//            login.execute();
-//            Object result = ((ProcedureCallImpl) login).getOutputs().getOutputParameterValue(3);
-//            transaction.commit();
-//            System.out.println(result);
-//            System.out.println(result.getClass());
-//            StoredProcedureQuery logout = session.createNamedStoredProcedureQuery("logout")
-//                    .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
-//                    .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
-//                    .registerStoredProcedureParameter(3, Boolean.class, ParameterMode.OUT)
-//                    .setParameter(1, "s3rius")
-//                    .setParameter(2, result.toString());
-//            transaction = session.beginTransaction();
-//            Object body = ((ProcedureCallImpl) logout).getOutputs().getOutputParameterValue(3);
-//            transaction.commit();
-//            System.out.println(body);
-//            System.out.println(body.getClass());
-//        } catch (JDBCException e) {
-//            SQLException cause = (SQLException) e.getCause();
-//            System.out.println(cause.getSQLState());
-//            System.out.println("---");
-//            System.out.println(cause.getMessage());
-//            System.out.println("---");
-//            System.out.println(cause.getErrorCode());
-//            System.out.println("---");
-//            System.out.println(cause.getLocalizedMessage());
-//        }
-        PostgresModel model = new PostgresModel();
-        System.out.println(model.login("s3rius", "19216211"));
+
+    /**
+     * Method to print colored text.
+     *
+     * @param text string for color
+     */
+    private void testBlock(String text) {
+        System.out.println("\u001B[32m" + text + "\u001B[0m");
     }
+
 
 }

@@ -81,7 +81,7 @@ public interface Model {
 
   /**
    * Returns minimum of required fields for create an object of chosen class.
-   * To see all available classes call {@link #getAvailableClasses()} Method
+   * To see all available tables call {@link #getAvailableClasses()} Method
    *
    * @return field names
    */
