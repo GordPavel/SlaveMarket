@@ -1,3 +1,4 @@
+import com.google.gson.JsonParser;
 import exceptions.CreateMerchandiseException;
 import exceptions.UserException;
 import model.PostgresModel;
@@ -20,13 +21,14 @@ import static java.lang.Math.abs;
 public class PostgresqlTests {
     private static boolean connect = true;
     private PostgresModel model;
-    private String user = "s2rius";
+    private String user = "s3rius";
     private String pasword = "19216211";
 
     {
         try {
             model = new PostgresModel();
         } catch (Throwable e) {
+            System.out.println(e.getMessage());
             connect = false;
         }
     }
@@ -99,7 +101,7 @@ public class PostgresqlTests {
     public void searchTest() {
         testBlock("searchTest{");
         if (connect) {
-            model.searchMerchandise("li").forEach(System.out::println);
+            model.searchMerchandise("").forEach(System.out::println);
         } else {
             System.out.print("Can't connect database ");
             testBlock("Skipping...");
@@ -115,7 +117,7 @@ public class PostgresqlTests {
             try {
                 List<String> classes = model.getAvailableClasses();
                 System.out.println(classes);
-                for (int i = 0; i < 1; i++) {
+                for (int i = 0; i < 10; i++) {
                     classes.forEach(o -> addMerchandise(o, token));
                 }
 //                addMerchandise("slaves", token);
@@ -132,64 +134,70 @@ public class PostgresqlTests {
 
     private void addMerchandise(String merchClass, String token) {
         testBlock("Adding Merchandise{");
-        List<String> fields = model.getMandatoryFields(merchClass);
-        String[] names = new String[]{
-                "Josef", "Julia", "Mark", "Siina",
-                "Roman", "Carl", "Akito", "Liara",
-                "Greg", "John", "Anabel", "Violet",
-                "Misato", "Tom", "Linda", "Garry",
-                "Paul", "Andrew", "Noise", "kris"
-        };
-        String[] planets = new String[]{
-                "Mercury", "Venus", "Earth", "Moon",
-                "Mars", "Phobos", "Deimos", "Eros",
-                "Gaspra", "Jupiter", "Ganymede", "Callisto",
-                "Amalthea", "Himalia", "Pasiphae", "Dia",
-                "Herse", "Saturn", "Phoebe", "Uranus",
-                "Cordelia", "Neptune", "Thalassa", "Despina",
-                "Galatea", "Pluto"
-        };
-        String[] colors = new String[]{
-                "Red", "Orange", "Yellow", "Green",
-                "Cyan", "Blue", "Indigo", "Violet"
-        };
-        String[] genders = new String[]{
-                "Male", "Female", "Abimegender", "Adamasgender",
-                "Aerogender", "Agender", "Transmission", "Trebuchet", "Apache",
-                "Exgender", "Femfluid", "Genderblank", "Genderflow", "Neutrois"
-        };
-        String[] races = new String[]{
-                "Asari", "Drell", "Elcor",
-                "Hanar", "Keeper", "Salarian",
-                "Turian", "Volu", "Batarian",
-                "Collector", "Geth", "Quarian",
-                "Krogan", "Quarian", "Leviathan",
-                "Reaper", "Yahg", "Vorcha"
-        };
-        Map<String, String> map = new HashMap<>();
-        fields.forEach(field -> {
-            if (field.equals("name")) {
-                map.put(field.toUpperCase(), names[abs(new Random().nextInt()) % names.length]);
-            } else if (field.equals("planet")) {
-                map.put(field.toUpperCase(), planets[abs(new Random().nextInt()) % planets.length]);
-            } else if (field.equals("color")) {
-                map.put(field.toUpperCase(), colors[abs(new Random().nextInt()) % colors.length]);
-            } else if (field.equals("gender")) {
-                map.put(field.toUpperCase(), genders[abs(new Random().nextInt()) % genders.length]);
-            } else if (field.equals("race")) {
-                map.put(field.toUpperCase(), races[abs(new Random().nextInt()) % races.length]);
-            } else if (field.equals("height")) {
-                map.put(field.toUpperCase(), String.valueOf(160 + abs(new Random().nextInt()) % 40));
-            } else if (field.equals("weight")) {
-                map.put(field.toUpperCase(), String.valueOf(60 + abs(new Random().nextInt()) % 35));
-            } else {
-                map.put(field.toUpperCase(), String.valueOf((new Random().nextFloat() + 2) * 10));
+        if (connect) {
+            List<String> fields = model.getMandatoryFields(merchClass);
+            String[] names = new String[]{
+                    "Josef", "Julia", "Mark", "Siina",
+                    "Roman", "Carl", "Akito", "Liara",
+                    "Greg", "John", "Anabel", "Violet",
+                    "Misato", "Tom", "Linda", "Garry",
+                    "Paul", "Andrew", "Noise", "kris"
+            };
+            String[] planets = new String[]{
+                    "Mercury", "Venus", "Earth", "Moon",
+                    "Mars", "Phobos", "Deimos", "Eros",
+                    "Gaspra", "Jupiter", "Ganymede", "Callisto",
+                    "Amalthea", "Himalia", "Pasiphae", "Dia",
+                    "Herse", "Saturn", "Phoebe", "Uranus",
+                    "Cordelia", "Neptune", "Thalassa", "Despina",
+                    "Galatea", "Pluto"
+            };
+            String[] colors = new String[]{
+                    "Red", "Orange", "Yellow", "Green",
+                    "Cyan", "Blue", "Indigo", "Violet"
+            };
+            String[] genders = new String[]{
+                    "Male", "Female", "Abimegender", "Adamasgender",
+                    "Aerogender", "Agender", "Transmission", "Trebuchet", "Apache",
+                    "Exgender", "Femfluid", "Genderblank", "Genderflow", "Neutrois"
+            };
+            String[] races = new String[]{
+                    "Asari", "Drell", "Elcor",
+                    "Hanar", "Keeper", "Salarian",
+                    "Turian", "Volu", "Batarian",
+                    "Collector", "Geth", "Quarian",
+                    "Krogan", "Quarian", "Leviathan",
+                    "Reaper", "Yahg", "Vorcha"
+            };
+            Map<String, String> map = new HashMap<>();
+            fields.forEach(field -> {
+                if (field.equals("name")) {
+                    map.put(field.toUpperCase(), names[abs(new Random().nextInt()) % names.length]);
+                } else if (field.equals("planet")) {
+                    map.put(field.toUpperCase(), planets[abs(new Random().nextInt()) % planets.length]);
+                } else if (field.equals("color")) {
+                    map.put(field.toUpperCase(), colors[abs(new Random().nextInt()) % colors.length]);
+                } else if (field.equals("gender")) {
+                    map.put(field.toUpperCase(), genders[abs(new Random().nextInt()) % genders.length]);
+                } else if (field.equals("race")) {
+                    map.put(field.toUpperCase(), races[abs(new Random().nextInt()) % races.length]);
+                } else if (field.equals("height")) {
+                    map.put(field.toUpperCase(), String.valueOf(160 + abs(new Random().nextInt()) % 40));
+                } else if (field.equals("weight")) {
+                    map.put(field.toUpperCase(), String.valueOf(60 + abs(new Random().nextInt()) % 35));
+                } else {
+                    map.put(field.toUpperCase(), String.valueOf((new Random().nextFloat() + 2) * 10));
+                }
+            });
+            try {
+                model.addMerchandiseByMap(merchClass, map, user, token, (abs(new Random().nextInt())));
+            } catch (CreateMerchandiseException e) {
+                e.printStackTrace();
             }
-        });
-        try {
-            model.addMerchandiseByMap(merchClass, map, user, token, (abs(new Random().nextInt())));
-        } catch (CreateMerchandiseException e) {
-            e.printStackTrace();
+            System.out.println("successfully added : \n" + map);
+        } else {
+            System.out.print("Can't connect database ");
+            testBlock("Skipping...");
         }
         testBlock("}");
     }
@@ -198,7 +206,7 @@ public class PostgresqlTests {
     public void getDealTest() {
         testBlock("get deal by id Test block{");
         if (connect) {
-            model.getDealById(1);
+            System.out.println(model.getDealById(12));
         } else {
             System.out.print("Can't connect database ");
             testBlock("Skipping...");
@@ -211,7 +219,93 @@ public class PostgresqlTests {
         testBlock("get deal by id Test block{");
         if (connect) {
             String token = model.login(user, pasword);
-            model.getDealsByUser(user, token);
+            model.getDealsByUser(user, token).forEach(System.out::println);
+            model.disconnect(user, token);
+        } else {
+            System.out.print("Can't connect database ");
+            testBlock("Skipping...");
+        }
+        testBlock("}");
+    }
+
+    @Test
+    public void buyMerchandiseTest() {
+        testBlock("get deal by id Test block{");
+        if (connect) {
+            String token = model.login(user, pasword);
+            try {
+                System.out.println(model.buyMerchandise(3, user, token));
+                System.out.println(model.buyMerchandise(4, user, token));
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+            model.disconnect(user, token);
+        } else {
+            System.out.print("Can't connect database ");
+            testBlock("Skipping...");
+        }
+        testBlock("}");
+    }
+
+    @Test
+    public void updateTest() {
+        testBlock("update merchandise values Test block{");
+        if (connect) {
+            String token = model.login(user, pasword);
+            try {
+                model.setValuesToMerchandise(12, "age=14 height=121", user, token);
+                System.out.println("Values successfully changed");
+            } catch (Throwable e) {
+                System.out.println(e.getMessage());
+            }
+            model.disconnect(user, token);
+        } else {
+            System.out.print("Can't connect database ");
+            testBlock("Skipping...");
+        }
+        testBlock("}");
+    }
+
+    @Test
+    public void removeTest() {
+        testBlock("update merchandise values Test block{");
+        if (connect) {
+            String token = model.login(user, pasword);
+            try {
+                try {
+                    model.removeMerchandise(13, user, token);
+                } catch (Exception e) {
+                    System.out.println(e.getMessage());
+                }
+                model.getDealsByUser(user, token).stream().map(o -> {
+                    JsonParser parser = new JsonParser();
+                    return parser.parse(o).getAsJsonObject();
+                })
+                        .filter(deal -> deal.get("state").getAsString().equals("removed"))
+                        .map(o -> o.get("state").getAsString() + " " + o.get("merchandise").getAsJsonObject().get("id"))
+                        .forEach(System.out::println);
+            } catch (Throwable e) {
+                System.out.println(e.getMessage());
+            }
+            model.disconnect(user, token);
+        } else {
+            System.out.print("Can't connect database ");
+            testBlock("Skipping...");
+        }
+        testBlock("}");
+    }
+
+    @Test
+    public void chandgePassTest() {
+        testBlock("change password Test block{");
+        if (connect) {
+            String token = model.login(user, pasword);
+            try {
+                model.changePassword(user, "testLogin", token);
+                model.changePassword(user, pasword, token);
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
             model.disconnect(user, token);
         } else {
             System.out.print("Can't connect database ");

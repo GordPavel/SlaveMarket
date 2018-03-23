@@ -141,7 +141,7 @@ public class RuntimeDbTests {
                 .parse(merch.getAllInfo())
                 .getAsJsonObject();
         object.add("state",
-                new JsonPrimitive(" on sale "));
+                new JsonPrimitive("on sale"));
         object.add("user",
                 new JsonPrimitive("test"));
         object.add("price",

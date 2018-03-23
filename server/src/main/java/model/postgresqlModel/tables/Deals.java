@@ -8,6 +8,8 @@
 
 package model.postgresqlModel.tables;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonPrimitive;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

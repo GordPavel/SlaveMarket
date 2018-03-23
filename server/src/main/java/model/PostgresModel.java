@@ -1,6 +1,9 @@
 package model;
 
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import com.google.gson.JsonPrimitive;
 import exceptions.*;
 import model.database.DealState;
 import model.merchandises.Merchandise;
@@ -22,15 +25,13 @@ import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
 public class PostgresModel implements Model {
     private Session session;
     private ResourceBundle errCodes = ResourceBundle.getBundle("errcodes");
-    private StoredProcedureQuery login;
-    private StoredProcedureQuery logout;
-    private StoredProcedureQuery addMerch;
 
     /**
      * Constructor with default credentials.
@@ -41,7 +42,6 @@ public class PostgresModel implements Model {
         BasicConfigurator.configure();
         SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         session = sessionFactory.openSession();
-        initProcedures();
     }
 
     /**
@@ -64,52 +64,62 @@ public class PostgresModel implements Model {
 
             SessionFactory factory = hibConfiguration.buildSessionFactory();
             session = factory.openSession();
-            initProcedures();
         } catch (Throwable thr) {
             System.err.println("Can't establish connection to postgresql");
             throw new ExceptionInInitializerError(thr);
         }
     }
 
-    private void initProcedures() {
-        login = session.createStoredProcedureQuery("login")
-                .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(3, String.class, ParameterMode.OUT);
-        logout = session.createStoredProcedureQuery("logout")
-                .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(3, Boolean.class, ParameterMode.OUT);
-        addMerch = session.createStoredProcedureQuery("addByMap")
-                .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(3, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(4, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(5, Integer.class, ParameterMode.IN);
-    }
-
 
     @Override
     public void addMerchandise(Merchandise merch, String user, String token, int price) {
-
+        throw new UnsupportedOperationException("lol. That shit isn't working");
     }
 
     @Override
     public void removeMerchandise(Merchandise merch, String user, String token) {
-
+        throw new UnsupportedOperationException("lol. That shit isn't working");
     }
 
     @Override
     public void removeMerchandise(int id, String user, String token) throws MerchandiseAlreadyBought {
-
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.createStoredProcedureQuery("removeMerchandise")
+                    .registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(3, String.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(4, Boolean.class, ParameterMode.OUT)
+                    .setParameter(1, id)
+                    .setParameter(2, user)
+                    .setParameter(3, token).getOutputParameterValue(4);
+            transaction.commit();
+        } catch (JDBCException e) {
+            transaction.rollback();
+            throw new MerchandiseRemoveException(getMessageByCode(e));
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     @Override
     public List<String> searchMerchandise(String query) throws WrongQueryException {
         Query querySet = session.createNativeQuery("SELECT * FROM searchMerchandise(:query)")
                 .addEntity(Merchandises.class).setParameter("query", query);
+        JsonParser parser = new JsonParser();
         return ((List<Merchandises>) querySet.getResultList())
-                .stream().map(Merchandises::toString).collect(toList());
+                .stream().map(o -> {
+                    Deals deals = (Deals) session.createNativeQuery("SELECT * FROM getLastDeal(:id)")
+                            .setParameter("id", o.getId()).addEntity(Deals.class).getSingleResult();
+                    JsonObject object = parser.parse(o.getAllInfo()).getAsJsonObject();
+                    object.add("state", new JsonPrimitive(deals.getState()));
+                    Users users = (Users) session.createQuery("from Users where id=:id")
+                            .setParameter("id", deals.getUserId()).getSingleResult();
+                    object.add("user", new JsonPrimitive(users.getUsername()));
+                    object.add("price", new JsonPrimitive(deals.getPrice()));
+                    return object.toString();
+                }).collect(toList());
     }
 
     @Override
@@ -117,7 +127,7 @@ public class PostgresModel implements Model {
         try {
             Merchandises merch = (Merchandises) session.createQuery("from Merchandises where id = :id")
                     .setParameter("id", id).getSingleResult();
-            return merch.toString();
+            return merch.getAllInfo();
         } catch (NoResultException e) {
             return null;
         }
@@ -125,12 +135,54 @@ public class PostgresModel implements Model {
 
     @Override
     public String buyMerchandise(int id, String user, String token) throws MerchandiseNotFoundException {
-        return null;
+        Transaction transaction = session.beginTransaction();
+        try {
+            StoredProcedureQuery buyMerch = session.createStoredProcedureQuery("buyMerchandise")
+                    .registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(3, String.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(4, String.class, ParameterMode.OUT)
+                    .setParameter(1, id)
+                    .setParameter(2, user)
+                    .setParameter(3, token);
+            String merch = buyMerch.getOutputParameterValue(4).toString();
+            transaction.commit();
+            return merch;
+        } catch (JDBCException e) {
+            transaction.rollback();
+            throw new UserException(getMessageByCode(e));
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     @Override
     public void setValuesToMerchandise(int id, String params, String user, String token) {
-
+        String kvs = Arrays.stream(params.trim().split(" "))
+                .collect(Collectors.joining(", "));
+        StoredProcedureQuery updateMerch = session.createStoredProcedureQuery("canUpdateMerch")
+                .registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(3, String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(4, Boolean.class, ParameterMode.OUT).setParameter(1, id)
+                .setParameter(2, user)
+                .setParameter(3, token);
+        session.beginTransaction();
+        try {
+            updateMerch.getOutputParameterValue(4);
+            Merchandises merch = (Merchandises) session.createQuery("from Merchandises where id=:id")
+                    .setParameter("id", id).getSingleResult();
+            session.createNativeQuery("UPDATE " + merch.getClassName() + " SET " + kvs + " WHERE id=:id")
+                    .setParameter("id", id).executeUpdate();
+            session.getTransaction().commit();
+        } catch (JDBCException e) {
+            session.getTransaction().rollback();
+            throw new MerchandiseUpdateException(getMessageByCode(e));
+        } catch (Exception e) {
+            session.getTransaction().rollback();
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     @Override
@@ -163,9 +215,6 @@ public class PostgresModel implements Model {
             keys.append(key).append(", ");
             vals.append("?").append(", ");
         }
-        System.out.println(className);
-        System.out.println(keys.substring(0, keys.length() - 2));
-        System.out.println(vals.substring(0, vals.length() - 2));
         NativeQuery query = session.createNativeQuery("INSERT INTO "
                 + className +
                 "(" + keys.substring(0, keys.length() - 2) + ") " +
@@ -206,15 +255,23 @@ public class PostgresModel implements Model {
 
     @Override
     public String login(String username, String password) {
+        Transaction transaction = session.beginTransaction();
         try {
+            StoredProcedureQuery login = session.createStoredProcedureQuery("login")
+                    .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(3, String.class, ParameterMode.OUT);
             login.setParameter(1, username);
             login.setParameter(2, password);
-            Transaction transaction = session.beginTransaction();
             String token = login.getOutputParameterValue(3).toString();
             transaction.commit();
             return token;
         } catch (JDBCException e) {
+            transaction.rollback();
             throw new UserException(getMessageByCode(e));
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -231,6 +288,9 @@ public class PostgresModel implements Model {
         } catch (JDBCException e) {
             transaction.rollback();
             throw new UserException(getMessageByCode(e));
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -240,13 +300,21 @@ public class PostgresModel implements Model {
 
     @Override
     public void disconnect(String username, String token) {
+        Transaction transaction = session.beginTransaction();
         try {
+            StoredProcedureQuery logout = session.createStoredProcedureQuery("logout")
+                    .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
+                    .registerStoredProcedureParameter(3, Boolean.class, ParameterMode.OUT);
             logout.setParameter(1, username).setParameter(2, token);
-            Transaction transaction = session.beginTransaction();
             logout.getOutputParameterValue(3);
             transaction.commit();
         } catch (JDBCException e) {
+            transaction.rollback();
             throw new UserException(getMessageByCode(e));
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new IllegalArgumentException(e.getMessage());
         }
     }
 
@@ -255,28 +323,85 @@ public class PostgresModel implements Model {
         List<Deals> dealsList = session.createQuery("from deals where userId=(select id from Users where username like :un AND token like :tkn)")
                 .setParameter("un", username)
                 .setParameter("tkn", token).getResultList();
-        dealsList.stream().map(deal -> {
-            return "";
+        JsonParser parser = new JsonParser();
+        return dealsList.stream().map(deal -> {
+            JsonObject mDeal = new JsonObject();
+            mDeal.add("date",
+                    new JsonPrimitive(deal.getTime().toString()));
+            mDeal.add("id", new JsonPrimitive(deal.getId()));
+            mDeal.add("userId", new JsonPrimitive(deal.getUserId()));
+            mDeal.add("state", new JsonPrimitive(deal.getState()));
+            mDeal.add("price", new JsonPrimitive(deal.getPrice()));
+            mDeal.add("merchandise", parser.parse(getMerchantById(deal.getMerchId())));
+            return mDeal.toString();
         }).collect(toList());
-        return null;
     }
 
     @Override
     public boolean changeLogin(String username, String newLogin, String token) {
-        return false;
+        StoredProcedureQuery updateUsername = session.createStoredProcedureCall("updateUsername")
+                .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(3, String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(4, Boolean.class, ParameterMode.OUT)
+                .setParameter(1, username)
+                .setParameter(2, newLogin)
+                .setParameter(3, token);
+        Transaction transaction = session.beginTransaction();
+        try {
+            boolean updated = (Boolean) updateUsername.getOutputParameterValue(4);
+            transaction.commit();
+            return updated;
+        } catch (JDBCException e) {
+            transaction.rollback();
+            throw new UserException(getMessageByCode(e));
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     @Override
     public void changePassword(String username, String newPassword, String token) {
-
+        StoredProcedureQuery updatePassword = session.createStoredProcedureCall("updatePassword")
+                .registerStoredProcedureParameter(1, String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(3, String.class, ParameterMode.IN)
+                .registerStoredProcedureParameter(4, Boolean.class, ParameterMode.OUT)
+                .setParameter(1, username)
+                .setParameter(2, newPassword)
+                .setParameter(3, token);
+        Transaction transaction = session.beginTransaction();
+        try {
+            updatePassword.getOutputParameterValue(4);
+            transaction.commit();
+        } catch (JDBCException e) {
+            transaction.rollback();
+            throw new UserException(getMessageByCode(e));
+        } catch (Exception e) {
+            transaction.rollback();
+            throw new IllegalArgumentException(e.getMessage());
+        }
     }
 
     @Override
     public String getDealById(int id) {
-        Deals deals = (Deals) session.createQuery("from deals where id = :id")
-                .setParameter("id", id).getSingleResult();
-        System.out.println(deals);
-        return null;
+        try {
+            Deals deal = (Deals) session.createQuery("from deals where id = :id")
+                    .setParameter("id", id).getSingleResult();
+            JsonParser parser = new JsonParser();
+            JsonObject mDeal = new JsonObject();
+            mDeal.add("date",
+                    new JsonPrimitive(deal.getTime().toString()));
+            mDeal.add("id", new JsonPrimitive(deal.getId()));
+            mDeal.add("state", new JsonPrimitive(deal.getState()));
+            mDeal.add("price", new JsonPrimitive(deal.getPrice()));
+            mDeal.add("userId", new JsonPrimitive(deal.getUserId()));
+            mDeal.add("merchandise", parser.parse(getMerchantById(deal.getMerchId())));
+            return mDeal.toString();
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

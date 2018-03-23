@@ -2,7 +2,7 @@ import controllers.Controller;
 import controllers.NativeController;
 import controllers.ServerController;
 import model.Model;
-import model.SlaveMarketModel;
+import model.PostgresModel;
 import model.database.Logger;
 import view.cli.CommandLineView;
 
@@ -16,35 +16,36 @@ import java.util.concurrent.Executors;
  */
 public class StartServer {
 
-  /**
-   * Function to start the program.
-   *
-   * @param args some arguments.
-   */
-  public static void main(String[] args) {
-    int port = 22033;
-    Model model = new SlaveMarketModel();
-    ServerSocket serverSocket;
-    Logger logger = new Logger();
-    Executors.newSingleThreadExecutor()
-            .execute(() -> {
-              NativeController mainController = new NativeController(model);
-              CommandLineView view = new CommandLineView(model, mainController);
-              view.launch();
-            });
-    try {
-      serverSocket = new ServerSocket(port);
-      while (!serverSocket.isClosed()) {
-        Socket connection = serverSocket.accept();
+    /**
+     * Function to start the program.
+     *
+     * @param args some arguments.
+     */
+    public static void main(String[] args) {
+        int port = 22033;
+        ServerSocket serverSocket;
+        Logger logger = new Logger();
         Executors.newSingleThreadExecutor()
                 .execute(() -> {
-                  Controller controller = new ServerController(model, connection);
-                  controller.start();
+                    Model model = new PostgresModel();
+                    NativeController mainController = new NativeController(model);
+                    CommandLineView view = new CommandLineView(mainController);
+                    view.launch();
                 });
-        logger.systemLog("Connection accepted");
-      }
-    } catch (IOException e) {
-      logger.logError("Can't open server socket");
+        try {
+            serverSocket = new ServerSocket(port);
+            while (!serverSocket.isClosed()) {
+                Socket connection = serverSocket.accept();
+                Executors.newSingleThreadExecutor()
+                        .execute(() -> {
+                            Model model = new PostgresModel();
+                            Controller controller = new ServerController(model, connection);
+                            controller.start();
+                        });
+                logger.systemLog("Connection accepted");
+            }
+        } catch (IOException e) {
+            logger.logError("Can't open server socket");
+        }
     }
-  }
 }

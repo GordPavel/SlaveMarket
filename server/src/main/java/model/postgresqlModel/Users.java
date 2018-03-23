@@ -20,6 +20,9 @@ public class Users implements Serializable {
     @Column(name = "token")
     private String token;
 
+    @Column(name = "balance")
+    private int balance;
+
     public int getId() {
         return id;
     }

@@ -1,6 +1,7 @@
 package model.database;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import model.merchandises.Merchandise;
 import model.merchandises.classes.Alien;
@@ -106,7 +107,8 @@ public class Deal implements Serializable, Comparable<Deal> {
         object.add("id", new JsonPrimitive(id));
         object.add("state", new JsonPrimitive(state.toString()));
         object.add("price", new JsonPrimitive(price));
-        object.add("merchandise", new JsonPrimitive(merchandise.getAllInfo()));
+        JsonParser parser = new JsonParser();
+        object.add("merchandise", parser.parse(merchandise.getAllInfo()));
 //    return this.time.format(DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss"))
 //            + ", merchandise=" + this.merchandise
 //            + ", price=" + this.price

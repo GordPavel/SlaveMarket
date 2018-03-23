@@ -34,7 +34,7 @@ public class NativeController implements Controller {
      */
     public NativeController(Model model) {
         this.model = model;
-        view = new CommandLineView(model, this);
+        view = new CommandLineView(this);
 
     }
 

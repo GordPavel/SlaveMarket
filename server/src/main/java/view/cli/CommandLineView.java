@@ -18,7 +18,7 @@ import java.util.stream.IntStream;
 /**
  * Realization of View with Observer.
  */
-public class CommandLineView implements Observer, View {
+public class CommandLineView implements View {
 
   private final ResourceBundle resources = ResourceBundle.getBundle("app");
   private final Controller controller;
@@ -29,11 +29,9 @@ public class CommandLineView implements Observer, View {
   /**
    * Constructor to subscribe new view as observer . And link controllers.
    *
-   * @param model      to register itself
    * @param controller to manage inputs
    */
-  public CommandLineView(Model model, Controller controller) {
-    ((Observable) model).addObserver(this);
+  public CommandLineView( Controller controller) {
     this.controller = controller;
 
   }
@@ -123,31 +121,6 @@ public class CommandLineView implements Observer, View {
     }
   }
 
-  /**
-   * Apply action performed after the trigger.
-   */
-
-  public void update() {
-
-  }
-
-  /**
-   * Update information of Merchandise with id.
-   *
-   * @param id id of changed element
-   */
-  public void deleted(int id) {
-
-  }
-
-  /**
-   * Update information of Merchandise with id.
-   *
-   * @param id id of changed element
-   */
-  public void changed(int id) {
-
-  }
 
   /**
    * Launch the view or CLI.

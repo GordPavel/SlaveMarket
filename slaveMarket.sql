@@ -54,7 +54,8 @@ CREATE TABLE IF NOT EXISTS users
   id       SERIAL      NOT NULL,
   username VARCHAR(20) NOT NULL,
   password VARCHAR(20) NOT NULL,
-  token    VARCHAR
+  token    VARCHAR,
+  balance  INTEGER DEFAULT 0
 );
 
 CREATE UNIQUE INDEX IF NOT EXISTS users_id_uindex
@@ -79,7 +80,7 @@ BEGIN
   check_data := TRUE;
   IF EXISTS(SELECT *
             FROM users
-            WHERE password = NEW.password AND username = NEW.username)
+            WHERE password = ENCODE(CONVERT_TO(NEW.password, 'UTF-8'), 'base64') AND username = NEW.username)
   THEN
     message := 'This username already taken';
     errcode := 'U0001';
@@ -121,14 +122,11 @@ CREATE TABLE IF NOT EXISTS merchandises
   info    VARCHAR          NOT NULL
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS merchandises_id_uindex
-  ON merchandises (id);
-
-CREATE UNIQUE INDEX IF NOT EXISTS merchandises_pkey
+CREATE UNIQUE INDEX IF NOT EXISTS merchandises_id_pk
   ON merchandises (id);
 
 ALTER TABLE merchandises
-  ADD CONSTRAINT merchandises_pkey
+  ADD CONSTRAINT merchandises_id_pk
 PRIMARY KEY (id);
 
 CREATE OR REPLACE FUNCTION readonly_trigger_function()
@@ -200,7 +198,7 @@ BEGIN
     RETURN NULL;
   END IF;
 
-  NEW.class := 'slave';
+  NEW.class := 'slaves';
   NEW.benefit := mod(CAST((NEW.height * NEW.weight / NEW.age) AS NUMERIC), 100);
   NEW.info := json_build_object('id', NEW.id,
                                 'class', NEW.class,
@@ -274,7 +272,7 @@ BEGIN
     RETURN NULL;
   END IF;
 
-  NEW.class := 'alien';
+  NEW.class := 'aliens';
   NEW.benefit := mod(CAST((NEW.height * NEW.weight / NEW.age) AS NUMERIC), 100);
   NEW.info := json_build_object('id', NEW.id,
                                 'class', NEW.class,
@@ -346,7 +344,7 @@ BEGIN
     USING ERRCODE = code;
     RETURN NULL;
   END IF;
-  NEW.class := 'poison';
+  NEW.class := 'poisons';
   NEW.benefit := NEW.chance;
   NEW.info := json_build_object('id', NEW.id,
                                 'class', NEW.class,
@@ -457,9 +455,6 @@ CREATE TABLE IF NOT EXISTS deals
   merchid INTEGER     NOT NULL,
   price   INTEGER     NOT NULL
 );
-
-CREATE UNIQUE INDEX IF NOT EXISTS deals_id_uindex
-  ON deals (id);
 
 CREATE UNIQUE INDEX IF NOT EXISTS deals_pkey
   ON deals (id);
@@ -624,7 +619,7 @@ BEGIN
   patt := $1 || '%';
   RETURN QUERY SELECT sl.id
                FROM slaves AS sl
-               WHERE name ILIKE patt OR sl.class ILIKE patt;
+               WHERE name ILIKE patt OR sl.class ILIKE patt OR gender ILIKE patt;
   RETURN;
 END;
 $$;
@@ -678,8 +673,198 @@ BEGIN
                  UNION (SELECT sp.id
                         FROM selectPoisons($1) AS sp)
 
-               )
+               ) AND mrc.id NOT IN (SELECT merchid
+                                    FROM deals
+                                    WHERE state <> 'on sale')
                ORDER BY mrc.id ASC;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION buymerchandise(mid INTEGER, userlogin CHARACTER VARYING, usertoken CHARACTER VARYING)
+  RETURNS CHARACTER VARYING
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  deal deals%ROWTYPE;
+BEGIN
+  IF EXISTS(SELECT *
+            FROM users AS us
+            WHERE username LIKE $2 AND token LIKE $3)
+  THEN
+    IF (SELECT state
+        FROM deals
+        WHERE merchid = $1
+        ORDER BY id DESC
+        LIMIT 1) LIKE 'on sale'
+    THEN
+      SELECT *
+      INTO deal
+      FROM deals
+      WHERE merchid = $1
+      ORDER BY id DESC
+      LIMIT 1;
+      INSERT INTO deals (userid, state, time, merchid, price) VALUES (deal.userid,
+        'sold', now(), $1, deal.price);
+      INSERT INTO deals (userid, state, time, merchid, price) VALUES ((SELECT id
+                                                                       FROM users
+                                                                       WHERE username LIKE $2 AND token LIKE $3),
+        'bought', now(), $1, deal.price);
+      RETURN (SELECT info
+              FROM merchandises
+              WHERE id = $1);
+    ELSE
+      RAISE EXCEPTION 'Merchandise already bought'
+      USING ERRCODE ='BM001';
+    END IF;
+  ELSE
+    RAISE EXCEPTION 'Wrong token'
+    USING ERRCODE ='U0007';
+  END IF;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION canupdatemerch(mid INTEGER, uname CHARACTER VARYING, utoken CHARACTER VARYING)
+  RETURNS BOOLEAN
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  usr users%ROWTYPE;
+BEGIN
+  IF EXISTS(SELECT *
+            FROM users AS us
+            WHERE username LIKE $2 AND token LIKE $3)
+  THEN
+    SELECT *
+    INTO usr
+    FROM users AS us
+    WHERE username LIKE $2 AND token LIKE $3;
+    IF (SELECT userid
+        FROM deals
+        WHERE merchid = $1
+              AND state <> 'sold'
+        ORDER BY id DESC
+        LIMIT 1) = usr.id
+    THEN
+      RETURN TRUE;
+    ELSE RAISE EXCEPTION 'Merchandise not yours'
+    USING ERRCODE ='SV001';
+    END IF;
+  ELSE RAISE EXCEPTION 'Wrong token'
+  USING ERRCODE ='U0007';
+  END IF;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION removemerchandise(mid INTEGER, uname CHARACTER VARYING, utoken CHARACTER VARYING)
+  RETURNS BOOLEAN
+LANGUAGE plpgsql
+AS $$
+DECLARE
+  usr  users%ROWTYPE;
+  deal deals%ROWTYPE;
+BEGIN
+  IF EXISTS(SELECT *
+            FROM users AS us
+            WHERE username LIKE $2 AND token LIKE $3)
+  THEN
+    SELECT *
+    INTO usr
+    FROM users AS us
+    WHERE username LIKE $2 AND token LIKE $3;
+    SELECT *
+    INTO deal
+    FROM deals
+    WHERE merchid = $1
+          AND state <> 'sold'
+    ORDER BY id DESC
+    LIMIT 1;
+    IF deal.userid = usr.id
+    THEN
+      IF deal.state = 'removed'
+      THEN
+        RAISE EXCEPTION 'Merchandise already removed'
+        USING ERRCODE ='RM001';
+      ELSE
+        INSERT INTO deals (userid, state, merchid, price) VALUES (usr.id, 'removed', deal.merchid, deal.price);
+        RETURN TRUE;
+      END IF;
+    ELSE RAISE EXCEPTION 'Merchandise not yours'
+    USING ERRCODE ='SV001';
+    END IF;
+  ELSE RAISE EXCEPTION 'Wrong token'
+  USING ERRCODE ='U0007';
+  END IF;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION updateusername(currentname CHARACTER VARYING, newname CHARACTER VARYING,
+                                          curtoken    CHARACTER VARYING)
+  RETURNS BOOLEAN
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  IF exists(SELECT *
+            FROM users
+            WHERE username LIKE currentName AND token LIKE $3)
+  THEN
+    IF EXISTS(SELECT
+              FROM users
+              WHERE username = $2 AND password LIKE (SELECT password
+                                                     FROM users AS us
+                                                     WHERE username LIKE $1 AND token LIKE $3))
+    THEN
+      RETURN FALSE;
+    ELSE
+      UPDATE users
+      SET username = $2
+      WHERE username = $1 AND token = $3;
+      RETURN TRUE;
+    END IF;
+  ELSE
+    RAISE EXCEPTION 'Wrong token'
+    USING ERRCODE ='U0007';
+  END IF;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION updatepassword(currentname CHARACTER VARYING, newpass CHARACTER VARYING,
+                                          curtoken    CHARACTER VARYING)
+  RETURNS BOOLEAN
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  IF exists(SELECT *
+            FROM users
+            WHERE username LIKE $1 AND token LIKE $3)
+  THEN
+    IF EXISTS(SELECT
+              FROM users
+              WHERE username = $1 AND password LIKE ENCODE(CONVERT_TO($2, 'UTF-8'), 'base64'))
+    THEN
+      RETURN FALSE;
+    ELSE
+      UPDATE users
+      SET password = ENCODE(CONVERT_TO($2, 'UTF-8'), 'base64')
+      WHERE username = $1 AND token = $3;
+      RETURN TRUE;
+    END IF;
+  ELSE
+    RAISE EXCEPTION 'Wrong token'
+    USING ERRCODE ='U0007';
+  END IF;
+END;
+$$;
+
+CREATE OR REPLACE FUNCTION getlastdeal(merch INTEGER)
+  RETURNS SETOF DEALS
+LANGUAGE plpgsql
+AS $$
+BEGIN
+  RETURN QUERY SELECT *
+               FROM deals
+               WHERE merchid = $1
+               ORDER BY id DESC
+               LIMIT 1;
 END;
 $$;
 
@@ -690,7 +875,6 @@ DELETE FROM food;
 DELETE FROM deals;
 
 ALTER SEQUENCE merchandise_id_super RESTART 1;
-
 ALTER SEQUENCE deals_id_seq RESTART 1;
 
 DELETE FROM classes *;
