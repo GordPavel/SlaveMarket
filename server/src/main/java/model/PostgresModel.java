@@ -1,16 +1,20 @@
 package model;
 
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import com.google.gson.JsonPrimitive;
+import com.google.gson.*;
+import com.google.gson.stream.JsonReader;
 import exceptions.*;
 import model.database.DealState;
 import model.merchandises.Merchandise;
+import model.postgresqlModel.JsonExportObject;
 import model.postgresqlModel.Users;
 import model.postgresqlModel.tables.Classes;
 import model.postgresqlModel.tables.Deals;
 import model.postgresqlModel.tables.Merchandises;
+import model.postgresqlModel.tables.merchandises.Aliens;
+import model.postgresqlModel.tables.merchandises.Foods;
+import model.postgresqlModel.tables.merchandises.Poisons;
+import model.postgresqlModel.tables.merchandises.Slaves;
 import org.apache.log4j.BasicConfigurator;
 import org.hibernate.JDBCException;
 import org.hibernate.Session;
@@ -23,6 +27,9 @@ import org.hibernate.query.Query;
 import javax.persistence.NoResultException;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
+import java.io.FileReader;
+import java.io.FileWriter;
+import java.io.IOException;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -69,7 +76,6 @@ public class PostgresModel implements Model {
             throw new ExceptionInInitializerError(thr);
         }
     }
-
 
     @Override
     public void addMerchandise(Merchandise merch, String user, String token, int price) {
@@ -406,11 +412,106 @@ public class PostgresModel implements Model {
 
     @Override
     public boolean exportAllData(String fileName) {
-        return false;
+
+        if (!fileName.endsWith(".json")) {
+            fileName += ".json";
+        }
+        JsonExportObject root = new JsonExportObject();
+        try {
+            List<Users> users = session.createQuery("from Users ").getResultList();
+            List<Deals> deals = session.createQuery("from deals order by id asc ").getResultList();
+
+            List<Slaves> slaves = session.createQuery("from Slaves order by id  asc ").getResultList();
+            List<Aliens> aliens = session.createQuery("from Aliens order by id  asc ").getResultList();
+            List<Poisons> poisons = session.createQuery("from Poisons order by id  asc ").getResultList();
+            List<Foods> foods = session.createQuery("from Foods order by id  asc ").getResultList();
+
+            root.setUsers(users);
+            root.setDeals(deals);
+
+            root.setSlaves(slaves);
+            root.setAliens(aliens);
+            root.setPoisons(poisons);
+            root.setFoods(foods);
+
+            Gson gson = new GsonBuilder().setPrettyPrinting().create();
+            try (FileWriter writer = new FileWriter(fileName)) {
+                gson.toJson(root, writer);
+            } catch (IOException e) {
+                System.out.println(e.getMessage());
+                return false;
+            }
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 
     @Override
     public boolean importAllData(String filename) {
+        if (!filename.endsWith(".json")) {
+            filename += ".json";
+        }
+        try (JsonReader reader = new JsonReader(new FileReader(filename))) {
+            Gson gson = new Gson();
+            JsonExportObject root = gson.fromJson(reader, JsonExportObject.class);
+            root.getUsers().forEach(users -> {
+                int oldId = users.getId();
+                System.out.println(users.getUsername());
+                String pass = users.getPassword();
+                session.beginTransaction();
+                try {
+                    users.setPassword((String) session.createNativeQuery(
+                            "SELECT CONVERT_FROM(DECODE(:pass, 'BASE64'), 'UTF-8')"
+                    ).setParameter("pass", users.getPassword()).getSingleResult());
+                    session.save(users);
+                    session.getTransaction().commit();
+                    setNewUserId(root.getDeals(), oldId, users.getId());
+                } catch (JDBCException e) {
+                    session.getTransaction().rollback();
+                    // If user already exists
+                    // Error code U0001 -> user already in database
+                    if (e.getSQLException().getSQLState().equals("U0001")) {
+                        Users exUsers = (Users) session.createQuery("from Users where username=:un and password=:pss")
+                                .setParameter("un", users.getUsername())
+                                .setParameter("pss", pass)
+                                .getSingleResult();
+                        setNewUserId(root.getDeals(), users.getId(), exUsers.getId());
+                    }
+                    System.out.println(getMessageByCode(e));
+                }
+            });
+            List<Aliens> aliens = root.getAliens();
+
+            aliens.stream().sorted(Comparator.comparingInt(Aliens::getId).reversed()).forEach(alien -> {
+                int id = alien.getId();
+                session.save(alien);
+                setMerchId(root.getDeals(), id, alien.getId());
+            });
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
         return false;
+    }
+
+    private void setMerchId(List<Deals> deals, int oldId, int newId) {
+        if (oldId != newId) {
+            deals.forEach(deal -> {
+                if (deal.getMerchId() == oldId) {
+                    deal.setMerchId(newId);
+                }
+            });
+        }
+    }
+
+    private void setNewUserId(List<Deals> deals, int oldId, int newId) {
+        if (oldId != newId) {
+            deals.forEach(deal -> {
+                if (deal.getUserId() == oldId) {
+                    deal.setUserId(newId);
+                }
+            });
+        }
     }
 }

@@ -21,7 +21,6 @@ import java.io.File;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
-import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -269,64 +268,40 @@ public class MerchDb implements Database {
   //
   // total_hours_wasted_here = 45
   */
-        if (!Pattern.compile("all", Pattern.CASE_INSENSITIVE).matcher(query.trim()).lookingAt()) {
-            String namePattern = "([a-zA-z]+[[0-9]*[a-zA-z]]*)";
-            Pattern pattern = Pattern.compile("\\sAND\\s", Pattern.CASE_INSENSITIVE);
-            Pattern notEqQuerySplitter = Pattern.compile(namePattern + "(>|>=|<|< =)([\\d]+[.\\d]*)");
-            Pattern eqQuerySplitter = Pattern.compile(namePattern + "(=|!=)([\\w]+[.\\w]*)");
-            String[] strings = pattern.split(query);
-            for (String subQuery : strings) {
-                Matcher notEqualsMatcher = notEqQuerySplitter.matcher(subQuery);
-                Matcher equalsMatcher = eqQuerySplitter.matcher(subQuery);
-                Matcher finalMatcher;
-                if (notEqualsMatcher.lookingAt()) {
-                    finalMatcher = notEqualsMatcher;
-                } else if (equalsMatcher.lookingAt()) {
-                    finalMatcher = equalsMatcher;
-                } else {
-                    throw new WrongQueryException(subQuery);
+        Pattern pattern = Pattern.compile(query + "(\\w)*");
+        return merchandises.filter(merchandise -> {
+            Method[] methods = merchandise.getClass().getMethods();
+            for (Method method : methods) {
+                if (!method.getName().startsWith("get")) {
+                    continue;
                 }
-                String field = finalMatcher.group(1).toUpperCase();
-                String value = finalMatcher.group(3);
-                QueryComparator<String, String> finalComparator = createComparator(finalMatcher.group(2),
-                        subQuery);
-                merchandises = merchandises.filter(merchandise -> {
-                    Method[] methods = merchandise.getClass().getMethods();
-                    for (Method method : methods) {
-                        if (!method.getName().startsWith("get")) {
-                            continue;
-                        }
-                        if (method.getParameterTypes().length != 0) {
-                            continue;
-                        }
-                        if (void.class.equals(method.getReturnType())) {
-                            continue;
-                        }
-                        try {
-                            if (method.getName().substring(3).toUpperCase().equals(field)
-                                    && null != lastDeal(merchandise)
-                                    && lastDeal(merchandise).getState().equals(DealState.FOR_SALE)
-                                    && finalComparator.apply(String.valueOf(method.invoke(merchandise)), value)) {
-                                return true;
-                            }
-                        } catch (IllegalAccessException | InvocationTargetException e) {
-                            System.out.println("Something bad happens sorry.");
-                        }
+                if (method.getParameterTypes().length != 0) {
+                    continue;
+                }
+                if (void.class.equals(method.getReturnType())) {
+                    continue;
+                }
+                if (!method.getReturnType().equals(String.class)) {
+                    continue;
+                }
+                try {
+                    if (null != lastDeal(merchandise)
+                            && lastDeal(merchandise).getState().equals(DealState.FOR_SALE)
+                            && pattern.matcher(String.valueOf(method.invoke(merchandise))).lookingAt()) {
+//                                    && finalComparator.apply(String.valueOf(method.invoke(merchandise)), value)) {
+                        return true;
                     }
-                    return false;
-                });
+                } catch (IllegalAccessException | InvocationTargetException e) {
+                    logger.logError("Something bad happens sorry. While searching " + query + " cause:" + e.getMessage());
+                    throw new MerchandiseNotFoundException("Something bad happens sorry. While searching " + query);
+                }
             }
-            return merchandises
-                    .sorted(Comparator
-                            .comparingInt(Merchandise::getId)
-                            .reversed())
-                    .map(this::toJson).collect(toList());
-        }
-        return merchandises.sorted(Comparator
+            return false;
+        }).sorted(Comparator
                 .comparingInt(Merchandise::getId)
                 .reversed())
-                .filter(merchandise -> lastDeal(merchandise).getState().equals(DealState.FOR_SALE))
                 .map(this::toJson).collect(toList());
+//        return merchandises;
     }
 
     private String toJson(Merchandise merchandise) {
@@ -343,58 +318,6 @@ public class MerchDb implements Database {
         return object.toString();
     }
 
-    /**
-     * Function to create comparator for subQuery.
-     *
-     * @param sign sign of subQuery between key an value
-     * @return lambda comparator that compare to values and return boolean.
-     */
-    private QueryComparator<String, String> createComparator(String sign, String query) {
-        QueryComparator<String, String> comparator = null;
-        if (">".equals(sign)) {
-            comparator = (left, right) -> {
-                try {
-                    return Double.parseDouble(left) > Double.parseDouble(right);
-                } catch (NumberFormatException e) {
-                    throw new WrongQueryException(query);
-                }
-            };
-        }
-        if ("<".equals(sign)) {
-            comparator = (left, right) -> {
-                try {
-                    return Double.parseDouble(left) < Double.parseDouble(right);
-                } catch (NumberFormatException e) {
-                    throw new WrongQueryException(query);
-                }
-            };
-        }
-        if ("<=".equals(sign)) {
-            comparator = (left, right) -> {
-                try {
-                    return Double.parseDouble(left) <= Double.parseDouble(right);
-                } catch (NumberFormatException e) {
-                    throw new WrongQueryException(query);
-                }
-            };
-        }
-        if (">=".equals(sign)) {
-            comparator = (left, right) -> {
-                try {
-                    return Double.parseDouble(left) >= Double.parseDouble(right);
-                } catch (NumberFormatException e) {
-                    throw new WrongQueryException(query);
-                }
-            };
-        }
-        if ("=".equals(sign)) {
-            comparator = String::equals;
-        }
-        if ("!=".equals(sign)) {
-            comparator = (left, right) -> !left.equals(right);
-        }
-        return comparator;
-    }
 
     /**
      * Returns merchandise by id or exception.
@@ -428,13 +351,6 @@ public class MerchDb implements Database {
                     return list.get(0);
                 }));
     }
-
-//  private Deal lastDeal(Merchandise merchandise, Expression expression) {
-//    deals.getDeals().stream()
-//            .filter(deal -> deal.getMerchandise().equals(merchandise)
-//                    && expression.execute();
-//            .collect(toList());
-//  }
 
 
     /**

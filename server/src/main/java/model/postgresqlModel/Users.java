@@ -57,4 +57,12 @@ public class Users implements Serializable {
 
     public void login() {
     }
+
+    public int getBalance() {
+        return balance;
+    }
+
+    public void setBalance(int balance) {
+        this.balance = balance;
+    }
 }

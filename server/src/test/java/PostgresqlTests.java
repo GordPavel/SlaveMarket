@@ -10,6 +10,7 @@ import org.junit.FixMethodOrder;
 import org.junit.Test;
 import org.junit.runners.MethodSorters;
 
+import java.io.File;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -307,6 +308,39 @@ public class PostgresqlTests {
                 System.out.println(e.getMessage());
             }
             model.disconnect(user, token);
+        } else {
+            System.out.print("Can't connect database ");
+            testBlock("Skipping...");
+        }
+        testBlock("}");
+    }
+
+    @Test
+    public void exportTest() {
+        testBlock("export Test block{");
+        if (connect) {
+            if (model.exportAllData("data")) {
+//                new File("data.json").delete();
+                System.out.println("Successfully exported");
+            } else {
+                System.out.println("Something bad happens");
+            }
+        } else {
+            System.out.print("Can't connect database ");
+            testBlock("Skipping...");
+        }
+        testBlock("}");
+    }
+
+    @Test
+    public void importTest() {
+        testBlock("import Test block{");
+        if (connect) {
+            if (model.exportAllData("data")) {
+                model.importAllData("data");
+            } else {
+                System.out.println("Something bad happens");
+            }
         } else {
             System.out.print("Can't connect database ");
             testBlock("Skipping...");

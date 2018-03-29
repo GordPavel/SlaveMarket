@@ -8,8 +8,6 @@
 
 package model.postgresqlModel.tables;
 
-import com.google.gson.JsonObject;
-import com.google.gson.JsonPrimitive;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;
@@ -20,9 +18,9 @@ public class Deals {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "deals_seq")
     @SequenceGenerator(
-            name="deals_seq",
-            sequenceName="deals_id_seq",
-            allocationSize=1
+            name = "deals_seq",
+            sequenceName = "deals_id_seq",
+            allocationSize = 1
     )
     @Column
     private int id;

@@ -11,20 +11,6 @@ import java.util.Map;
 @XmlRootElement
 public interface Merchandise extends Serializable {
 
-  //    public static Merchandise buildFromMap(Class className, Map<String, String> map)
-  //    throws NoSuchMethodException, ClassNotFoundException, InvocationTargetException,
-  //    IllegalAccessException {
-  //
-  //        for (Field field : className.getDeclaredFields()) {
-  //            if (!Objects.equals(field.getName(), "id") || !map.containsKey(field.getName()))
-  //                throw new WrongQueryException("Missed key \"" + field.getName() + "\"");
-  //
-  //        }
-  ////            return (Merchandise) className.getMethod("buildFromMap",
-  // map.getClass()).invoke(null, map);
-  //        return null;
-  //    }
-
   /**
    * Returns minimum of required fields for create an object of chosen class.
    *

@@ -27,6 +27,14 @@ public class Poisons {
     private String name;
     private String info;
 
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
     public String getOnset() {
         return onset;
     }

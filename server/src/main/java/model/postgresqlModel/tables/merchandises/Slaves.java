@@ -8,16 +8,10 @@
 
 package model.postgresqlModel.tables.merchandises;
 
-import exceptions.WrongQueryException;
 import model.merchandises.Merchandise;
 
 import javax.persistence.*;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import static model.merchandises.classes.Alien.parseAndCheck;
-import static model.merchandises.classes.Slave.mandatoryFields;
 
 @Entity
 @Table(name = "slaves")
@@ -37,37 +31,27 @@ public class Slaves implements Merchandise {
     @Column(name = "weight")
     private float weight;
     @Column(name = "age")
+
     private int age;
     @Column(name = "info")
     private String info;
     @Column(name = "gender")
     private String gender;
 
-    /**
-     * returns new instance of Slave created by map.
-     *
-     * @param map map for creating. Where key - field Name, value - field value.
-     * @return new Instance of class made by map.
-     */
-    public static Slaves buildFromMap(HashMap<String, String> map) {
-        // This is crap code but it’s 3 a.m. and I need to get this working
-        Slaves slave = new Slaves();
-        List<String> requiredFields = mandatoryFields();
-        for (String s : requiredFields) {
-            if (!map.containsKey(s.toUpperCase())) {
-                throw new WrongQueryException("Missed key \"" + s + "\"");
-            }
-        }
-        try {
-            slave.age = parseAndCheck("AGE", map.get("AGE")).intValue();
-            slave.weight = parseAndCheck("WEIGHT", map.get("WEIGHT"));
-            slave.height = parseAndCheck("HEIGHT", map.get("HEIGHT"));
-            slave.gender = map.get("GENDER");
-            slave.name = map.get("NAME");
-        } catch (Exception e) {
-            throw new IllegalArgumentException(e.getMessage());
-        }
-        return slave;
+    public String getInfo() {
+        return info;
+    }
+
+    public void setInfo(String info) {
+        this.info = info;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
     }
 
     public String getSlavesClass() {
@@ -87,20 +71,40 @@ public class Slaves implements Merchandise {
         return name;
     }
 
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public float getBenefit() {
         return benefit;
+    }
+
+    public void setBenefit(float benefit) {
+        this.benefit = benefit;
     }
 
     public float getHeight() {
         return height;
     }
 
+    public void setHeight(float height) {
+        this.height = height;
+    }
+
     public float getWeight() {
         return weight;
     }
 
+    public void setWeight(float weight) {
+        this.weight = weight;
+    }
+
     public int getAge() {
         return age;
+    }
+
+    public void setAge(int age) {
+        this.age = age;
     }
 
     public String getAllInfo() {
