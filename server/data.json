@@ -1,0 +1,4778 @@
+{
+  "users": [
+    {
+      "id": 18,
+      "username": "s2rius",
+      "password": "MTkyMTYyMTE\u003d",
+      "balance": 0
+    },
+    {
+      "id": 19,
+      "username": "s3rius",
+      "password": "MTkyMTYyMTE\u003d",
+      "balance": 0
+    }
+  ],
+  "deals": [
+    {
+      "id": 1,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 1,
+      "price": 64487768
+    },
+    {
+      "id": 2,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 2,
+      "price": 1216632423
+    },
+    {
+      "id": 3,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 3,
+      "price": 1844371840
+    },
+    {
+      "id": 4,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 4,
+      "price": 16391047
+    },
+    {
+      "id": 5,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 5,
+      "price": 1706466224
+    },
+    {
+      "id": 6,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 6,
+      "price": 1002734551
+    },
+    {
+      "id": 7,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 7,
+      "price": 852057471
+    },
+    {
+      "id": 8,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 8,
+      "price": 1243423698
+    },
+    {
+      "id": 9,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 9,
+      "price": 1484607433
+    },
+    {
+      "id": 10,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 10,
+      "price": 1143419164
+    },
+    {
+      "id": 11,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 11,
+      "price": 1549172541
+    },
+    {
+      "id": 12,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 12,
+      "price": 254106936
+    },
+    {
+      "id": 13,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 13,
+      "price": 779857
+    },
+    {
+      "id": 14,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 14,
+      "price": 1899544170
+    },
+    {
+      "id": 15,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 15,
+      "price": 229930284
+    },
+    {
+      "id": 16,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 16,
+      "price": 566549637
+    },
+    {
+      "id": 17,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 17,
+      "price": 1867448171
+    },
+    {
+      "id": 18,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 18,
+      "price": 494448347
+    },
+    {
+      "id": 19,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 19,
+      "price": 904058177
+    },
+    {
+      "id": 20,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 20,
+      "price": 918742141
+    },
+    {
+      "id": 21,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 21,
+      "price": 152866250
+    },
+    {
+      "id": 22,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 22,
+      "price": 1161447160
+    },
+    {
+      "id": 23,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 23,
+      "price": 1335793856
+    },
+    {
+      "id": 24,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 24,
+      "price": 935342760
+    },
+    {
+      "id": 25,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 25,
+      "price": 311448158
+    },
+    {
+      "id": 26,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:18 AM",
+      "merchId": 26,
+      "price": 882658539
+    },
+    {
+      "id": 27,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 27,
+      "price": 1420123368
+    },
+    {
+      "id": 28,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 28,
+      "price": 2090261520
+    },
+    {
+      "id": 29,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 29,
+      "price": 1125555472
+    },
+    {
+      "id": 30,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 30,
+      "price": 2043402018
+    },
+    {
+      "id": 31,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 31,
+      "price": 1179992368
+    },
+    {
+      "id": 32,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 32,
+      "price": 1046141897
+    },
+    {
+      "id": 33,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 33,
+      "price": 399167776
+    },
+    {
+      "id": 34,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 34,
+      "price": 203036657
+    },
+    {
+      "id": 35,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 35,
+      "price": 1193553032
+    },
+    {
+      "id": 36,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 36,
+      "price": 1064543407
+    },
+    {
+      "id": 37,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 37,
+      "price": 669933361
+    },
+    {
+      "id": 38,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 38,
+      "price": 1192639912
+    },
+    {
+      "id": 39,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 39,
+      "price": 587354033
+    },
+    {
+      "id": 40,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:19 AM",
+      "merchId": 40,
+      "price": 1865072944
+    },
+    {
+      "id": 41,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 41,
+      "price": 1198135924
+    },
+    {
+      "id": 42,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 42,
+      "price": 224338529
+    },
+    {
+      "id": 43,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 43,
+      "price": 343554607
+    },
+    {
+      "id": 44,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 44,
+      "price": 1845478371
+    },
+    {
+      "id": 45,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 45,
+      "price": 990303499
+    },
+    {
+      "id": 46,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 46,
+      "price": 1147830541
+    },
+    {
+      "id": 47,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 47,
+      "price": 1668110199
+    },
+    {
+      "id": 48,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 48,
+      "price": 1500360645
+    },
+    {
+      "id": 49,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 49,
+      "price": 1658269457
+    },
+    {
+      "id": 50,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 50,
+      "price": 1420254638
+    },
+    {
+      "id": 51,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 51,
+      "price": 168681388
+    },
+    {
+      "id": 52,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 52,
+      "price": 902131030
+    },
+    {
+      "id": 53,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 53,
+      "price": 1225654706
+    },
+    {
+      "id": 54,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 54,
+      "price": 1786674695
+    },
+    {
+      "id": 55,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 55,
+      "price": 244489455
+    },
+    {
+      "id": 56,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 56,
+      "price": 337711327
+    },
+    {
+      "id": 57,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:25 AM",
+      "merchId": 57,
+      "price": 1807173316
+    },
+    {
+      "id": 58,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 58,
+      "price": 1604007425
+    },
+    {
+      "id": 59,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 59,
+      "price": 1198280011
+    },
+    {
+      "id": 60,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 60,
+      "price": 612195700
+    },
+    {
+      "id": 61,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 61,
+      "price": 1695829589
+    },
+    {
+      "id": 62,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 62,
+      "price": 1907482361
+    },
+    {
+      "id": 63,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 63,
+      "price": 283492139
+    },
+    {
+      "id": 64,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 64,
+      "price": 433160573
+    },
+    {
+      "id": 65,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 65,
+      "price": 1584186519
+    },
+    {
+      "id": 66,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 66,
+      "price": 1286522273
+    },
+    {
+      "id": 67,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 67,
+      "price": 956643279
+    },
+    {
+      "id": 68,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 68,
+      "price": 824625666
+    },
+    {
+      "id": 69,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 69,
+      "price": 16304287
+    },
+    {
+      "id": 70,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 70,
+      "price": 1259700424
+    },
+    {
+      "id": 71,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 71,
+      "price": 1815156292
+    },
+    {
+      "id": 72,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 72,
+      "price": 1661205850
+    },
+    {
+      "id": 73,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 73,
+      "price": 896767256
+    },
+    {
+      "id": 74,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 74,
+      "price": 1982951264
+    },
+    {
+      "id": 75,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 75,
+      "price": 1565382007
+    },
+    {
+      "id": 76,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 76,
+      "price": 368469957
+    },
+    {
+      "id": 77,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 77,
+      "price": 1680744209
+    },
+    {
+      "id": 78,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 78,
+      "price": 2006897676
+    },
+    {
+      "id": 79,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 79,
+      "price": 2090104828
+    },
+    {
+      "id": 80,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 24, 2018 2:44:26 AM",
+      "merchId": 80,
+      "price": 2068112290
+    },
+    {
+      "id": 81,
+      "userId": 19,
+      "state": "sold",
+      "time": "Mar 24, 2018 2:48:15 AM",
+      "merchId": 1,
+      "price": 64487768
+    },
+    {
+      "id": 82,
+      "userId": 19,
+      "state": "bought",
+      "time": "Mar 24, 2018 2:48:15 AM",
+      "merchId": 1,
+      "price": 64487768
+    },
+    {
+      "id": 83,
+      "userId": 19,
+      "state": "sold",
+      "time": "Mar 24, 2018 2:50:37 AM",
+      "merchId": 2,
+      "price": 1216632423
+    },
+    {
+      "id": 84,
+      "userId": 19,
+      "state": "bought",
+      "time": "Mar 24, 2018 2:50:37 AM",
+      "merchId": 2,
+      "price": 1216632423
+    },
+    {
+      "id": 85,
+      "userId": 19,
+      "state": "sold",
+      "time": "Mar 28, 2018 6:06:05 PM",
+      "merchId": 3,
+      "price": 1844371840
+    },
+    {
+      "id": 86,
+      "userId": 19,
+      "state": "bought",
+      "time": "Mar 28, 2018 6:06:05 PM",
+      "merchId": 3,
+      "price": 1844371840
+    },
+    {
+      "id": 87,
+      "userId": 19,
+      "state": "sold",
+      "time": "Mar 28, 2018 6:06:05 PM",
+      "merchId": 4,
+      "price": 16391047
+    },
+    {
+      "id": 88,
+      "userId": 19,
+      "state": "bought",
+      "time": "Mar 28, 2018 6:06:05 PM",
+      "merchId": 4,
+      "price": 16391047
+    },
+    {
+      "id": 89,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:06 PM",
+      "merchId": 84,
+      "price": 698691357
+    },
+    {
+      "id": 90,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:06 PM",
+      "merchId": 85,
+      "price": 782161972
+    },
+    {
+      "id": 91,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:06 PM",
+      "merchId": 86,
+      "price": 1205112415
+    },
+    {
+      "id": 92,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 87,
+      "price": 1650569027
+    },
+    {
+      "id": 93,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 88,
+      "price": 383357465
+    },
+    {
+      "id": 94,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 89,
+      "price": 1171882720
+    },
+    {
+      "id": 95,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 90,
+      "price": 2045817481
+    },
+    {
+      "id": 96,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 91,
+      "price": 115358808
+    },
+    {
+      "id": 97,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 92,
+      "price": 1185803766
+    },
+    {
+      "id": 98,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 93,
+      "price": 1608533361
+    },
+    {
+      "id": 99,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 94,
+      "price": 546906391
+    },
+    {
+      "id": 100,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 95,
+      "price": 1821939705
+    },
+    {
+      "id": 101,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 96,
+      "price": 1537229301
+    },
+    {
+      "id": 102,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 97,
+      "price": 2021722251
+    },
+    {
+      "id": 103,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 98,
+      "price": 496293895
+    },
+    {
+      "id": 104,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 99,
+      "price": 243515228
+    },
+    {
+      "id": 105,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 100,
+      "price": 1232622092
+    },
+    {
+      "id": 106,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 101,
+      "price": 115073017
+    },
+    {
+      "id": 107,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 102,
+      "price": 1394335901
+    },
+    {
+      "id": 108,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 103,
+      "price": 846782082
+    },
+    {
+      "id": 109,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 104,
+      "price": 1553406230
+    },
+    {
+      "id": 110,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 105,
+      "price": 1038969843
+    },
+    {
+      "id": 111,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 106,
+      "price": 1153367147
+    },
+    {
+      "id": 112,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 107,
+      "price": 1641127448
+    },
+    {
+      "id": 113,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 108,
+      "price": 1400458433
+    },
+    {
+      "id": 114,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 109,
+      "price": 50513540
+    },
+    {
+      "id": 115,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 110,
+      "price": 689179668
+    },
+    {
+      "id": 116,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 111,
+      "price": 1490466770
+    },
+    {
+      "id": 117,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 112,
+      "price": 428627928
+    },
+    {
+      "id": 118,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 113,
+      "price": 861096162
+    },
+    {
+      "id": 119,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 114,
+      "price": 1054946704
+    },
+    {
+      "id": 120,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 115,
+      "price": 1073463373
+    },
+    {
+      "id": 121,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 116,
+      "price": 1423503386
+    },
+    {
+      "id": 122,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 117,
+      "price": 32763288
+    },
+    {
+      "id": 123,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 118,
+      "price": 1401531487
+    },
+    {
+      "id": 124,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 119,
+      "price": 2136212364
+    },
+    {
+      "id": 125,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 120,
+      "price": 1998879502
+    },
+    {
+      "id": 126,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 121,
+      "price": 1430186111
+    },
+    {
+      "id": 127,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 122,
+      "price": 1457866939
+    },
+    {
+      "id": 128,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 28, 2018 6:06:07 PM",
+      "merchId": 123,
+      "price": 672168819
+    },
+    {
+      "id": 129,
+      "userId": 19,
+      "state": "removed",
+      "time": "Mar 28, 2018 6:06:09 PM",
+      "merchId": 13,
+      "price": 779857
+    },
+    {
+      "id": 130,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:52 PM",
+      "merchId": 126,
+      "price": 1910377252
+    },
+    {
+      "id": 131,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 127,
+      "price": 128758722
+    },
+    {
+      "id": 132,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 128,
+      "price": 1991598654
+    },
+    {
+      "id": 133,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 129,
+      "price": 1218179262
+    },
+    {
+      "id": 134,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 130,
+      "price": 1362242949
+    },
+    {
+      "id": 135,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 131,
+      "price": 1126126798
+    },
+    {
+      "id": 136,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 132,
+      "price": 1379309742
+    },
+    {
+      "id": 137,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 133,
+      "price": 255776719
+    },
+    {
+      "id": 138,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 134,
+      "price": 889957581
+    },
+    {
+      "id": 139,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 135,
+      "price": 463320216
+    },
+    {
+      "id": 140,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 136,
+      "price": 928337040
+    },
+    {
+      "id": 141,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 137,
+      "price": 114308938
+    },
+    {
+      "id": 142,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 138,
+      "price": 897164279
+    },
+    {
+      "id": 143,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 139,
+      "price": 2080350292
+    },
+    {
+      "id": 144,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 140,
+      "price": 1514372423
+    },
+    {
+      "id": 145,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 141,
+      "price": 780740614
+    },
+    {
+      "id": 146,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 142,
+      "price": 343970453
+    },
+    {
+      "id": 147,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 143,
+      "price": 1476579310
+    },
+    {
+      "id": 148,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 144,
+      "price": 1217534159
+    },
+    {
+      "id": 149,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 145,
+      "price": 1463045291
+    },
+    {
+      "id": 150,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 146,
+      "price": 417065608
+    },
+    {
+      "id": 151,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 147,
+      "price": 26350412
+    },
+    {
+      "id": 152,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 148,
+      "price": 1164674654
+    },
+    {
+      "id": 153,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 149,
+      "price": 972024980
+    },
+    {
+      "id": 154,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 150,
+      "price": 265214995
+    },
+    {
+      "id": 155,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 151,
+      "price": 499737605
+    },
+    {
+      "id": 156,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 152,
+      "price": 1621166953
+    },
+    {
+      "id": 157,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 153,
+      "price": 1699361412
+    },
+    {
+      "id": 158,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 154,
+      "price": 1986080644
+    },
+    {
+      "id": 159,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 155,
+      "price": 1308088598
+    },
+    {
+      "id": 160,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 156,
+      "price": 2038306420
+    },
+    {
+      "id": 161,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 157,
+      "price": 1726530397
+    },
+    {
+      "id": 162,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 158,
+      "price": 82267643
+    },
+    {
+      "id": 163,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 159,
+      "price": 2066077722
+    },
+    {
+      "id": 164,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 160,
+      "price": 636576275
+    },
+    {
+      "id": 165,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 161,
+      "price": 1902392182
+    },
+    {
+      "id": 166,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 162,
+      "price": 112752311
+    },
+    {
+      "id": 167,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:53 PM",
+      "merchId": 163,
+      "price": 72389217
+    },
+    {
+      "id": 168,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:54 PM",
+      "merchId": 164,
+      "price": 2126923356
+    },
+    {
+      "id": 169,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:57:54 PM",
+      "merchId": 165,
+      "price": 1110813978
+    },
+    {
+      "id": 170,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 167,
+      "price": 1836697554
+    },
+    {
+      "id": 171,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 168,
+      "price": 1958975939
+    },
+    {
+      "id": 172,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 169,
+      "price": 1007456365
+    },
+    {
+      "id": 173,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 170,
+      "price": 1985149935
+    },
+    {
+      "id": 174,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 171,
+      "price": 1423312251
+    },
+    {
+      "id": 175,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 172,
+      "price": 672793536
+    },
+    {
+      "id": 176,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 173,
+      "price": 487207052
+    },
+    {
+      "id": 177,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 174,
+      "price": 1611210416
+    },
+    {
+      "id": 178,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 175,
+      "price": 18602040
+    },
+    {
+      "id": 179,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 176,
+      "price": 1873602127
+    },
+    {
+      "id": 180,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 177,
+      "price": 1400872092
+    },
+    {
+      "id": 181,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:34 PM",
+      "merchId": 178,
+      "price": 140707583
+    },
+    {
+      "id": 182,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 179,
+      "price": 1676881747
+    },
+    {
+      "id": 183,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 180,
+      "price": 1298178828
+    },
+    {
+      "id": 184,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 181,
+      "price": 329253178
+    },
+    {
+      "id": 185,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 182,
+      "price": 1069517903
+    },
+    {
+      "id": 186,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 183,
+      "price": 1125830361
+    },
+    {
+      "id": 187,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 184,
+      "price": 142796918
+    },
+    {
+      "id": 188,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 185,
+      "price": 1930613990
+    },
+    {
+      "id": 189,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 186,
+      "price": 2140952613
+    },
+    {
+      "id": 190,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 187,
+      "price": 711222745
+    },
+    {
+      "id": 191,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 188,
+      "price": 988806750
+    },
+    {
+      "id": 192,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 189,
+      "price": 937185592
+    },
+    {
+      "id": 193,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 190,
+      "price": 1774609897
+    },
+    {
+      "id": 194,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 191,
+      "price": 1667118280
+    },
+    {
+      "id": 195,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 192,
+      "price": 157559779
+    },
+    {
+      "id": 196,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 193,
+      "price": 173953550
+    },
+    {
+      "id": 197,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 194,
+      "price": 360519185
+    },
+    {
+      "id": 198,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 195,
+      "price": 1632904978
+    },
+    {
+      "id": 199,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 196,
+      "price": 507448805
+    },
+    {
+      "id": 200,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 197,
+      "price": 640622192
+    },
+    {
+      "id": 201,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 198,
+      "price": 1828805973
+    },
+    {
+      "id": 202,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 199,
+      "price": 202844526
+    },
+    {
+      "id": 203,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 200,
+      "price": 1806058627
+    },
+    {
+      "id": 204,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 201,
+      "price": 1522498546
+    },
+    {
+      "id": 205,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 202,
+      "price": 1398043589
+    },
+    {
+      "id": 206,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 203,
+      "price": 849409126
+    },
+    {
+      "id": 207,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 204,
+      "price": 448022511
+    },
+    {
+      "id": 208,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 205,
+      "price": 382358446
+    },
+    {
+      "id": 209,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:35 PM",
+      "merchId": 206,
+      "price": 1408520251
+    },
+    {
+      "id": 210,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 208,
+      "price": 846788785
+    },
+    {
+      "id": 211,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 209,
+      "price": 1864933811
+    },
+    {
+      "id": 212,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 210,
+      "price": 1820371729
+    },
+    {
+      "id": 213,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 211,
+      "price": 296334367
+    },
+    {
+      "id": 214,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 212,
+      "price": 144918639
+    },
+    {
+      "id": 215,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 213,
+      "price": 973088607
+    },
+    {
+      "id": 216,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 214,
+      "price": 1913189646
+    },
+    {
+      "id": 217,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 215,
+      "price": 1225227484
+    },
+    {
+      "id": 218,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 216,
+      "price": 1524638397
+    },
+    {
+      "id": 219,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 217,
+      "price": 607975766
+    },
+    {
+      "id": 220,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 218,
+      "price": 699171271
+    },
+    {
+      "id": 221,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 219,
+      "price": 1198946449
+    },
+    {
+      "id": 222,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:58 PM",
+      "merchId": 220,
+      "price": 945977931
+    },
+    {
+      "id": 223,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 221,
+      "price": 275647960
+    },
+    {
+      "id": 224,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 222,
+      "price": 342030114
+    },
+    {
+      "id": 225,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 223,
+      "price": 1812937667
+    },
+    {
+      "id": 226,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 224,
+      "price": 358606940
+    },
+    {
+      "id": 227,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 225,
+      "price": 2124996217
+    },
+    {
+      "id": 228,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 226,
+      "price": 1588646174
+    },
+    {
+      "id": 229,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 227,
+      "price": 1678321524
+    },
+    {
+      "id": 230,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 228,
+      "price": 1849696339
+    },
+    {
+      "id": 231,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 229,
+      "price": 683641449
+    },
+    {
+      "id": 232,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 230,
+      "price": 1937882651
+    },
+    {
+      "id": 233,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 231,
+      "price": 2005150041
+    },
+    {
+      "id": 234,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 232,
+      "price": 1818016157
+    },
+    {
+      "id": 235,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 233,
+      "price": 1026936071
+    },
+    {
+      "id": 236,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 234,
+      "price": 2099034607
+    },
+    {
+      "id": 237,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 235,
+      "price": 148487037
+    },
+    {
+      "id": 238,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 236,
+      "price": 371614035
+    },
+    {
+      "id": 239,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 237,
+      "price": 174003591
+    },
+    {
+      "id": 240,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 238,
+      "price": 1780392136
+    },
+    {
+      "id": 241,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 239,
+      "price": 1670027521
+    },
+    {
+      "id": 242,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 240,
+      "price": 412942819
+    },
+    {
+      "id": 243,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 241,
+      "price": 1872041346
+    },
+    {
+      "id": 244,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 242,
+      "price": 318500772
+    },
+    {
+      "id": 245,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 243,
+      "price": 466902830
+    },
+    {
+      "id": 246,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 244,
+      "price": 1156985167
+    },
+    {
+      "id": 247,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 245,
+      "price": 121308873
+    },
+    {
+      "id": 248,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 246,
+      "price": 1436900518
+    },
+    {
+      "id": 249,
+      "userId": 19,
+      "state": "on sale",
+      "time": "Mar 30, 2018 7:59:59 PM",
+      "merchId": 247,
+      "price": 1305057036
+    }
+  ],
+  "aliens": [
+    {
+      "id": 4,
+      "planet": "Eros",
+      "weight": 92.0,
+      "height": 185.0,
+      "color": "Red",
+      "name": "Liara",
+      "age": 29,
+      "race": "Reaper",
+      "alienClass": "aliens",
+      "benefit": 86.89655,
+      "info": "{\"id\" : 4, \"class\" : \"aliens\", \"name\" : \"Liara\", \"age\" : 29, \"weight\" : 92, \"height\" : 185, \"planet\" : \"Eros\", \"color\" : \"Red\", \"race\" : \"Reaper\", \"benefit\" : 86.896551724138007}"
+    },
+    {
+      "id": 8,
+      "planet": "Dia",
+      "weight": 89.0,
+      "height": 176.0,
+      "color": "Orange",
+      "name": "kris",
+      "age": 30,
+      "race": "Hanar",
+      "alienClass": "aliens",
+      "benefit": 22.133333,
+      "info": "{\"id\" : 8, \"class\" : \"aliens\", \"name\" : \"kris\", \"age\" : 30, \"weight\" : 89, \"height\" : 176, \"planet\" : \"Dia\", \"color\" : \"Orange\", \"race\" : \"Hanar\", \"benefit\" : 22.133333333332999}"
+    },
+    {
+      "id": 12,
+      "planet": "Gaspra",
+      "weight": 79.0,
+      "height": 121.0,
+      "color": "Indigo",
+      "name": "Akito",
+      "age": 14,
+      "race": "Salarian",
+      "alienClass": "aliens",
+      "benefit": 82.78571,
+      "info": "{\"id\" : 12, \"class\" : \"aliens\", \"name\" : \"Akito\", \"age\" : 14, \"weight\" : 79, \"height\" : 121, \"planet\" : \"Gaspra\", \"color\" : \"Indigo\", \"race\" : \"Salarian\", \"benefit\" : 82.785714285713993}"
+    },
+    {
+      "id": 16,
+      "planet": "Phobos",
+      "weight": 73.0,
+      "height": 184.0,
+      "color": "Orange",
+      "name": "Akito",
+      "age": 27,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 97.48148,
+      "info": "{\"id\" : 16, \"class\" : \"aliens\", \"name\" : \"Akito\", \"age\" : 27, \"weight\" : 73, \"height\" : 184, \"planet\" : \"Phobos\", \"color\" : \"Orange\", \"race\" : \"Quarian\", \"benefit\" : 97.481481481480998}"
+    },
+    {
+      "id": 20,
+      "planet": "Himalia",
+      "weight": 68.0,
+      "height": 162.0,
+      "color": "Blue",
+      "name": "Siina",
+      "age": 22,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 0.72727275,
+      "info": "{\"id\" : 20, \"class\" : \"aliens\", \"name\" : \"Siina\", \"age\" : 22, \"weight\" : 68, \"height\" : 162, \"planet\" : \"Himalia\", \"color\" : \"Blue\", \"race\" : \"Quarian\", \"benefit\" : 0.72727272727299996}"
+    },
+    {
+      "id": 24,
+      "planet": "Venus",
+      "weight": 71.0,
+      "height": 185.0,
+      "color": "Indigo",
+      "name": "Siina",
+      "age": 22,
+      "race": "Hanar",
+      "alienClass": "aliens",
+      "benefit": 97.045456,
+      "info": "{\"id\" : 24, \"class\" : \"aliens\", \"name\" : \"Siina\", \"age\" : 22, \"weight\" : 71, \"height\" : 185, \"planet\" : \"Venus\", \"color\" : \"Indigo\", \"race\" : \"Hanar\", \"benefit\" : 97.045454545455001}"
+    },
+    {
+      "id": 28,
+      "planet": "Dia",
+      "weight": 80.0,
+      "height": 193.0,
+      "color": "Yellow",
+      "name": "Misato",
+      "age": 27,
+      "race": "Asari",
+      "alienClass": "aliens",
+      "benefit": 71.85185,
+      "info": "{\"id\" : 28, \"class\" : \"aliens\", \"name\" : \"Misato\", \"age\" : 27, \"weight\" : 80, \"height\" : 193, \"planet\" : \"Dia\", \"color\" : \"Yellow\", \"race\" : \"Asari\", \"benefit\" : 71.851851851852004}"
+    },
+    {
+      "id": 32,
+      "planet": "Callisto",
+      "weight": 85.0,
+      "height": 169.0,
+      "color": "Green",
+      "name": "Julia",
+      "age": 30,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 78.833336,
+      "info": "{\"id\" : 32, \"class\" : \"aliens\", \"name\" : \"Julia\", \"age\" : 30, \"weight\" : 85, \"height\" : 169, \"planet\" : \"Callisto\", \"color\" : \"Green\", \"race\" : \"Quarian\", \"benefit\" : 78.833333333333002}"
+    },
+    {
+      "id": 36,
+      "planet": "Gaspra",
+      "weight": 89.0,
+      "height": 170.0,
+      "color": "Blue",
+      "name": "Tom",
+      "age": 29,
+      "race": "Volu",
+      "alienClass": "aliens",
+      "benefit": 21.724138,
+      "info": "{\"id\" : 36, \"class\" : \"aliens\", \"name\" : \"Tom\", \"age\" : 29, \"weight\" : 89, \"height\" : 170, \"planet\" : \"Gaspra\", \"color\" : \"Blue\", \"race\" : \"Volu\", \"benefit\" : 21.724137931034999}"
+    },
+    {
+      "id": 40,
+      "planet": "Uranus",
+      "weight": 70.0,
+      "height": 188.0,
+      "color": "Indigo",
+      "name": "Carl",
+      "age": 28,
+      "race": "Leviathan",
+      "alienClass": "aliens",
+      "benefit": 70.0,
+      "info": "{\"id\" : 40, \"class\" : \"aliens\", \"name\" : \"Carl\", \"age\" : 28, \"weight\" : 70, \"height\" : 188, \"planet\" : \"Uranus\", \"color\" : \"Indigo\", \"race\" : \"Leviathan\", \"benefit\" : 70}"
+    },
+    {
+      "id": 44,
+      "planet": "Gaspra",
+      "weight": 80.0,
+      "height": 169.0,
+      "color": "Red",
+      "name": "Roman",
+      "age": 28,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 82.85714,
+      "info": "{\"id\" : 44, \"class\" : \"aliens\", \"name\" : \"Roman\", \"age\" : 28, \"weight\" : 80, \"height\" : 169, \"planet\" : \"Gaspra\", \"color\" : \"Red\", \"race\" : \"Quarian\", \"benefit\" : 82.857142857143003}"
+    },
+    {
+      "id": 48,
+      "planet": "Jupiter",
+      "weight": 88.0,
+      "height": 196.0,
+      "color": "Blue",
+      "name": "Mark",
+      "age": 26,
+      "race": "Geth",
+      "alienClass": "aliens",
+      "benefit": 63.384617,
+      "info": "{\"id\" : 48, \"class\" : \"aliens\", \"name\" : \"Mark\", \"age\" : 26, \"weight\" : 88, \"height\" : 196, \"planet\" : \"Jupiter\", \"color\" : \"Blue\", \"race\" : \"Geth\", \"benefit\" : 63.384615384615003}"
+    },
+    {
+      "id": 52,
+      "planet": "Mars",
+      "weight": 90.0,
+      "height": 170.0,
+      "color": "Red",
+      "name": "Noise",
+      "age": 23,
+      "race": "Volu",
+      "alienClass": "aliens",
+      "benefit": 65.21739,
+      "info": "{\"id\" : 52, \"class\" : \"aliens\", \"name\" : \"Noise\", \"age\" : 23, \"weight\" : 90, \"height\" : 170, \"planet\" : \"Mars\", \"color\" : \"Red\", \"race\" : \"Volu\", \"benefit\" : 65.217391304347998}"
+    },
+    {
+      "id": 56,
+      "planet": "Deimos",
+      "weight": 80.0,
+      "height": 189.0,
+      "color": "Orange",
+      "name": "Josef",
+      "age": 21,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 20.0,
+      "info": "{\"id\" : 56, \"class\" : \"aliens\", \"name\" : \"Josef\", \"age\" : 21, \"weight\" : 80, \"height\" : 189, \"planet\" : \"Deimos\", \"color\" : \"Orange\", \"race\" : \"Quarian\", \"benefit\" : 20}"
+    },
+    {
+      "id": 60,
+      "planet": "Thalassa",
+      "weight": 78.0,
+      "height": 170.0,
+      "color": "Red",
+      "name": "Liara",
+      "age": 22,
+      "race": "Yahg",
+      "alienClass": "aliens",
+      "benefit": 2.7272727,
+      "info": "{\"id\" : 60, \"class\" : \"aliens\", \"name\" : \"Liara\", \"age\" : 22, \"weight\" : 78, \"height\" : 170, \"planet\" : \"Thalassa\", \"color\" : \"Red\", \"race\" : \"Yahg\", \"benefit\" : 2.7272727272730002}"
+    },
+    {
+      "id": 64,
+      "planet": "Moon",
+      "weight": 80.0,
+      "height": 169.0,
+      "color": "Violet",
+      "name": "kris",
+      "age": 27,
+      "race": "Batarian",
+      "alienClass": "aliens",
+      "benefit": 0.7407407,
+      "info": "{\"id\" : 64, \"class\" : \"aliens\", \"name\" : \"kris\", \"age\" : 27, \"weight\" : 80, \"height\" : 169, \"planet\" : \"Moon\", \"color\" : \"Violet\", \"race\" : \"Batarian\", \"benefit\" : 0.74074074074100005}"
+    },
+    {
+      "id": 68,
+      "planet": "Gaspra",
+      "weight": 84.0,
+      "height": 184.0,
+      "color": "Green",
+      "name": "Misato",
+      "age": 22,
+      "race": "Drell",
+      "alienClass": "aliens",
+      "benefit": 2.5454545,
+      "info": "{\"id\" : 68, \"class\" : \"aliens\", \"name\" : \"Misato\", \"age\" : 22, \"weight\" : 84, \"height\" : 184, \"planet\" : \"Gaspra\", \"color\" : \"Green\", \"race\" : \"Drell\", \"benefit\" : 2.5454545454550002}"
+    },
+    {
+      "id": 72,
+      "planet": "Deimos",
+      "weight": 92.0,
+      "height": 180.0,
+      "color": "Yellow",
+      "name": "Tom",
+      "age": 23,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 20.0,
+      "info": "{\"id\" : 72, \"class\" : \"aliens\", \"name\" : \"Tom\", \"age\" : 23, \"weight\" : 92, \"height\" : 180, \"planet\" : \"Deimos\", \"color\" : \"Yellow\", \"race\" : \"Quarian\", \"benefit\" : 20}"
+    },
+    {
+      "id": 76,
+      "planet": "Pluto",
+      "weight": 77.0,
+      "height": 163.0,
+      "color": "Blue",
+      "name": "Noise",
+      "age": 21,
+      "race": "Drell",
+      "alienClass": "aliens",
+      "benefit": 97.666664,
+      "info": "{\"id\" : 76, \"class\" : \"aliens\", \"name\" : \"Noise\", \"age\" : 21, \"weight\" : 77, \"height\" : 163, \"planet\" : \"Pluto\", \"color\" : \"Blue\", \"race\" : \"Drell\", \"benefit\" : 97.666666666666998}"
+    },
+    {
+      "id": 80,
+      "planet": "Phobos",
+      "weight": 75.0,
+      "height": 167.0,
+      "color": "Violet",
+      "name": "Violet",
+      "age": 30,
+      "race": "Reaper",
+      "alienClass": "aliens",
+      "benefit": 17.5,
+      "info": "{\"id\" : 80, \"class\" : \"aliens\", \"name\" : \"Violet\", \"age\" : 30, \"weight\" : 75, \"height\" : 167, \"planet\" : \"Phobos\", \"color\" : \"Violet\", \"race\" : \"Reaper\", \"benefit\" : 17.5}"
+    },
+    {
+      "id": 87,
+      "planet": "Amalthea",
+      "weight": 93.0,
+      "height": 182.0,
+      "color": "Cyan",
+      "name": "Akito",
+      "age": 26,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 51.0,
+      "info": "{\"id\" : 87, \"class\" : \"aliens\", \"name\" : \"Akito\", \"age\" : 26, \"weight\" : 93, \"height\" : 182, \"planet\" : \"Amalthea\", \"color\" : \"Cyan\", \"race\" : \"Quarian\", \"benefit\" : 51}"
+    },
+    {
+      "id": 91,
+      "planet": "Mars",
+      "weight": 91.0,
+      "height": 174.0,
+      "color": "Red",
+      "name": "kris",
+      "age": 21,
+      "race": "Elcor",
+      "alienClass": "aliens",
+      "benefit": 54.0,
+      "info": "{\"id\" : 91, \"class\" : \"aliens\", \"name\" : \"kris\", \"age\" : 21, \"weight\" : 91, \"height\" : 174, \"planet\" : \"Mars\", \"color\" : \"Red\", \"race\" : \"Elcor\", \"benefit\" : 54}"
+    },
+    {
+      "id": 95,
+      "planet": "Deimos",
+      "weight": 69.0,
+      "height": 170.0,
+      "color": "Cyan",
+      "name": "Misato",
+      "age": 24,
+      "race": "Batarian",
+      "alienClass": "aliens",
+      "benefit": 88.75,
+      "info": "{\"id\" : 95, \"class\" : \"aliens\", \"name\" : \"Misato\", \"age\" : 24, \"weight\" : 69, \"height\" : 170, \"planet\" : \"Deimos\", \"color\" : \"Cyan\", \"race\" : \"Batarian\", \"benefit\" : 88.75}"
+    },
+    {
+      "id": 99,
+      "planet": "Pluto",
+      "weight": 90.0,
+      "height": 181.0,
+      "color": "Indigo",
+      "name": "Linda",
+      "age": 23,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 8.26087,
+      "info": "{\"id\" : 99, \"class\" : \"aliens\", \"name\" : \"Linda\", \"age\" : 23, \"weight\" : 90, \"height\" : 181, \"planet\" : \"Pluto\", \"color\" : \"Indigo\", \"race\" : \"Quarian\", \"benefit\" : 8.2608695652169999}"
+    },
+    {
+      "id": 103,
+      "planet": "Eros",
+      "weight": 61.0,
+      "height": 193.0,
+      "color": "Violet",
+      "name": "Garry",
+      "age": 24,
+      "race": "Volu",
+      "alienClass": "aliens",
+      "benefit": 90.541664,
+      "info": "{\"id\" : 103, \"class\" : \"aliens\", \"name\" : \"Garry\", \"age\" : 24, \"weight\" : 61, \"height\" : 193, \"planet\" : \"Eros\", \"color\" : \"Violet\", \"race\" : \"Volu\", \"benefit\" : 90.541666666666998}"
+    },
+    {
+      "id": 107,
+      "planet": "Herse",
+      "weight": 65.0,
+      "height": 188.0,
+      "color": "Blue",
+      "name": "Liara",
+      "age": 22,
+      "race": "Batarian",
+      "alienClass": "aliens",
+      "benefit": 55.454544,
+      "info": "{\"id\" : 107, \"class\" : \"aliens\", \"name\" : \"Liara\", \"age\" : 22, \"weight\" : 65, \"height\" : 188, \"planet\" : \"Herse\", \"color\" : \"Blue\", \"race\" : \"Batarian\", \"benefit\" : 55.454545454544999}"
+    },
+    {
+      "id": 111,
+      "planet": "Pasiphae",
+      "weight": 66.0,
+      "height": 161.0,
+      "color": "Violet",
+      "name": "Julia",
+      "age": 21,
+      "race": "Krogan",
+      "alienClass": "aliens",
+      "benefit": 6.0,
+      "info": "{\"id\" : 111, \"class\" : \"aliens\", \"name\" : \"Julia\", \"age\" : 21, \"weight\" : 66, \"height\" : 161, \"planet\" : \"Pasiphae\", \"color\" : \"Violet\", \"race\" : \"Krogan\", \"benefit\" : 6}"
+    },
+    {
+      "id": 115,
+      "planet": "Uranus",
+      "weight": 72.0,
+      "height": 198.0,
+      "color": "Indigo",
+      "name": "Akito",
+      "age": 29,
+      "race": "Hanar",
+      "alienClass": "aliens",
+      "benefit": 91.586205,
+      "info": "{\"id\" : 115, \"class\" : \"aliens\", \"name\" : \"Akito\", \"age\" : 29, \"weight\" : 72, \"height\" : 198, \"planet\" : \"Uranus\", \"color\" : \"Indigo\", \"race\" : \"Hanar\", \"benefit\" : 91.586206896552}"
+    },
+    {
+      "id": 119,
+      "planet": "Callisto",
+      "weight": 82.0,
+      "height": 191.0,
+      "color": "Orange",
+      "name": "Greg",
+      "age": 25,
+      "race": "Collector",
+      "alienClass": "aliens",
+      "benefit": 26.48,
+      "info": "{\"id\" : 119, \"class\" : \"aliens\", \"name\" : \"Greg\", \"age\" : 25, \"weight\" : 82, \"height\" : 191, \"planet\" : \"Callisto\", \"color\" : \"Orange\", \"race\" : \"Collector\", \"benefit\" : 26.48}"
+    },
+    {
+      "id": 123,
+      "planet": "Jupiter",
+      "weight": 94.0,
+      "height": 187.0,
+      "color": "Red",
+      "name": "John",
+      "age": 21,
+      "race": "Vorcha",
+      "alienClass": "aliens",
+      "benefit": 37.04762,
+      "info": "{\"id\" : 123, \"class\" : \"aliens\", \"name\" : \"John\", \"age\" : 21, \"weight\" : 94, \"height\" : 187, \"planet\" : \"Jupiter\", \"color\" : \"Red\", \"race\" : \"Vorcha\", \"benefit\" : 37.047619047619001}"
+    },
+    {
+      "id": 129,
+      "planet": "Ganymede",
+      "weight": 73.0,
+      "height": 199.0,
+      "color": "Red",
+      "name": "Paul",
+      "age": 23,
+      "race": "Salarian",
+      "alienClass": "aliens",
+      "benefit": 31.608696,
+      "info": "{\"id\" : 129, \"class\" : \"aliens\", \"name\" : \"Paul\", \"age\" : 23, \"weight\" : 73, \"height\" : 199, \"planet\" : \"Ganymede\", \"color\" : \"Red\", \"race\" : \"Salarian\", \"benefit\" : 31.608695652173999}"
+    },
+    {
+      "id": 133,
+      "planet": "Saturn",
+      "weight": 67.0,
+      "height": 168.0,
+      "color": "Indigo",
+      "name": "Greg",
+      "age": 21,
+      "race": "Elcor",
+      "alienClass": "aliens",
+      "benefit": 36.0,
+      "info": "{\"id\" : 133, \"class\" : \"aliens\", \"name\" : \"Greg\", \"age\" : 21, \"weight\" : 67, \"height\" : 168, \"planet\" : \"Saturn\", \"color\" : \"Indigo\", \"race\" : \"Elcor\", \"benefit\" : 36}"
+    },
+    {
+      "id": 137,
+      "planet": "Moon",
+      "weight": 92.0,
+      "height": 178.0,
+      "color": "Yellow",
+      "name": "Misato",
+      "age": 28,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 84.85714,
+      "info": "{\"id\" : 137, \"class\" : \"aliens\", \"name\" : \"Misato\", \"age\" : 28, \"weight\" : 92, \"height\" : 178, \"planet\" : \"Moon\", \"color\" : \"Yellow\", \"race\" : \"Quarian\", \"benefit\" : 84.857142857143003}"
+    },
+    {
+      "id": 141,
+      "planet": "Herse",
+      "weight": 74.0,
+      "height": 180.0,
+      "color": "Cyan",
+      "name": "Garry",
+      "age": 27,
+      "race": "Quarian",
+      "alienClass": "aliens",
+      "benefit": 93.333336,
+      "info": "{\"id\" : 141, \"class\" : \"aliens\", \"name\" : \"Garry\", \"age\" : 27, \"weight\" : 74, \"height\" : 180, \"planet\" : \"Herse\", \"color\" : \"Cyan\", \"race\" : \"Quarian\", \"benefit\" : 93.333333333333002}"
+    },
+    {
+      "id": 145,
+      "planet": "Pluto",
+      "weight": 85.0,
+      "height": 173.0,
+      "color": "Yellow",
+      "name": "Andrew",
+      "age": 22,
+      "race": "Leviathan",
+      "alienClass": "aliens",
+      "benefit": 68.40909,
+      "info": "{\"id\" : 145, \"class\" : \"aliens\", \"name\" : \"Andrew\", \"age\" : 22, \"weight\" : 85, \"height\" : 173, \"planet\" : \"Pluto\", \"color\" : \"Yellow\", \"race\" : \"Leviathan\", \"benefit\" : 68.409090909091006}"
+    },
+    {
+      "id": 149,
+      "planet": "Uranus",
+      "weight": 69.0,
+      "height": 197.0,
+      "color": "Violet",
+      "name": "kris",
+      "age": 28,
+      "race": "Volu",
+      "alienClass": "aliens",
+      "benefit": 85.46429,
+      "info": "{\"id\" : 149, \"class\" : \"aliens\", \"name\" : \"kris\", \"age\" : 28, \"weight\" : 69, \"height\" : 197, \"planet\" : \"Uranus\", \"color\" : \"Violet\", \"race\" : \"Volu\", \"benefit\" : 85.464285714286007}"
+    },
+    {
+      "id": 153,
+      "planet": "Herse",
+      "weight": 91.0,
+      "height": 174.0,
+      "color": "Cyan",
+      "name": "Liara",
+      "age": 23,
+      "race": "Leviathan",
+      "alienClass": "aliens",
+      "benefit": 88.434784,
+      "info": "{\"id\" : 153, \"class\" : \"aliens\", \"name\" : \"Liara\", \"age\" : 23, \"weight\" : 91, \"height\" : 174, \"planet\" : \"Herse\", \"color\" : \"Cyan\", \"race\" : \"Leviathan\", \"benefit\" : 88.434782608695997}"
+    },
+    {
+      "id": 157,
+      "planet": "Moon",
+      "weight": 70.0,
+      "height": 187.0,
+      "color": "Yellow",
+      "name": "Josef",
+      "age": 21,
+      "race": "Reaper",
+      "alienClass": "aliens",
+      "benefit": 23.333334,
+      "info": "{\"id\" : 157, \"class\" : \"aliens\", \"name\" : \"Josef\", \"age\" : 21, \"weight\" : 70, \"height\" : 187, \"planet\" : \"Moon\", \"color\" : \"Yellow\", \"race\" : \"Reaper\", \"benefit\" : 23.333333333333002}"
+    },
+    {
+      "id": 161,
+      "planet": "Ganymede",
+      "weight": 69.0,
+      "height": 198.0,
+      "color": "Violet",
+      "name": "Misato",
+      "age": 28,
+      "race": "Batarian",
+      "alienClass": "aliens",
+      "benefit": 87.92857,
+      "info": "{\"id\" : 161, \"class\" : \"aliens\", \"name\" : \"Misato\", \"age\" : 28, \"weight\" : 69, \"height\" : 198, \"planet\" : \"Ganymede\", \"color\" : \"Violet\", \"race\" : \"Batarian\", \"benefit\" : 87.928571428571004}"
+    },
+    {
+      "id": 165,
+      "planet": "Herse",
+      "weight": 63.0,
+      "height": 182.0,
+      "color": "Cyan",
+      "name": "Anabel",
+      "age": 23,
+      "race": "Salarian",
+      "alienClass": "aliens",
+      "benefit": 98.521736,
+      "info": "{\"id\" : 165, \"class\" : \"aliens\", \"name\" : \"Anabel\", \"age\" : 23, \"weight\" : 63, \"height\" : 182, \"planet\" : \"Herse\", \"color\" : \"Cyan\", \"race\" : \"Salarian\", \"benefit\" : 98.521739130434995}"
+    },
+    {
+      "id": 170,
+      "planet": "Uranus",
+      "weight": 68.0,
+      "height": 187.0,
+      "color": "Violet",
+      "name": "Liara",
+      "age": 29,
+      "race": "Krogan",
+      "alienClass": "aliens",
+      "benefit": 38.482758,
+      "info": "{\"id\" : 170, \"class\" : \"aliens\", \"name\" : \"Liara\", \"age\" : 29, \"weight\" : 68, \"height\" : 187, \"planet\" : \"Uranus\", \"color\" : \"Violet\", \"race\" : \"Krogan\", \"benefit\" : 38.482758620689999}"
+    },
+    {
+      "id": 174,
+      "planet": "Dia",
+      "weight": 94.0,
+      "height": 183.0,
+      "color": "Indigo",
+      "name": "Anabel",
+      "age": 28,
+      "race": "Drell",
+      "alienClass": "aliens",
+      "benefit": 14.357142,
+      "info": "{\"id\" : 174, \"class\" : \"aliens\", \"name\" : \"Anabel\", \"age\" : 28, \"weight\" : 94, \"height\" : 183, \"planet\" : \"Dia\", \"color\" : \"Indigo\", \"race\" : \"Drell\", \"benefit\" : 14.357142857143}"
+    },
+    {
+      "id": 178,
+      "planet": "Earth",
+      "weight": 85.0,
+      "height": 161.0,
+      "color": "Blue",
+      "name": "Paul",
+      "age": 22,
+      "race": "Keeper",
+      "alienClass": "aliens",
+      "benefit": 22.045454,
+      "info": "{\"id\" : 178, \"class\" : \"aliens\", \"name\" : \"Paul\", \"age\" : 22, \"weight\" : 85, \"height\" : 161, \"planet\" : \"Earth\", \"color\" : \"Blue\", \"race\" : \"Keeper\", \"benefit\" : 22.045454545455001}"
+    },
+    {
+      "id": 182,
+      "planet": "Galatea",
+      "weight": 88.0,
+      "height": 162.0,
+      "color": "Green",
+      "name": "Siina",
+      "age": 25,
+      "race": "Yahg",
+      "alienClass": "aliens",
+      "benefit": 70.24,
+      "info": "{\"id\" : 182, \"class\" : \"aliens\", \"name\" : \"Siina\", \"age\" : 25, \"weight\" : 88, \"height\" : 162, \"planet\" : \"Galatea\", \"color\" : \"Green\", \"race\" : \"Yahg\", \"benefit\" : 70.239999999999995}"
+    },
+    {
+      "id": 186,
+      "planet": "Uranus",
+      "weight": 85.0,
+      "height": 171.0,
+      "color": "Cyan",
+      "name": "Siina",
+      "age": 26,
+      "race": "Keeper",
+      "alienClass": "aliens",
+      "benefit": 59.03846,
+      "info": "{\"id\" : 186, \"class\" : \"aliens\", \"name\" : \"Siina\", \"age\" : 26, \"weight\" : 85, \"height\" : 171, \"planet\" : \"Uranus\", \"color\" : \"Cyan\", \"race\" : \"Keeper\", \"benefit\" : 59.038461538462002}"
+    },
+    {
+      "id": 190,
+      "planet": "Moon",
+      "weight": 75.0,
+      "height": 187.0,
+      "color": "Green",
+      "name": "kris",
+      "age": 26,
+      "race": "Elcor",
+      "alienClass": "aliens",
+      "benefit": 39.423077,
+      "info": "{\"id\" : 190, \"class\" : \"aliens\", \"name\" : \"kris\", \"age\" : 26, \"weight\" : 75, \"height\" : 187, \"planet\" : \"Moon\", \"color\" : \"Green\", \"race\" : \"Elcor\", \"benefit\" : 39.423076923076998}"
+    },
+    {
+      "id": 194,
+      "planet": "Eros",
+      "weight": 70.0,
+      "height": 167.0,
+      "color": "Blue",
+      "name": "Akito",
+      "age": 23,
+      "race": "Geth",
+      "alienClass": "aliens",
+      "benefit": 8.26087,
+      "info": "{\"id\" : 194, \"class\" : \"aliens\", \"name\" : \"Akito\", \"age\" : 23, \"weight\" : 70, \"height\" : 167, \"planet\" : \"Eros\", \"color\" : \"Blue\", \"race\" : \"Geth\", \"benefit\" : 8.2608695652169999}"
+    },
+    {
+      "id": 198,
+      "planet": "Mars",
+      "weight": 64.0,
+      "height": 178.0,
+      "color": "Indigo",
+      "name": "kris",
+      "age": 23,
+      "race": "Geth",
+      "alienClass": "aliens",
+      "benefit": 95.304344,
+      "info": "{\"id\" : 198, \"class\" : \"aliens\", \"name\" : \"kris\", \"age\" : 23, \"weight\" : 64, \"height\" : 178, \"planet\" : \"Mars\", \"color\" : \"Indigo\", \"race\" : \"Geth\", \"benefit\" : 95.304347826086996}"
+    },
+    {
+      "id": 202,
+      "planet": "Himalia",
+      "weight": 93.0,
+      "height": 180.0,
+      "color": "Red",
+      "name": "Roman",
+      "age": 21,
+      "race": "Batarian",
+      "alienClass": "aliens",
+      "benefit": 97.14286,
+      "info": "{\"id\" : 202, \"class\" : \"aliens\", \"name\" : \"Roman\", \"age\" : 21, \"weight\" : 93, \"height\" : 180, \"planet\" : \"Himalia\", \"color\" : \"Red\", \"race\" : \"Batarian\", \"benefit\" : 97.142857142856997}"
+    },
+    {
+      "id": 206,
+      "planet": "Ganymede",
+      "weight": 70.0,
+      "height": 171.0,
+      "color": "Blue",
+      "name": "Julia",
+      "age": 27,
+      "race": "Collector",
+      "alienClass": "aliens",
+      "benefit": 43.333332,
+      "info": "{\"id\" : 206, \"class\" : \"aliens\", \"name\" : \"Julia\", \"age\" : 27, \"weight\" : 70, \"height\" : 171, \"planet\" : \"Ganymede\", \"color\" : \"Blue\", \"race\" : \"Collector\", \"benefit\" : 43.333333333333002}"
+    },
+    {
+      "id": 211,
+      "planet": "Mercury",
+      "weight": 89.0,
+      "height": 171.0,
+      "color": "Orange",
+      "name": "Liara",
+      "age": 26,
+      "race": "Volu",
+      "alienClass": "aliens",
+      "benefit": 85.34615,
+      "info": "{\"id\" : 211, \"class\" : \"aliens\", \"name\" : \"Liara\", \"age\" : 26, \"weight\" : 89, \"height\" : 171, \"planet\" : \"Mercury\", \"color\" : \"Orange\", \"race\" : \"Volu\", \"benefit\" : 85.346153846153996}"
+    },
+    {
+      "id": 215,
+      "planet": "Jupiter",
+      "weight": 67.0,
+      "height": 181.0,
+      "color": "Indigo",
+      "name": "Noise",
+      "age": 26,
+      "race": "Krogan",
+      "alienClass": "aliens",
+      "benefit": 66.42308,
+      "info": "{\"id\" : 215, \"class\" : \"aliens\", \"name\" : \"Noise\", \"age\" : 26, \"weight\" : 67, \"height\" : 181, \"planet\" : \"Jupiter\", \"color\" : \"Indigo\", \"race\" : \"Krogan\", \"benefit\" : 66.423076923077005}"
+    },
+    {
+      "id": 219,
+      "planet": "Neptune",
+      "weight": 72.0,
+      "height": 183.0,
+      "color": "Blue",
+      "name": "Violet",
+      "age": 25,
+      "race": "Batarian",
+      "alienClass": "aliens",
+      "benefit": 27.04,
+      "info": "{\"id\" : 219, \"class\" : \"aliens\", \"name\" : \"Violet\", \"age\" : 25, \"weight\" : 72, \"height\" : 183, \"planet\" : \"Neptune\", \"color\" : \"Blue\", \"race\" : \"Batarian\", \"benefit\" : 27.039999999999999}"
+    },
+    {
+      "id": 223,
+      "planet": "Neptune",
+      "weight": 62.0,
+      "height": 178.0,
+      "color": "Yellow",
+      "name": "Greg",
+      "age": 20,
+      "race": "Collector",
+      "alienClass": "aliens",
+      "benefit": 51.8,
+      "info": "{\"id\" : 223, \"class\" : \"aliens\", \"name\" : \"Greg\", \"age\" : 20, \"weight\" : 62, \"height\" : 178, \"planet\" : \"Neptune\", \"color\" : \"Yellow\", \"race\" : \"Collector\", \"benefit\" : 51.799999999999997}"
+    },
+    {
+      "id": 227,
+      "planet": "Dia",
+      "weight": 84.0,
+      "height": 163.0,
+      "color": "Yellow",
+      "name": "Anabel",
+      "age": 26,
+      "race": "Turian",
+      "alienClass": "aliens",
+      "benefit": 26.615385,
+      "info": "{\"id\" : 227, \"class\" : \"aliens\", \"name\" : \"Anabel\", \"age\" : 26, \"weight\" : 84, \"height\" : 163, \"planet\" : \"Dia\", \"color\" : \"Yellow\", \"race\" : \"Turian\", \"benefit\" : 26.615384615385}"
+    },
+    {
+      "id": 231,
+      "planet": "Cordelia",
+      "weight": 91.0,
+      "height": 194.0,
+      "color": "Yellow",
+      "name": "kris",
+      "age": 20,
+      "race": "Hanar",
+      "alienClass": "aliens",
+      "benefit": 82.7,
+      "info": "{\"id\" : 231, \"class\" : \"aliens\", \"name\" : \"kris\", \"age\" : 20, \"weight\" : 91, \"height\" : 194, \"planet\" : \"Cordelia\", \"color\" : \"Yellow\", \"race\" : \"Hanar\", \"benefit\" : 82.700000000000003}"
+    },
+    {
+      "id": 235,
+      "planet": "Ganymede",
+      "weight": 61.0,
+      "height": 181.0,
+      "color": "Orange",
+      "name": "Liara",
+      "age": 26,
+      "race": "Turian",
+      "alienClass": "aliens",
+      "benefit": 24.653847,
+      "info": "{\"id\" : 235, \"class\" : \"aliens\", \"name\" : \"Liara\", \"age\" : 26, \"weight\" : 61, \"height\" : 181, \"planet\" : \"Ganymede\", \"color\" : \"Orange\", \"race\" : \"Turian\", \"benefit\" : 24.653846153846001}"
+    },
+    {
+      "id": 239,
+      "planet": "Moon",
+      "weight": 61.0,
+      "height": 165.0,
+      "color": "Green",
+      "name": "Siina",
+      "age": 26,
+      "race": "Salarian",
+      "alienClass": "aliens",
+      "benefit": 87.11539,
+      "info": "{\"id\" : 239, \"class\" : \"aliens\", \"name\" : \"Siina\", \"age\" : 26, \"weight\" : 61, \"height\" : 165, \"planet\" : \"Moon\", \"color\" : \"Green\", \"race\" : \"Salarian\", \"benefit\" : 87.115384615384997}"
+    },
+    {
+      "id": 243,
+      "planet": "Eros",
+      "weight": 83.0,
+      "height": 188.0,
+      "color": "Orange",
+      "name": "Paul",
+      "age": 26,
+      "race": "Reaper",
+      "alienClass": "aliens",
+      "benefit": 0.15384616,
+      "info": "{\"id\" : 243, \"class\" : \"aliens\", \"name\" : \"Paul\", \"age\" : 26, \"weight\" : 83, \"height\" : 188, \"planet\" : \"Eros\", \"color\" : \"Orange\", \"race\" : \"Reaper\", \"benefit\" : 0.15384615384600001}"
+    },
+    {
+      "id": 247,
+      "planet": "Venus",
+      "weight": 73.0,
+      "height": 199.0,
+      "color": "Violet",
+      "name": "Paul",
+      "age": 24,
+      "race": "Yahg",
+      "alienClass": "aliens",
+      "benefit": 5.2916665,
+      "info": "{\"id\" : 247, \"class\" : \"aliens\", \"name\" : \"Paul\", \"age\" : 24, \"weight\" : 73, \"height\" : 199, \"planet\" : \"Venus\", \"color\" : \"Violet\", \"race\" : \"Yahg\", \"benefit\" : 5.291666666667}"
+    }
+  ],
+  "foods": [
+    {
+      "foodClass": "food",
+      "id": 3,
+      "composition": "24.998343999999999",
+      "energy": 23.447845,
+      "weight": 86.0,
+      "name": "John",
+      "info": "{\"id\" : 3, \"class\" : \"food\", \"name\" : \"John\", \"energy\" : 23.447845000000001, \"weight\" : 86, \"benefit\" : 16.514669999999999}",
+      "benefit": 16.51467
+    },
+    {
+      "foodClass": "food",
+      "id": 7,
+      "composition": "21.920721",
+      "energy": 23.705688,
+      "weight": 88.0,
+      "name": "Carl",
+      "info": "{\"id\" : 7, \"class\" : \"food\", \"name\" : \"Carl\", \"energy\" : 23.705687999999999, \"weight\" : 88, \"benefit\" : 86.100543999999999}",
+      "benefit": 86.10055
+    },
+    {
+      "foodClass": "food",
+      "id": 11,
+      "composition": "29.851186999999999",
+      "energy": 20.707535,
+      "weight": 86.0,
+      "name": "Siina",
+      "info": "{\"id\" : 11, \"class\" : \"food\", \"name\" : \"Siina\", \"energy\" : 20.707535, \"weight\" : 86, \"benefit\" : 80.848010000000002}",
+      "benefit": 80.84801
+    },
+    {
+      "foodClass": "food",
+      "id": 15,
+      "composition": "20.771308999999999",
+      "energy": 21.471632,
+      "weight": 86.0,
+      "name": "Julia",
+      "info": "{\"id\" : 15, \"class\" : \"food\", \"name\" : \"Julia\", \"energy\" : 21.471632, \"weight\" : 86, \"benefit\" : 46.560352000000002}",
+      "benefit": 46.560352
+    },
+    {
+      "foodClass": "food",
+      "id": 19,
+      "composition": "28.711279000000001",
+      "energy": 24.553602,
+      "weight": 74.0,
+      "name": "John",
+      "info": "{\"id\" : 19, \"class\" : \"food\", \"name\" : \"John\", \"energy\" : 24.553602000000001, \"weight\" : 74, \"benefit\" : 16.966548}",
+      "benefit": 16.966549
+    },
+    {
+      "foodClass": "food",
+      "id": 23,
+      "composition": "23.671641999999999",
+      "energy": 22.544062,
+      "weight": 68.0,
+      "name": "Anabel",
+      "info": "{\"id\" : 23, \"class\" : \"food\", \"name\" : \"Anabel\", \"energy\" : 22.544062, \"weight\" : 68, \"benefit\" : 32.996215999999997}",
+      "benefit": 32.996216
+    },
+    {
+      "foodClass": "food",
+      "id": 27,
+      "composition": "23.96931",
+      "energy": 20.006935,
+      "weight": 88.0,
+      "name": "Noise",
+      "info": "{\"id\" : 27, \"class\" : \"food\", \"name\" : \"Noise\", \"energy\" : 20.006934999999999, \"weight\" : 88, \"benefit\" : 60.610280000000003}",
+      "benefit": 60.61028
+    },
+    {
+      "foodClass": "food",
+      "id": 31,
+      "composition": "24.266777000000001",
+      "energy": 21.488415,
+      "weight": 71.0,
+      "name": "Linda",
+      "info": "{\"id\" : 31, \"class\" : \"food\", \"name\" : \"Linda\", \"energy\" : 21.488415, \"weight\" : 71, \"benefit\" : 25.677465000000002}",
+      "benefit": 25.677465
+    },
+    {
+      "foodClass": "food",
+      "id": 35,
+      "composition": "29.899319999999999",
+      "energy": 21.671356,
+      "weight": 93.0,
+      "name": "Tom",
+      "info": "{\"id\" : 35, \"class\" : \"food\", \"name\" : \"Tom\", \"energy\" : 21.671355999999999, \"weight\" : 93, \"benefit\" : 15.436108000000001}",
+      "benefit": 15.436108
+    },
+    {
+      "foodClass": "food",
+      "id": 39,
+      "composition": "29.878988",
+      "energy": 26.88198,
+      "weight": 65.0,
+      "name": "Violet",
+      "info": "{\"id\" : 39, \"class\" : \"food\", \"name\" : \"Violet\", \"energy\" : 26.881979999999999, \"weight\" : 65, \"benefit\" : 47.328699999999998}",
+      "benefit": 47.3287
+    },
+    {
+      "foodClass": "food",
+      "id": 43,
+      "composition": "27.510280000000002",
+      "energy": 28.4915,
+      "weight": 72.0,
+      "name": "Julia",
+      "info": "{\"id\" : 43, \"class\" : \"food\", \"name\" : \"Julia\", \"energy\" : 28.491499999999998, \"weight\" : 72, \"benefit\" : 51.387999999999998}",
+      "benefit": 51.388
+    },
+    {
+      "foodClass": "food",
+      "id": 47,
+      "composition": "26.851654",
+      "energy": 24.531788,
+      "weight": 67.0,
+      "name": "Mark",
+      "info": "{\"id\" : 47, \"class\" : \"food\", \"name\" : \"Mark\", \"energy\" : 24.531787999999999, \"weight\" : 67, \"benefit\" : 43.629795999999999}",
+      "benefit": 43.629795
+    },
+    {
+      "foodClass": "food",
+      "id": 51,
+      "composition": "20.892261999999999",
+      "energy": 20.86994,
+      "weight": 81.0,
+      "name": "Misato",
+      "info": "{\"id\" : 51, \"class\" : \"food\", \"name\" : \"Misato\", \"energy\" : 20.86994, \"weight\" : 81, \"benefit\" : 90.465140000000005}",
+      "benefit": 90.46514
+    },
+    {
+      "foodClass": "food",
+      "id": 55,
+      "composition": "23.722479",
+      "energy": 21.184711,
+      "weight": 65.0,
+      "name": "Paul",
+      "info": "{\"id\" : 55, \"class\" : \"food\", \"name\" : \"Paul\", \"energy\" : 21.184711, \"weight\" : 65, \"benefit\" : 77.006214999999997}",
+      "benefit": 77.00622
+    },
+    {
+      "foodClass": "food",
+      "id": 59,
+      "composition": "22.369281999999998",
+      "energy": 27.863874,
+      "weight": 63.0,
+      "name": "Mark",
+      "info": "{\"id\" : 59, \"class\" : \"food\", \"name\" : \"Mark\", \"energy\" : 27.863873999999999, \"weight\" : 63, \"benefit\" : 55.424061999999999}",
+      "benefit": 55.42406
+    },
+    {
+      "foodClass": "food",
+      "id": 63,
+      "composition": "27.833492",
+      "energy": 23.579563,
+      "weight": 62.0,
+      "name": "Linda",
+      "info": "{\"id\" : 63, \"class\" : \"food\", \"name\" : \"Linda\", \"energy\" : 23.579563, \"weight\" : 62, \"benefit\" : 61.932906000000003}",
+      "benefit": 61.932907
+    },
+    {
+      "foodClass": "food",
+      "id": 67,
+      "composition": "28.457470000000001",
+      "energy": 20.617012,
+      "weight": 90.0,
+      "name": "Misato",
+      "info": "{\"id\" : 67, \"class\" : \"food\", \"name\" : \"Misato\", \"energy\" : 20.617011999999999, \"weight\" : 90, \"benefit\" : 55.531080000000003}",
+      "benefit": 55.53108
+    },
+    {
+      "foodClass": "food",
+      "id": 71,
+      "composition": "24.473011",
+      "energy": 28.133924,
+      "weight": 69.0,
+      "name": "Julia",
+      "info": "{\"id\" : 71, \"class\" : \"food\", \"name\" : \"Julia\", \"energy\" : 28.133924, \"weight\" : 69, \"benefit\" : 41.240755999999998}",
+      "benefit": 41.240757
+    },
+    {
+      "foodClass": "food",
+      "id": 75,
+      "composition": "28.355388999999999",
+      "energy": 27.595554,
+      "weight": 61.0,
+      "name": "Akito",
+      "info": "{\"id\" : 75, \"class\" : \"food\", \"name\" : \"Akito\", \"energy\" : 27.595554, \"weight\" : 61, \"benefit\" : 83.328794000000002}",
+      "benefit": 83.3288
+    },
+    {
+      "foodClass": "food",
+      "id": 79,
+      "composition": "21.389112000000001",
+      "energy": 23.495895,
+      "weight": 78.0,
+      "name": "John",
+      "info": "{\"id\" : 79, \"class\" : \"food\", \"name\" : \"John\", \"energy\" : 23.495895000000001, \"weight\" : 78, \"benefit\" : 32.679810000000003}",
+      "benefit": 32.67981
+    },
+    {
+      "foodClass": "food",
+      "id": 86,
+      "composition": "22.935324000000001",
+      "energy": 22.006292,
+      "weight": 64.0,
+      "name": "kris",
+      "info": "{\"id\" : 86, \"class\" : \"food\", \"name\" : \"kris\", \"energy\" : 22.006291999999998, \"weight\" : 64, \"benefit\" : 8.4026879999999995}",
+      "benefit": 8.402688
+    },
+    {
+      "foodClass": "food",
+      "id": 90,
+      "composition": "21.657665000000001",
+      "energy": 29.772797,
+      "weight": 88.0,
+      "name": "Noise",
+      "info": "{\"id\" : 90, \"class\" : \"food\", \"name\" : \"Noise\", \"energy\" : 29.772797000000001, \"weight\" : 88, \"benefit\" : 20.006136000000001}",
+      "benefit": 20.006136
+    },
+    {
+      "foodClass": "food",
+      "id": 94,
+      "composition": "22.933931000000001",
+      "energy": 23.24873,
+      "weight": 94.0,
+      "name": "kris",
+      "info": "{\"id\" : 94, \"class\" : \"food\", \"name\" : \"kris\", \"energy\" : 23.248729999999998, \"weight\" : 94, \"benefit\" : 85.380619999999993}",
+      "benefit": 85.38062
+    },
+    {
+      "foodClass": "food",
+      "id": 98,
+      "composition": "22.415687999999999",
+      "energy": 28.45928,
+      "weight": 92.0,
+      "name": "Noise",
+      "info": "{\"id\" : 98, \"class\" : \"food\", \"name\" : \"Noise\", \"energy\" : 28.45928, \"weight\" : 92, \"benefit\" : 18.25376}",
+      "benefit": 18.25376
+    },
+    {
+      "foodClass": "food",
+      "id": 102,
+      "composition": "29.749745999999998",
+      "energy": 22.47393,
+      "weight": 65.0,
+      "name": "Liara",
+      "info": "{\"id\" : 102, \"class\" : \"food\", \"name\" : \"Liara\", \"energy\" : 22.473929999999999, \"weight\" : 65, \"benefit\" : 60.80545}",
+      "benefit": 60.80545
+    },
+    {
+      "foodClass": "food",
+      "id": 106,
+      "composition": "27.184984",
+      "energy": 25.284176,
+      "weight": 90.0,
+      "name": "Tom",
+      "info": "{\"id\" : 106, \"class\" : \"food\", \"name\" : \"Tom\", \"energy\" : 25.284175999999999, \"weight\" : 90, \"benefit\" : 75.575839999999999}",
+      "benefit": 75.57584
+    },
+    {
+      "foodClass": "food",
+      "id": 110,
+      "composition": "23.418330000000001",
+      "energy": 26.86465,
+      "weight": 77.0,
+      "name": "John",
+      "info": "{\"id\" : 110, \"class\" : \"food\", \"name\" : \"John\", \"energy\" : 26.864650000000001, \"weight\" : 77, \"benefit\" : 68.578050000000005}",
+      "benefit": 68.57805
+    },
+    {
+      "foodClass": "food",
+      "id": 114,
+      "composition": "28.143215000000001",
+      "energy": 27.92545,
+      "weight": 61.0,
+      "name": "Greg",
+      "info": "{\"id\" : 114, \"class\" : \"food\", \"name\" : \"Greg\", \"energy\" : 27.925450000000001, \"weight\" : 61, \"benefit\" : 3.4524499999999998}",
+      "benefit": 3.45245
+    },
+    {
+      "foodClass": "food",
+      "id": 118,
+      "composition": "20.509374999999999",
+      "energy": 28.452068,
+      "weight": 88.0,
+      "name": "Roman",
+      "info": "{\"id\" : 118, \"class\" : \"food\", \"name\" : \"Roman\", \"energy\" : 28.452068000000001, \"weight\" : 88, \"benefit\" : 3.781984}",
+      "benefit": 3.781984
+    },
+    {
+      "foodClass": "food",
+      "id": 122,
+      "composition": "24.437742",
+      "energy": 25.50344,
+      "weight": 80.0,
+      "name": "Mark",
+      "info": "{\"id\" : 122, \"class\" : \"food\", \"name\" : \"Mark\", \"energy\" : 25.503440000000001, \"weight\" : 80, \"benefit\" : 40.275199999999998}",
+      "benefit": 40.2752
+    },
+    {
+      "foodClass": "food",
+      "id": 128,
+      "composition": "24.164486",
+      "energy": 25.163057,
+      "weight": 93.0,
+      "name": "Linda",
+      "info": "{\"id\" : 128, \"class\" : \"food\", \"name\" : \"Linda\", \"energy\" : 25.163056999999998, \"weight\" : 93, \"benefit\" : 40.164301000000002}",
+      "benefit": 40.164303
+    },
+    {
+      "foodClass": "food",
+      "id": 132,
+      "composition": "29.139122",
+      "energy": 28.887224,
+      "weight": 89.0,
+      "name": "Josef",
+      "info": "{\"id\" : 132, \"class\" : \"food\", \"name\" : \"Josef\", \"energy\" : 28.887224, \"weight\" : 89, \"benefit\" : 70.962935999999999}",
+      "benefit": 70.96294
+    },
+    {
+      "foodClass": "food",
+      "id": 136,
+      "composition": "21.88381",
+      "energy": 24.235437,
+      "weight": 81.0,
+      "name": "Mark",
+      "info": "{\"id\" : 136, \"class\" : \"food\", \"name\" : \"Mark\", \"energy\" : 24.235437000000001, \"weight\" : 81, \"benefit\" : 63.070397}",
+      "benefit": 63.070396
+    },
+    {
+      "foodClass": "food",
+      "id": 140,
+      "composition": "28.038599999999999",
+      "energy": 22.139603,
+      "weight": 67.0,
+      "name": "Linda",
+      "info": "{\"id\" : 140, \"class\" : \"food\", \"name\" : \"Linda\", \"energy\" : 22.139603000000001, \"weight\" : 67, \"benefit\" : 83.353401000000005}",
+      "benefit": 83.3534
+    },
+    {
+      "foodClass": "food",
+      "id": 144,
+      "composition": "24.031313000000001",
+      "energy": 29.392538,
+      "weight": 66.0,
+      "name": "Liara",
+      "info": "{\"id\" : 144, \"class\" : \"food\", \"name\" : \"Liara\", \"energy\" : 29.392537999999998, \"weight\" : 66, \"benefit\" : 39.907508}",
+      "benefit": 39.90751
+    },
+    {
+      "foodClass": "food",
+      "id": 148,
+      "composition": "23.796894000000002",
+      "energy": 28.90644,
+      "weight": 77.0,
+      "name": "Siina",
+      "info": "{\"id\" : 148, \"class\" : \"food\", \"name\" : \"Siina\", \"energy\" : 28.90644, \"weight\" : 77, \"benefit\" : 25.79588}",
+      "benefit": 25.79588
+    },
+    {
+      "foodClass": "food",
+      "id": 152,
+      "composition": "24.381976999999999",
+      "energy": 29.167667,
+      "weight": 62.0,
+      "name": "Violet",
+      "info": "{\"id\" : 152, \"class\" : \"food\", \"name\" : \"Violet\", \"energy\" : 29.167667000000002, \"weight\" : 62, \"benefit\" : 8.3953539999999993}",
+      "benefit": 8.395354
+    },
+    {
+      "foodClass": "food",
+      "id": 156,
+      "composition": "26.47475",
+      "energy": 25.944107,
+      "weight": 78.0,
+      "name": "Violet",
+      "info": "{\"id\" : 156, \"class\" : \"food\", \"name\" : \"Violet\", \"energy\" : 25.944106999999999, \"weight\" : 78, \"benefit\" : 23.640346000000001}",
+      "benefit": 23.640347
+    },
+    {
+      "foodClass": "food",
+      "id": 160,
+      "composition": "24.806439999999998",
+      "energy": 25.224476,
+      "weight": 77.0,
+      "name": "Misato",
+      "info": "{\"id\" : 160, \"class\" : \"food\", \"name\" : \"Misato\", \"energy\" : 25.224475999999999, \"weight\" : 77, \"benefit\" : 42.284652000000001}",
+      "benefit": 42.284653
+    },
+    {
+      "foodClass": "food",
+      "id": 164,
+      "composition": "25.352969999999999",
+      "energy": 24.640467,
+      "weight": 75.0,
+      "name": "Greg",
+      "info": "{\"id\" : 164, \"class\" : \"food\", \"name\" : \"Greg\", \"energy\" : 24.640467000000001, \"weight\" : 75, \"benefit\" : 48.035024999999997}",
+      "benefit": 48.035027
+    },
+    {
+      "foodClass": "food",
+      "id": 169,
+      "composition": "28.038969999999999",
+      "energy": 29.032768,
+      "weight": 88.0,
+      "name": "Mark",
+      "info": "{\"id\" : 169, \"class\" : \"food\", \"name\" : \"Mark\", \"energy\" : 29.032768000000001, \"weight\" : 88, \"benefit\" : 54.883583999999999}",
+      "benefit": 54.883583
+    },
+    {
+      "foodClass": "food",
+      "id": 173,
+      "composition": "23.241503000000002",
+      "energy": 24.136572,
+      "weight": 90.0,
+      "name": "Akito",
+      "info": "{\"id\" : 173, \"class\" : \"food\", \"name\" : \"Akito\", \"energy\" : 24.136572000000001, \"weight\" : 90, \"benefit\" : 72.291480000000007}",
+      "benefit": 72.29148
+    },
+    {
+      "foodClass": "food",
+      "id": 177,
+      "composition": "27.835646000000001",
+      "energy": 22.409943,
+      "weight": 90.0,
+      "name": "Greg",
+      "info": "{\"id\" : 177, \"class\" : \"food\", \"name\" : \"Greg\", \"energy\" : 22.409942999999998, \"weight\" : 90, \"benefit\" : 16.894870000000001}",
+      "benefit": 16.89487
+    },
+    {
+      "foodClass": "food",
+      "id": 181,
+      "composition": "24.355335",
+      "energy": 26.737041,
+      "weight": 86.0,
+      "name": "Tom",
+      "info": "{\"id\" : 181, \"class\" : \"food\", \"name\" : \"Tom\", \"energy\" : 26.737041000000001, \"weight\" : 86, \"benefit\" : 99.385525999999999}",
+      "benefit": 99.38553
+    },
+    {
+      "foodClass": "food",
+      "id": 185,
+      "composition": "20.717801999999999",
+      "energy": 23.345995,
+      "weight": 61.0,
+      "name": "Violet",
+      "info": "{\"id\" : 185, \"class\" : \"food\", \"name\" : \"Violet\", \"energy\" : 23.345994999999998, \"weight\" : 61, \"benefit\" : 24.105695000000001}",
+      "benefit": 24.105696
+    },
+    {
+      "foodClass": "food",
+      "id": 189,
+      "composition": "28.542828",
+      "energy": 20.225578,
+      "weight": 83.0,
+      "name": "Violet",
+      "info": "{\"id\" : 189, \"class\" : \"food\", \"name\" : \"Violet\", \"energy\" : 20.225577999999999, \"weight\" : 83, \"benefit\" : 78.722973999999994}",
+      "benefit": 78.72298
+    },
+    {
+      "foodClass": "food",
+      "id": 193,
+      "composition": "20.466346999999999",
+      "energy": 27.885365,
+      "weight": 68.0,
+      "name": "Carl",
+      "info": "{\"id\" : 193, \"class\" : \"food\", \"name\" : \"Carl\", \"energy\" : 27.885365, \"weight\" : 68, \"benefit\" : 96.204819999999998}",
+      "benefit": 96.20482
+    },
+    {
+      "foodClass": "food",
+      "id": 197,
+      "composition": "21.159105",
+      "energy": 25.735966,
+      "weight": 60.0,
+      "name": "Paul",
+      "info": "{\"id\" : 197, \"class\" : \"food\", \"name\" : \"Paul\", \"energy\" : 25.735966000000001, \"weight\" : 60, \"benefit\" : 44.157960000000003}",
+      "benefit": 44.15796
+    },
+    {
+      "foodClass": "food",
+      "id": 201,
+      "composition": "22.038215999999998",
+      "energy": 25.58023,
+      "weight": 88.0,
+      "name": "Linda",
+      "info": "{\"id\" : 201, \"class\" : \"food\", \"name\" : \"Linda\", \"energy\" : 25.58023, \"weight\" : 88, \"benefit\" : 51.06024}",
+      "benefit": 51.06024
+    },
+    {
+      "foodClass": "food",
+      "id": 205,
+      "composition": "21.294159000000001",
+      "energy": 24.969759,
+      "weight": 77.0,
+      "name": "kris",
+      "info": "{\"id\" : 205, \"class\" : \"food\", \"name\" : \"kris\", \"energy\" : 24.969759, \"weight\" : 77, \"benefit\" : 22.671443}",
+      "benefit": 22.671444
+    },
+    {
+      "foodClass": "food",
+      "id": 210,
+      "composition": "28.300695000000001",
+      "energy": 25.109772,
+      "weight": 62.0,
+      "name": "Greg",
+      "info": "{\"id\" : 210, \"class\" : \"food\", \"name\" : \"Greg\", \"energy\" : 25.109772, \"weight\" : 62, \"benefit\" : 56.805864}",
+      "benefit": 56.805862
+    },
+    {
+      "foodClass": "food",
+      "id": 214,
+      "composition": "24.250525",
+      "energy": 27.870735,
+      "weight": 72.0,
+      "name": "Josef",
+      "info": "{\"id\" : 214, \"class\" : \"food\", \"name\" : \"Josef\", \"energy\" : 27.870735, \"weight\" : 72, \"benefit\" : 6.69292}",
+      "benefit": 6.69292
+    },
+    {
+      "foodClass": "food",
+      "id": 218,
+      "composition": "26.502649999999999",
+      "energy": 22.755945,
+      "weight": 84.0,
+      "name": "Roman",
+      "info": "{\"id\" : 218, \"class\" : \"food\", \"name\" : \"Roman\", \"energy\" : 22.755945000000001, \"weight\" : 84, \"benefit\" : 11.49938}",
+      "benefit": 11.49938
+    },
+    {
+      "foodClass": "food",
+      "id": 222,
+      "composition": "28.361913999999999",
+      "energy": 25.155552,
+      "weight": 78.0,
+      "name": "Anabel",
+      "info": "{\"id\" : 222, \"class\" : \"food\", \"name\" : \"Anabel\", \"energy\" : 25.155552, \"weight\" : 78, \"benefit\" : 62.133056000000003}",
+      "benefit": 62.133057
+    },
+    {
+      "foodClass": "food",
+      "id": 226,
+      "composition": "27.0854",
+      "energy": 29.015474,
+      "weight": 70.0,
+      "name": "Noise",
+      "info": "{\"id\" : 226, \"class\" : \"food\", \"name\" : \"Noise\", \"energy\" : 29.015474000000001, \"weight\" : 70, \"benefit\" : 31.083179999999999}",
+      "benefit": 31.08318
+    },
+    {
+      "foodClass": "food",
+      "id": 230,
+      "composition": "22.056484000000001",
+      "energy": 20.187077,
+      "weight": 65.0,
+      "name": "Greg",
+      "info": "{\"id\" : 230, \"class\" : \"food\", \"name\" : \"Greg\", \"energy\" : 20.187076999999999, \"weight\" : 65, \"benefit\" : 12.160005}",
+      "benefit": 12.160005
+    },
+    {
+      "foodClass": "food",
+      "id": 234,
+      "composition": "21.900845",
+      "energy": 22.09782,
+      "weight": 64.0,
+      "name": "John",
+      "info": "{\"id\" : 234, \"class\" : \"food\", \"name\" : \"John\", \"energy\" : 22.097819999999999, \"weight\" : 64, \"benefit\" : 14.260479999999999}",
+      "benefit": 14.26048
+    },
+    {
+      "foodClass": "food",
+      "id": 238,
+      "composition": "21.344373999999998",
+      "energy": 29.42323,
+      "weight": 85.0,
+      "name": "Mark",
+      "info": "{\"id\" : 238, \"class\" : \"food\", \"name\" : \"Mark\", \"energy\" : 29.42323, \"weight\" : 85, \"benefit\" : 0.97455000000000003}",
+      "benefit": 0.97455
+    },
+    {
+      "foodClass": "food",
+      "id": 242,
+      "composition": "24.908579",
+      "energy": 29.660946,
+      "weight": 89.0,
+      "name": "Paul",
+      "info": "{\"id\" : 242, \"class\" : \"food\", \"name\" : \"Paul\", \"energy\" : 29.660945999999999, \"weight\" : 89, \"benefit\" : 39.824193999999999}",
+      "benefit": 39.824196
+    },
+    {
+      "foodClass": "food",
+      "id": 246,
+      "composition": "20.651388000000001",
+      "energy": 22.084522,
+      "weight": 93.0,
+      "name": "Andrew",
+      "info": "{\"id\" : 246, \"class\" : \"food\", \"name\" : \"Andrew\", \"energy\" : 22.084522, \"weight\" : 93, \"benefit\" : 53.860545999999999}",
+      "benefit": 53.860546
+    }
+  ],
+  "poisons": [
+    {
+      "poisonClass": "poisons",
+      "id": 2,
+      "onset": "26.860869999999998",
+      "frequency": "22.256733000000001",
+      "effect": "22.057663000000002",
+      "chance": 22.24472,
+      "weight": 68.0,
+      "type": "21.267289999999999",
+      "name": "Andrew",
+      "info": "{\"id\" : 2, \"class\" : \"poisons\", \"name\" : \"Andrew\", \"onset\" : \"26.860869999999998\", \"frequency\" : \"22.256733000000001\", \"effect\" : \"22.057663000000002\", \"chance\" : 22.244720000000001, \"type\" : \"21.267289999999999\", \"weight\" : 68, \"benefit\" : 22.244720000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 6,
+      "onset": "25.057763999999999",
+      "frequency": "28.870543000000001",
+      "effect": "26.551600000000001",
+      "chance": 25.823532,
+      "weight": 68.0,
+      "type": "28.855457000000001",
+      "name": "Carl",
+      "info": "{\"id\" : 6, \"class\" : \"poisons\", \"name\" : \"Carl\", \"onset\" : \"25.057763999999999\", \"frequency\" : \"28.870543000000001\", \"effect\" : \"26.551600000000001\", \"chance\" : 25.823532, \"type\" : \"28.855457000000001\", \"weight\" : 68, \"benefit\" : 25.823532}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 10,
+      "onset": "26.224346000000001",
+      "frequency": "24.003553",
+      "effect": "28.551124999999999",
+      "chance": 20.498829,
+      "weight": 81.0,
+      "type": "22.045093999999999",
+      "name": "Andrew",
+      "info": "{\"id\" : 10, \"class\" : \"poisons\", \"name\" : \"Andrew\", \"onset\" : \"26.224346000000001\", \"frequency\" : \"24.003553\", \"effect\" : \"28.551124999999999\", \"chance\" : 20.498829000000001, \"type\" : \"22.045093999999999\", \"weight\" : 81, \"benefit\" : 20.498829000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 14,
+      "onset": "27.068194999999999",
+      "frequency": "20.398492999999998",
+      "effect": "24.653606",
+      "chance": 29.33287,
+      "weight": 76.0,
+      "type": "20.417776",
+      "name": "Josef",
+      "info": "{\"id\" : 14, \"class\" : \"poisons\", \"name\" : \"Josef\", \"onset\" : \"27.068194999999999\", \"frequency\" : \"20.398492999999998\", \"effect\" : \"24.653606\", \"chance\" : 29.33287, \"type\" : \"20.417776\", \"weight\" : 76, \"benefit\" : 29.33287}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 18,
+      "onset": "28.578875",
+      "frequency": "27.310669000000001",
+      "effect": "24.192734000000002",
+      "chance": 27.1517,
+      "weight": 72.0,
+      "type": "24.385345000000001",
+      "name": "Siina",
+      "info": "{\"id\" : 18, \"class\" : \"poisons\", \"name\" : \"Siina\", \"onset\" : \"28.578875\", \"frequency\" : \"27.310669000000001\", \"effect\" : \"24.192734000000002\", \"chance\" : 27.151700000000002, \"type\" : \"24.385345000000001\", \"weight\" : 72, \"benefit\" : 27.151700000000002}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 22,
+      "onset": "20.047663",
+      "frequency": "20.683240000000001",
+      "effect": "26.163295999999999",
+      "chance": 22.75119,
+      "weight": 63.0,
+      "type": "26.840316999999999",
+      "name": "Anabel",
+      "info": "{\"id\" : 22, \"class\" : \"poisons\", \"name\" : \"Anabel\", \"onset\" : \"20.047663\", \"frequency\" : \"20.683240000000001\", \"effect\" : \"26.163295999999999\", \"chance\" : 22.751190000000001, \"type\" : \"26.840316999999999\", \"weight\" : 63, \"benefit\" : 22.751190000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 26,
+      "onset": "22.963190000000001",
+      "frequency": "20.787991999999999",
+      "effect": "28.106375",
+      "chance": 26.00954,
+      "weight": 91.0,
+      "type": "24.78904",
+      "name": "John",
+      "info": "{\"id\" : 26, \"class\" : \"poisons\", \"name\" : \"John\", \"onset\" : \"22.963190000000001\", \"frequency\" : \"20.787991999999999\", \"effect\" : \"28.106375\", \"chance\" : 26.009540000000001, \"type\" : \"24.78904\", \"weight\" : 91, \"benefit\" : 26.009540000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 30,
+      "onset": "28.850185",
+      "frequency": "29.639668",
+      "effect": "28.562080000000002",
+      "chance": 26.267078,
+      "weight": 68.0,
+      "type": "21.15803",
+      "name": "Noise",
+      "info": "{\"id\" : 30, \"class\" : \"poisons\", \"name\" : \"Noise\", \"onset\" : \"28.850185\", \"frequency\" : \"29.639668\", \"effect\" : \"28.562080000000002\", \"chance\" : 26.267078000000001, \"type\" : \"21.15803\", \"weight\" : 68, \"benefit\" : 26.267078000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 34,
+      "onset": "25.129231999999998",
+      "frequency": "20.960659",
+      "effect": "24.708973",
+      "chance": 26.562153,
+      "weight": 64.0,
+      "type": "20.648502000000001",
+      "name": "Greg",
+      "info": "{\"id\" : 34, \"class\" : \"poisons\", \"name\" : \"Greg\", \"onset\" : \"25.129231999999998\", \"frequency\" : \"20.960659\", \"effect\" : \"24.708973\", \"chance\" : 26.562152999999999, \"type\" : \"20.648502000000001\", \"weight\" : 64, \"benefit\" : 26.562152999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 38,
+      "onset": "26.325018",
+      "frequency": "27.700469999999999",
+      "effect": "26.384143999999999",
+      "chance": 26.570919,
+      "weight": 86.0,
+      "type": "26.631509999999999",
+      "name": "Tom",
+      "info": "{\"id\" : 38, \"class\" : \"poisons\", \"name\" : \"Tom\", \"onset\" : \"26.325018\", \"frequency\" : \"27.700469999999999\", \"effect\" : \"26.384143999999999\", \"chance\" : 26.570919, \"type\" : \"26.631509999999999\", \"weight\" : 86, \"benefit\" : 26.570919}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 42,
+      "onset": "27.128983000000002",
+      "frequency": "28.461798000000002",
+      "effect": "20.401565999999999",
+      "chance": 26.5357,
+      "weight": 72.0,
+      "type": "20.542497999999998",
+      "name": "Liara",
+      "info": "{\"id\" : 42, \"class\" : \"poisons\", \"name\" : \"Liara\", \"onset\" : \"27.128983000000002\", \"frequency\" : \"28.461798000000002\", \"effect\" : \"20.401565999999999\", \"chance\" : 26.535699999999999, \"type\" : \"20.542497999999998\", \"weight\" : 72, \"benefit\" : 26.535699999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 46,
+      "onset": "26.870619999999999",
+      "frequency": "22.238562000000002",
+      "effect": "26.162251999999999",
+      "chance": 23.483934,
+      "weight": 66.0,
+      "type": "22.870315999999999",
+      "name": "Garry",
+      "info": "{\"id\" : 46, \"class\" : \"poisons\", \"name\" : \"Garry\", \"onset\" : \"26.870619999999999\", \"frequency\" : \"22.238562000000002\", \"effect\" : \"26.162251999999999\", \"chance\" : 23.483934000000001, \"type\" : \"22.870315999999999\", \"weight\" : 66, \"benefit\" : 23.483934000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 50,
+      "onset": "29.191514999999999",
+      "frequency": "24.989367000000001",
+      "effect": "24.528213999999998",
+      "chance": 21.548805,
+      "weight": 82.0,
+      "type": "23.862417000000001",
+      "name": "Misato",
+      "info": "{\"id\" : 50, \"class\" : \"poisons\", \"name\" : \"Misato\", \"onset\" : \"29.191514999999999\", \"frequency\" : \"24.989367000000001\", \"effect\" : \"24.528213999999998\", \"chance\" : 21.548805000000002, \"type\" : \"23.862417000000001\", \"weight\" : 82, \"benefit\" : 21.548805000000002}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 54,
+      "onset": "21.189623000000001",
+      "frequency": "21.481780000000001",
+      "effect": "27.345020000000002",
+      "chance": 27.789005,
+      "weight": 93.0,
+      "type": "23.823616000000001",
+      "name": "Garry",
+      "info": "{\"id\" : 54, \"class\" : \"poisons\", \"name\" : \"Garry\", \"onset\" : \"21.189623000000001\", \"frequency\" : \"21.481780000000001\", \"effect\" : \"27.345020000000002\", \"chance\" : 27.789005, \"type\" : \"23.823616000000001\", \"weight\" : 93, \"benefit\" : 27.789005}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 58,
+      "onset": "26.301973",
+      "frequency": "25.284687000000002",
+      "effect": "21.267202000000001",
+      "chance": 28.060555,
+      "weight": 80.0,
+      "type": "22.866645999999999",
+      "name": "Siina",
+      "info": "{\"id\" : 58, \"class\" : \"poisons\", \"name\" : \"Siina\", \"onset\" : \"26.301973\", \"frequency\" : \"25.284687000000002\", \"effect\" : \"21.267202000000001\", \"chance\" : 28.060555000000001, \"type\" : \"22.866645999999999\", \"weight\" : 80, \"benefit\" : 28.060555000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 62,
+      "onset": "25.467569999999998",
+      "frequency": "25.780918",
+      "effect": "27.246420000000001",
+      "chance": 22.499569,
+      "weight": 62.0,
+      "type": "24.456351999999999",
+      "name": "Linda",
+      "info": "{\"id\" : 62, \"class\" : \"poisons\", \"name\" : \"Linda\", \"onset\" : \"25.467569999999998\", \"frequency\" : \"25.780918\", \"effect\" : \"27.246420000000001\", \"chance\" : 22.499569000000001, \"type\" : \"24.456351999999999\", \"weight\" : 62, \"benefit\" : 22.499569000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 66,
+      "onset": "21.416695000000001",
+      "frequency": "28.852499999999999",
+      "effect": "29.312346999999999",
+      "chance": 25.846472,
+      "weight": 61.0,
+      "type": "20.441236",
+      "name": "Paul",
+      "info": "{\"id\" : 66, \"class\" : \"poisons\", \"name\" : \"Paul\", \"onset\" : \"21.416695000000001\", \"frequency\" : \"28.852499999999999\", \"effect\" : \"29.312346999999999\", \"chance\" : 25.846471999999999, \"type\" : \"20.441236\", \"weight\" : 61, \"benefit\" : 25.846471999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 70,
+      "onset": "23.867049999999999",
+      "frequency": "24.752715999999999",
+      "effect": "23.279007",
+      "chance": 20.32991,
+      "weight": 62.0,
+      "type": "26.495594000000001",
+      "name": "kris",
+      "info": "{\"id\" : 70, \"class\" : \"poisons\", \"name\" : \"kris\", \"onset\" : \"23.867049999999999\", \"frequency\" : \"24.752715999999999\", \"effect\" : \"23.279007\", \"chance\" : 20.329910000000002, \"type\" : \"26.495594000000001\", \"weight\" : 62, \"benefit\" : 20.329910000000002}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 74,
+      "onset": "29.738416999999998",
+      "frequency": "25.782810000000001",
+      "effect": "20.471129999999999",
+      "chance": 22.249672,
+      "weight": 80.0,
+      "type": "22.9528",
+      "name": "Garry",
+      "info": "{\"id\" : 74, \"class\" : \"poisons\", \"name\" : \"Garry\", \"onset\" : \"29.738416999999998\", \"frequency\" : \"25.782810000000001\", \"effect\" : \"20.471129999999999\", \"chance\" : 22.249672, \"type\" : \"22.9528\", \"weight\" : 80, \"benefit\" : 22.249672}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 78,
+      "onset": "20.804535000000001",
+      "frequency": "22.700915999999999",
+      "effect": "20.108238",
+      "chance": 22.352121,
+      "weight": 67.0,
+      "type": "25.812076999999999",
+      "name": "John",
+      "info": "{\"id\" : 78, \"class\" : \"poisons\", \"name\" : \"John\", \"onset\" : \"20.804535000000001\", \"frequency\" : \"22.700915999999999\", \"effect\" : \"20.108238\", \"chance\" : 22.352121, \"type\" : \"25.812076999999999\", \"weight\" : 67, \"benefit\" : 22.352121}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 85,
+      "onset": "29.163128",
+      "frequency": "22.179220000000001",
+      "effect": "23.643380000000001",
+      "chance": 20.600023,
+      "weight": 75.0,
+      "type": "25.633223000000001",
+      "name": "Roman",
+      "info": "{\"id\" : 85, \"class\" : \"poisons\", \"name\" : \"Roman\", \"onset\" : \"29.163128\", \"frequency\" : \"22.179220000000001\", \"effect\" : \"23.643380000000001\", \"chance\" : 20.600023, \"type\" : \"25.633223000000001\", \"weight\" : 75, \"benefit\" : 20.600023}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 89,
+      "onset": "23.433351999999999",
+      "frequency": "25.484120999999998",
+      "effect": "21.776209000000001",
+      "chance": 21.370205,
+      "weight": 94.0,
+      "type": "23.626850000000001",
+      "name": "Josef",
+      "info": "{\"id\" : 89, \"class\" : \"poisons\", \"name\" : \"Josef\", \"onset\" : \"23.433351999999999\", \"frequency\" : \"25.484120999999998\", \"effect\" : \"21.776209000000001\", \"chance\" : 21.370204999999999, \"type\" : \"23.626850000000001\", \"weight\" : 94, \"benefit\" : 21.370204999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 93,
+      "onset": "22.998259000000001",
+      "frequency": "29.232299999999999",
+      "effect": "20.647487999999999",
+      "chance": 27.157265,
+      "weight": 66.0,
+      "type": "28.528487999999999",
+      "name": "Andrew",
+      "info": "{\"id\" : 93, \"class\" : \"poisons\", \"name\" : \"Andrew\", \"onset\" : \"22.998259000000001\", \"frequency\" : \"29.232299999999999\", \"effect\" : \"20.647487999999999\", \"chance\" : 27.157264999999999, \"type\" : \"28.528487999999999\", \"weight\" : 66, \"benefit\" : 27.157264999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 97,
+      "onset": "23.921510000000001",
+      "frequency": "23.018439999999998",
+      "effect": "23.00676",
+      "chance": 28.270527,
+      "weight": 84.0,
+      "type": "25.532810000000001",
+      "name": "Akito",
+      "info": "{\"id\" : 97, \"class\" : \"poisons\", \"name\" : \"Akito\", \"onset\" : \"23.921510000000001\", \"frequency\" : \"23.018439999999998\", \"effect\" : \"23.00676\", \"chance\" : 28.270527000000001, \"type\" : \"25.532810000000001\", \"weight\" : 84, \"benefit\" : 28.270527000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 101,
+      "onset": "21.433039000000001",
+      "frequency": "20.521087999999999",
+      "effect": "24.478567000000002",
+      "chance": 29.321442,
+      "weight": 87.0,
+      "type": "23.965896999999998",
+      "name": "Paul",
+      "info": "{\"id\" : 101, \"class\" : \"poisons\", \"name\" : \"Paul\", \"onset\" : \"21.433039000000001\", \"frequency\" : \"20.521087999999999\", \"effect\" : \"24.478567000000002\", \"chance\" : 29.321442000000001, \"type\" : \"23.965896999999998\", \"weight\" : 87, \"benefit\" : 29.321442000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 105,
+      "onset": "24.601134999999999",
+      "frequency": "24.869457000000001",
+      "effect": "20.87199",
+      "chance": 27.889317,
+      "weight": 86.0,
+      "type": "26.545432999999999",
+      "name": "Siina",
+      "info": "{\"id\" : 105, \"class\" : \"poisons\", \"name\" : \"Siina\", \"onset\" : \"24.601134999999999\", \"frequency\" : \"24.869457000000001\", \"effect\" : \"20.87199\", \"chance\" : 27.889316999999998, \"type\" : \"26.545432999999999\", \"weight\" : 86, \"benefit\" : 27.889316999999998}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 109,
+      "onset": "26.407564000000001",
+      "frequency": "20.637249000000001",
+      "effect": "29.924202000000001",
+      "chance": 24.162865,
+      "weight": 88.0,
+      "type": "21.033054",
+      "name": "Liara",
+      "info": "{\"id\" : 109, \"class\" : \"poisons\", \"name\" : \"Liara\", \"onset\" : \"26.407564000000001\", \"frequency\" : \"20.637249000000001\", \"effect\" : \"29.924202000000001\", \"chance\" : 24.162865, \"type\" : \"21.033054\", \"weight\" : 88, \"benefit\" : 24.162865}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 113,
+      "onset": "21.302567",
+      "frequency": "29.671966999999999",
+      "effect": "25.896778000000001",
+      "chance": 29.690472,
+      "weight": 69.0,
+      "type": "25.953785",
+      "name": "Tom",
+      "info": "{\"id\" : 113, \"class\" : \"poisons\", \"name\" : \"Tom\", \"onset\" : \"21.302567\", \"frequency\" : \"29.671966999999999\", \"effect\" : \"25.896778000000001\", \"chance\" : 29.690472, \"type\" : \"25.953785\", \"weight\" : 69, \"benefit\" : 29.690472}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 117,
+      "onset": "21.479513000000001",
+      "frequency": "26.574383000000001",
+      "effect": "29.602810000000002",
+      "chance": 28.17772,
+      "weight": 93.0,
+      "type": "22.439513999999999",
+      "name": "Tom",
+      "info": "{\"id\" : 117, \"class\" : \"poisons\", \"name\" : \"Tom\", \"onset\" : \"21.479513000000001\", \"frequency\" : \"26.574383000000001\", \"effect\" : \"29.602810000000002\", \"chance\" : 28.177720000000001, \"type\" : \"22.439513999999999\", \"weight\" : 93, \"benefit\" : 28.177720000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 121,
+      "onset": "24.832771000000001",
+      "frequency": "28.837969999999999",
+      "effect": "23.23536",
+      "chance": 25.85253,
+      "weight": 68.0,
+      "type": "21.714587999999999",
+      "name": "Josef",
+      "info": "{\"id\" : 121, \"class\" : \"poisons\", \"name\" : \"Josef\", \"onset\" : \"24.832771000000001\", \"frequency\" : \"28.837969999999999\", \"effect\" : \"23.23536\", \"chance\" : 25.852530000000002, \"type\" : \"21.714587999999999\", \"weight\" : 68, \"benefit\" : 25.852530000000002}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 127,
+      "onset": "20.088740999999999",
+      "frequency": "20.258559999999999",
+      "effect": "22.794352",
+      "chance": 29.753834,
+      "weight": 63.0,
+      "type": "20.586842999999998",
+      "name": "Garry",
+      "info": "{\"id\" : 127, \"class\" : \"poisons\", \"name\" : \"Garry\", \"onset\" : \"20.088740999999999\", \"frequency\" : \"20.258559999999999\", \"effect\" : \"22.794352\", \"chance\" : 29.753834000000001, \"type\" : \"20.586842999999998\", \"weight\" : 63, \"benefit\" : 29.753834000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 131,
+      "onset": "21.826951999999999",
+      "frequency": "27.456693999999999",
+      "effect": "29.82582",
+      "chance": 28.369934,
+      "weight": 73.0,
+      "type": "27.248940000000001",
+      "name": "Violet",
+      "info": "{\"id\" : 131, \"class\" : \"poisons\", \"name\" : \"Violet\", \"onset\" : \"21.826951999999999\", \"frequency\" : \"27.456693999999999\", \"effect\" : \"29.82582\", \"chance\" : 28.369934000000001, \"type\" : \"27.248940000000001\", \"weight\" : 73, \"benefit\" : 28.369934000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 135,
+      "onset": "22.930260000000001",
+      "frequency": "21.178287999999998",
+      "effect": "24.794018000000001",
+      "chance": 25.823841,
+      "weight": 73.0,
+      "type": "28.255882",
+      "name": "Garry",
+      "info": "{\"id\" : 135, \"class\" : \"poisons\", \"name\" : \"Garry\", \"onset\" : \"22.930260000000001\", \"frequency\" : \"21.178287999999998\", \"effect\" : \"24.794018000000001\", \"chance\" : 25.823841000000002, \"type\" : \"28.255882\", \"weight\" : 73, \"benefit\" : 25.823841000000002}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 139,
+      "onset": "21.990200000000002",
+      "frequency": "22.358789999999999",
+      "effect": "27.585487000000001",
+      "chance": 20.045614,
+      "weight": 68.0,
+      "type": "22.130579999999998",
+      "name": "Misato",
+      "info": "{\"id\" : 139, \"class\" : \"poisons\", \"name\" : \"Misato\", \"onset\" : \"21.990200000000002\", \"frequency\" : \"22.358789999999999\", \"effect\" : \"27.585487000000001\", \"chance\" : 20.045614, \"type\" : \"22.130579999999998\", \"weight\" : 68, \"benefit\" : 20.045614}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 143,
+      "onset": "24.601832999999999",
+      "frequency": "20.891613",
+      "effect": "22.748968000000001",
+      "chance": 27.347271,
+      "weight": 67.0,
+      "type": "22.265438",
+      "name": "Anabel",
+      "info": "{\"id\" : 143, \"class\" : \"poisons\", \"name\" : \"Anabel\", \"onset\" : \"24.601832999999999\", \"frequency\" : \"20.891613\", \"effect\" : \"22.748968000000001\", \"chance\" : 27.347270999999999, \"type\" : \"22.265438\", \"weight\" : 67, \"benefit\" : 27.347270999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 147,
+      "onset": "25.807205",
+      "frequency": "23.786273999999999",
+      "effect": "20.461424000000001",
+      "chance": 28.047108,
+      "weight": 71.0,
+      "type": "23.429860999999999",
+      "name": "Andrew",
+      "info": "{\"id\" : 147, \"class\" : \"poisons\", \"name\" : \"Andrew\", \"onset\" : \"25.807205\", \"frequency\" : \"23.786273999999999\", \"effect\" : \"20.461424000000001\", \"chance\" : 28.047108000000001, \"type\" : \"23.429860999999999\", \"weight\" : 71, \"benefit\" : 28.047108000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 151,
+      "onset": "20.408964000000001",
+      "frequency": "21.244205000000001",
+      "effect": "20.357745999999999",
+      "chance": 26.16344,
+      "weight": 79.0,
+      "type": "23.380585",
+      "name": "Tom",
+      "info": "{\"id\" : 151, \"class\" : \"poisons\", \"name\" : \"Tom\", \"onset\" : \"20.408964000000001\", \"frequency\" : \"21.244205000000001\", \"effect\" : \"20.357745999999999\", \"chance\" : 26.163440000000001, \"type\" : \"23.380585\", \"weight\" : 79, \"benefit\" : 26.163440000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 155,
+      "onset": "21.177157999999999",
+      "frequency": "21.812103",
+      "effect": "23.168050000000001",
+      "chance": 24.910841,
+      "weight": 64.0,
+      "type": "29.940605000000001",
+      "name": "Carl",
+      "info": "{\"id\" : 155, \"class\" : \"poisons\", \"name\" : \"Carl\", \"onset\" : \"21.177157999999999\", \"frequency\" : \"21.812103\", \"effect\" : \"23.168050000000001\", \"chance\" : 24.910841000000001, \"type\" : \"29.940605000000001\", \"weight\" : 64, \"benefit\" : 24.910841000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 159,
+      "onset": "22.777184999999999",
+      "frequency": "29.657174999999999",
+      "effect": "24.973966999999998",
+      "chance": 22.263523,
+      "weight": 80.0,
+      "type": "26.966826999999999",
+      "name": "Linda",
+      "info": "{\"id\" : 159, \"class\" : \"poisons\", \"name\" : \"Linda\", \"onset\" : \"22.777184999999999\", \"frequency\" : \"29.657174999999999\", \"effect\" : \"24.973966999999998\", \"chance\" : 22.263522999999999, \"type\" : \"26.966826999999999\", \"weight\" : 80, \"benefit\" : 22.263522999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 163,
+      "onset": "21.772670000000002",
+      "frequency": "25.062830000000002",
+      "effect": "23.088781000000001",
+      "chance": 26.58033,
+      "weight": 68.0,
+      "type": "20.152622000000001",
+      "name": "Akito",
+      "info": "{\"id\" : 163, \"class\" : \"poisons\", \"name\" : \"Akito\", \"onset\" : \"21.772670000000002\", \"frequency\" : \"25.062830000000002\", \"effect\" : \"23.088781000000001\", \"chance\" : 26.58033, \"type\" : \"20.152622000000001\", \"weight\" : 68, \"benefit\" : 26.58033}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 168,
+      "onset": "21.629519999999999",
+      "frequency": "26.471852999999999",
+      "effect": "23.719121999999999",
+      "chance": 22.781078,
+      "weight": 76.0,
+      "type": "28.146048",
+      "name": "Mark",
+      "info": "{\"id\" : 168, \"class\" : \"poisons\", \"name\" : \"Mark\", \"onset\" : \"21.629519999999999\", \"frequency\" : \"26.471852999999999\", \"effect\" : \"23.719121999999999\", \"chance\" : 22.781078000000001, \"type\" : \"28.146048\", \"weight\" : 76, \"benefit\" : 22.781078000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 172,
+      "onset": "25.83456",
+      "frequency": "25.073599999999999",
+      "effect": "24.824081",
+      "chance": 25.259523,
+      "weight": 63.0,
+      "type": "21.697064999999998",
+      "name": "Garry",
+      "info": "{\"id\" : 172, \"class\" : \"poisons\", \"name\" : \"Garry\", \"onset\" : \"25.83456\", \"frequency\" : \"25.073599999999999\", \"effect\" : \"24.824081\", \"chance\" : 25.259523000000002, \"type\" : \"21.697064999999998\", \"weight\" : 63, \"benefit\" : 25.259523000000002}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 176,
+      "onset": "22.767330000000001",
+      "frequency": "27.162445000000002",
+      "effect": "26.818733000000002",
+      "chance": 20.75103,
+      "weight": 65.0,
+      "type": "29.353596",
+      "name": "kris",
+      "info": "{\"id\" : 176, \"class\" : \"poisons\", \"name\" : \"kris\", \"onset\" : \"22.767330000000001\", \"frequency\" : \"27.162445000000002\", \"effect\" : \"26.818733000000002\", \"chance\" : 20.75103, \"type\" : \"29.353596\", \"weight\" : 65, \"benefit\" : 20.75103}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 180,
+      "onset": "21.155639999999998",
+      "frequency": "27.468776999999999",
+      "effect": "29.554739999999999",
+      "chance": 24.507938,
+      "weight": 67.0,
+      "type": "29.613588",
+      "name": "Andrew",
+      "info": "{\"id\" : 180, \"class\" : \"poisons\", \"name\" : \"Andrew\", \"onset\" : \"21.155639999999998\", \"frequency\" : \"27.468776999999999\", \"effect\" : \"29.554739999999999\", \"chance\" : 24.507937999999999, \"type\" : \"29.613588\", \"weight\" : 67, \"benefit\" : 24.507937999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 184,
+      "onset": "22.048126",
+      "frequency": "27.720504999999999",
+      "effect": "21.836227000000001",
+      "chance": 27.717842,
+      "weight": 65.0,
+      "type": "23.193204999999999",
+      "name": "Josef",
+      "info": "{\"id\" : 184, \"class\" : \"poisons\", \"name\" : \"Josef\", \"onset\" : \"22.048126\", \"frequency\" : \"27.720504999999999\", \"effect\" : \"21.836227000000001\", \"chance\" : 27.717842000000001, \"type\" : \"23.193204999999999\", \"weight\" : 65, \"benefit\" : 27.717842000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 188,
+      "onset": "21.692526000000001",
+      "frequency": "20.651585000000001",
+      "effect": "24.329521",
+      "chance": 29.754238,
+      "weight": 77.0,
+      "type": "23.982426",
+      "name": "Andrew",
+      "info": "{\"id\" : 188, \"class\" : \"poisons\", \"name\" : \"Andrew\", \"onset\" : \"21.692526000000001\", \"frequency\" : \"20.651585000000001\", \"effect\" : \"24.329521\", \"chance\" : 29.754238000000001, \"type\" : \"23.982426\", \"weight\" : 77, \"benefit\" : 29.754238000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 192,
+      "onset": "24.570046999999999",
+      "frequency": "23.842047000000001",
+      "effect": "21.284603000000001",
+      "chance": 25.625736,
+      "weight": 69.0,
+      "type": "26.724442",
+      "name": "Anabel",
+      "info": "{\"id\" : 192, \"class\" : \"poisons\", \"name\" : \"Anabel\", \"onset\" : \"24.570046999999999\", \"frequency\" : \"23.842047000000001\", \"effect\" : \"21.284603000000001\", \"chance\" : 25.625736, \"type\" : \"26.724442\", \"weight\" : 69, \"benefit\" : 25.625736}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 196,
+      "onset": "27.489576",
+      "frequency": "20.138355000000001",
+      "effect": "27.662026999999998",
+      "chance": 26.854212,
+      "weight": 68.0,
+      "type": "26.036909999999999",
+      "name": "Carl",
+      "info": "{\"id\" : 196, \"class\" : \"poisons\", \"name\" : \"Carl\", \"onset\" : \"27.489576\", \"frequency\" : \"20.138355000000001\", \"effect\" : \"27.662026999999998\", \"chance\" : 26.854212, \"type\" : \"26.036909999999999\", \"weight\" : 68, \"benefit\" : 26.854212}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 200,
+      "onset": "28.800507",
+      "frequency": "29.054753999999999",
+      "effect": "25.081720000000001",
+      "chance": 21.485546,
+      "weight": 92.0,
+      "type": "29.276865000000001",
+      "name": "Akito",
+      "info": "{\"id\" : 200, \"class\" : \"poisons\", \"name\" : \"Akito\", \"onset\" : \"28.800507\", \"frequency\" : \"29.054753999999999\", \"effect\" : \"25.081720000000001\", \"chance\" : 21.485545999999999, \"type\" : \"29.276865000000001\", \"weight\" : 92, \"benefit\" : 21.485545999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 204,
+      "onset": "22.196273999999999",
+      "frequency": "20.998850000000001",
+      "effect": "28.383967999999999",
+      "chance": 29.237137,
+      "weight": 83.0,
+      "type": "23.915503000000001",
+      "name": "Anabel",
+      "info": "{\"id\" : 204, \"class\" : \"poisons\", \"name\" : \"Anabel\", \"onset\" : \"22.196273999999999\", \"frequency\" : \"20.998850000000001\", \"effect\" : \"28.383967999999999\", \"chance\" : 29.237137000000001, \"type\" : \"23.915503000000001\", \"weight\" : 83, \"benefit\" : 29.237137000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 209,
+      "onset": "27.070065",
+      "frequency": "26.093443000000001",
+      "effect": "23.469066999999999",
+      "chance": 23.39818,
+      "weight": 91.0,
+      "type": "20.066734",
+      "name": "John",
+      "info": "{\"id\" : 209, \"class\" : \"poisons\", \"name\" : \"John\", \"onset\" : \"27.070065\", \"frequency\" : \"26.093443000000001\", \"effect\" : \"23.469066999999999\", \"chance\" : 23.39818, \"type\" : \"20.066734\", \"weight\" : 91, \"benefit\" : 23.39818}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 213,
+      "onset": "26.306239999999999",
+      "frequency": "24.609183999999999",
+      "effect": "20.046900000000001",
+      "chance": 22.20391,
+      "weight": 87.0,
+      "type": "27.488534999999999",
+      "name": "Noise",
+      "info": "{\"id\" : 213, \"class\" : \"poisons\", \"name\" : \"Noise\", \"onset\" : \"26.306239999999999\", \"frequency\" : \"24.609183999999999\", \"effect\" : \"20.046900000000001\", \"chance\" : 22.20391, \"type\" : \"27.488534999999999\", \"weight\" : 87, \"benefit\" : 22.20391}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 217,
+      "onset": "21.465242",
+      "frequency": "24.523045",
+      "effect": "24.449529999999999",
+      "chance": 24.451565,
+      "weight": 88.0,
+      "type": "20.310542999999999",
+      "name": "kris",
+      "info": "{\"id\" : 217, \"class\" : \"poisons\", \"name\" : \"kris\", \"onset\" : \"21.465242\", \"frequency\" : \"24.523045\", \"effect\" : \"24.449529999999999\", \"chance\" : 24.451564999999999, \"type\" : \"20.310542999999999\", \"weight\" : 88, \"benefit\" : 24.451564999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 221,
+      "onset": "22.652113",
+      "frequency": "26.171032",
+      "effect": "25.311384",
+      "chance": 28.202263,
+      "weight": 85.0,
+      "type": "21.601381",
+      "name": "kris",
+      "info": "{\"id\" : 221, \"class\" : \"poisons\", \"name\" : \"kris\", \"onset\" : \"22.652113\", \"frequency\" : \"26.171032\", \"effect\" : \"25.311384\", \"chance\" : 28.202262999999999, \"type\" : \"21.601381\", \"weight\" : 85, \"benefit\" : 28.202262999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 225,
+      "onset": "21.555596999999999",
+      "frequency": "23.588526000000002",
+      "effect": "28.085491000000001",
+      "chance": 23.843414,
+      "weight": 87.0,
+      "type": "24.848777999999999",
+      "name": "Greg",
+      "info": "{\"id\" : 225, \"class\" : \"poisons\", \"name\" : \"Greg\", \"onset\" : \"21.555596999999999\", \"frequency\" : \"23.588526000000002\", \"effect\" : \"28.085491000000001\", \"chance\" : 23.843413999999999, \"type\" : \"24.848777999999999\", \"weight\" : 87, \"benefit\" : 23.843413999999999}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 229,
+      "onset": "20.981283000000001",
+      "frequency": "24.887947",
+      "effect": "29.398005000000001",
+      "chance": 25.77513,
+      "weight": 62.0,
+      "type": "25.905142000000001",
+      "name": "John",
+      "info": "{\"id\" : 229, \"class\" : \"poisons\", \"name\" : \"John\", \"onset\" : \"20.981283000000001\", \"frequency\" : \"24.887947\", \"effect\" : \"29.398005000000001\", \"chance\" : 25.775130000000001, \"type\" : \"25.905142000000001\", \"weight\" : 62, \"benefit\" : 25.775130000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 233,
+      "onset": "29.303540999999999",
+      "frequency": "25.492512000000001",
+      "effect": "29.153534000000001",
+      "chance": 27.904121,
+      "weight": 90.0,
+      "type": "26.005610999999998",
+      "name": "Linda",
+      "info": "{\"id\" : 233, \"class\" : \"poisons\", \"name\" : \"Linda\", \"onset\" : \"29.303540999999999\", \"frequency\" : \"25.492512000000001\", \"effect\" : \"29.153534000000001\", \"chance\" : 27.904121, \"type\" : \"26.005610999999998\", \"weight\" : 90, \"benefit\" : 27.904121}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 237,
+      "onset": "26.968457999999998",
+      "frequency": "26.426807",
+      "effect": "23.398325",
+      "chance": 25.806398,
+      "weight": 87.0,
+      "type": "22.145702",
+      "name": "Mark",
+      "info": "{\"id\" : 237, \"class\" : \"poisons\", \"name\" : \"Mark\", \"onset\" : \"26.968457999999998\", \"frequency\" : \"26.426807\", \"effect\" : \"23.398325\", \"chance\" : 25.806398000000002, \"type\" : \"22.145702\", \"weight\" : 87, \"benefit\" : 25.806398000000002}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 241,
+      "onset": "29.564046999999999",
+      "frequency": "24.600624",
+      "effect": "20.940270000000002",
+      "chance": 26.2938,
+      "weight": 64.0,
+      "type": "24.19922",
+      "name": "Mark",
+      "info": "{\"id\" : 241, \"class\" : \"poisons\", \"name\" : \"Mark\", \"onset\" : \"29.564046999999999\", \"frequency\" : \"24.600624\", \"effect\" : \"20.940270000000002\", \"chance\" : 26.293800000000001, \"type\" : \"24.19922\", \"weight\" : 64, \"benefit\" : 26.293800000000001}"
+    },
+    {
+      "poisonClass": "poisons",
+      "id": 245,
+      "onset": "27.193574999999999",
+      "frequency": "23.783707",
+      "effect": "25.954875999999999",
+      "chance": 25.17684,
+      "weight": 85.0,
+      "type": "29.324967999999998",
+      "name": "Liara",
+      "info": "{\"id\" : 245, \"class\" : \"poisons\", \"name\" : \"Liara\", \"onset\" : \"27.193574999999999\", \"frequency\" : \"23.783707\", \"effect\" : \"25.954875999999999\", \"chance\" : 25.176839999999999, \"type\" : \"29.324967999999998\", \"weight\" : 85, \"benefit\" : 25.176839999999999}"
+    }
+  ],
+  "slaves": [
+    {
+      "slavesClass": "slaves",
+      "id": 1,
+      "name": "kris",
+      "benefit": 12.0,
+      "height": 192.0,
+      "weight": 80.0,
+      "age": 30,
+      "info": "{\"id\" : 1, \"class\" : \"slaves\", \"name\" : \"kris\", \"age\" : 30, \"weight\" : 80, \"height\" : 192, \"benefit\" : 12}",
+      "gender": "Trebuchet"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 5,
+      "name": "kris",
+      "benefit": 80.6,
+      "height": 164.0,
+      "weight": 83.0,
+      "age": 20,
+      "info": "{\"id\" : 5, \"class\" : \"slaves\", \"name\" : \"kris\", \"age\" : 20, \"weight\" : 83, \"height\" : 164, \"benefit\" : 80.599999999999994}",
+      "gender": "Neutrois"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 9,
+      "name": "Tom",
+      "benefit": 67.13793,
+      "height": 169.0,
+      "weight": 63.0,
+      "age": 29,
+      "info": "{\"id\" : 9, \"class\" : \"slaves\", \"name\" : \"Tom\", \"age\" : 29, \"weight\" : 63, \"height\" : 169, \"benefit\" : 67.137931034483003}",
+      "gender": "Genderblank"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 13,
+      "name": "Violet",
+      "benefit": 47.4,
+      "height": 161.0,
+      "weight": 68.0,
+      "age": 20,
+      "info": "{\"id\" : 13, \"class\" : \"slaves\", \"name\" : \"Violet\", \"age\" : 20, \"weight\" : 68, \"height\" : 161, \"benefit\" : 47.399999999999999}",
+      "gender": "Transmission"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 17,
+      "name": "Misato",
+      "benefit": 27.0,
+      "height": 198.0,
+      "weight": 76.0,
+      "age": 24,
+      "info": "{\"id\" : 17, \"class\" : \"slaves\", \"name\" : \"Misato\", \"age\" : 24, \"weight\" : 76, \"height\" : 198, \"benefit\" : 27}",
+      "gender": "Femfluid"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 21,
+      "name": "Garry",
+      "benefit": 51.12,
+      "height": 166.0,
+      "weight": 83.0,
+      "age": 25,
+      "info": "{\"id\" : 21, \"class\" : \"slaves\", \"name\" : \"Garry\", \"age\" : 25, \"weight\" : 83, \"height\" : 166, \"benefit\" : 51.119999999999997}",
+      "gender": "Genderflow"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 25,
+      "name": "Linda",
+      "benefit": 75.96,
+      "height": 187.0,
+      "weight": 77.0,
+      "age": 25,
+      "info": "{\"id\" : 25, \"class\" : \"slaves\", \"name\" : \"Linda\", \"age\" : 25, \"weight\" : 77, \"height\" : 187, \"benefit\" : 75.959999999999994}",
+      "gender": "Female"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 29,
+      "name": "Misato",
+      "benefit": 17.6,
+      "height": 174.0,
+      "weight": 60.0,
+      "age": 25,
+      "info": "{\"id\" : 29, \"class\" : \"slaves\", \"name\" : \"Misato\", \"age\" : 25, \"weight\" : 60, \"height\" : 174, \"benefit\" : 17.600000000000001}",
+      "gender": "Transmission"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 33,
+      "name": "Andrew",
+      "benefit": 9.413794,
+      "height": 187.0,
+      "weight": 79.0,
+      "age": 29,
+      "info": "{\"id\" : 33, \"class\" : \"slaves\", \"name\" : \"Andrew\", \"age\" : 29, \"weight\" : 79, \"height\" : 187, \"benefit\" : 9.4137931034480005}",
+      "gender": "Genderflow"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 37,
+      "name": "Liara",
+      "benefit": 5.04,
+      "height": 166.0,
+      "weight": 61.0,
+      "age": 25,
+      "info": "{\"id\" : 37, \"class\" : \"slaves\", \"name\" : \"Liara\", \"age\" : 25, \"weight\" : 61, \"height\" : 166, \"benefit\" : 5.04}",
+      "gender": "Agender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 41,
+      "name": "Carl",
+      "benefit": 66.7,
+      "height": 187.0,
+      "weight": 82.0,
+      "age": 20,
+      "info": "{\"id\" : 41, \"class\" : \"slaves\", \"name\" : \"Carl\", \"age\" : 20, \"weight\" : 82, \"height\" : 187, \"benefit\" : 66.700000000000003}",
+      "gender": "Apache"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 45,
+      "name": "Misato",
+      "benefit": 64.0,
+      "height": 192.0,
+      "weight": 83.0,
+      "age": 24,
+      "info": "{\"id\" : 45, \"class\" : \"slaves\", \"name\" : \"Misato\", \"age\" : 24, \"weight\" : 83, \"height\" : 192, \"benefit\" : 64}",
+      "gender": "Adamasgender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 49,
+      "name": "John",
+      "benefit": 28.47826,
+      "height": 187.0,
+      "weight": 65.0,
+      "age": 23,
+      "info": "{\"id\" : 49, \"class\" : \"slaves\", \"name\" : \"John\", \"age\" : 23, \"weight\" : 65, \"height\" : 187, \"benefit\" : 28.478260869564998}",
+      "gender": "Genderblank"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 53,
+      "name": "Siina",
+      "benefit": 73.083336,
+      "height": 197.0,
+      "weight": 82.0,
+      "age": 24,
+      "info": "{\"id\" : 53, \"class\" : \"slaves\", \"name\" : \"Siina\", \"age\" : 24, \"weight\" : 82, \"height\" : 197, \"benefit\" : 73.083333333333002}",
+      "gender": "Male"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 57,
+      "name": "Carl",
+      "benefit": 84.5,
+      "height": 185.0,
+      "weight": 74.0,
+      "age": 20,
+      "info": "{\"id\" : 57, \"class\" : \"slaves\", \"name\" : \"Carl\", \"age\" : 20, \"weight\" : 74, \"height\" : 185, \"benefit\" : 84.5}",
+      "gender": "Genderblank"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 61,
+      "name": "Mark",
+      "benefit": 88.46154,
+      "height": 170.0,
+      "weight": 90.0,
+      "age": 26,
+      "info": "{\"id\" : 61, \"class\" : \"slaves\", \"name\" : \"Mark\", \"age\" : 26, \"weight\" : 90, \"height\" : 170, \"benefit\" : 88.461538461537998}",
+      "gender": "Genderblank"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 65,
+      "name": "Josef",
+      "benefit": 86.0,
+      "height": 162.0,
+      "weight": 78.0,
+      "age": 26,
+      "info": "{\"id\" : 65, \"class\" : \"slaves\", \"name\" : \"Josef\", \"age\" : 26, \"weight\" : 78, \"height\" : 162, \"benefit\" : 86}",
+      "gender": "Transmission"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 69,
+      "name": "Andrew",
+      "benefit": 63.53846,
+      "height": 198.0,
+      "weight": 74.0,
+      "age": 26,
+      "info": "{\"id\" : 69, \"class\" : \"slaves\", \"name\" : \"Andrew\", \"age\" : 26, \"weight\" : 74, \"height\" : 198, \"benefit\" : 63.538461538462002}",
+      "gender": "Exgender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 73,
+      "name": "Anabel",
+      "benefit": 33.846153,
+      "height": 188.0,
+      "weight": 60.0,
+      "age": 26,
+      "info": "{\"id\" : 73, \"class\" : \"slaves\", \"name\" : \"Anabel\", \"age\" : 26, \"weight\" : 60, \"height\" : 188, \"benefit\" : 33.846153846154003}",
+      "gender": "Genderblank"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 77,
+      "name": "Noise",
+      "benefit": 74.296295,
+      "height": 163.0,
+      "weight": 62.0,
+      "age": 27,
+      "info": "{\"id\" : 77, \"class\" : \"slaves\", \"name\" : \"Noise\", \"age\" : 27, \"weight\" : 62, \"height\" : 163, \"benefit\" : 74.296296296296006}",
+      "gender": "Genderflow"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 84,
+      "name": "Tom",
+      "benefit": 86.666664,
+      "height": 160.0,
+      "weight": 73.0,
+      "age": 24,
+      "info": "{\"id\" : 84, \"class\" : \"slaves\", \"name\" : \"Tom\", \"age\" : 24, \"weight\" : 73, \"height\" : 160, \"benefit\" : 86.666666666666998}",
+      "gender": "Male"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 88,
+      "name": "Siina",
+      "benefit": 26.153847,
+      "height": 180.0,
+      "weight": 76.0,
+      "age": 26,
+      "info": "{\"id\" : 88, \"class\" : \"slaves\", \"name\" : \"Siina\", \"age\" : 26, \"weight\" : 76, \"height\" : 180, \"benefit\" : 26.153846153846001}",
+      "gender": "Male"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 92,
+      "name": "Andrew",
+      "benefit": 20.0,
+      "height": 160.0,
+      "weight": 60.0,
+      "age": 30,
+      "info": "{\"id\" : 92, \"class\" : \"slaves\", \"name\" : \"Andrew\", \"age\" : 30, \"weight\" : 60, \"height\" : 160, \"benefit\" : 20}",
+      "gender": "Agender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 96,
+      "name": "John",
+      "benefit": 36.25,
+      "height": 198.0,
+      "weight": 65.0,
+      "age": 24,
+      "info": "{\"id\" : 96, \"class\" : \"slaves\", \"name\" : \"John\", \"age\" : 24, \"weight\" : 65, \"height\" : 198, \"benefit\" : 36.25}",
+      "gender": "Femfluid"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 100,
+      "name": "Violet",
+      "benefit": 48.04348,
+      "height": 185.0,
+      "weight": 93.0,
+      "age": 23,
+      "info": "{\"id\" : 100, \"class\" : \"slaves\", \"name\" : \"Violet\", \"age\" : 23, \"weight\" : 93, \"height\" : 185, \"benefit\" : 48.043478260870003}",
+      "gender": "Transmission"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 104,
+      "name": "Julia",
+      "benefit": 30.0,
+      "height": 180.0,
+      "weight": 77.0,
+      "age": 22,
+      "info": "{\"id\" : 104, \"class\" : \"slaves\", \"name\" : \"Julia\", \"age\" : 22, \"weight\" : 77, \"height\" : 180, \"benefit\" : 30}",
+      "gender": "Male"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 108,
+      "name": "Misato",
+      "benefit": 71.72414,
+      "height": 171.0,
+      "weight": 80.0,
+      "age": 29,
+      "info": "{\"id\" : 108, \"class\" : \"slaves\", \"name\" : \"Misato\", \"age\" : 29, \"weight\" : 80, \"height\" : 171, \"benefit\" : 71.724137931033994}",
+      "gender": "Genderflow"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 112,
+      "name": "Julia",
+      "benefit": 67.333336,
+      "height": 182.0,
+      "weight": 88.0,
+      "age": 24,
+      "info": "{\"id\" : 112, \"class\" : \"slaves\", \"name\" : \"Julia\", \"age\" : 24, \"weight\" : 88, \"height\" : 182, \"benefit\" : 67.333333333333002}",
+      "gender": "Trebuchet"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 116,
+      "name": "Tom",
+      "benefit": 97.565216,
+      "height": 191.0,
+      "weight": 84.0,
+      "age": 23,
+      "info": "{\"id\" : 116, \"class\" : \"slaves\", \"name\" : \"Tom\", \"age\" : 23, \"weight\" : 84, \"height\" : 191, \"benefit\" : 97.565217391304003}",
+      "gender": "Neutrois"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 120,
+      "name": "Roman",
+      "benefit": 92.0,
+      "height": 196.0,
+      "weight": 60.0,
+      "age": 30,
+      "info": "{\"id\" : 120, \"class\" : \"slaves\", \"name\" : \"Roman\", \"age\" : 30, \"weight\" : 60, \"height\" : 196, \"benefit\" : 92}",
+      "gender": "Male"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 126,
+      "name": "Roman",
+      "benefit": 14.428572,
+      "height": 187.0,
+      "weight": 92.0,
+      "age": 28,
+      "info": "{\"id\" : 126, \"class\" : \"slaves\", \"name\" : \"Roman\", \"age\" : 28, \"weight\" : 92, \"height\" : 187, \"benefit\" : 14.428571428571001}",
+      "gender": "Femfluid"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 130,
+      "name": "Carl",
+      "benefit": 24.833334,
+      "height": 163.0,
+      "weight": 92.0,
+      "age": 24,
+      "info": "{\"id\" : 130, \"class\" : \"slaves\", \"name\" : \"Carl\", \"age\" : 24, \"weight\" : 92, \"height\" : 163, \"benefit\" : 24.833333333333002}",
+      "gender": "Genderflow"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 134,
+      "name": "Josef",
+      "benefit": 76.0,
+      "height": 192.0,
+      "weight": 84.0,
+      "age": 28,
+      "info": "{\"id\" : 134, \"class\" : \"slaves\", \"name\" : \"Josef\", \"age\" : 28, \"weight\" : 84, \"height\" : 192, \"benefit\" : 76}",
+      "gender": "Apache"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 138,
+      "name": "Josef",
+      "benefit": 10.0,
+      "height": 170.0,
+      "weight": 72.0,
+      "age": 24,
+      "info": "{\"id\" : 138, \"class\" : \"slaves\", \"name\" : \"Josef\", \"age\" : 24, \"weight\" : 72, \"height\" : 170, \"benefit\" : 10}",
+      "gender": "Neutrois"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 142,
+      "name": "Liara",
+      "benefit": 81.333336,
+      "height": 176.0,
+      "weight": 65.0,
+      "age": 30,
+      "info": "{\"id\" : 142, \"class\" : \"slaves\", \"name\" : \"Liara\", \"age\" : 30, \"weight\" : 65, \"height\" : 176, \"benefit\" : 81.333333333333002}",
+      "gender": "Agender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 146,
+      "name": "Julia",
+      "benefit": 67.0,
+      "height": 189.0,
+      "weight": 69.0,
+      "age": 23,
+      "info": "{\"id\" : 146, \"class\" : \"slaves\", \"name\" : \"Julia\", \"age\" : 23, \"weight\" : 69, \"height\" : 189, \"benefit\" : 67}",
+      "gender": "Female"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 150,
+      "name": "Mark",
+      "benefit": 92.652176,
+      "height": 179.0,
+      "weight": 89.0,
+      "age": 23,
+      "info": "{\"id\" : 150, \"class\" : \"slaves\", \"name\" : \"Mark\", \"age\" : 23, \"weight\" : 89, \"height\" : 179, \"benefit\" : 92.652173913043001}",
+      "gender": "Apache"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 154,
+      "name": "Greg",
+      "benefit": 15.583333,
+      "height": 166.0,
+      "weight": 89.0,
+      "age": 24,
+      "info": "{\"id\" : 154, \"class\" : \"slaves\", \"name\" : \"Greg\", \"age\" : 24, \"weight\" : 89, \"height\" : 166, \"benefit\" : 15.583333333333}",
+      "gender": "Trebuchet"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 158,
+      "name": "Misato",
+      "benefit": 45.517242,
+      "height": 170.0,
+      "weight": 76.0,
+      "age": 29,
+      "info": "{\"id\" : 158, \"class\" : \"slaves\", \"name\" : \"Misato\", \"age\" : 29, \"weight\" : 76, \"height\" : 170, \"benefit\" : 45.517241379310001}",
+      "gender": "Aerogender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 162,
+      "name": "Liara",
+      "benefit": 69.76,
+      "height": 182.0,
+      "weight": 92.0,
+      "age": 25,
+      "info": "{\"id\" : 162, \"class\" : \"slaves\", \"name\" : \"Liara\", \"age\" : 25, \"weight\" : 92, \"height\" : 182, \"benefit\" : 69.760000000000005}",
+      "gender": "Genderflow"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 167,
+      "name": "Akito",
+      "benefit": 68.454544,
+      "height": 171.0,
+      "weight": 86.0,
+      "age": 22,
+      "info": "{\"id\" : 167, \"class\" : \"slaves\", \"name\" : \"Akito\", \"age\" : 22, \"weight\" : 86, \"height\" : 171, \"benefit\" : 68.454545454544999}",
+      "gender": "Neutrois"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 171,
+      "name": "Andrew",
+      "benefit": 85.833336,
+      "height": 185.0,
+      "weight": 76.0,
+      "age": 24,
+      "info": "{\"id\" : 171, \"class\" : \"slaves\", \"name\" : \"Andrew\", \"age\" : 24, \"weight\" : 76, \"height\" : 185, \"benefit\" : 85.833333333333002}",
+      "gender": "Adamasgender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 175,
+      "name": "Garry",
+      "benefit": 78.8,
+      "height": 190.0,
+      "weight": 63.0,
+      "age": 25,
+      "info": "{\"id\" : 175, \"class\" : \"slaves\", \"name\" : \"Garry\", \"age\" : 25, \"weight\" : 63, \"height\" : 190, \"benefit\" : 78.799999999999997}",
+      "gender": "Abimegender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 179,
+      "name": "Julia",
+      "benefit": 36.666668,
+      "height": 161.0,
+      "weight": 80.0,
+      "age": 24,
+      "info": "{\"id\" : 179, \"class\" : \"slaves\", \"name\" : \"Julia\", \"age\" : 24, \"weight\" : 80, \"height\" : 161, \"benefit\" : 36.666666666666998}",
+      "gender": "Male"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 183,
+      "name": "Noise",
+      "benefit": 1.25,
+      "height": 198.0,
+      "weight": 85.0,
+      "age": 24,
+      "info": "{\"id\" : 183, \"class\" : \"slaves\", \"name\" : \"Noise\", \"age\" : 24, \"weight\" : 85, \"height\" : 198, \"benefit\" : 1.25}",
+      "gender": "Transmission"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 187,
+      "name": "Noise",
+      "benefit": 87.69231,
+      "height": 191.0,
+      "weight": 80.0,
+      "age": 26,
+      "info": "{\"id\" : 187, \"class\" : \"slaves\", \"name\" : \"Noise\", \"age\" : 26, \"weight\" : 80, \"height\" : 191, \"benefit\" : 87.692307692308006}",
+      "gender": "Abimegender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 191,
+      "name": "Julia",
+      "benefit": 30.666666,
+      "height": 199.0,
+      "weight": 72.0,
+      "age": 27,
+      "info": "{\"id\" : 191, \"class\" : \"slaves\", \"name\" : \"Julia\", \"age\" : 27, \"weight\" : 72, \"height\" : 199, \"benefit\" : 30.666666666666998}",
+      "gender": "Trebuchet"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 195,
+      "name": "Liara",
+      "benefit": 18.8,
+      "height": 170.0,
+      "weight": 91.0,
+      "age": 25,
+      "info": "{\"id\" : 195, \"class\" : \"slaves\", \"name\" : \"Liara\", \"age\" : 25, \"weight\" : 91, \"height\" : 170, \"benefit\" : 18.800000000000001}",
+      "gender": "Aerogender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 199,
+      "name": "Anabel",
+      "benefit": 26.56,
+      "height": 178.0,
+      "weight": 88.0,
+      "age": 25,
+      "info": "{\"id\" : 199, \"class\" : \"slaves\", \"name\" : \"Anabel\", \"age\" : 25, \"weight\" : 88, \"height\" : 178, \"benefit\" : 26.559999999999999}",
+      "gender": "Adamasgender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 203,
+      "name": "Violet",
+      "benefit": 99.2,
+      "height": 195.0,
+      "weight": 64.0,
+      "age": 25,
+      "info": "{\"id\" : 203, \"class\" : \"slaves\", \"name\" : \"Violet\", \"age\" : 25, \"weight\" : 64, \"height\" : 195, \"benefit\" : 99.200000000000003}",
+      "gender": "Genderflow"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 208,
+      "name": "John",
+      "benefit": 7.642857,
+      "height": 181.0,
+      "weight": 94.0,
+      "age": 28,
+      "info": "{\"id\" : 208, \"class\" : \"slaves\", \"name\" : \"John\", \"age\" : 28, \"weight\" : 94, \"height\" : 181, \"benefit\" : 7.6428571428570002}",
+      "gender": "Femfluid"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 212,
+      "name": "Josef",
+      "benefit": 29.333334,
+      "height": 161.0,
+      "weight": 72.0,
+      "age": 27,
+      "info": "{\"id\" : 212, \"class\" : \"slaves\", \"name\" : \"Josef\", \"age\" : 27, \"weight\" : 72, \"height\" : 161, \"benefit\" : 29.333333333333002}",
+      "gender": "Adamasgender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 216,
+      "name": "Garry",
+      "benefit": 97.76,
+      "height": 196.0,
+      "weight": 89.0,
+      "age": 25,
+      "info": "{\"id\" : 216, \"class\" : \"slaves\", \"name\" : \"Garry\", \"age\" : 25, \"weight\" : 89, \"height\" : 196, \"benefit\" : 97.760000000000005}",
+      "gender": "Trebuchet"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 220,
+      "name": "Siina",
+      "benefit": 36.0,
+      "height": 190.0,
+      "weight": 88.0,
+      "age": 20,
+      "info": "{\"id\" : 220, \"class\" : \"slaves\", \"name\" : \"Siina\", \"age\" : 20, \"weight\" : 88, \"height\" : 190, \"benefit\" : 36}",
+      "gender": "Exgender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 224,
+      "name": "kris",
+      "benefit": 62.0,
+      "height": 196.0,
+      "weight": 66.0,
+      "age": 28,
+      "info": "{\"id\" : 224, \"class\" : \"slaves\", \"name\" : \"kris\", \"age\" : 28, \"weight\" : 66, \"height\" : 196, \"benefit\" : 62}",
+      "gender": "Aerogender"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 228,
+      "name": "Andrew",
+      "benefit": 82.791664,
+      "height": 197.0,
+      "weight": 71.0,
+      "age": 24,
+      "info": "{\"id\" : 228, \"class\" : \"slaves\", \"name\" : \"Andrew\", \"age\" : 24, \"weight\" : 71, \"height\" : 197, \"benefit\" : 82.791666666666998}",
+      "gender": "Apache"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 232,
+      "name": "Roman",
+      "benefit": 43.392857,
+      "height": 191.0,
+      "weight": 65.0,
+      "age": 28,
+      "info": "{\"id\" : 232, \"class\" : \"slaves\", \"name\" : \"Roman\", \"age\" : 28, \"weight\" : 65, \"height\" : 191, \"benefit\" : 43.392857142856997}",
+      "gender": "Transmission"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 236,
+      "name": "Linda",
+      "benefit": 76.0,
+      "height": 194.0,
+      "weight": 84.0,
+      "age": 21,
+      "info": "{\"id\" : 236, \"class\" : \"slaves\", \"name\" : \"Linda\", \"age\" : 21, \"weight\" : 84, \"height\" : 194, \"benefit\" : 76}",
+      "gender": "Genderblank"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 240,
+      "name": "Carl",
+      "benefit": 95.69231,
+      "height": 176.0,
+      "weight": 88.0,
+      "age": 26,
+      "info": "{\"id\" : 240, \"class\" : \"slaves\", \"name\" : \"Carl\", \"age\" : 26, \"weight\" : 88, \"height\" : 176, \"benefit\" : 95.692307692308006}",
+      "gender": "Female"
+    },
+    {
+      "slavesClass": "slaves",
+      "id": 244,
+      "name": "Anabel",
+      "benefit": 55.384617,
+      "height": 185.0,
+      "weight": 64.0,
+      "age": 26,
+      "info": "{\"id\" : 244, \"class\" : \"slaves\", \"name\" : \"Anabel\", \"age\" : 26, \"weight\" : 64, \"height\" : 185, \"benefit\" : 55.384615384615003}",
+      "gender": "Male"
+    }
+  ]
+}

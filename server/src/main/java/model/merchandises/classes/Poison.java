@@ -22,6 +22,7 @@ public class Poison implements FoodInterface {
     private Float weight;
     private String type;
     private String name;
+    private String className = "Poison";
 
     /**
      * Method to check and parse values that comes out from map.
@@ -192,5 +193,9 @@ public class Poison implements FoodInterface {
     @Override
     public int hashCode() {
         return Objects.hash(onset, id, frequency, effect, chance, weight, type, name);
+    }
+
+    public String getClassName() {
+        return className;
     }
 }

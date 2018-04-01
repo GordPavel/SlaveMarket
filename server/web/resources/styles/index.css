@@ -1,0 +1,265 @@
+/*
+ * Copyright (c) 2018.
+ * You may use, distribute and modify this code
+ * under the terms of the TOT (take on trust) public license which unfortunately won't be
+ * written for another century. So you can modify and copy this files.
+ *
+ */
+/*.owl-carousel div h1, .owl-carousel div .textOverlayCarousel {*/
+/*background-color: rgba(0, 0, 0, 0.78);*/
+/*position: absolute;*/
+/*color: #FFF;*/
+/*font-size: 30px;*/
+/*display: block;*/
+/*}*/
+/*.owl-carousel div h2, .owl-carousel div .textOverlayCarousel {*/
+/*background-color: rgba(0, 0, 0, 0.78);*/
+/*position: absolute;*/
+/*color: #FFF;*/
+/*font-size: 12px;*/
+/*display: block;*/
+/*}*/
+
+/* Ow; Slider CSS*/
+
+.owl-wrapper {
+    positon: relative;
+}
+
+.owl-controls {
+    position: absolute;
+    bottom: 10px;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.owl-theme .owl-controls .owl-page span {
+    background: #fff !important;
+}
+
+.carousel.slide {
+    max-width: 100%;
+    min-width: 400px;
+    overflow: hidden;
+}
+
+.carousel-inner {
+    width: 100%;
+    left: 50%;
+    margin-left: -800px;
+}
+
+.owl-text-overlay {
+    position: absolute;
+    text-align: center;
+    width: 60%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.4);
+    padding-bottom: 20px;
+    font-family: "Open Sans", sans-serif;
+    border-radius: 15px 50px 30px 5px;
+}
+
+div.owl-title {
+    font-size: 48px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+div.owl-caption {
+    font-size: 18px;
+    line-height: 24px;
+}
+
+.owl-theme .owl-controls .owl-page span:active {
+    background: #fff !important;
+}
+
+/* hide previous and next */
+
+.owl-buttons {
+    visibility: hidden;
+    display: none;
+}
+
+.owl-img {
+    display: block;
+    background-size: cover;
+    width: -webkit-fill-available;
+    height: 400px;
+    max-height: 400px;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+}
+
+.main-slider .owl-dot.active span {
+    background-color: #20669e;
+}
+
+.main-slider .owl-dot span {
+    width: 11px;
+    height: 11px;
+    border: 2px solid #20669e;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 50%;
+    display: block;
+    -webkit-transition: all 250ms;
+    transition: all 250ms;
+    margin-left: 20px;
+}
+
+.main-slider .owl-dots {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -webkit-box-pack: end;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    margin-top: -30px;
+    padding-bottom: 30px;
+}
+
+#login-dp {
+    min-width: 250px;
+    padding: 14px 14px 0;
+    overflow: hidden;
+    background-color: rgba(255, 255, 255, .8);
+}
+
+#login-dp .help-block {
+    font-size: 12px
+}
+
+#login-dp .bottom {
+    background-color: rgba(255, 255, 255, .8);
+    border-top: 1px solid #ddd;
+    clear: both;
+    padding: 14px;
+}
+
+#login-dp .social-buttons {
+    margin: 12px 0
+}
+
+#login-dp .social-buttons a {
+    width: 49%;
+}
+
+#login-dp .form-group {
+    margin-bottom: 10px;
+}
+
+.btn-fb {
+    color: #fff;
+    background-color: #3b5998;
+}
+
+.btn-fb:hover {
+    color: #fff;
+    background-color: #496ebc
+}
+
+.btn-tw {
+    color: #fff;
+    background-color: #55acee;
+}
+
+.btn-tw:hover {
+    color: #fff;
+    background-color: #59b5fa;
+}
+
+/****----------------------------------------------****/
+
+.card {
+    width: 100%;
+    margin: 15px;
+}
+
+.lastNewsList .container {
+    margin: 15px;
+}
+
+.panel-default {
+    border-color: #8f9296 !important;
+}
+
+.panel-heading {
+    background-color: #8f9296;
+}
+
+/****----------------------------------------------****/
+
+.NewsHeader {
+    font-size: 23pt;
+}
+
+.newsImage {
+    max-height: 80px;
+}
+
+.newsTable .media-body {
+    display: block;
+    /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
+}
+
+.newsTable .media-meta {
+    font-size: 11px;
+    color: #999;
+}
+
+.newsTable .media .title {
+    color: #2BBCDE;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: normal;
+    margin: 0;
+}
+
+.newsItem {
+    max-height: 80px;
+    border-color: #2BBCDE;
+}
+
+.content .container {
+    margin: 10px;
+}
+
+.last-news-row .last-news a {
+    display: block;
+    color: #231f20;
+    font-weight: 700;
+}
+
+.last-news a img {
+    display: block;
+    width: 100%;
+}
+
+.last-news a span {
+    position: absolute;
+    text-align: center;
+    width: 60%;
+    top: 50%;
+    transform: translateY(-50%);
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    color: #fff;
+    background: rgba(0, 0, 0, 0.4);
+    padding-bottom: 20px;
+    font-family: "Open Sans", sans-serif;
+    border-radius: 15px 50px 30px 5px;
+}

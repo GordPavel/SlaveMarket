@@ -87,7 +87,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "exit",
+											"description": "exit",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -113,7 +113,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -402,7 +402,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "add new slave",
+											"description": "add new slave",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -428,7 +428,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -717,7 +717,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "actor",
+											"description": "actor",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -743,7 +743,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1847,7 +1847,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Search slave by query",
+											"description": "Search slave by query",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -1873,7 +1873,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2583,7 +2583,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "by name",
+											"description": "by name",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2609,7 +2609,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2898,7 +2898,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "by ID",
+											"description": "by ID",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -2924,7 +2924,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3213,7 +3213,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "by price",
+											"description": "by price",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3239,7 +3239,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3528,7 +3528,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "by age",
+											"description": "by age",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3554,7 +3554,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3843,7 +3843,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "by gender",
+											"description": "by gender",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -3869,7 +3869,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4158,7 +4158,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Show the result",
+											"description": "Show the result",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4184,7 +4184,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -4481,7 +4481,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«include»",
+									"description": "«include»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -4625,7 +4625,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«include»",
+									"description": "«include»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -4769,7 +4769,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«include»",
+									"description": "«include»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -4913,7 +4913,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«include»",
+									"description": "«include»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -5057,7 +5057,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«include»",
+									"description": "«include»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -5193,7 +5193,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Open slave menu by id",
+											"description": "Open slave menu by id",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5219,7 +5219,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -5937,7 +5937,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -6081,7 +6081,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -6225,7 +6225,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -6369,7 +6369,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -6505,7 +6505,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Delete slave",
+											"description": "Delete slave",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -6531,7 +6531,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7241,7 +7241,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Set price",
+											"description": "Set price",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7267,7 +7267,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7556,7 +7556,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "set name",
+											"description": "set name",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7582,7 +7582,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -7879,7 +7879,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -8023,7 +8023,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -8167,7 +8167,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -8311,7 +8311,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -8455,7 +8455,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -8599,7 +8599,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -8735,7 +8735,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "show help",
+											"description": "show help",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -8761,7 +8761,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -9479,7 +9479,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -9623,7 +9623,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -9767,7 +9767,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -9903,7 +9903,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "by productivity",
+											"description": "by productivity",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -9929,7 +9929,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10226,7 +10226,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -10370,7 +10370,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«include»",
+									"description": "«include»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -10514,7 +10514,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -10650,7 +10650,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Set productivity",
+											"description": "Set productivity",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10676,7 +10676,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -10973,7 +10973,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -11109,7 +11109,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Get info",
+											"description": "Get info",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -11135,7 +11135,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -11432,7 +11432,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -11568,7 +11568,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "buy",
+											"description": "buy",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -11594,7 +11594,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from useCases)",
+											"description": "(from useCases)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -11891,7 +11891,7 @@
 									},
 									"edgePosition": 1,
 									"underline": false,
-									"text": "«extend»",
+									"description": "«extend»",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -12902,7 +12902,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -12928,7 +12928,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Controller",
+											"description": "Controller",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -12954,7 +12954,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13070,7 +13070,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addMerchant(merch: Merchandise, user: String, token: String, price: int): void",
+											"description": "+addMerchant(merch: Merchandise, user: String, token: String, price: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13099,7 +13099,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+removeMerchant(merch: Merchandise, user: String, token: String): void",
+											"description": "+removeMerchant(merch: Merchandise, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13128,7 +13128,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+removeMerchant(id: int, user: String, token: String): void",
+											"description": "+removeMerchant(id: int, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13157,7 +13157,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+serchMerchant(query: String): List<String>",
+											"description": "+serchMerchant(query: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13186,7 +13186,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getMerchantById(id: int): String",
+											"description": "+getMerchantById(id: int): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13215,7 +13215,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+buyMerchandise(id: int, user: String, token: String): String",
+											"description": "+buyMerchandise(id: int, user: String, token: String): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13244,7 +13244,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setValuesToMerchandise(id: int, params: String, user: String, token: String): void",
+											"description": "+setValuesToMerchandise(id: int, params: String, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13273,7 +13273,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAvailableClasses(): List<String>",
+											"description": "+getAvailableClasses(): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13302,7 +13302,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getMandatoryFields(className: String): List<String>",
+											"description": "+getMandatoryFields(className: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13331,7 +13331,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addMerchandiseByMap(className: String, kvs: Map<String; String>, user: String, token: String, price: int): void",
+											"description": "+addMerchandiseByMap(className: String, kvs: Map<String; String>, user: String, token: String, price: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13360,7 +13360,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+login(username: String, password: String): String",
+											"description": "+login(username: String, password: String): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13389,7 +13389,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+register(username: String, pass: String): boolean",
+											"description": "+register(username: String, pass: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13418,7 +13418,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+disconnect(username: String, token: String): void",
+											"description": "+disconnect(username: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13447,7 +13447,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+start(): void",
+											"description": "+start(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13476,7 +13476,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getDealsByUser(username: String, token: String): List<String>",
+											"description": "+getDealsByUser(username: String, token: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13505,7 +13505,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+changeLogin(username: String, newLogin: String, token: String): boolean",
+											"description": "+changeLogin(username: String, newLogin: String, token: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13534,7 +13534,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+changePassword(username: String, newPassword: String, token: String): void",
+											"description": "+changePassword(username: String, newPassword: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13563,7 +13563,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+exportAllData(fileName: String): boolean",
+											"description": "+exportAllData(fileName: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13592,7 +13592,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+importAllData(fileName: String): boolean",
+											"description": "+importAllData(fileName: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13769,7 +13769,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "ClientGui",
+											"description": "ClientGui",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13795,7 +13795,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13887,7 +13887,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-controller: Controller",
+											"description": "-controller: Controller",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13916,7 +13916,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-token: String = \"\"",
+											"description": "-token: String = \"\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13945,7 +13945,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-username: String = \"\"",
+											"description": "-username: String = \"\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -13974,7 +13974,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-rootStage: Stage",
+											"description": "-rootStage: Stage",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14003,7 +14003,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-lastMenu: GuiActions",
+											"description": "-lastMenu: GuiActions",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14032,7 +14032,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-menu: ListView<String>",
+											"description": "-menu: ListView<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14087,7 +14087,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+ClientGui()",
+											"description": "+ClientGui()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14116,7 +14116,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+start(stage: Stage): void",
+											"description": "+start(stage: Stage): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14145,7 +14145,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setListeners(scene: Scene): void",
+											"description": "+setListeners(scene: Scene): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14174,7 +14174,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "~checkFields(scene: Scene): void",
+											"description": "~checkFields(scene: Scene): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14203,7 +14203,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+stop(): void",
+											"description": "+stop(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14232,7 +14232,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setupMainListeners(mainScene: Scene): void",
+											"description": "+setupMainListeners(mainScene: Scene): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14261,7 +14261,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-action(selectedItem: String): void",
+											"description": "-action(selectedItem: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14290,7 +14290,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "~setActions(actions: GuiActions, listView: ListView<String>): void",
+											"description": "~setActions(actions: GuiActions, listView: ListView<String>): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14467,7 +14467,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "NativeController",
+											"description": "NativeController",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14493,7 +14493,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14585,7 +14585,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-model: Model",
+											"description": "-model: Model",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14614,7 +14614,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-view: View",
+											"description": "-view: View",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14669,7 +14669,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+NativeController(model: Model)",
+											"description": "+NativeController(model: Model)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14698,7 +14698,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+register(username: String, pass: String): boolean",
+											"description": "+register(username: String, pass: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14727,7 +14727,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+disconnect(username: String, token: String): void",
+											"description": "+disconnect(username: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14756,7 +14756,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-encrypt(username: String, pass: String): String",
+											"description": "-encrypt(username: String, pass: String): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14908,7 +14908,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14934,7 +14934,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Database",
+											"description": "Database",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -14960,7 +14960,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15076,7 +15076,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addMerchant(merch: Merchandise, user: String, token: String, price: int): void",
+											"description": "+addMerchant(merch: Merchandise, user: String, token: String, price: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15105,7 +15105,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+removeMerchant(merch: Merchandise, user: String, token: String): void",
+											"description": "+removeMerchant(merch: Merchandise, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15134,7 +15134,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+removeMerchant(id: int, user: String, token: String): void",
+											"description": "+removeMerchant(id: int, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15163,7 +15163,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+serchMerchant(query: String): List<String>",
+											"description": "+serchMerchant(query: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15192,7 +15192,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getMerchantById(id: int): String",
+											"description": "+getMerchantById(id: int): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15221,7 +15221,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+buyMerchandise(id: int, user: String, token: String): String",
+											"description": "+buyMerchandise(id: int, user: String, token: String): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15250,7 +15250,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setValuesToMerchandise(id: int, params: String, user: String, token: String): void",
+											"description": "+setValuesToMerchandise(id: int, params: String, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15279,7 +15279,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAvailableClasses(): List<String>",
+											"description": "+getAvailableClasses(): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15308,7 +15308,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getMandatoryFields(className: String): List<String>",
+											"description": "+getMandatoryFields(className: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15337,7 +15337,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addMerchandiseByMap(className: String, kvs: Map<String; String>, user: String, token: String, price: int): void",
+											"description": "+addMerchandiseByMap(className: String, kvs: Map<String; String>, user: String, token: String, price: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15366,7 +15366,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+login(username: String, password: String): String",
+											"description": "+login(username: String, password: String): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15395,7 +15395,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+register(username: String, pass: String): boolean",
+											"description": "+register(username: String, pass: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15424,7 +15424,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+disconnect(username: String, token: String): void",
+											"description": "+disconnect(username: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15453,7 +15453,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getDealsByUser(username: String, token: String): List<String>",
+											"description": "+getDealsByUser(username: String, token: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15482,7 +15482,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+changeLogin(username: String, newLogin: String, token: String): boolean",
+											"description": "+changeLogin(username: String, newLogin: String, token: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15511,7 +15511,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+changePassword(username: String, newPassword: String, token: String): void",
+											"description": "+changePassword(username: String, newPassword: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15540,7 +15540,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+exportAllData(fileName: String): boolean",
+											"description": "+exportAllData(fileName: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15569,7 +15569,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+importAllData(fileName: String): boolean",
+											"description": "+importAllData(fileName: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15721,7 +15721,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15747,7 +15747,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Observer",
+											"description": "Observer",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15773,7 +15773,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15889,7 +15889,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+update(): void",
+											"description": "+update(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15918,7 +15918,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+deleted(id: int): void",
+											"description": "+deleted(id: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -15947,7 +15947,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+changed(id: int): void",
+											"description": "+changed(id: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16099,7 +16099,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16125,7 +16125,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "View",
+											"description": "View",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16151,7 +16151,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16267,7 +16267,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+launch(): void",
+											"description": "+launch(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16419,7 +16419,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16445,7 +16445,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Merchandise",
+											"description": "Merchandise",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16471,7 +16471,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16587,7 +16587,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+getMandatoryFields(className: String): List<String>",
+											"description": "+getMandatoryFields(className: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16616,7 +16616,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getId(): int",
+											"description": "+getId(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16645,7 +16645,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setId(id: int): void",
+											"description": "+setId(id: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16674,7 +16674,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getBenefit(): float",
+											"description": "+getBenefit(): float",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16703,7 +16703,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getName(): String",
+											"description": "+getName(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16732,7 +16732,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAllInfo(): String",
+											"description": "+getAllInfo(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16761,7 +16761,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setParamsByMap(map: Map<String; String>): void",
+											"description": "+setParamsByMap(map: Map<String; String>): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16913,7 +16913,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16939,7 +16939,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "SlaveInterface",
+											"description": "SlaveInterface",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -16965,7 +16965,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17081,7 +17081,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getHeight(): float",
+											"description": "+getHeight(): float",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17110,7 +17110,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getWeight(): float",
+											"description": "+getWeight(): float",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17139,7 +17139,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAge(): int",
+											"description": "+getAge(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17168,7 +17168,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getGender(): String",
+											"description": "+getGender(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17197,7 +17197,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getName(): String",
+											"description": "+getName(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17492,7 +17492,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17518,7 +17518,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Model",
+											"description": "Model",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17544,7 +17544,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17660,7 +17660,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addMerchant(merch: Merchandise, user: String, token: String, price: int): void",
+											"description": "+addMerchant(merch: Merchandise, user: String, token: String, price: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17689,7 +17689,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+removeMerchant(merch: Merchandise, user: String, token: String): void",
+											"description": "+removeMerchant(merch: Merchandise, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17718,7 +17718,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+removeMerchant(id: int, user: String, token: String): void",
+											"description": "+removeMerchant(id: int, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17747,7 +17747,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+serchMerchant(query: String): List<String>",
+											"description": "+serchMerchant(query: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17776,7 +17776,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getMerchantById(id: int): String",
+											"description": "+getMerchantById(id: int): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17805,7 +17805,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+buyMerchandise(id: int, user: String, token: String): String",
+											"description": "+buyMerchandise(id: int, user: String, token: String): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17834,7 +17834,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setValuesToMerchandise(id: int, params: String, user: String, token: String): void",
+											"description": "+setValuesToMerchandise(id: int, params: String, user: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17863,7 +17863,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getAvailableClasses(): List<String>",
+											"description": "+getAvailableClasses(): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17892,7 +17892,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getMandatoryFields(className: String): List<String>",
+											"description": "+getMandatoryFields(className: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17921,7 +17921,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addMerchandiseByMap(className: String, kvs: Map<String; String>, user: String, token: String, price: int): void",
+											"description": "+addMerchandiseByMap(className: String, kvs: Map<String; String>, user: String, token: String, price: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17950,7 +17950,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+login(username: String, password: String): String",
+											"description": "+login(username: String, password: String): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -17979,7 +17979,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+register(username: String, pass: String): boolean",
+											"description": "+register(username: String, pass: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18008,7 +18008,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+disconnect(username: String, token: String): void",
+											"description": "+disconnect(username: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18037,7 +18037,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getDealsByUser(username: String, token: String): List<String>",
+											"description": "+getDealsByUser(username: String, token: String): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18066,7 +18066,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+changeLogin(username: String, newLogin: String, token: String): boolean",
+											"description": "+changeLogin(username: String, newLogin: String, token: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18095,7 +18095,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+changePassword(username: String, newPassword: String, token: String): void",
+											"description": "+changePassword(username: String, newPassword: String, token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18124,7 +18124,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+exportAllData(fileName: String): boolean",
+											"description": "+exportAllData(fileName: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18153,7 +18153,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+importAllData(fileName: String): boolean",
+											"description": "+importAllData(fileName: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18305,7 +18305,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18331,7 +18331,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Observable",
+											"description": "Observable",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18357,7 +18357,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18473,7 +18473,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addObserver(observer: Observer): void",
+											"description": "+addObserver(observer: Observer): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18502,7 +18502,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+notifyAllObservers(): void",
+											"description": "+notifyAllObservers(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18531,7 +18531,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+changed(id: int): void",
+											"description": "+changed(id: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18560,7 +18560,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+deleted(id: int): void",
+											"description": "+deleted(id: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18589,7 +18589,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+deleteObserver(observer: Observer): void",
+											"description": "+deleteObserver(observer: Observer): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18741,7 +18741,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18767,7 +18767,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "QueryComparator",
+											"description": "QueryComparator",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18793,7 +18793,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -18909,7 +18909,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+apply(a: A, b: B): boolean",
+											"description": "+apply(a: A, b: B): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19061,7 +19061,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19087,7 +19087,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "DealExp",
+											"description": "DealExp",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19113,7 +19113,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19229,7 +19229,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+apply(deal: B): A",
+											"description": "+apply(deal: B): A",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19406,7 +19406,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "ServerController",
+											"description": "ServerController",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19432,7 +19432,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19524,7 +19524,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-inputStream: ObjectInputStream",
+											"description": "-inputStream: ObjectInputStream",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19553,7 +19553,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-outputStream: ObjectOutputStream",
+											"description": "-outputStream: ObjectOutputStream",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19582,7 +19582,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-logger: Logger = new Logger()",
+											"description": "-logger: Logger = new Logger()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19611,7 +19611,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-model: Model",
+											"description": "-model: Model",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19666,7 +19666,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+ServerController(model: Model, socket: Socket)",
+											"description": "+ServerController(model: Model, socket: Socket)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19695,7 +19695,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-act(json: JsonObject): void",
+											"description": "-act(json: JsonObject): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19724,7 +19724,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-sendResponse(response: Object): void",
+											"description": "-sendResponse(response: Object): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19901,7 +19901,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "ClientController",
+											"description": "ClientController",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -19927,7 +19927,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20019,7 +20019,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-socket: Socket",
+											"description": "-socket: Socket",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20048,7 +20048,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-logger: Logger = new Logger()",
+											"description": "-logger: Logger = new Logger()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20077,7 +20077,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-output: ObjectOutputStream",
+											"description": "-output: ObjectOutputStream",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20106,7 +20106,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-input: ObjectInputStream",
+											"description": "-input: ObjectInputStream",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20135,7 +20135,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-gui: View",
+											"description": "-gui: View",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20190,7 +20190,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+ClientController(view: View)",
+											"description": "+ClientController(view: View)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20219,7 +20219,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-writeAndGetResponse(object: String): JsonObject",
+											"description": "-writeAndGetResponse(object: String): JsonObject",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20248,7 +20248,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+encrypt(username: String, pass: String): String",
+											"description": "+encrypt(username: String, pass: String): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20854,7 +20854,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "SlaveMarketModel",
+											"description": "SlaveMarketModel",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20880,7 +20880,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -20972,7 +20972,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-database: Database",
+											"description": "-database: Database",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21001,7 +21001,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-observers: List<Observer>",
+											"description": "-observers: List<Observer>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21056,7 +21056,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+SlaveMarketModel()",
+											"description": "+SlaveMarketModel()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21519,7 +21519,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "CommandLineView",
+											"description": "CommandLineView",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21545,7 +21545,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21637,7 +21637,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-resources: ResourceBundle = ResourceBundle.getBundle(\"app\")",
+											"description": "-resources: ResourceBundle = ResourceBundle.getBundle(\"app\")",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21666,7 +21666,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-controller: Controller",
+											"description": "-controller: Controller",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21695,7 +21695,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-user: String = \"\"",
+											"description": "-user: String = \"\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21724,7 +21724,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-token: String = \"\"",
+											"description": "-token: String = \"\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21779,7 +21779,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+CommandLineView(model: Model, controller: Controller)",
+											"description": "+CommandLineView(model: Model, controller: Controller)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21808,7 +21808,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-startLogin(): void",
+											"description": "-startLogin(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21837,7 +21837,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-openSlaveMenu(slaveId: int, scanner: Scanner): void",
+											"description": "-openSlaveMenu(slaveId: int, scanner: Scanner): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21866,7 +21866,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-startMenu(scanner: Scanner): void",
+											"description": "-startMenu(scanner: Scanner): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -21895,7 +21895,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-userMenu(scanner: Scanner): void",
+											"description": "-userMenu(scanner: Scanner): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22644,7 +22644,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "MerchDb",
+											"description": "MerchDb",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22670,7 +22670,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22762,7 +22762,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-logger: Logger = new Logger()",
+											"description": "-logger: Logger = new Logger()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22791,7 +22791,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-dealFile: String = \"deals.dl\"",
+											"description": "-dealFile: String = \"deals.dl\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22820,7 +22820,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-userFile: String = \"users.us\"",
+											"description": "-userFile: String = \"users.us\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22849,7 +22849,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-merchants: List<Merchandise>",
+											"description": "-merchants: List<Merchandise>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22878,7 +22878,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-deals: DealList",
+											"description": "-deals: DealList",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22907,7 +22907,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-users: List<User>",
+											"description": "-users: List<User>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22962,7 +22962,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+MerchDb(load: boolean)",
+											"description": "+MerchDb(load: boolean)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -22991,7 +22991,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-unblockAll(): void",
+											"description": "-unblockAll(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23020,7 +23020,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-loadFromFile(): void",
+											"description": "-loadFromFile(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23049,7 +23049,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-saveData(): void",
+											"description": "-saveData(): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23078,7 +23078,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-findMerh(id: int): Merchandise",
+											"description": "-findMerh(id: int): Merchandise",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23107,7 +23107,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-lastDeal(merh: Merchandise): Deal",
+											"description": "-lastDeal(merh: Merchandise): Deal",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23136,7 +23136,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-getUser(username: String): User",
+											"description": "-getUser(username: String): User",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23165,7 +23165,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-createComparator(sign: String, query: String): QueryComparator",
+											"description": "-createComparator(sign: String, query: String): QueryComparator",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23485,7 +23485,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Slave",
+											"description": "Slave",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23511,7 +23511,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23603,7 +23603,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-height: float",
+											"description": "-height: float",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23632,7 +23632,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-weight: float",
+											"description": "-weight: float",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23661,7 +23661,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-age: int",
+											"description": "-age: int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23690,7 +23690,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-gender: String",
+											"description": "-gender: String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23719,7 +23719,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-name: String",
+											"description": "-name: String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23748,7 +23748,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-id: int",
+											"description": "-id: int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23803,7 +23803,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-Slave()",
+											"description": "-Slave()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23832,7 +23832,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+newBuilder(): Builder",
+											"description": "+newBuilder(): Builder",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23861,7 +23861,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+buildFromMap(map: HashMap<String; String>): Slave",
+											"description": "+buildFromMap(map: HashMap<String; String>): Slave",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23890,7 +23890,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+mandatoryFields(): List<String>",
+											"description": "+mandatoryFields(): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23919,7 +23919,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "-parseAndCheck(value: String): Float",
+											"description": "-parseAndCheck(value: String): Float",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23948,7 +23948,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+toString(): String",
+											"description": "+toString(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -23977,7 +23977,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+equals(obj: Object): boolean",
+											"description": "+equals(obj: Object): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24006,7 +24006,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+hashCode(): int",
+											"description": "+hashCode(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24326,7 +24326,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Deal",
+											"description": "Deal",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24352,7 +24352,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24444,7 +24444,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-state: DealState",
+											"description": "-state: DealState",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24473,7 +24473,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-time: LocalDateTime",
+											"description": "-time: LocalDateTime",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24502,7 +24502,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-user: User",
+											"description": "-user: User",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24531,7 +24531,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-merchandise: Merchandise",
+											"description": "-merchandise: Merchandise",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24560,7 +24560,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-price: int",
+											"description": "-price: int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24589,7 +24589,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-id: int",
+											"description": "-id: int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24644,7 +24644,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Deal(user: User, merchandise: Merchandise, price: int, state: DealState, id: int)",
+											"description": "+Deal(user: User, merchandise: Merchandise, price: int, state: DealState, id: int)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24673,7 +24673,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getUser(): User",
+											"description": "+getUser(): User",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24702,7 +24702,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setUser(user: User): void",
+											"description": "+setUser(user: User): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24731,7 +24731,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getMerchandise(): Merchandise",
+											"description": "+getMerchandise(): Merchandise",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24760,7 +24760,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setMerchandise(merchandise: Merchandise): void",
+											"description": "+setMerchandise(merchandise: Merchandise): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24789,7 +24789,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPrice(): int",
+											"description": "+getPrice(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24818,7 +24818,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setPrice(price: int): void",
+											"description": "+setPrice(price: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24847,7 +24847,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getId(): int",
+											"description": "+getId(): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24876,7 +24876,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setId(id: int): void",
+											"description": "+setId(id: int): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24905,7 +24905,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getState(): DealState",
+											"description": "+getState(): DealState",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24934,7 +24934,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+toString(): String",
+											"description": "+toString(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -24963,7 +24963,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+compareTo(o: Deal): int",
+											"description": "+compareTo(o: Deal): int",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25140,7 +25140,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Logger",
+											"description": "Logger",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25166,7 +25166,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25258,7 +25258,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-mainPath: String = \"logs/main/\"",
+											"description": "-mainPath: String = \"logs/main/\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25287,7 +25287,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-mainLogFile: String = his.mainPath + \"Slavemarket.log\"",
+											"description": "-mainLogFile: String = his.mainPath + \"Slavemarket.log\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25316,7 +25316,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-userDir: String = \"logs/users/\"",
+											"description": "-userDir: String = \"logs/users/\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25345,7 +25345,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-systemFile: String = this.mainPath + \"System.log\"",
+											"description": "-systemFile: String = this.mainPath + \"System.log\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25374,7 +25374,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-datePattern: String = \"YYYY-MM-dd HH:mm:ss\"",
+											"description": "-datePattern: String = \"YYYY-MM-dd HH:mm:ss\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25403,7 +25403,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-writer: PrintWriter",
+											"description": "-writer: PrintWriter",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25432,7 +25432,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-userWriter: PrintWriter",
+											"description": "-userWriter: PrintWriter",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25461,7 +25461,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-errorWriter: PrintWriter",
+											"description": "-errorWriter: PrintWriter",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25490,7 +25490,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-systemWriter: PrintWriter",
+											"description": "-systemWriter: PrintWriter",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25545,7 +25545,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+Logger()",
+											"description": "+Logger()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25574,7 +25574,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+log(user: String, action: String, merchInfo: String): void",
+											"description": "+log(user: String, action: String, merchInfo: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25603,7 +25603,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+logError(error: String): void",
+											"description": "+logError(error: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25632,7 +25632,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+systemLog(message: String): void",
+											"description": "+systemLog(message: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25809,7 +25809,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "User",
+											"description": "User",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25835,7 +25835,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25927,7 +25927,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-username: String",
+											"description": "-username: String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25956,7 +25956,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-password: String",
+											"description": "-password: String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -25985,7 +25985,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-token: String = \"\"",
+											"description": "-token: String = \"\"",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26040,7 +26040,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getUsername(): String",
+											"description": "+getUsername(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26069,7 +26069,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setUsername(username: String): void",
+											"description": "+setUsername(username: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26098,7 +26098,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+verifyPassword(password: String): boolean",
+											"description": "+verifyPassword(password: String): boolean",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26127,7 +26127,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getPassword(): String",
+											"description": "+getPassword(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26156,7 +26156,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setPassword(password: String): void",
+											"description": "+setPassword(password: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26185,7 +26185,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getToken(): String",
+											"description": "+getToken(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26214,7 +26214,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+setToken(token: String): void",
+											"description": "+setToken(token: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26243,7 +26243,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+generateToken(): String",
+											"description": "+generateToken(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26420,7 +26420,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "FileManager",
+											"description": "FileManager",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26446,7 +26446,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26538,7 +26538,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "-logger: Logger = new Logger()",
+											"description": "-logger: Logger = new Logger()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26593,7 +26593,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+writeSerialaizableToFile(o: Object, file: String): void",
+											"description": "+writeSerialaizableToFile(o: Object, file: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26622,7 +26622,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+readDeals(dealFile: String): DealList",
+											"description": "+readDeals(dealFile: String): DealList",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26651,7 +26651,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+readUsers(userFile: String): List<User>",
+											"description": "+readUsers(userFile: String): List<User>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26680,7 +26680,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "-read(datafile: String): Object",
+											"description": "-read(datafile: String): Object",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26857,7 +26857,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Util",
+											"description": "Util",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26883,7 +26883,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -26975,7 +26975,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+logger: Logger = new Logger()",
+											"description": "+logger: Logger = new Logger()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27030,7 +27030,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+runAlert(type: Alert.AlertType, header: String, content: String, log: String): void",
+											"description": "+runAlert(type: Alert.AlertType, header: String, content: String, log: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27207,7 +27207,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "DealList",
+											"description": "DealList",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27233,7 +27233,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27325,7 +27325,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "-deals: List<Deal> = new ArrayList<Deal>()",
+											"description": "-deals: List<Deal> = new ArrayList<Deal>()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27380,7 +27380,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getDeals(): List<Deal>",
+											"description": "+getDeals(): List<Deal>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27409,7 +27409,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+addDeal(deal: Deal): void",
+											"description": "+addDeal(deal: Deal): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27586,7 +27586,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "StartClient",
+											"description": "StartClient",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27612,7 +27612,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27728,7 +27728,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+main(args: String): void",
+											"description": "+main(args: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27905,7 +27905,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "StartServer",
+											"description": "StartServer",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -27931,7 +27931,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28047,7 +28047,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+main(args: String): void",
+											"description": "+main(args: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28224,7 +28224,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Main",
+											"description": "Main",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28250,7 +28250,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28366,7 +28366,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": true,
-											"text": "+main(args: String): void",
+											"description": "+main(args: String): void",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28518,7 +28518,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«enumeration»",
+											"description": "«enumeration»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28544,7 +28544,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "MandatoryFields",
+											"description": "MandatoryFields",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28570,7 +28570,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28686,7 +28686,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+MandatoryFields(fields: List<String>)",
+											"description": "+MandatoryFields(fields: List<String>)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28715,7 +28715,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getFields(): List<String>",
+											"description": "+getFields(): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28818,7 +28818,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Slave",
+											"description": "Slave",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28926,7 +28926,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«enumeration»",
+											"description": "«enumeration»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28952,7 +28952,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "DealState",
+											"description": "DealState",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -28978,7 +28978,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29094,7 +29094,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+DealState(state1: String)",
+											"description": "+DealState(state1: String)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29123,7 +29123,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+toString(): String",
+											"description": "+toString(): String",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29226,7 +29226,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Bought",
+											"description": "Bought",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29255,7 +29255,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "FOR_SALE",
+											"description": "FOR_SALE",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29363,7 +29363,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«enumeration»",
+											"description": "«enumeration»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29389,7 +29389,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "GuiActions",
+											"description": "GuiActions",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29415,7 +29415,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29531,7 +29531,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+GuiActions(arrayList: List<String>)",
+											"description": "+GuiActions(arrayList: List<String>)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29560,7 +29560,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+getActions(): List<String>",
+											"description": "+getActions(): List<String>",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29663,7 +29663,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "MAIN",
+											"description": "MAIN",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29692,7 +29692,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "PROFILE",
+											"description": "PROFILE",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29721,7 +29721,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "MERCHANDISE",
+											"description": "MERCHANDISE",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29854,7 +29854,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "CreateMerchandiseException",
+											"description": "CreateMerchandiseException",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29880,7 +29880,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -29996,7 +29996,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+CreateMerchandiseException(s: String)",
+											"description": "+CreateMerchandiseException(s: String)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30173,7 +30173,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "WrongQueryException",
+											"description": "WrongQueryException",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30199,7 +30199,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30315,7 +30315,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+WrongQueryException(query: String)",
+											"description": "+WrongQueryException(query: String)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30492,7 +30492,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "MerchandiseNotFoundException",
+											"description": "MerchandiseNotFoundException",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30518,7 +30518,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30634,7 +30634,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+MerchandiseNotFoundException(id: int)",
+											"description": "+MerchandiseNotFoundException(id: int)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30663,7 +30663,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+MerchandiseNotFoundException(merchandise: Merchandise)",
+											"description": "+MerchandiseNotFoundException(merchandise: Merchandise)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30840,7 +30840,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "WrongClassCallException",
+											"description": "WrongClassCallException",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30866,7 +30866,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -30982,7 +30982,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+WrongClassCallException(message: String)",
+											"description": "+WrongClassCallException(message: String)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31159,7 +31159,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "UserException",
+											"description": "UserException",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31185,7 +31185,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31301,7 +31301,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+UserException(message: String)",
+											"description": "+UserException(message: String)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31478,7 +31478,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "InvalidToken",
+											"description": "InvalidToken",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31504,7 +31504,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31620,7 +31620,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+InvalidToken()",
+											"description": "+InvalidToken()",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31797,7 +31797,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "MerchandiseAlreadyBought",
+											"description": "MerchandiseAlreadyBought",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31823,7 +31823,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Model)",
+											"description": "(from Model)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -31939,7 +31939,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "+MerchandiseAlreadyBought(id: int)",
+											"description": "+MerchandiseAlreadyBought(id: int)",
 											"horizontalAlignment": 0,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53007,7 +53007,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Model",
+											"description": "Model",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53033,7 +53033,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53295,7 +53295,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "view",
+											"description": "view",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53321,7 +53321,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53583,7 +53583,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Controller",
+											"description": "Controller",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53609,7 +53609,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53846,7 +53846,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53872,7 +53872,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Model",
+											"description": "Model",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -53898,7 +53898,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -54278,7 +54278,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -54304,7 +54304,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "View",
+											"description": "View",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -54330,7 +54330,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -54710,7 +54710,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -54736,7 +54736,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Observable",
+											"description": "Observable",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -54762,7 +54762,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -55142,7 +55142,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -55168,7 +55168,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Observer",
+											"description": "Observer",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -55194,7 +55194,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -55599,7 +55599,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "database",
+											"description": "database",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -55625,7 +55625,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -55887,7 +55887,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "merchandises",
+											"description": "merchandises",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -55913,7 +55913,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -56150,7 +56150,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -56176,7 +56176,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Merchandise",
+											"description": "Merchandise",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -56202,7 +56202,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -56725,7 +56725,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -56751,7 +56751,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Controller",
+											"description": "Controller",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -56777,7 +56777,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -57729,7 +57729,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -57755,7 +57755,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "BufferedView",
+											"description": "BufferedView",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -57781,7 +57781,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -58329,7 +58329,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "exceptions",
+											"description": "exceptions",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -58355,7 +58355,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -58592,7 +58592,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "«interface»",
+											"description": "«interface»",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -58618,7 +58618,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "QueryComparator",
+											"description": "QueryComparator",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -58644,7 +58644,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Component diagram)",
+											"description": "(from Component diagram)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -59439,7 +59439,7 @@
 									"alpha": 2.356194490192345,
 									"distance": 20,
 									"underline": false,
-									"text": "Initial state",
+									"description": "Initial state",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -59596,7 +59596,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Start programm",
+											"description": "Start programm",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -59622,7 +59622,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -59995,7 +59995,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Help",
+											"description": "Help",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -60021,7 +60021,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -60251,7 +60251,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Close programm",
+											"description": "Close programm",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -60277,7 +60277,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -60507,7 +60507,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Add new slave",
+											"description": "Add new slave",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -60533,7 +60533,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -61645,7 +61645,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Search for slaves",
+											"description": "Search for slaves",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -61671,7 +61671,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -62187,7 +62187,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "Open slave menu by id",
+											"description": "Open slave menu by id",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -62213,7 +62213,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -62586,7 +62586,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "exit",
+											"description": "exit",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -62612,7 +62612,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -62842,7 +62842,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "delete slave",
+											"description": "delete slave",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -62868,7 +62868,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -63956,7 +63956,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "buy slave",
+											"description": "buy slave",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -63982,7 +63982,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -64498,7 +64498,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "set params",
+											"description": "set params",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -64524,7 +64524,7 @@
 											"height": 13,
 											"autoResize": false,
 											"underline": false,
-											"text": "(from Main region)",
+											"description": "(from Main region)",
 											"horizontalAlignment": 2,
 											"verticalAlignment": 5,
 											"wordWrap": false
@@ -65467,7 +65467,7 @@
 									"height": 13,
 									"autoResize": false,
 									"underline": false,
-									"text": "User",
+									"description": "User",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -65647,7 +65647,7 @@
 									"height": 13,
 									"autoResize": false,
 									"underline": false,
-									"text": "Deals",
+									"description": "Deals",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -65875,7 +65875,7 @@
 									"height": 13,
 									"autoResize": false,
 									"underline": false,
-									"text": "Merchandise",
+									"description": "Merchandise",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false
@@ -66079,7 +66079,7 @@
 									"height": 13,
 									"autoResize": false,
 									"underline": false,
-									"text": "Classes",
+									"description": "Classes",
 									"horizontalAlignment": 2,
 									"verticalAlignment": 5,
 									"wordWrap": false

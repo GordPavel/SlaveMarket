@@ -23,6 +23,9 @@ public class Users implements Serializable {
     @Column(name = "balance")
     private int balance;
 
+    @Column(name = "role")
+    private String role;
+
     public int getId() {
         return id;
     }
@@ -64,5 +67,13 @@ public class Users implements Serializable {
 
     public void setBalance(int balance) {
         this.balance = balance;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

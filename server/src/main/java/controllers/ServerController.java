@@ -298,4 +298,19 @@ public class ServerController implements Controller {
   public boolean ping(String address, int port) {
     return false;
   }
+
+    @Override
+    public void setRole(String username, String token, int id, String role) {
+
+    }
+
+    @Override
+    public List<String> availableRoles() {
+        return null;
+    }
+
+    @Override
+    public List<String> getAllUsers() {
+        return null;
+    }
 }

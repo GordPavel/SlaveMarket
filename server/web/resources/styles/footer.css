@@ -1,0 +1,100 @@
+/*
+ * Copyright (c) 2018.
+ * You may use, distribute and modify this code
+ * under the terms of the TOT (take on trust) public license which unfortunately won't be
+ * written for another century. So you can modify and copy this files.
+ *
+ */
+html {
+    position: relative;
+    min-height: 100%;
+}
+
+.footer-distributed .footer-left p {
+    color: #8f9296;
+    font-size: 14px;
+    margin: 0;
+}
+
+.left-footer h3 {
+    color: #ffffff;
+    font: normal 36px 'Cookie', cursive;
+    margin: 0;
+}
+
+.left-footer h3 span {
+    color: #5383d3;
+}
+
+.left-footer .footer-company-name {
+    color: #8f9296;
+    font-size: 14px;
+    font-weight: normal;
+    margin: 0;
+}
+
+.container-fluid {
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+/* Footer links */
+
+.right-footer p.footer-links a {
+    display: inline-block;
+    line-height: 1.8;
+    text-decoration: none;
+    color: inherit;
+}
+
+.footer-links a {
+    display: inline-block;
+    width: 35px;
+    height: 35px;
+    background-color: #33383b;
+    border-radius: 2px;
+
+    font-size: 20px;
+    color: #ffffff;
+    text-align: center;
+    line-height: 35px;
+
+    margin-left: 3px;
+}
+
+.footer-links {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    right: 0;
+}
+
+/* If you don't want the footer to be responsive, remove these media queries */
+
+.container {
+    width: auto;
+    max-width: 680px;
+    padding: 0 15px;
+}
+
+.container .text-muted {
+    margin: 20px 0;
+}
+
+/*.footer {*/
+    /*position: absolute;*/
+    /*left: 0;*/
+    /*bottom: 0;*/
+    /*height: 70px;*/
+    /*width: 100%;*/
+    /*overflow:hidden;*/
+    /*background-color: #292c2f;*/
+    /*box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.12);*/
+/*}*/
+
+/*.footer, .push {*/
+    /*height: 70px; !* .push must be the same height as .footer *!*/
+/*}*/

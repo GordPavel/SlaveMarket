@@ -2,34 +2,27 @@ package model;
 
 
 import com.google.gson.*;
-import com.google.gson.stream.JsonReader;
 import exceptions.*;
 import model.database.DealState;
 import model.merchandises.Merchandise;
-import model.postgresqlModel.JsonExportObject;
 import model.postgresqlModel.Users;
 import model.postgresqlModel.tables.Classes;
 import model.postgresqlModel.tables.Deals;
 import model.postgresqlModel.tables.Merchandises;
-import model.postgresqlModel.tables.merchandises.Aliens;
-import model.postgresqlModel.tables.merchandises.Foods;
-import model.postgresqlModel.tables.merchandises.Poisons;
-import model.postgresqlModel.tables.merchandises.Slaves;
-import org.apache.log4j.BasicConfigurator;
-import org.hibernate.JDBCException;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
+import model.postgresqlModel.tables.News;
+import org.hibernate.*;
 import org.hibernate.cfg.Configuration;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.persistence.NoResultException;
 import javax.persistence.ParameterMode;
 import javax.persistence.StoredProcedureQuery;
-import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
@@ -37,8 +30,10 @@ import java.util.stream.Collectors;
 import static java.util.stream.Collectors.toList;
 
 public class PostgresModel implements Model {
+    private final static Logger logger = LoggerFactory.getLogger(PostgresModel.class);
     private Session session;
     private ResourceBundle errCodes = ResourceBundle.getBundle("errcodes");
+    private Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     /**
      * Constructor with default credentials.
@@ -46,9 +41,9 @@ public class PostgresModel implements Model {
      * password: 19216211
      */
     public PostgresModel() {
-        BasicConfigurator.configure();
         SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         session = sessionFactory.openSession();
+        logger.info("session created");
     }
 
     /**
@@ -59,7 +54,7 @@ public class PostgresModel implements Model {
      */
     public PostgresModel(String username, String password) {
         try {
-            BasicConfigurator.configure();
+
             Configuration hibConfiguration = new Configuration();
             hibConfiguration.setProperty("hibernate.connection.driver_class", "org.postgresql.Driver");
             hibConfiguration.setProperty("hibernate.connection.url", "jdbc:postgresql://localhost/slaveMarket");
@@ -71,8 +66,9 @@ public class PostgresModel implements Model {
 
             SessionFactory factory = hibConfiguration.buildSessionFactory();
             session = factory.openSession();
+            logger.info("session created");
         } catch (Throwable thr) {
-            System.err.println("Can't establish connection to postgresql");
+            logger.error("Can't establish connection to postgresql");
             throw new ExceptionInInitializerError(thr);
         }
     }
@@ -100,6 +96,7 @@ public class PostgresModel implements Model {
                     .setParameter(2, user)
                     .setParameter(3, token).getOutputParameterValue(4);
             transaction.commit();
+            logger.info("removed Merchandise" + id + " by User " + user);
         } catch (JDBCException e) {
             transaction.rollback();
             throw new MerchandiseRemoveException(getMessageByCode(e));
@@ -124,7 +121,7 @@ public class PostgresModel implements Model {
                             .setParameter("id", deals.getUserId()).getSingleResult();
                     object.add("user", new JsonPrimitive(users.getUsername()));
                     object.add("price", new JsonPrimitive(deals.getPrice()));
-                    return object.toString();
+                    return gson.toJson(object);
                 }).collect(toList());
     }
 
@@ -133,7 +130,8 @@ public class PostgresModel implements Model {
         try {
             Merchandises merch = (Merchandises) session.createQuery("from Merchandises where id = :id")
                     .setParameter("id", id).getSingleResult();
-            return merch.getAllInfo();
+            JsonParser parser = new JsonParser();
+            return gson.toJson(parser.parse(merch.getAllInfo()));
         } catch (NoResultException e) {
             return null;
         }
@@ -153,11 +151,15 @@ public class PostgresModel implements Model {
                     .setParameter(3, token);
             String merch = buyMerch.getOutputParameterValue(4).toString();
             transaction.commit();
-            return merch;
+            logger.info("Merchandise with id=" + id + " was bought by " + user);
+            JsonParser parser = new JsonParser();
+            return gson.toJson(parser.parse(merch));
         } catch (JDBCException e) {
             transaction.rollback();
+            logger.error("User " + user + " can't buy merchandise with id=" + id + " because " + getMessageByCode(e));
             throw new UserException(getMessageByCode(e));
         } catch (Exception e) {
+            logger.error("found exception while buying merchandise(id=" + id + ") by " + user);
             transaction.rollback();
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -182,10 +184,13 @@ public class PostgresModel implements Model {
             session.createNativeQuery("UPDATE " + merch.getClassName() + " SET " + kvs + " WHERE id=:id")
                     .setParameter("id", id).executeUpdate();
             session.getTransaction().commit();
+            logger.info("updated Merchandise" + id + " by User " + user);
         } catch (JDBCException e) {
             session.getTransaction().rollback();
+            logger.error(getMessageByCode(e) + " while updating values merchandise " + id + " by user " + user);
             throw new MerchandiseUpdateException(getMessageByCode(e));
         } catch (Exception e) {
+            logger.error("found exception while updating merchandise(id=" + id + ") by user " + user);
             session.getTransaction().rollback();
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -253,8 +258,10 @@ public class PostgresModel implements Model {
             transaction = session.beginTransaction();
             session.save(deals);
             transaction.commit();
+            logger.info("Added new merchandise(id=" + id + ") by user " + user);
         } catch (Throwable e) {
             transaction.rollback();
+            logger.error("Can't add merchandise, because exception: " + e.getMessage());
             throw new JDBCException(e.getMessage(), new SQLException(e.getCause()), query.getQueryString());
         }
     }
@@ -271,11 +278,14 @@ public class PostgresModel implements Model {
             login.setParameter(2, password);
             String token = login.getOutputParameterValue(3).toString();
             transaction.commit();
+            logger.info("User " + username + " successfully logged in");
             return token;
         } catch (JDBCException e) {
             transaction.rollback();
+            logger.error("User " + username + " can't login because: " + getMessageByCode(e));
             throw new UserException(getMessageByCode(e));
         } catch (Exception e) {
+            logger.error("Found exception while logging in by user " + username + " because exception: " + e.getMessage());
             transaction.rollback();
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -290,11 +300,14 @@ public class PostgresModel implements Model {
             user.setPassword(pass);
             session.save(user);
             transaction.commit();
+            logger.info("User " + username + " successfully registered");
             return true;
         } catch (JDBCException e) {
             transaction.rollback();
+            logger.error("Can't register " + username + " because error " + getMessageByCode(e));
             throw new UserException(getMessageByCode(e));
         } catch (Exception e) {
+            logger.error("Found exception while registration " + e.getMessage());
             transaction.rollback();
             throw new IllegalArgumentException(e.getMessage());
         }
@@ -315,11 +328,14 @@ public class PostgresModel implements Model {
             logout.setParameter(1, username).setParameter(2, token);
             logout.getOutputParameterValue(3);
             transaction.commit();
+            logger.info("User " + username + " disconnected");
         } catch (JDBCException e) {
             transaction.rollback();
+            logger.error("Can't disconnect user because " + getMessageByCode(e));
             throw new UserException(getMessageByCode(e));
         } catch (Exception e) {
             transaction.rollback();
+            logger.error("Can't disconnect user because exception: " + e.getMessage());
             throw new IllegalArgumentException(e.getMessage());
         }
     }
@@ -339,7 +355,7 @@ public class PostgresModel implements Model {
             mDeal.add("state", new JsonPrimitive(deal.getState()));
             mDeal.add("price", new JsonPrimitive(deal.getPrice()));
             mDeal.add("merchandise", parser.parse(getMerchantById(deal.getMerchId())));
-            return mDeal.toString();
+            return gson.toJson(mDeal);
         }).collect(toList());
     }
 
@@ -357,12 +373,15 @@ public class PostgresModel implements Model {
         try {
             boolean updated = (Boolean) updateUsername.getOutputParameterValue(4);
             transaction.commit();
+            logger.info("User " + username + " changed his username to " + newLogin);
             return updated;
         } catch (JDBCException e) {
             transaction.rollback();
+            logger.error("User " + username + "can't change his username to " + newLogin + " because " + getMessageByCode(e));
             throw new UserException(getMessageByCode(e));
         } catch (Exception e) {
             transaction.rollback();
+            logger.error("Found exception while changing login: " + e.getMessage());
             throw new IllegalArgumentException(e.getMessage());
         }
     }
@@ -381,11 +400,14 @@ public class PostgresModel implements Model {
         try {
             updatePassword.getOutputParameterValue(4);
             transaction.commit();
+            logger.info("User " + username + " changed his password to " + newPassword);
         } catch (JDBCException e) {
             transaction.rollback();
+            logger.error("User " + username + "can't change his password to " + newPassword + " because " + getMessageByCode(e));
             throw new UserException(getMessageByCode(e));
         } catch (Exception e) {
             transaction.rollback();
+            logger.error("Found exception while changing password: " + e.getMessage());
             throw new IllegalArgumentException(e.getMessage());
         }
     }
@@ -412,88 +434,100 @@ public class PostgresModel implements Model {
 
     @Override
     public boolean exportAllData(String fileName) {
-
-        if (!fileName.endsWith(".json")) {
-            fileName += ".json";
-        }
-        JsonExportObject root = new JsonExportObject();
+        News news = new News();
+        news.setHeader("News now available");
+        news.setDescription("If you want to be aware of all the events of this site, then this is for you.");
+        news.setText("A new section was created in order to be always up to date on the latest news on this site. For many of you this will seem uninteresting and you will prove to be right. Because the news on this site is only needed to fill the void on the main page and in the databases. I believe that on all self-respecting sites there should be a news line. or RSS-distribution. Here we now have. Watch the news, gentlemen.\n");
+//        news.setText("This site was created to show you what I can. And the entire system was created in order to prove that I'm not an empty place in programming. It was hard, but our team coped. Now it seems that there is nothing with which our team could not cope.\n" +
+//                "Our team consists of one person who was terribly tired while writing all this. Really. Why did I even create this news? The next news will be just about them.\n");
+//        news.setText("Every day people look through the web pages to find something interesting and where they could take the money. Our site is just like that. You can not only look at the pages of our site, but also earn a little. The system is simple. You must add the product to the system of one of the proposed categories and, after its purchase by someone from the visitors, you will be supplemented with balances.");
+//        news.setHeader("New slaves");
+//        news.setDescription("Many types of new slaves is coming out soon");
+//        news.setText("Our system is growing up. So we need to add new types of slaves." +
+//                "\nWe already have aliens, slaves, poisons and foods. But as you know we need to grow to be a real shopping platform." +
+//                " So you can support us by sending , as you think, new needed type on win10@list.ru\n" +
+//                "With love your SlaveMarket administration.");
+        news.setSlider(false);
+        byte[] img = new byte[0];
         try {
-            List<Users> users = session.createQuery("from Users ").getResultList();
-            List<Deals> deals = session.createQuery("from deals order by id asc ").getResultList();
-
-            List<Slaves> slaves = session.createQuery("from Slaves order by id  asc ").getResultList();
-            List<Aliens> aliens = session.createQuery("from Aliens order by id  asc ").getResultList();
-            List<Poisons> poisons = session.createQuery("from Poisons order by id  asc ").getResultList();
-            List<Foods> foods = session.createQuery("from Foods order by id  asc ").getResultList();
-
-            root.setUsers(users);
-            root.setDeals(deals);
-
-            root.setSlaves(slaves);
-            root.setAliens(aliens);
-            root.setPoisons(poisons);
-            root.setFoods(foods);
-
-            Gson gson = new GsonBuilder().setPrettyPrinting().create();
-            try (FileWriter writer = new FileWriter(fileName)) {
-                gson.toJson(root, writer);
-            } catch (IOException e) {
-                System.out.println(e.getMessage());
-                return false;
-            }
-            return true;
-        } catch (Exception e) {
-            return false;
+            img = Files.readAllBytes(Paths.get("/home/s3rius/Development/Projects/slaveMarket/server/web/resources/images/news.jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+        news.setImage(img);
+        Transaction transaction = session.beginTransaction();
+        try {
+            session.save(news);
+            transaction.commit();
+        } catch (HibernateException e) {
+            transaction.rollback();
+            e.printStackTrace();
+        }
+        return true;
     }
 
     @Override
     public boolean importAllData(String filename) {
-        if (!filename.endsWith(".json")) {
-            filename += ".json";
-        }
-        try (JsonReader reader = new JsonReader(new FileReader(filename))) {
-            Gson gson = new Gson();
-            JsonExportObject root = gson.fromJson(reader, JsonExportObject.class);
-            root.getUsers().forEach(users -> {
-                int oldId = users.getId();
-                System.out.println(users.getUsername());
-                String pass = users.getPassword();
-                session.beginTransaction();
-                try {
-                    users.setPassword((String) session.createNativeQuery(
-                            "SELECT CONVERT_FROM(DECODE(:pass, 'BASE64'), 'UTF-8')"
-                    ).setParameter("pass", users.getPassword()).getSingleResult());
-                    session.save(users);
-                    session.getTransaction().commit();
-                    setNewUserId(root.getDeals(), oldId, users.getId());
-                } catch (JDBCException e) {
-                    session.getTransaction().rollback();
-                    // If user already exists
-                    // Error code U0001 -> user already in database
-                    if (e.getSQLException().getSQLState().equals("U0001")) {
-                        Users exUsers = (Users) session.createQuery("from Users where username=:un and password=:pss")
-                                .setParameter("un", users.getUsername())
-                                .setParameter("pss", pass)
-                                .getSingleResult();
-                        setNewUserId(root.getDeals(), users.getId(), exUsers.getId());
-                    }
-                    System.out.println(getMessageByCode(e));
-                }
-            });
-            List<Aliens> aliens = root.getAliens();
-
-            aliens.stream().sorted(Comparator.comparingInt(Aliens::getId).reversed()).forEach(alien -> {
-                int id = alien.getId();
-                session.save(alien);
-                setMerchId(root.getDeals(), id, alien.getId());
-            });
-        } catch (IOException e) {
-            System.out.println(e.getMessage());
-            return false;
-        }
-        return false;
+        throw new UnsupportedOperationException();
     }
+
+    @Override
+    public List<String> getNews() {
+        List<News> newsList = session.createQuery("from News ").getResultList();
+        return newsList.stream().map(news -> gson.toJson(news)).collect(toList());
+    }
+
+    @Override
+    public String newsById(int id) {
+        News news = (News) session.createQuery("from News where id=:id")
+                .setParameter("id", id).getSingleResult();
+        return gson.toJson(news);
+    }
+
+    @Override
+    public void addNews(String username, String token, String header, String description, String text, byte[] image, boolean slider) {
+        Users user = (Users) session.createQuery("from Users where username=:username AND token=:token")
+                .setParameter("username", username)
+                .setParameter("token", token).getSingleResult();
+        if (user.getRole().equals("admin")) {
+            News news = new News();
+            news.setHeader(header);
+            news.setText(text);
+            news.setDescription(description);
+            news.setImage(image);
+            news.setSlider(slider);
+            news.setAuthor(user.getId());
+            Transaction transaction = session.beginTransaction();
+            try {
+                session.save(news);
+                transaction.commit();
+            } catch (JDBCException e) {
+                transaction.rollback();
+                logger.error(getMessageByCode(e) + " while adding news");
+            }
+        } else {
+            logger.error("User" + username + " tried to add news, but have no privileges to do this");
+            throw new PermissionDeniedException();
+        }
+
+    }
+
+    @Override
+    public void setRole(String username, String token, int id, String role) {
+
+    }
+
+    @Override
+    public List<String> availableRoles() {
+        return null;
+    }
+
+    @Override
+    public List<String> getAllUsers() {
+        List<Users> users = session.createQuery("from Users ").getResultList();
+        return users.stream().map(user -> user.getUsername() + "#" + user.getId()).collect(toList());
+    }
+
 
     private void setMerchId(List<Deals> deals, int oldId, int newId) {
         if (oldId != newId) {

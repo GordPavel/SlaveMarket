@@ -7,6 +7,14 @@
         <groupId>net.cracker.practice</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <properties>
+        <jdk.version>1.8</jdk.version>
+        <spring.version>4.1.1.RELEASE</spring.version>
+        <jstl.version>1.2</jstl.version>
+        <junit.version>4.11</junit.version>
+        <logback.version>1.0.13</logback.version>
+        <jcl-over-slf4j.version>1.7.5</jcl-over-slf4j.version>
+    </properties>
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>server</artifactId>
@@ -19,8 +27,8 @@
                 <artifactId>maven-compiler-plugin</artifactId>
                 <version>2.3.2</version>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
+                    <source>${jdk.version}</source>
+                    <target>${jdk.version}</target>
                 </configuration>
             </plugin>
 
@@ -59,13 +67,53 @@
                     </execution>
                 </executions>
             </plugin>
+            <plugin>
+                <groupId>org.apache.tomcat.maven</groupId>
+                <artifactId>tomcat7-maven-plugin</artifactId>
+                <version>2.2</version>
+                <configuration>
+                    <path>/</path>
+                    <ignorePackaging>true</ignorePackaging>
+                </configuration>
+            </plugin>
         </plugins>
     </build>
     <dependencies>
         <dependency>
             <groupId>org.springframework</groupId>
-            <artifactId>spring-beans</artifactId>
-            <version>4.1.1.RELEASE</version>
+            <artifactId>spring-core</artifactId>
+            <version>${spring.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>commons-logging</groupId>
+                    <artifactId>commons-logging</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <dependency>
+            <groupId>ch.qos.logback</groupId>
+            <artifactId>logback-classic</artifactId>
+            <version>${logback.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-web</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>${spring.version}</version>
+        </dependency>
+
+        <!-- jstl -->
+        <dependency>
+            <groupId>jstl</groupId>
+            <artifactId>jstl</artifactId>
+            <version>${jstl.version}</version>
         </dependency>
     </dependencies>
 </project>

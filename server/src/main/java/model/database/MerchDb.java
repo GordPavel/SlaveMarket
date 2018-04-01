@@ -268,7 +268,7 @@ public class MerchDb implements Database {
   //
   // total_hours_wasted_here = 45
   */
-        Pattern pattern = Pattern.compile(query + "(\\w)*");
+        Pattern pattern = Pattern.compile(query + "(\\w)*", Pattern.CASE_INSENSITIVE);
         return merchandises.filter(merchandise -> {
             Method[] methods = merchandise.getClass().getMethods();
             for (Method method : methods) {
@@ -735,6 +735,21 @@ public class MerchDb implements Database {
                 .sorted(Comparator.comparingInt(Merchandise::getId))
                 .collect(toList());
         return true;
+    }
+
+    @Override
+    public List<String> getNews() {
+        return null;
+    }
+
+    @Override
+    public String newsById(int id) {
+        return null;
+    }
+
+    @Override
+    public void addNews(int userId, String token, String header, String description, String text, byte[] image, boolean slider) {
+
     }
 
 }

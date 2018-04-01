@@ -2,18 +2,12 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import exceptions.CreateMerchandiseException;
-import exceptions.UserException;
 import model.Model;
 import model.Observable;
-import model.PostgresModel;
 import model.SlaveMarketModel;
 import model.database.MerchDb;
 import model.merchandises.Merchandise;
 import model.merchandises.classes.Slave;
-import org.apache.log4j.BasicConfigurator;
-import org.hibernate.Session;
-import org.hibernate.SessionFactory;
-import org.hibernate.cfg.Configuration;
 import org.junit.Assert;
 import org.junit.FixMethodOrder;
 import org.junit.Test;
@@ -67,7 +61,7 @@ public class RuntimeDbTests {
     @Test
     public void searchMerchandiseTest() {
         Assert.assertEquals(slaves.stream().map(this::toJsonObj)
-                .collect(toList()).get(2), db.searchMerchandise("GENDER=male AND NAME=Luise").get(0));
+                .collect(toList()).get(2), db.searchMerchandise("Luise").get(0));
     }
 
     @Test
@@ -75,7 +69,7 @@ public class RuntimeDbTests {
         slaves.remove(1);
         slaves.remove(1);
         Assert.assertEquals(slaves.stream().map(this::toJsonObj)
-                .collect(toList()), db.searchMerchandise("id=0"));
+                .collect(toList()), db.searchMerchandise("Pete"));
     }
 
     @Test
@@ -133,7 +127,7 @@ public class RuntimeDbTests {
     private void toJson(Stream<Slave> stream) {
         Assert.assertEquals(stream.sorted(Comparator
                 .comparingInt(Merchandise::getId)
-                .reversed()).map(this::toJsonObj).collect(toList()), db.searchMerchandise("ALL"));
+                .reversed()).map(this::toJsonObj).collect(toList()), db.searchMerchandise(""));
     }
 
     private String toJsonObj(Slave merch) {
@@ -188,7 +182,7 @@ public class RuntimeDbTests {
     @Test
     public void queryTest() {
         System.out.println("\u001B[32mQuery test\u001B[0m testBlock started{");
-        System.out.println(db.searchMerchandise("id>=0 and id!=1"));
+        db.searchMerchandise("sl").forEach(System.out::println);
 //        Pattern pattern = Pattern.compile("(\\bnot \\b)?[b]*");
         System.out.println("\u001B[32m}\u001B[0m");
     }

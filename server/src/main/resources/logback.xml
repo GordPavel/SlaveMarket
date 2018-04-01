@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  ~ Copyright (c) 2018.
+  ~ You may use, distribute and modify this code
+  ~ under the terms of the TOT (take on trust) public license which unfortunately won't be
+  ~ written for another century. So you can modify and copy this files.
+  ~
+  -->
+
+<configuration>
+
+    <appender name="webInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>logs/main/web_logs/%d{yyyy-MM-dd}.log</FileNamePattern>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+
+    <appender name="dbInfo" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>logs/main/db_logs/%d{yyyy-MM-dd}.log</FileNamePattern>
+        </rollingPolicy>
+        <append>true</append>
+        <encoder>
+            <pattern>%-4relative [%thread] %-5level %logger{35} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="controllers.springControllers.IndexController" level="info"
+            additivity="false">
+        <appender-ref ref="webInfo"/>
+    </logger>
+
+    <logger name="model.PostgresModel"
+            level="info"
+            additivity="false">
+        <appender-ref ref="dbInfo"/>
+    </logger>
+
+    <root>
+        <level value="off"/>
+        <appender-ref ref="dbInfo"/>
+    </root>
+
+</configuration>

@@ -5,7 +5,7 @@
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import javafx.scene.description.*?>
 <AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
             minWidth="-Infinity"
             prefHeight="470.0" prefWidth="712.0" stylesheets="/сss/main.css"
@@ -22,7 +22,7 @@
                 <Text fx:id="CurrentUser" fill="WHITE" fontSmoothingType="LCD" layoutX="14.0" layoutY="28.0"
                       strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="90.98307228088379"/>
                 <Text fx:id="logo" layoutX="168.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="SLAVE MARKET" textAlignment="CENTER" wrappingWidth="312.126953125">
+                      description="SLAVE MARKET" textAlignment="CENTER" wrappingWidth="312.126953125">
                     <font>
                         <Font size="43.0"/>
                     </font>
@@ -34,7 +34,7 @@
         <AnchorPane layoutY="95.0" prefHeight="375.0" prefWidth="175.0" style="-fx-background-color: #22858B;">
             <children>
                 <Text fill="WHITE" layoutX="14.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0"
-                      text="Actions:"/>
+                      description="Actions:"/>
                 <ListView fx:id="actions" layoutY="37.0" prefHeight="308.0" prefWidth="170.0"
                           AnchorPane.bottomAnchor="30.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0"
                           AnchorPane.topAnchor="37.0"/>

@@ -457,7 +457,7 @@ public class ClientGui extends Application implements View, Observer {
                         if (fieldMap.get(key).getText().trim().equals("")) {
                             continue;
                         }
-//                  map.put(key, fieldMap.get(key).getText().trim());
+//                  map.put(key, fieldMap.get(key).getDescription().trim());
                         builder.append(key + "=" + fieldMap.get(key).getText().trim() + " ");
                     }
                     boolean allGood = true;

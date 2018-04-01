@@ -197,4 +197,28 @@ public interface Controller {
    * @return true if server available.
    */
   boolean ping(String address, int port);
+
+    /**
+     * Method to set role to user
+     *
+     * @param username admin's username
+     * @param token    admin's current token
+     * @param id       user admin want to change
+     * @param role     new user's role
+     */
+    void setRole(String username, String token, int id, String role);
+
+    /**
+     * Method to get list of available permission roles
+     *
+     * @return list of all roles
+     */
+    List<String> availableRoles();
+
+    /**
+     * Method to get list of users
+     *
+     * @return list of json objects
+     */
+    List<String> getAllUsers();
 }

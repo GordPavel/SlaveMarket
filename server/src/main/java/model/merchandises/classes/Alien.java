@@ -24,6 +24,7 @@ public class Alien implements SlaveInterface {
     private int age;
     private String race;
     private int id;
+    private String className = "alien";
 
     /**
      * returns new instance of Slave created by map.
@@ -189,5 +190,9 @@ public class Alien implements SlaveInterface {
     public boolean equals(Object obj) {
         return obj.getClass().getName().equals(this.getClass().getName())
                 && ((Alien) obj).getAllInfo().equals(getAllInfo());
+    }
+
+    public String getClassName() {
+        return className;
     }
 }

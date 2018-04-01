@@ -132,7 +132,6 @@
                     <failOnViolation>false</failOnViolation>
                 </configuration>
             </plugin>
-
         </plugins>
 
     </build>
@@ -191,12 +190,6 @@
             <groupId>com.vladmihalcea</groupId>
             <artifactId>hibernate-types-52</artifactId>
             <version>2.1.1</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-log4j12</artifactId>
-            <version>1.7.22</version>
         </dependency>
 
         <dependency>

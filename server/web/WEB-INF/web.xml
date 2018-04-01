@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<!--
+  ~ Copyright (c) 2018.
+  ~ You may use, distribute and modify this code
+  ~ under the terms of the TOT (take on trust) public license which unfortunately won't be
+  ~ written for another century. So you can modify and copy this files.
+  ~
+  -->
+
+<web-app metadata-complete="true" xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
+    <display-name>Slave Market</display-name>
+    <servlet-mapping>
+        <servlet-name>default</servlet-name>
+        <url-pattern>/resources/*</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <servlet-class>
+            org.springframework.web.servlet.DispatcherServlet
+        </servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>mvc-dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/mvc-dispatcher-servlet.xml</param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+</web-app>

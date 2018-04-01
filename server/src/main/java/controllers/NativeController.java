@@ -176,6 +176,21 @@ public class NativeController implements Controller {
     }
 
     @Override
+    public void setRole(String username, String token, int id, String role) {
+
+    }
+
+    @Override
+    public List<String> availableRoles() {
+        return null;
+    }
+
+    @Override
+    public List<String> getAllUsers() {
+        return null;
+    }
+
+    @Override
     public boolean register(String username, String pass) {
         return model.register(username, pass);
     }
@@ -184,6 +199,8 @@ public class NativeController implements Controller {
     public void disconnect(String username, String token) {
         model.disconnect(username, token);
     }
+
+
 
 //  private String encrypt(String username, String pass) {
 //    try {
