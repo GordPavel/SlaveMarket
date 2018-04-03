@@ -9,18 +9,21 @@
 <%--
   Created by IntelliJ IDEA.
   User: s3rius
-  Date: 31.03.18
-  Time: 19:14
+  Date: 03.04.18
+  Time: 17:04
   To change this template use File | Settings | File Templates.
 --%>
 <html>
 <head>
     <jsp:include page="/resources/templates/inclues.jsp"/>
-    <title>Cart</title>
+    <link rel="stylesheet" href="/resources/styles/profile.css">
+    <title>Profile</title>
 </head>
 <body>
 <%@include file="/resources/templates/header.jsp" %>
-
+<h2>${user.username}</h2>
+<h2>${home}</h2>
 <jsp:include page="/resources/templates/footer.jsp"/>
+
 </body>
 </html>

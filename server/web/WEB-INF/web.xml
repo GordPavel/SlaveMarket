@@ -10,10 +10,6 @@
 
 <web-app metadata-complete="true" xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
     <display-name>Slave Market</display-name>
-    <servlet-mapping>
-        <servlet-name>default</servlet-name>
-        <url-pattern>/resources/*</url-pattern>
-    </servlet-mapping>
 
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>

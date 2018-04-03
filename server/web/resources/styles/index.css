@@ -65,7 +65,7 @@
     background: rgba(0, 0, 0, 0.4);
     padding-bottom: 20px;
     font-family: "Open Sans", sans-serif;
-    border-radius: 15px 50px 30px 5px;
+    border-radius: 15px;
 }
 
 div.owl-title {
@@ -196,7 +196,7 @@ div.owl-caption {
 }
 
 .panel-heading {
-    background-color: #8f9296;
+    font-size: 24pt;
 }
 
 /****----------------------------------------------****/
@@ -209,45 +209,51 @@ div.owl-caption {
     max-height: 80px;
 }
 
-.newsTable .media-body {
-    display: block;
-    /* Had to use this style to force the div to expand (wasn't necessary with my bootstrap version 3.3.6) */
-}
-
-.newsTable .media-meta {
-    font-size: 11px;
-    color: #999;
-}
-
-.newsTable .media .title {
-    color: #2BBCDE;
-    font-size: 14px;
-    font-weight: bold;
-    line-height: normal;
-    margin: 0;
-}
-
-.newsItem {
-    max-height: 80px;
-    border-color: #2BBCDE;
-}
-
 .content .container {
     margin: 10px;
 }
 
-.last-news-row .last-news a {
+.info-items-row .info-item a {
     display: block;
     color: #231f20;
     font-weight: 700;
 }
 
-.last-news a img {
-    display: block;
-    width: 100%;
+.info-item {
+    margin-bottom: 30px;
+    overflow: hidden;
+    position: relative;
+    max-height: 180px;
 }
 
-.last-news a span {
+.newsList li {
+    overflow: hidden;
+    display: flex;
+    margin-bottom: 10px;
+}
+
+.newsList .image {
+    margin-right: 15px;
+    max-height: 85px;
+}
+
+.newsList .title {
+    font-weight: 700;
+}
+
+.newsList .info {
+    font-size: 14px;
+}
+
+a {
+    text-decoration: none;
+}
+
+.info-item img {
+    left: 50%;
+}
+
+.info-item a span {
     position: absolute;
     text-align: center;
     width: 60%;
@@ -261,5 +267,137 @@ div.owl-caption {
     background: rgba(0, 0, 0, 0.4);
     padding-bottom: 20px;
     font-family: "Open Sans", sans-serif;
-    border-radius: 15px 50px 30px 5px;
+    border-radius: 15px;
 }
+
+.container .row {
+    display: flex;
+}
+
+.container .row .col-lg-8,
+.sidebar .col-lg-4 {
+    flex: 1;
+}
+
+.lastNews-title {
+    font-size: 23pt;
+    text-align: left;
+}
+
+.lastNews-footer {
+    font-size: 14pt;
+    text-align: center;
+    text-decoration-color: #0c5460;
+}
+
+.newsList {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.listrap {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    cursor: default;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.listrap li {
+    margin: 0;
+    padding: 10px;
+}
+
+.listrap li.active, .listrap li:hover {
+    background-color: #d9edf7;
+}
+
+.listrap strong {
+    margin-left: 10px;
+}
+
+.listrap .listrap-toggle {
+    display: inline-block;
+    width: 60px;
+    height: 60px;
+}
+
+.listrap .listrap-toggle span {
+    background-color: #428bca;
+    opacity: 0.8;
+    z-index: 100;
+    width: 60px;
+    height: 60px;
+    display: none;
+    position: absolute;
+    border-radius: 50%;
+    text-align: center;
+    line-height: 60px;
+    vertical-align: middle;
+    color: #ffffff;
+}
+
+.listrap li.active .listrap-toggle span {
+    display: block;
+}
+
+.listrap-toggle {
+    overflow: hidden;
+    max-height: 20%;
+}
+
+.listrap-toggle img {
+    max-height: 80px;
+
+}
+
+.col-container {
+    display: table;
+    width: 100%;
+}
+
+.item-section {
+    display: table-cell;
+}
+
+.col-sm-5 {
+    width: 100px;
+    height: 100px;
+    background: no-repeat center center;
+    overflow: hidden;
+}
+
+.newsList img {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    height: 100%;
+    width: auto;
+    -webkit-transform: translate(-50%,-50%);
+    -ms-transform: translate(-50%,-50%);
+    transform: translate(-50%,-50%);
+}
+
+.newsList a {
+    text-decoration: none;
+}
+
+.newsList h5 {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+li.list-group-item {
+    max-height: 85px;
+}
+
+li.linkToNews:hover {
+    text-decoration-color: #428bca;
+}
+

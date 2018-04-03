@@ -18,50 +18,64 @@
     <jsp:include page="/resources/templates/inclues.jsp"/>
     <link rel="stylesheet" href="/resources/styles/login.css">
     <script src="/resources/scripts/login.js"></script>
+    <script src="/resources/scripts/jquery.magnific-popup.min.js"></script>
+    <link rel="stylesheet" href="/resources/styles/magnific-popup.css">
     <title>Login</title>
 </head>
 <body>
 <%@include file="/resources/templates/header.jsp" %>
-<div class="container">
-    <div class="row">
-        <div class="col-md-12">
-            <div class="pr-wrap">
-                <div class="pass-reset">
-                    <label>Enter your login and password one more time to reset token.</label>
-                    <input type="text" placeholder="Username"/>
-                    <input type="password" placeholder="Password" style="margin-top: 10px;"/>
-                    <input type="submit" value="Submit" class="pass-reset-submit btn btn-success btn-sm"/>
-                    <button class="pass-reset-cancel btn btn-success btn-sm">Cancel</button>
-                </div>
-            </div>
-            <div class="wrap">
-                <p class="form-title">Sign In</p>
-                <form class="login">
-                    <input type="text" placeholder="Username"/>
-                    <input type="password" placeholder="Password" style="margin-top: 10px;"/>
-                    <input type="submit" value="Sign In" class="btn btn-outline-primary"/>
-                    <div class="remember-forgot">
-                        <div class="row">
-                            <div class="col-md-6">
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox"/>
-                                        Remember Me
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="col-md-6 forgot-pass-content">
-                                <a href="javascript:void(0);" class="forgot-pass">Update Token</a>
-                            </div>
-                        </div>
+<section class="loginForm">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="pr-wrap">
+                    <div class="token-reset">
+                        <label>Enter your login and password one more time to reset token.</label>
+                        <input type="text" placeholder="Username"/>
+                        <input type="password" placeholder="Password" style="margin-top: 10px;"/>
+                        <input type="submit" value="Submit" class="token-reset-submit btn btn-primary btn-sm"/>
+                        <button class="token-reset-cancel btn btn-primary btn-sm">Cancel</button>
                     </div>
-                </form>
+                </div>
+                <div class="wrap">
+                    <p class="form-title">Sign In</p>
+                    <form class="login" action="javascript:void(0);">
+                        <input type="text" placeholder="Username"/>
+                        <input type="password" placeholder="Password" style="margin-top: 10px;"/>
+                        <input type="submit" value="Sign In" class="btn btn-primary sign-in-btn"/>
+                        <input type="submit" value="Register" class="btn btn-primary register-btn"/>
+                        <div class="remember-forgot">
+                            <%--<div class="row">--%>
+                                <%--<div class="col-md-6">--%>
+                                <%--<div class="checkbox">--%>
+                                <%--<label>--%>
+                                <%--<input type="checkbox"/>--%>
+                                <%--Remember Me--%>
+                                <%--</label>--%>
+                                <%--</div>--%>
+                                <%--</div>--%>
+                                <div class="text-center forgot-pass-content">
+                                    <a href="javascript:void(0);" class="forgot-token">Update Token</a>
+                                </div>
+                            <%--</div>--%>
+                        </div>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
+    <div id="test-modal" class="white-popup-block mfp-hide">
+        <h1>Modal dialog</h1>
+        <p>You won't be able to dismiss this by usual means (escape or
+            click button), but you can close it programatically based on
+            user choices or actions.</p>
+        <p><a class="popup-modal-dismiss" href="#" style="">Dismiss</a></p>
+    </div>
+</section>
 <%--<section class="footerSection">--%>
-    <%--<%@include file="/resources/templates/footer.jsp" %>--%>
+<%--<%@include file="/resources/templates/footer.jsp" %>--%>
 <%--</section>--%>
+<%--<jsp:include page="/resources/templates/footer.jsp"/>--%>
+
 </body>
 </html>

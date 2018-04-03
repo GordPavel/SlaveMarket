@@ -38,10 +38,18 @@
                                 <li><a class="nav-link" href="/logout">Log out</a></li>
                             </ul>
                         </li>
+                        <c:set var="admin" value="admin"/>
+                        <c:if test="${user.role==admin}">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/adminPanel">Admin panel</a>
+                            </li>
+                        </c:if>
                     </c:if>
                     <li class="nav-item">
                         <c:if test="${cart.size()<1}">
-                            <a class="nav-link" href="#">Cart <span
+                            <a class="nav-link" href="#" data-container="body" data-toggle="popover"
+                               data-placement="bottom"
+                               data-content="Your cart is empty">Cart <span
                                     class="badge badge-info">empty</span></a>
                         </c:if>
                         <c:if test="${cart.size()>0}">

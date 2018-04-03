@@ -7,15 +7,17 @@
   ~
   -->
 
-<beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:context="http://www.springframework.org/schema/context"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:mvc="http://www.springframework.org/schema/mvc"
+<beans xmlns="http://www.springframework.org/schema/beans" xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc" xmlns:tx="http://www.springframework.org/schema/tx"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context
-        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
+        http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
 
-    <context:component-scan base-package="controllers.springControllers"/>
+    <context:component-scan base-package="spring.springControllers"/>
+    <mvc:resources mapping="/resources/**" location="resources/" cache-period="31556926"/>
+
 
     <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
         <property name="prefix">
@@ -26,6 +28,54 @@
         </property>
     </bean>
 
-    <mvc:resources mapping="/resources/**" location="resources/" cache-period="31556926"/>
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
+        <property name="driverClassName" value="org.postgresql.Driver"/>
+        <property name="url"
+                  value="jdbc:postgresql://localhost:5432/slaveMarket"/>
+        <property name="username" value="s3rius"/>
+        <property name="password" value="19216211"/>
+    </bean>
+
+    <bean id="hibernate4AnnotatedSessionFactory"
+          class="org.springframework.orm.hibernate5.LocalSessionFactoryBean">
+        <property name="dataSource" ref="dataSource"/>
+        <property name="annotatedClasses">
+            <list>
+                <value>model.postgresqlModel.Users</value>
+                <value>model.postgresqlModel.tables.News</value>
+                <value>model.postgresqlModel.tables.Merchandises</value>
+                <value>model.postgresqlModel.tables.Deals</value>
+                <value>model.postgresqlModel.tables.Classes</value>
+                <value>model.postgresqlModel.tables.merchandises.Aliens</value>
+                <value>model.postgresqlModel.tables.merchandises.Foods</value>
+                <value>model.postgresqlModel.tables.merchandises.Poisons</value>
+                <value>model.postgresqlModel.tables.merchandises.Slaves</value>
+            </list>
+        </property>
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.PostgreSQL9Dialect</prop>
+                <prop key="hibernate.show_sql">false</prop>
+            </props>
+        </property>
+    </bean>
+
+    <bean id="psqlmodel" class="spring.PostgresModel">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+    <bean id="psqlService" class="spring.springControllers.PostgresSpringService">
+        <property name="model" ref="psqlmodel"/>
+    </bean>
+
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+    <bean id="transactionManager" class="org.springframework.orm.hibernate5.HibernateTransactionManager">
+        <property name="sessionFactory" ref="hibernate4AnnotatedSessionFactory"/>
+    </bean>
+
+
     <mvc:annotation-driven/>
+
 </beans>

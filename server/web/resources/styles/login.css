@@ -5,6 +5,10 @@
  * written for another century. So you can modify and copy this files.
  *
  */
+:root {
+    --placeholder-color: white;
+}
+
 body {
     display: block;
     overflow: hidden;
@@ -43,7 +47,7 @@ form.login {
 }
 
 form.login input[type="text"], form.login input[type="password"],
-.pass-reset input[type="text"], .pass-reset input[type="password"] {
+.token-reset input[type="text"], .token-reset input[type="password"] {
     width: 100%;
     margin: 0;
     padding: 5px 10px;
@@ -117,11 +121,11 @@ form.login a:hover {
     display: none;
 }
 
-.show-pass-reset {
+.show-token-reset {
     display: block !important;
 }
 
-.pass-reset {
+.token-reset {
     margin: 0 auto;
     width: 250px;
     position: relative;
@@ -131,13 +135,13 @@ form.login a:hover {
     padding: 20px 15px;
 }
 
-.pass-reset label {
+.token-reset label {
     font-size: 12px;
     font-weight: 400;
     margin-bottom: 15px;
 }
 
-.pass-reset input[type="email"] {
+.token-reset input[type="email"] {
     width: 100%;
     margin: 5px 0 0 0;
     padding: 5px 10px;
@@ -154,8 +158,8 @@ form.login a:hover {
     outline: 0;
 }
 
-.pass-reset input[type="submit"],
-.pass-reset .pass-reset-cancel {
+.token-reset input[type="submit"],
+.token-reset .pass-reset-cancel {
     width: 100%;
     border: 0;
     font-size: 14px;
@@ -167,11 +171,53 @@ form.login a:hover {
     letter-spacing: 1px;
 }
 
-.pass-reset input[type="text"],
-.pass-reset input[type="password"] {
+.token-reset input[type="text"],
+.token-reset input[type="password"] {
     color: #000000;
 }
 
-.pass-reset input[type="submit"]:hover {
+.token-reset input[type="submit"]:hover {
     transition: background-color 0.5s ease;
+}
+
+.buttons {
+    width: 390px;
+    height: 75px;
+    margin: 0 auto;
+}
+
+.button {
+    display: block;
+    background: #ED5E2F;
+    color: #FFF;
+    text-decoration: none;
+    width: 110px;
+    text-align: center;
+    padding: 10px;
+    margin: 15px 0 0 15px;
+    font-size: 18px;
+    text-transform: uppercase;
+    font-weight: 300;
+}
+
+.download {
+    width: 200px;
+}
+
+.white-popup {
+    position: relative;
+    background: #FFF;
+    padding: 20px;
+    width: auto;
+    max-width: 500px;
+    margin: 20px auto;
+}
+
+.login ::placeholder {
+    color: var(--placeholder-color);
+    opacity: 0.8; /* Firefox */
+}
+
+.popup-modal-text {
+    margin: 15px;
 }

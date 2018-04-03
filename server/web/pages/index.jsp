@@ -38,87 +38,93 @@
     <div id="main-dot-container" class="owl-dots">
     </div>
 </section>
-<%--<section class="newsSection">--%>
-<%--<div class="lastNewsList">--%>
-<%--<div class="container">--%>
-<%--<div class="row lastNewsListHeader">--%>
-<%--<div class="col-md-6 text-left">--%>
-<%--News--%>
-<%--</div>--%>
-<%--<a class="col-md-6 text-right" href="/news">--%>
-<%--See all news--%>
-<%--</a>--%>
-<%--</div>--%>
-<%--<c:forEach var="i" begin="0" end="0" step="1">--%>
-<%--<c:if test="${i<0}">--%>
-<%--<div class="row">--%>
-<%--<div class="col-md-6 news">--%>
-<%--<div class="newsHeader text-center">--%>
-<%--</div>--%>
-<%--<div class="row">--%>
-<%--<div class="newsImage">--%>
-<%--<i class="fa fa-newspaper"></i>--%>
-<%--</div>--%>
-<%--<div class="newsDescription">--%>
-<%--some descriptionsaiuefasieufnasleifnase asefnalseifn aseifun--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--<div class="col-md-6 news">--%>
-<%--<div class="newsHeader text-center">--%>
-<%--</div>--%>
-<%--<div class="row">--%>
-<%--<div class="newsImage">--%>
-<%--<i class="fa fa-newspaper"></i>--%>
-<%--</div>--%>
-<%--<div class="newsDescription">--%>
-<%--some descriptionsaiuefasieufnasleifnase asefnalseifn aseifun--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</div>--%>
-<%--</c:if>--%>
-<%--</c:forEach>--%>
-<%--</div>--%>
-<%--</section>--%>
 
-<section class="content">
-    <div class="container">
-        <div class="panel panel-default">
-            <div class="panel-heading"><i class="fa fa-newspaper"></i> News</div>
-            <div class="panel-body">
-                <div class="row">
-                    <div class=" col-lg-8">
-                        <c:forEach var="i" begin="0" end="2" step="2">
-                        <c:if test="${i lt news.size() && i+1 lt news.size()}">
-                        <div class="last-news-row row">
-                            <div class="last-news col-lg-6">
-                                <a href="/news/${news.get(i).id}">
-                                    <span>${news.get(i).header}</span>
-                                    <img src="data:image/jpg;base64,${news.get(i).base64EncodedImg}"/>
+<section class="newsSection">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><i class="fa fa-link"></i> Links</div>
+                    <div class="panel-body">
+                        <div class="info-items-row row">
+                            <div class="info-item col-lg-6">
+                                <a href="/info/about">
+                                    <span>About Us</span>
+                                    <img src="/resources/images/about-us.jpg"/>
                                 </a>
                             </div>
-                            <div class="last-news col-lg-6">
-                                <a href="/news/${news.get(i+1).id}">
-                                    <span>${news.get(i+1).header}</span>
-                                    <img src="data:image/jpg;base64,${news.get(i+1).base64EncodedImg}"/>
+                            <div class="info-item col-lg-6">
+                                <a href="/info/contacts">
+                                    <span>Contacts</span>
+                                    <img src="/resources/images/contacts.jpg"/>
                                 </a>
                             </div>
-                            </c:if>
-                            </c:forEach>
                         </div>
-                        <div class="sidebar col-lg-4"></div>
+                        <div class="info-items-row row">
+                            <div class="info-item col-lg-4">
+                                <a href="/info/quest">
+                                    <span>Questions and Answers</span>
+                                    <img src="/resources/images/qanda.jpg"/>
+                                </a>
+                            </div>
+                            <div class="info-item col-lg-4">
+                                <a href="/info/dev">
+                                    <span>Developers</span>
+                                    <img src="/resources/images/dev.jpg"/>
+                                </a>
+                            </div>
+                            <div class="info-item col-lg-4">
+                                <a href="/info/coop">
+                                    <span>Cooperation with us</span>
+                                    <img src="/resources/images/coop.jpg"/>
+                                </a>
+                            </div>
+                        </div>
                     </div>
+                </div>
+            </div>
+            <div class="sidebar col-lg-4">
+                <div class="lastNews">
+                    <div class="lastNews-title heading-sm">
+                        <i class="fa fa-newspaper"></i> Last news
+                    </div>
+                    <div class="lastNews">
+                        <ul class="newsList list-group">
+                            <c:forEach var="index" begin="0" end="3" step="1">
+                                <c:if test="${news.size() > index}">
+                                    <li class="list-group-item">
+                                        <div class="col-sm-7">
+                                            <h5>${news.get(index).header}</h5>
+                                            <h4>
+                                                <small class="text-muted">
+                                                    <a href="/news/${news.get(index).id}" class="text-muted linkToNews">Read
+                                                        More<i class="fa fa-arrow-right"></i></a>
+                                                </small>
+                                            </h4>
+                                        </div>
+                                        <div class="col-sm-5">
+                                            <a href="/news/${news.get(index).id}" class="pull-right">
+                                                <img src="data:image/jpg;base64,${news.get(index).base64EncodedImg}"
+                                                     class="img-rounded pull-right">
+                                            </a>
+                                        </div>
+                                    </li>
+                                </c:if>
+                            </c:forEach>
+                        </ul>
+
+                    </div>
+                </div>
+                <div class="lastNews-footer heading-sm text-center">
+                    <a href="/news">
+                        See all news <i class="fa fa-arrow-right"></i>
+                    </a>
                 </div>
             </div>
         </div>
     </div>
 </section>
-<%--<section class="footerSection">--%>
-<%--<%@include file="/resources/templates/footer.jsp" %>--%>
-<%--</section>--%>
 
-
+<jsp:include page="/resources/templates/footer.jsp"/>
 </body>
 </html>
