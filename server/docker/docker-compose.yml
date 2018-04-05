@@ -1,0 +1,18 @@
+version: '2'
+
+ app:
+  image: app
+    ports:
+    - "8080:8080"
+    depends_on:
+    - mypostgres
+
+    mypostgres:
+      image: postgres
+      restart: always
+      ports:
+      - "5432:5432"
+      environment:
+        - POSTGRES_PASSWORD=19216211
+        - POSTGRES_USER=s3rius
+        - POSTGRES_DB=slaveMarket

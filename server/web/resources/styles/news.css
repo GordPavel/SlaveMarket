@@ -84,6 +84,10 @@ header.masthead {
     background-size: cover;
 }
 
+header.masthead.image {
+    max-height: 520px;
+}
+
 header.masthead .overlay {
     position: absolute;
     top: 0;
@@ -169,6 +173,7 @@ header.masthead .post-heading .meta a {
     header.masthead .post-heading h1 {
         font-size: 55px;
     }
+
     header.masthead .post-heading .subheading {
         font-size: 30px;
     }

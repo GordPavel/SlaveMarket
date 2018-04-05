@@ -1,7 +1,5 @@
 package model;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import exceptions.CreateMerchandiseException;
 import exceptions.MerchandiseAlreadyBought;
 import exceptions.MerchandiseNotFoundException;
@@ -209,7 +207,7 @@ public interface Model {
      * @param image       image for news
      * @param slider      true if you want to show it on slider on main page
      */
-    void addNews(String user, String token, @NotNull String header, String description, String text, @Nullable byte[] image, boolean slider);
+    void addNews(String user, String token, String header, String description, String text, byte[] image, boolean slider);
 
     /**
      * Method to set role to user

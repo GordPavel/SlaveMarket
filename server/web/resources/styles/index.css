@@ -395,6 +395,8 @@ a {
 
 li.list-group-item {
     max-height: 85px;
+    background-color: transparent;
+    border: none;
 }
 
 li.linkToNews:hover {

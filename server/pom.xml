@@ -7,6 +7,8 @@
         <groupId>net.cracker.practice</groupId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <packaging>war</packaging>
+    <version>1.0</version>
     <properties>
         <jdk.version>1.8</jdk.version>
         <spring.version>5.0.4.RELEASE</spring.version>
@@ -20,8 +22,15 @@
     <artifactId>server</artifactId>
 
     <build>
-        <plugins>
 
+        <finalName>server</finalName>
+        <sourceDirectory>src/main/java</sourceDirectory>
+        <resources>
+            <resource>
+                <directory>src/main/resources</directory>
+            </resource>
+        </resources>
+        <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -30,6 +39,32 @@
                     <source>${jdk.version}</source>
                     <target>${jdk.version}</target>
                 </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>2.4</version>
+                <executions>
+                    <execution>
+                        <id>copy-web.xml</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-resources</goal>
+                        </goals>
+                        <configuration>
+                            <overwrite>true</overwrite>
+                            <outputDirectory>web/</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>pages/</directory>
+                                    <directory>resources/</directory>
+                                    <directory>WEB-INF/</directory>
+                                </resource>
+                            </resources>
+                        </configuration>
+                    </execution>
+                </executions>
             </plugin>
 
             <plugin>
@@ -68,13 +103,43 @@
                 </executions>
             </plugin>
             <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <configuration>
+                    <warName>server</warName>
+                    <attachClasses>true</attachClasses>
+                    <webXml>web/WEB-INF/web.xml</webXml>
+                    <webResources>
+                        <resource>
+                            <directory>web/WEB-INF/</directory>
+                            <targetPath>WEB-INF/</targetPath>
+                            <includes>
+                                <include>mvc-dispatcher-servlet.xml</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>web/pages/</directory>
+                            <targetPath>pages/</targetPath>
+                            <includes>
+                                <include>*</include>
+                            </includes>
+                        </resource>
+                        <resource>
+                            <directory>web/resources/</directory>
+                            <targetPath>resources/</targetPath>
+                            <includes>
+                                <include>**/*</include>
+                            </includes>
+                        </resource>
+                    </webResources>
+                </configuration>
+            </plugin>
+            <plugin>
                 <groupId>org.apache.tomcat.maven</groupId>
                 <artifactId>tomcat7-maven-plugin</artifactId>
-                <version>2.2</version>
                 <configuration>
                     <path>/</path>
-                    <ignorePackaging>true</ignorePackaging>
                 </configuration>
+                <version>2.2</version>
             </plugin>
         </plugins>
     </build>
@@ -128,12 +193,18 @@
             <artifactId>commons-dbcp</artifactId>
             <version>1.4</version>
         </dependency>
-        
+
         <!-- jstl -->
         <dependency>
             <groupId>jstl</groupId>
             <artifactId>jstl</artifactId>
             <version>${jstl.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>javax.xml.bind</groupId>
+            <artifactId>jaxb-api</artifactId>
+            <version>2.3.0</version>
         </dependency>
     </dependencies>
 </project>

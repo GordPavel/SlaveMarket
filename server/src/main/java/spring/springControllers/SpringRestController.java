@@ -53,6 +53,17 @@ public class SpringRestController {
         }
     }
 
+    @RequestMapping(value = "/registerReq", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<? extends String> registerRequest(@RequestParam("username") String username, @RequestParam("password") String password) {
+        try {
+            model.register(username, password);
+            return new ResponseEntity<>("User successfully registered", HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
+        }
+    }
+
     @Autowired
     @Qualifier("psqlService")
     public void setModel(PostgresSpringService model) {

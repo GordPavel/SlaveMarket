@@ -93,6 +93,12 @@
                             <c:forEach var="index" begin="0" end="3" step="1">
                                 <c:if test="${news.size() > index}">
                                     <li class="list-group-item">
+                                        <div class="col-sm-5">
+                                            <a href="/news/${news.get(index).id}" class="pull-left">
+                                                <img src="data:image/jpg;base64,${news.get(index).base64EncodedImg}"
+                                                     class="img-rounded pull-right">
+                                            </a>
+                                        </div>
                                         <div class="col-sm-7">
                                             <h5>${news.get(index).header}</h5>
                                             <h4>
@@ -101,12 +107,6 @@
                                                         More<i class="fa fa-arrow-right"></i></a>
                                                 </small>
                                             </h4>
-                                        </div>
-                                        <div class="col-sm-5">
-                                            <a href="/news/${news.get(index).id}" class="pull-right">
-                                                <img src="data:image/jpg;base64,${news.get(index).base64EncodedImg}"
-                                                     class="img-rounded pull-right">
-                                            </a>
                                         </div>
                                     </li>
                                 </c:if>

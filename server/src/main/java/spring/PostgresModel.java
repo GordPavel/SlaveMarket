@@ -300,6 +300,7 @@ public class PostgresModel implements SpringModel {
             Users user = new Users();
             user.setUsername(username);
             user.setPassword(pass);
+            user.setRole("user");
             session.save(user);
             logger.info("User " + username + " successfully registered");
             return true;

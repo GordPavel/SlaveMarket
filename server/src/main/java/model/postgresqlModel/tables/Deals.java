@@ -8,6 +8,7 @@
 
 package model.postgresqlModel.tables;
 
+
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.persistence.*;

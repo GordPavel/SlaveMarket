@@ -44,6 +44,7 @@ import static java.util.stream.Collectors.toList;
 
 @Controller
 @EnableWebMvc
+
 @Scope(value = "session")
 public class IndexController {
     private static final String VIEW_INDEX = "index";
@@ -52,7 +53,7 @@ public class IndexController {
     private static final String VIEW_CART = "cart";
     private static final String VIEW_SHOP = "shop";
     private static final String VIEW_404 = "not_found";
-    private static final String VIEW_MERCHANDISE = "shop/item/";
+    private static final String VIEW_ADMIN = "admin_panel";
     private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
     private final static String VIEW_LOGIN = "login";
     private static final String VIEW_PROFILE = "profile";
@@ -127,6 +128,13 @@ public class IndexController {
         }
     }
 
+    /**
+     * Method to  get specified news.
+     *
+     * @param newsId news's id
+     * @param map    model map
+     * @return page name
+     */
     @RequestMapping(value = "/news/{newsId}", method = RequestMethod.GET)
     public String openNews(@PathVariable("newsId") int newsId, ModelMap map) {
         News news = new Gson().fromJson(model.getNewsById(newsId), News.class);
@@ -139,7 +147,11 @@ public class IndexController {
         }
     }
 
-
+    /**
+     * Method to perform logout action.
+     *
+     * @return redirect on home page
+     */
     @RequestMapping(value = "/logout")
     public ModelAndView logout() {
         if (null != user) {

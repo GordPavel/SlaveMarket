@@ -23,7 +23,7 @@
 
 
 <!-- Page Header -->
-<header class="masthead" style="background-image: url('data:image/jpg;base64,${news.base64EncodedImg}')">
+<header class="masthead image" style="background-image: url('data:image/jpg;base64,${news.base64EncodedImg}')">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">

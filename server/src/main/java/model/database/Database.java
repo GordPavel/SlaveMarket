@@ -1,7 +1,5 @@
 package model.database;
 
-import com.sun.istack.internal.NotNull;
-import com.sun.istack.internal.Nullable;
 import exceptions.CreateMerchandiseException;
 import exceptions.InvalidToken;
 import exceptions.MerchandiseNotFoundException;
@@ -213,5 +211,5 @@ public interface Database {
      * @param image       image for news
      * @param slider      true if you want to show it on slider on main page
      */
-    void addNews(int userId, String token, @NotNull String header, String description, String text, @Nullable byte[] image, boolean slider);
+    void addNews(int userId, String token, String header, String description, String text, byte[] image, boolean slider);
 }
