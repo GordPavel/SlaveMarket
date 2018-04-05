@@ -32,7 +32,7 @@
           destroy-method="close">
         <property name="driverClassName" value="org.postgresql.Driver"/>
         <property name="url"
-                  value="jdbc:postgresql://localhost:5432/slaveMarket"/>
+                  value="jdbc:postgresql://db:5432/slaveMarket"/>
         <property name="username" value="s3rius"/>
         <property name="password" value="19216211"/>
     </bean>

@@ -23,7 +23,8 @@
 
 
 <!-- Page Header -->
-<header class="masthead image" style="background-image: url('data:image/jpg;base64,${news.base64EncodedImg}')">
+<header class="masthead image"
+        style="background: transparent url('data:image/jpg;base64,${news.base64EncodedImg} ') 0 0 no-repeat fixed">
     <div class="overlay"></div>
     <div class="container">
         <div class="row">
@@ -97,7 +98,8 @@
             <hr>
             <!-- Pager -->
             <div class="clearfix">
-                <a class="btn btn-primary float-right" href="/news/">See other news <i class="fa fa-arrow-right"></i></a>
+                <a class="btn btn-primary float-right" href="/news/">See other news <i
+                        class="fa fa-arrow-right"></i></a>
             </div>
         </div>
     </div>

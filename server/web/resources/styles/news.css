@@ -86,6 +86,7 @@ header.masthead {
 
 header.masthead.image {
     max-height: 520px;
+    background-size: cover;
 }
 
 header.masthead .overlay {

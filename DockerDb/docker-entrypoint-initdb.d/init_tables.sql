@@ -1,77 +1,158 @@
-CREATE SEQUENCE merchandise_id_super;
+create sequence merchandise_id_super;
 
-CREATE TABLE IF NOT EXISTS classes
+create table classes
 (
-  classname VARCHAR(20) NOT NULL,
-  fields    CHARACTER VARYING []
+  classname varchar(20) not null,
+  fields    character varying [],
+  constraint table_name_pkey
+  primary key (classname)
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS table_name_classname_uindex
-  ON classes (classname);
+create unique index table_name_classname_uindex
+  on classes (classname);
 
-CREATE UNIQUE INDEX IF NOT EXISTS table_name_pkey
-  ON classes (classname);
-
-ALTER TABLE classes
-  ADD CONSTRAINT table_name_pkey
-PRIMARY KEY (classname);
-
-CREATE OR REPLACE FUNCTION insert_classes_proc()
-  RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
-DECLARE
-  fields VARCHAR [];
-BEGIN
-  SELECT string_to_array(string_agg(ti.column_name, ' '), ' ')
-  INTO fields
-  FROM (SELECT *
-        FROM information_schema.columns
-        WHERE table_name = NEW.classname) AS ti
-  WHERE
-    ti.is_nullable = 'NO' AND ti.column_name <> 'id' AND ti.column_name <> 'class' AND ti.column_name <> 'benefit' AND
-    ti.column_name <> 'info';
-  IF fields IS NOT NULL
-  THEN
-    NEW.fields = fields;
-    RETURN NEW;
-  ELSE
-    RAISE EXCEPTION 'Can''t find table with name %', NEW.classname
-    USING ERRCODE ='CT001';
-    RETURN NULL;
-  END IF;
-END;
-$$;
-
-CREATE TRIGGER insert_classes_trg
-  BEFORE INSERT
-  ON classes
-  FOR EACH ROW
-EXECUTE PROCEDURE insert_classes_proc();
-
-CREATE TABLE IF NOT EXISTS users
+create table users
 (
-  id       SERIAL      NOT NULL,
-  username VARCHAR(20) NOT NULL,
-  password VARCHAR(20) NOT NULL,
-  token    VARCHAR,
-  balance  INTEGER DEFAULT 0
+  id       serial                                      not null,
+  username varchar(20)                                 not null,
+  password varchar(20)                                 not null,
+  token    varchar,
+  balance  integer default 0,
+  role     varchar default 'user' :: character varying not null,
+  constraint users_pkey
+  primary key (id)
 );
 
-CREATE UNIQUE INDEX IF NOT EXISTS users_id_uindex
-  ON users (id);
+create unique index users_id_uindex
+  on users (id);
 
-CREATE UNIQUE INDEX IF NOT EXISTS users_pkey
-  ON users (id);
+create table merchandises
+(
+  id      integer          not null,
+  name    varchar(20)      not null,
+  class   varchar(20)      not null,
+  benefit double precision not null,
+  info    varchar          not null,
+  image   bytea,
+  constraint merchandises_id_pk
+  primary key (id)
+);
 
-ALTER TABLE users
-  ADD CONSTRAINT users_pkey
-PRIMARY KEY (id);
+create table slaves
+(
+  id     integer default nextval('merchandise_id_super' :: regclass) not null,
+  height double precision                                            not null,
+  weight double precision                                            not null,
+  age    integer                                                     not null,
+  gender varchar default 'UNKNOWN' :: character varying              not null,
+  constraint slave_pkey
+  primary key (id)
+)
+  inherits (merchandises);
 
-CREATE OR REPLACE FUNCTION insert_user()
-  RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
+create unique index slave_id_uindex
+  on slaves (id);
+
+create table aliens
+(
+  id     integer default nextval('merchandise_id_super' :: regclass) not null,
+  planet varchar(20)                                                 not null,
+  weight double precision                                            not null,
+  height double precision                                            not null,
+  color  varchar(20)                                                 not null,
+  age    integer                                                     not null,
+  race   varchar(20)                                                 not null,
+  constraint table_name_pkey1
+  primary key (id)
+)
+  inherits (merchandises);
+
+create unique index table_name_id_uindex
+  on aliens (id);
+
+create table poisons
+(
+  id        integer default nextval('merchandise_id_super' :: regclass) not null,
+  onset     varchar(20)                                                 not null,
+  frequency varchar(20)                                                 not null,
+  effect    text                                                        not null,
+  chance    double precision                                            not null,
+  weight    double precision                                            not null,
+  type      varchar(20)                                                 not null,
+  constraint poison_pkey
+  primary key (id)
+)
+  inherits (merchandises);
+
+create unique index poison_id_uindex
+  on poisons (id);
+
+create table food
+(
+  id          integer default nextval('merchandise_id_super' :: regclass) not null,
+  energy      double precision                                            not null,
+  weight      double precision                                            not null,
+  composition text                                                        not null,
+  constraint food_pkey
+  primary key (id)
+)
+  inherits (merchandises);
+
+create unique index food_id_uindex
+  on food (id);
+
+create table deal_states
+(
+  state varchar not null,
+  constraint deal_states_pkey
+  primary key (state)
+);
+
+create unique index deal_states_state_uindex
+  on deal_states (state);
+
+create table deals
+(
+  id      serial      not null,
+  userid  integer     not null,
+  state   varchar(20) not null,
+  time    timestamp   not null,
+  merchid integer     not null,
+  price   integer     not null,
+  constraint deals_pkey
+  primary key (id),
+  constraint deals_users_id_fk
+  foreign key (userid) references users
+);
+
+create table news
+(
+  id          serial            not null,
+  header      varchar           not null,
+  description varchar           not null,
+  newstext    text              not null,
+  newsimg     bytea,
+  slider      boolean default false,
+  author      integer default 1 not null,
+  constraint news_pkey
+  primary key (id)
+);
+
+create unique index news_id_uindex
+  on news (id);
+
+create table roles
+(
+  role varchar
+);
+
+create unique index roles_role_uindex
+  on roles (role);
+
+create or replace function insert_user()
+  returns trigger
+language plpgsql
+as $$
 DECLARE
   message    VARCHAR;
   errcode    VARCHAR;
@@ -107,68 +188,16 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER insert_user_trg
-  BEFORE INSERT
-  ON users
-  FOR EACH ROW
-EXECUTE PROCEDURE insert_user();
+create trigger insert_user_trg
+  before insert
+  on users
+  for each row
+execute procedure insert_user();
 
-CREATE TABLE IF NOT EXISTS merchandises
-(
-  id      INTEGER          NOT NULL,
-  name    VARCHAR(20)      NOT NULL,
-  class   VARCHAR(20)      NOT NULL,
-  benefit DOUBLE PRECISION NOT NULL,
-  info    VARCHAR          NOT NULL
-);
-
-CREATE UNIQUE INDEX IF NOT EXISTS merchandises_id_pk
-  ON merchandises (id);
-
-ALTER TABLE merchandises
-  ADD CONSTRAINT merchandises_id_pk
-PRIMARY KEY (id);
-
-CREATE OR REPLACE FUNCTION readonly_trigger_function()
-  RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
-BEGIN
-  RAISE EXCEPTION 'The "%" table is read only!', TG_TABLE_NAME
-  USING HINT = 'Look at tables that inherit from this table and write to them instead.', ERRCODE ='TA001';
-  RETURN NULL;
-END;
-$$;
-
-CREATE TRIGGER merchandises_readonly_trigger
-  BEFORE INSERT OR UPDATE OR DELETE
-  ON merchandises
-EXECUTE PROCEDURE readonly_trigger_function();
-
-CREATE TABLE IF NOT EXISTS slaves
-(
-  id     INTEGER DEFAULT nextval('merchandise_id_super' :: REGCLASS) NOT NULL,
-  height DOUBLE PRECISION                                            NOT NULL,
-  weight DOUBLE PRECISION                                            NOT NULL,
-  age    INTEGER                                                     NOT NULL,
-  gender VARCHAR DEFAULT 'UNKNOWN' :: CHARACTER VARYING              NOT NULL
-)
-  INHERITS (merchandises);
-
-CREATE UNIQUE INDEX IF NOT EXISTS slave_id_uindex
-  ON slaves (id);
-
-CREATE UNIQUE INDEX IF NOT EXISTS slave_pkey
-  ON slaves (id);
-
-ALTER TABLE slaves
-  ADD CONSTRAINT slave_pkey
-PRIMARY KEY (id);
-
-CREATE OR REPLACE FUNCTION insert_slave()
-  RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
+create or replace function insert_slave()
+  returns trigger
+language plpgsql
+as $$
 DECLARE
   var        VARCHAR;
   check_data BOOLEAN;
@@ -211,38 +240,16 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER slave_insert
-  BEFORE INSERT OR UPDATE
-  ON slaves
-  FOR EACH ROW
-EXECUTE PROCEDURE insert_slave();
+create trigger slave_insert
+  before insert or update
+  on slaves
+  for each row
+execute procedure insert_slave();
 
-CREATE TABLE IF NOT EXISTS aliens
-(
-  id     INTEGER DEFAULT nextval('merchandise_id_super' :: REGCLASS) NOT NULL,
-  planet VARCHAR(20)                                                 NOT NULL,
-  weight DOUBLE PRECISION                                            NOT NULL,
-  height DOUBLE PRECISION                                            NOT NULL,
-  color  VARCHAR(20)                                                 NOT NULL,
-  age    INTEGER                                                     NOT NULL,
-  race   VARCHAR(20)                                                 NOT NULL
-)
-  INHERITS (merchandises);
-
-CREATE UNIQUE INDEX IF NOT EXISTS table_name_id_uindex
-  ON aliens (id);
-
-CREATE UNIQUE INDEX IF NOT EXISTS table_name_pkey1
-  ON aliens (id);
-
-ALTER TABLE aliens
-  ADD CONSTRAINT table_name_pkey1
-PRIMARY KEY (id);
-
-CREATE OR REPLACE FUNCTION insert_alien()
-  RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
+create or replace function insert_alien()
+  returns trigger
+language plpgsql
+as $$
 DECLARE
   var        VARCHAR;
   check_data BOOLEAN;
@@ -288,38 +295,16 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER alien_insert
-  BEFORE INSERT OR UPDATE
-  ON aliens
-  FOR EACH ROW
-EXECUTE PROCEDURE insert_alien();
+create trigger alien_insert
+  before insert or update
+  on aliens
+  for each row
+execute procedure insert_alien();
 
-CREATE TABLE IF NOT EXISTS poisons
-(
-  id        INTEGER DEFAULT nextval('merchandise_id_super' :: REGCLASS) NOT NULL,
-  onset     VARCHAR(20)                                                 NOT NULL,
-  frequency VARCHAR(20)                                                 NOT NULL,
-  effect    TEXT                                                        NOT NULL,
-  chance    DOUBLE PRECISION                                            NOT NULL,
-  weight    DOUBLE PRECISION                                            NOT NULL,
-  type      VARCHAR(20)                                                 NOT NULL
-)
-  INHERITS (merchandises);
-
-CREATE UNIQUE INDEX IF NOT EXISTS poison_id_uindex
-  ON poisons (id);
-
-CREATE UNIQUE INDEX IF NOT EXISTS poison_pkey
-  ON poisons (id);
-
-ALTER TABLE poisons
-  ADD CONSTRAINT poison_pkey
-PRIMARY KEY (id);
-
-CREATE OR REPLACE FUNCTION insert_poison()
-  RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
+create or replace function insert_poison()
+  returns trigger
+language plpgsql
+as $$
 DECLARE
   var        VARCHAR;
   code       VARCHAR;
@@ -360,35 +345,16 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER poison_insert
-  BEFORE INSERT OR UPDATE
-  ON poisons
-  FOR EACH ROW
-EXECUTE PROCEDURE insert_poison();
+create trigger poison_insert
+  before insert or update
+  on poisons
+  for each row
+execute procedure insert_poison();
 
-CREATE TABLE IF NOT EXISTS food
-(
-  id          INTEGER DEFAULT nextval('merchandise_id_super' :: REGCLASS) NOT NULL,
-  energy      DOUBLE PRECISION                                            NOT NULL,
-  weight      DOUBLE PRECISION                                            NOT NULL,
-  composition TEXT                                                        NOT NULL
-)
-  INHERITS (merchandises);
-
-CREATE UNIQUE INDEX IF NOT EXISTS food_id_uindex
-  ON food (id);
-
-CREATE UNIQUE INDEX IF NOT EXISTS food_pkey
-  ON food (id);
-
-ALTER TABLE food
-  ADD CONSTRAINT food_pkey
-PRIMARY KEY (id);
-
-CREATE OR REPLACE FUNCTION insert_food()
-  RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
+create or replace function insert_food()
+  returns trigger
+language plpgsql
+as $$
 DECLARE
   var        VARCHAR;
   check_data BOOLEAN;
@@ -425,52 +391,32 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER insert_food_trg
-  BEFORE INSERT OR UPDATE
-  ON food
-  FOR EACH ROW
-EXECUTE PROCEDURE insert_food();
+create trigger insert_food_trg
+  before insert or update
+  on food
+  for each row
+execute procedure insert_food();
 
-CREATE TABLE IF NOT EXISTS deal_states
-(
-  state VARCHAR NOT NULL
-);
+create or replace function readonly_trigger_function()
+  returns trigger
+language plpgsql
+as $$
+BEGIN
+  RAISE EXCEPTION 'The "%" table is read only!', TG_TABLE_NAME
+  USING HINT = 'Look at tables that inherit from this table and write to them instead.', ERRCODE ='TA001';
+  RETURN NULL;
+END;
+$$;
 
-CREATE UNIQUE INDEX IF NOT EXISTS deal_states_pkey
-  ON deal_states (state);
+create trigger merchandises_readonly_trigger
+  before insert or update or delete
+  on merchandises
+execute procedure readonly_trigger_function();
 
-CREATE UNIQUE INDEX IF NOT EXISTS deal_states_state_uindex
-  ON deal_states (state);
-
-ALTER TABLE deal_states
-  ADD CONSTRAINT deal_states_pkey
-PRIMARY KEY (state);
-
-CREATE TABLE IF NOT EXISTS deals
-(
-  id      SERIAL      NOT NULL,
-  userid  INTEGER     NOT NULL,
-  state   VARCHAR(20) NOT NULL,
-  time    TIMESTAMP   NOT NULL,
-  merchid INTEGER     NOT NULL,
-  price   INTEGER     NOT NULL
-);
-
-CREATE UNIQUE INDEX IF NOT EXISTS deals_pkey
-  ON deals (id);
-
-ALTER TABLE deals
-  ADD CONSTRAINT deals_pkey
-PRIMARY KEY (id);
-
-ALTER TABLE deals
-  ADD CONSTRAINT deals_users_id_fk
-FOREIGN KEY (userid) REFERENCES users;
-
-CREATE OR REPLACE FUNCTION insert_deal()
-  RETURNS TRIGGER
-LANGUAGE plpgsql
-AS $$
+create or replace function insert_deal()
+  returns trigger
+language plpgsql
+as $$
 DECLARE
   var        VARCHAR;
   check_data BOOLEAN;
@@ -525,43 +471,45 @@ BEGIN
 END;
 $$;
 
-CREATE TRIGGER insert_deal_trg
-  BEFORE INSERT
-  ON deals
-  FOR EACH ROW
-EXECUTE PROCEDURE insert_deal();
+create trigger insert_deal_trg
+  before insert
+  on deals
+  for each row
+execute procedure insert_deal();
 
-CREATE TABLE IF NOT EXISTS test
-(
-  column_1 INTEGER,
-  column_2 INTEGER
-);
-
-CREATE OR REPLACE FUNCTION login(usernamevar CHARACTER VARYING, passwordvar CHARACTER VARYING)
-  RETURNS CHARACTER VARYING
-LANGUAGE plpgsql
-AS $$
+create or replace function login(usernamevar character varying, passwordvar character varying)
+  returns character varying
+language plpgsql
+as $$
 DECLARE
   genarated_token VARCHAR;
-  deodedPass      VARCHAR;
+  decodedPass     VARCHAR;
 BEGIN
-  deodedPass := ENCODE(CONVERT_TO(passwordvar, 'UTF-8'), 'base64');
+  decodedPass := ENCODE(CONVERT_TO(passwordvar, 'UTF-8'), 'base64');
   IF EXISTS(SELECT *
             FROM users
-            WHERE username = usernameVar AND password = deodedPass)
+            WHERE username = usernameVar)
   THEN
-    IF EXISTS(SELECT token
+    IF EXISTS(SELECT *
               FROM users
-              WHERE username = usernamevar AND PASSWORD = deodedPass AND users.token IS NULL)
+              WHERE username = usernameVar AND password = decodedPass)
     THEN
-      genarated_token := (SELECT md5(random() :: TEXT || clock_timestamp() :: TEXT) :: UUID);
-      UPDATE users
-      SET token = genarated_token
-      WHERE password = deodedPass AND username = usernameVar;
-      RETURN genarated_token;
+      IF EXISTS(SELECT token
+                FROM users
+                WHERE username = usernamevar AND PASSWORD = decodedPass AND users.token IS NULL)
+      THEN
+        genarated_token := (SELECT md5(random() :: TEXT || clock_timestamp() :: TEXT) :: UUID);
+        UPDATE users
+        SET token = genarated_token
+        WHERE password = decodedPass AND username = usernameVar;
+        RETURN genarated_token;
+      ELSE
+        RAISE EXCEPTION 'user already in'
+        USING ERRCODE ='U0003';
+      END IF;
     ELSE
-      RAISE EXCEPTION 'user already in'
-      USING ERRCODE ='U0003';
+      RAISE EXCEPTION 'Wrong password'
+      USING ERRCODE ='U0008';
     END IF;
   ELSE
     RAISE EXCEPTION 'user not exists'
@@ -571,10 +519,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION logout(usernamevar CHARACTER VARYING, tokenvar CHARACTER VARYING)
-  RETURNS BOOLEAN
-LANGUAGE plpgsql
-AS $$
+create or replace function logout(usernamevar character varying, tokenvar character varying)
+  returns boolean
+language plpgsql
+as $$
 BEGIN
   IF EXISTS(SELECT token
             FROM users
@@ -593,10 +541,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION selectaliens(param CHARACTER VARYING)
-  RETURNS TABLE(id INTEGER)
-LANGUAGE plpgsql
-AS $$
+create or replace function selectaliens(param character varying)
+  returns TABLE(id integer)
+language plpgsql
+as $$
 DECLARE
   patt VARCHAR;
 BEGIN
@@ -609,10 +557,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION selectslave(param CHARACTER VARYING)
-  RETURNS TABLE(id INTEGER)
-LANGUAGE plpgsql
-AS $$
+create or replace function selectslave(param character varying)
+  returns TABLE(id integer)
+language plpgsql
+as $$
 DECLARE
   patt VARCHAR;
 BEGIN
@@ -624,10 +572,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION selectfood(param CHARACTER VARYING)
-  RETURNS TABLE(id INTEGER)
-LANGUAGE plpgsql
-AS $$
+create or replace function selectfood(param character varying)
+  returns TABLE(id integer)
+language plpgsql
+as $$
 DECLARE
   patt VARCHAR;
 BEGIN
@@ -640,10 +588,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION selectpoisons(CHARACTER VARYING)
-  RETURNS TABLE(id INTEGER)
-LANGUAGE plpgsql
-AS $$
+create or replace function selectpoisons(character varying)
+  returns TABLE(id integer)
+language plpgsql
+as $$
 DECLARE
   patt VARCHAR;
 BEGIN
@@ -655,10 +603,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION searchmerchandise(params CHARACTER VARYING)
-  RETURNS SETOF MERCHANDISES
-LANGUAGE plpgsql
-AS $$
+create or replace function searchmerchandise(params character varying)
+  returns SETOF merchandises
+language plpgsql
+as $$
 --   RETURNS TABLE(id INT, name VARCHAR, class VARCHAR, benefit FLOAT) AS
 BEGIN
   RETURN QUERY SELECT *
@@ -680,10 +628,43 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION buymerchandise(mid INTEGER, userlogin CHARACTER VARYING, usertoken CHARACTER VARYING)
-  RETURNS CHARACTER VARYING
-LANGUAGE plpgsql
-AS $$
+create or replace function insert_classes_proc()
+  returns trigger
+language plpgsql
+as $$
+DECLARE
+  fields VARCHAR [];
+BEGIN
+  SELECT string_to_array(string_agg(ti.column_name, ' '), ' ')
+  INTO fields
+  FROM (SELECT *
+        FROM information_schema.columns
+        WHERE table_name = NEW.classname) AS ti
+  WHERE
+    ti.is_nullable = 'NO' AND ti.column_name <> 'id' AND ti.column_name <> 'class' AND ti.column_name <> 'benefit' AND
+    ti.column_name <> 'info';
+  IF fields IS NOT NULL
+  THEN
+    NEW.fields = fields;
+    RETURN NEW;
+  ELSE
+    RAISE EXCEPTION 'Can''t find table with name %', NEW.classname
+    USING ERRCODE ='CT001';
+    RETURN NULL;
+  END IF;
+END;
+$$;
+
+create trigger insert_classes_trg
+  before insert
+  on classes
+  for each row
+execute procedure insert_classes_proc();
+
+create or replace function buymerchandise(mid integer, userlogin character varying, usertoken character varying)
+  returns character varying
+language plpgsql
+as $$
 DECLARE
   deal deals%ROWTYPE;
 BEGIN
@@ -704,11 +685,11 @@ BEGIN
       ORDER BY id DESC
       LIMIT 1;
       INSERT INTO deals (userid, state, time, merchid, price) VALUES (deal.userid,
-        'sold', now(), $1, deal.price);
+                                                                      'sold', now(), $1, deal.price);
       INSERT INTO deals (userid, state, time, merchid, price) VALUES ((SELECT id
                                                                        FROM users
                                                                        WHERE username LIKE $2 AND token LIKE $3),
-        'bought', now(), $1, deal.price);
+                                                                      'bought', now(), $1, deal.price);
       RETURN (SELECT info
               FROM merchandises
               WHERE id = $1);
@@ -723,10 +704,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION canupdatemerch(mid INTEGER, uname CHARACTER VARYING, utoken CHARACTER VARYING)
-  RETURNS BOOLEAN
-LANGUAGE plpgsql
-AS $$
+create or replace function canupdatemerch(mid integer, uname character varying, utoken character varying)
+  returns boolean
+language plpgsql
+as $$
 DECLARE
   usr users%ROWTYPE;
 BEGIN
@@ -755,10 +736,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION removemerchandise(mid INTEGER, uname CHARACTER VARYING, utoken CHARACTER VARYING)
-  RETURNS BOOLEAN
-LANGUAGE plpgsql
-AS $$
+create or replace function removemerchandise(mid integer, uname character varying, utoken character varying)
+  returns boolean
+language plpgsql
+as $$
 DECLARE
   usr  users%ROWTYPE;
   deal deals%ROWTYPE;
@@ -797,11 +778,11 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION updateusername(currentname CHARACTER VARYING, newname CHARACTER VARYING,
-                                          curtoken    CHARACTER VARYING)
-  RETURNS BOOLEAN
-LANGUAGE plpgsql
-AS $$
+create or replace function updateusername(currentname character varying, newname character varying,
+                                          curtoken    character varying)
+  returns boolean
+language plpgsql
+as $$
 BEGIN
   IF exists(SELECT *
             FROM users
@@ -827,11 +808,11 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION updatepassword(currentname CHARACTER VARYING, newpass CHARACTER VARYING,
-                                          curtoken    CHARACTER VARYING)
-  RETURNS BOOLEAN
-LANGUAGE plpgsql
-AS $$
+create or replace function updatepassword(currentname character varying, newpass character varying,
+                                          curtoken    character varying)
+  returns boolean
+language plpgsql
+as $$
 BEGIN
   IF exists(SELECT *
             FROM users
@@ -855,10 +836,10 @@ BEGIN
 END;
 $$;
 
-CREATE OR REPLACE FUNCTION getlastdeal(merch INTEGER)
-  RETURNS SETOF DEALS
-LANGUAGE plpgsql
-AS $$
+create or replace function getlastdeal(merch integer)
+  returns SETOF deals
+language plpgsql
+as $$
 BEGIN
   RETURN QUERY SELECT *
                FROM deals
@@ -868,16 +849,4 @@ BEGIN
 END;
 $$;
 
-DELETE FROM slaves;
-DELETE FROM poisons;
-DELETE FROM aliens;
-DELETE FROM food;
-DELETE FROM deals;
 
-ALTER SEQUENCE merchandise_id_super RESTART 1;
-ALTER SEQUENCE deals_id_seq RESTART 1;
-
-DELETE FROM classes *;
-DELETE FROM deal_states *;
-INSERT INTO classes (classname) VALUES ('slaves'), ('poisons'), ('food'), ('aliens');
-INSERT INTO deal_states VALUES ('on sale'), ('bought'), ('sold'), ('removed');
