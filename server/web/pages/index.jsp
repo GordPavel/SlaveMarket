@@ -10,9 +10,11 @@
 <head>
     <jsp:include page="/resources/templates/inclues.jsp"/>
     <link rel="stylesheet" href="/resources/styles/index.css"/>
+    <link rel="stylesheet" href="/resources/styles/animate.css"/>
     <link rel="stylesheet" href="/resources/styles/owl.carousel.css">
     <link rel="stylesheet" href="/resources/styles/owl.theme.default.css">
     <script src="/resources/scripts/owl.carousel.min.js"></script>
+    <script src="/resources/scripts/wow.min.js"></script>
     <script src="/resources/scripts/index.js"></script>
     <title>Slave market</title>
 </head>
@@ -42,12 +44,12 @@
 <section class="newsSection">
     <div class="container-fluid">
         <div class="row">
-            <div class="col-lg-8">
+            <div class="col-lg-8 ">
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="fa fa-link"></i> Links</div>
                     <div class="panel-body">
-                        <div class="info-items-row row">
-                            <div class="info-item col-lg-6">
+                        <div class="info-items-row row wow slideInDown">
+                            <div class="info-item col-lg-6" >
                                 <a href="/info/about">
                                     <span>About Us</span>
                                     <img src="/resources/images/about-us.jpg"/>
@@ -60,7 +62,7 @@
                                 </a>
                             </div>
                         </div>
-                        <div class="info-items-row row">
+                        <div class="info-items-row row wow slideInUp">
                             <div class="info-item col-lg-4">
                                 <a href="/info/quest">
                                     <span>Questions and Answers</span>
@@ -73,7 +75,7 @@
                                     <img src="/resources/images/dev.jpg"/>
                                 </a>
                             </div>
-                            <div class="info-item col-lg-4">
+                            <div class="info-item col-lg-4 " >
                                 <a href="/info/coop">
                                     <span>Cooperation with us</span>
                                     <img src="/resources/images/coop.jpg"/>
@@ -83,7 +85,7 @@
                     </div>
                 </div>
             </div>
-            <div class="sidebar col-lg-4">
+            <div class="sidebar col-lg-4 ">
                 <div class="lastNews">
                     <div class="lastNews-title heading-sm">
                         <i class="fa fa-newspaper"></i> Last news
@@ -92,7 +94,7 @@
                         <ul class="newsList list-group">
                             <c:forEach var="index" begin="0" end="3" step="1">
                                 <c:if test="${news.size() > index}">
-                                    <li class="list-group-item">
+                                    <li class="list-group-item wow fadeInRightBig">
                                         <div class="col-sm-5">
                                             <a href="/news/${news.get(index).id}" class="pull-left">
                                                 <img src="data:image/jpg;base64,${news.get(index).base64EncodedImg}"

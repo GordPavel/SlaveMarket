@@ -102,6 +102,13 @@ public class PostgresSpringService {
         return model.getDealsByUser(username, token);
     }
 
+
+    @Transactional
+    public List<String> getDealsByUser(String username, String token, int offset, int limit) {
+        return model.getDealsByUser(username, token, offset, limit);
+    }
+
+
     @Transactional
     public boolean changeLogin(String username, String newLogin, String token) {
         return model.changeLogin(username, newLogin, token);
@@ -168,7 +175,7 @@ public class PostgresSpringService {
     }
 
     @Transactional
-    public String getNewsById(int id){
+    public String getNewsById(int id) {
         return model.getNewsById(id);
     }
 

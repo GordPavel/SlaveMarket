@@ -87,7 +87,6 @@ public class News {
         } catch (UnsupportedEncodingException e) {
             return "";
         }
-
     }
 
     public int getId() {

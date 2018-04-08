@@ -1,7 +1,7 @@
 import com.google.gson.JsonParser;
 import exceptions.CreateMerchandiseException;
 import exceptions.UserException;
-import model.PostgresModel;
+import model.PostgresCSModel;
 import org.apache.log4j.BasicConfigurator;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -20,13 +20,13 @@ import static java.lang.Math.abs;
 @FixMethodOrder(MethodSorters.NAME_ASCENDING)
 public class PostgresqlTests {
     private static boolean connect = true;
-    private PostgresModel model;
+    private PostgresCSModel model;
     private String user = "s3rius";
     private String pasword = "19216211";
 
     {
         try {
-            model = new PostgresModel();
+            model = new PostgresCSModel();
         } catch (Throwable e) {
             System.out.println(e.getMessage());
             connect = false;
@@ -117,7 +117,7 @@ public class PostgresqlTests {
             try {
                 List<String> classes = model.getAvailableClasses();
                 System.out.println(classes);
-                for (int i = 0; i < 10; i++) {
+                for (int i = 0; i < 15; i++) {
                     classes.forEach(o -> addMerchandise(o, token));
                 }
 //                addMerchandise("slaves", token);

@@ -2,7 +2,7 @@ import controllers.Controller;
 import controllers.NativeController;
 import controllers.ServerController;
 import model.Model;
-import model.PostgresModel;
+import model.PostgresCSModel;
 import model.database.Logger;
 import view.cli.CommandLineView;
 
@@ -27,7 +27,7 @@ public class StartServer {
         Logger logger = new Logger();
         Executors.newSingleThreadExecutor()
                 .execute(() -> {
-                    Model model = new PostgresModel();
+                    Model model = new PostgresCSModel();
                     NativeController mainController = new NativeController(model);
                     CommandLineView view = new CommandLineView(mainController);
                     view.launch();
@@ -38,7 +38,7 @@ public class StartServer {
                 Socket connection = serverSocket.accept();
                 Executors.newSingleThreadExecutor()
                         .execute(() -> {
-                            Model model = new PostgresModel();
+                            Model model = new PostgresCSModel();
                             Controller controller = new ServerController(model, connection);
                             controller.start();
                         });

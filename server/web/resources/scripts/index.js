@@ -7,6 +7,16 @@
  */
 
 $(document).ready(function () {
+    wow = new WOW(
+        {
+            boxClass:     'wow',
+            animateClass: 'animated',
+            offset:       0,
+            mobile:       false,
+            live:         true
+        }
+    );
+    wow.init();
     $("#owl-slider").owlCarousel({
         navigation: false,
         loop: true,

@@ -1,7 +1,11 @@
 package model.postgresqlModel;
 
+import org.apache.commons.codec.binary.Base64;
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 
 @Entity
 @Table(name = "users")
@@ -76,4 +80,5 @@ public class Users implements Serializable {
     public void setRole(String role) {
         this.role = role;
     }
+
 }

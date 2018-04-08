@@ -80,6 +80,7 @@ public class PostgresModel implements SpringModel {
         }
     }
 
+
     @Override
     public void addMerchandise(Merchandise merch, String user, String token, int price) {
         throw new UnsupportedOperationException("lol. That shit isn't working");
@@ -341,22 +342,37 @@ public class PostgresModel implements SpringModel {
     @Override
     public List<String> getDealsByUser(String username, String token) {
         Session session = sessionFactory.getCurrentSession();
+        try {
+            List<Deals> dealsList = session.createQuery("from deals where userId=(select id from Users where username like :un AND token like :tkn) order by id desc")
+                    .setParameter("un", username)
+                    .setParameter("tkn", token).getResultList();
+            return formatDeals(dealsList);
+        } catch (Exception e) {
+            return new ArrayList<>();
+        }
+    }
 
-        List<Deals> dealsList = session.createQuery("from deals where userId=(select id from Users where username like :un AND token like :tkn)")
-                .setParameter("un", username)
-                .setParameter("tkn", token).getResultList();
-        JsonParser parser = new JsonParser();
-        return dealsList.stream().map(deal -> {
-            JsonObject mDeal = new JsonObject();
-            mDeal.add("date",
-                    new JsonPrimitive(deal.getTime().toString()));
-            mDeal.add("id", new JsonPrimitive(deal.getId()));
-            mDeal.add("userId", new JsonPrimitive(deal.getUserId()));
-            mDeal.add("state", new JsonPrimitive(deal.getState()));
-            mDeal.add("price", new JsonPrimitive(deal.getPrice()));
-            mDeal.add("merchandise", parser.parse(getMerchantById(deal.getMerchId())));
-            return gson.toJson(mDeal);
-        }).collect(toList());
+    private List<String> formatDeals(List<Deals> dealsList) {
+        return dealsList.stream().map(gson::toJson).collect(toList());
+    }
+
+    @Override
+    public List<String> getDealsByUser(String username, String token, int offset, int limit) {
+        Session session = sessionFactory.getCurrentSession();
+        try {
+            List<Deals> dealsList = session.createNativeQuery("SELECT * FROM deals WHERE " +
+                    "userId=(SELECT id FROM Users WHERE username LIKE :un AND token LIKE :tkn) ORDER BY id DESC OFFSET :ofs LIMIT :lim")
+                    .setParameter("un", username)
+                    .setParameter("tkn", token)
+                    .setParameter("ofs", offset)
+                    .setParameter("lim", limit)
+                    .addEntity(Deals.class)
+                    .getResultList();
+            return formatDeals(dealsList);
+        } catch (Exception e) {
+            logger.error("Found exception while taking deals for user " + username + "Exception message: " + e.getMessage());
+            return new ArrayList<>();
+        }
     }
 
     @Override
@@ -553,11 +569,12 @@ public class PostgresModel implements SpringModel {
     @Override
     public String updateToken(String username, String password) {
         Session session = sessionFactory.getCurrentSession();
-        Users user = (Users) session.createQuery("from Users where username=:uname and password=:psw")
+        Users user = (Users) session.createQuery("from Users where username=:uname and password LIKE ENCODE(CONVERT_TO(:psw, 'UTF-8'), 'base64')")
                 .setParameter("uname", username)
                 .setParameter("psw", password).getSingleResult();
         user.setToken(null);
         session.update(user);
+        session.flush();
         String token = login(username, password);
         return token;
     }

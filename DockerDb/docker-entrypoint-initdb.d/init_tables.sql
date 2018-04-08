@@ -1,3 +1,4 @@
+-- we don't know how to generate database slaveMarket (class Database) :(
 create sequence merchandise_id_super;
 
 create table classes
@@ -666,12 +667,17 @@ create or replace function buymerchandise(mid integer, userlogin character varyi
 language plpgsql
 as $$
 DECLARE
-  deal deals%ROWTYPE;
+  deal    deals%ROWTYPE;
+  userRow users%ROWTYPE;
 BEGIN
   IF EXISTS(SELECT *
             FROM users AS us
             WHERE username LIKE $2 AND token LIKE $3)
   THEN
+    SELECT *
+    INTO userRow
+    FROM users AS us
+    WHERE username LIKE $2 AND token LIKE $3;
     IF (SELECT state
         FROM deals
         WHERE merchid = $1
@@ -684,15 +690,35 @@ BEGIN
       WHERE merchid = $1
       ORDER BY id DESC
       LIMIT 1;
-      INSERT INTO deals (userid, state, time, merchid, price) VALUES (deal.userid,
-                                                                      'sold', now(), $1, deal.price);
-      INSERT INTO deals (userid, state, time, merchid, price) VALUES ((SELECT id
-                                                                       FROM users
-                                                                       WHERE username LIKE $2 AND token LIKE $3),
-                                                                      'bought', now(), $1, deal.price);
-      RETURN (SELECT info
-              FROM merchandises
-              WHERE id = $1);
+      IF deal.userid <> userRow.id
+      THEN
+        IF userRow.balance < deal.price
+        THEN
+          RAISE EXCEPTION 'Not enough money'
+          USING ERRCODE ='U0009';
+        ELSE
+          INSERT INTO deals (userid, state, time, merchid, price) VALUES (deal.userid,
+                                                                          'sold', now(), $1, deal.price);
+          INSERT INTO deals (userid, state, time, merchid, price) VALUES ((SELECT id
+                                                                           FROM users
+                                                                           WHERE username LIKE $2 AND token LIKE $3),
+                                                                          'bought', now(), $1, deal.price);
+          UPDATE users
+          SET balance = (userRow.balance - deal.price)
+          WHERE id = userRow.id;
+          UPDATE users
+          set balance = ((select balance
+                          from users
+                          where id = deal.userid) + deal.price)
+          where id = deal.userid;
+          RETURN (SELECT info
+                  FROM merchandises
+                  WHERE id = $1);
+        end if;
+      ELSE
+        RAISE EXCEPTION 'Merchandise on sale by you'
+        USING ERRCODE ='BM002';
+      end if;
     ELSE
       RAISE EXCEPTION 'Merchandise already bought'
       USING ERRCODE ='BM001';

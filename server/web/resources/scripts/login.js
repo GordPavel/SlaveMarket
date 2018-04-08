@@ -12,7 +12,7 @@ $(document).ready(function () {
     });
 
     $('.token-reset-submit').click(function (event) {
-        var form = $('.login');
+        var form = $('.token-reset');
         var uname = form.find('input[type="text"]').val();
         var pass = form.find('input[type="password"]').val();
         console.log(uname + "\t" + pass);

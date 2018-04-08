@@ -14,6 +14,7 @@ import com.google.gson.JsonParser;
 import model.merchandises.Merchandise;
 import model.merchandises.MerchandiseImpl;
 import model.postgresqlModel.Users;
+import model.postgresqlModel.tables.Deals;
 import model.postgresqlModel.tables.News;
 import model.postgresqlModel.tables.merchandises.Aliens;
 import org.slf4j.Logger;
@@ -44,7 +45,6 @@ import static java.util.stream.Collectors.toList;
 
 @Controller
 @EnableWebMvc
-
 @Scope(value = "session")
 public class IndexController {
     private static final String VIEW_INDEX = "index";
@@ -121,7 +121,13 @@ public class IndexController {
     public String openProfile(ModelMap modelMap) {
         setAttr(modelMap);
         if (null != user) {
-            modelMap.addAttribute("home", System.getProperty("catalina.base"));
+//            modelMap.addAttribute("user", user);
+            Gson gson = new Gson();
+            List<Deals> dealsList =
+                    model.getDealsByUser(user.getUsername(), user.getToken(), 0, 5).stream()
+                            .map(item -> gson.fromJson(item, Deals.class))
+                            .collect(toList());
+            modelMap.addAttribute("myDeals", dealsList);
             return VIEW_PROFILE;
         } else {
             return VIEW_INDEX;
@@ -140,6 +146,7 @@ public class IndexController {
         News news = new Gson().fromJson(model.getNewsById(newsId), News.class);
         setAttr(map);
         if (null != news) {
+
             map.addAttribute("news", news);
             return VIEW_NEWS;
         } else {

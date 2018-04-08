@@ -29,8 +29,8 @@ import java.util.stream.Collectors;
 
 import static java.util.stream.Collectors.toList;
 
-public class PostgresModel implements Model {
-    private final static Logger logger = LoggerFactory.getLogger(PostgresModel.class);
+public class PostgresCSModel implements Model {
+    private final static Logger logger = LoggerFactory.getLogger(PostgresCSModel.class);
     private Session session;
     private ResourceBundle errCodes = ResourceBundle.getBundle("errcodes");
     private Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -40,7 +40,7 @@ public class PostgresModel implements Model {
      * username: s3rius
      * password: 19216211
      */
-    public PostgresModel() {
+    public PostgresCSModel() {
         SessionFactory sessionFactory = new Configuration().configure("hibernate.cfg.xml").buildSessionFactory();
         session = sessionFactory.openSession();
         logger.info("session created");
@@ -52,7 +52,7 @@ public class PostgresModel implements Model {
      * @param username user's username.
      * @param password user's password.
      */
-    public PostgresModel(String username, String password) {
+    public PostgresCSModel(String username, String password) {
         try {
 
             Configuration hibConfiguration = new Configuration();
@@ -473,8 +473,12 @@ public class PostgresModel implements Model {
 
     @Override
     public List<String> getNews() {
-        List<News> newsList = session.createQuery("from News ").getResultList();
-        return newsList.stream().map(news -> gson.toJson(news)).collect(toList());
+        try {
+            List<News> newsList = session.createQuery("from News ").getResultList();
+            return newsList.stream().map(news -> gson.toJson(news)).collect(toList());
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
@@ -528,24 +532,4 @@ public class PostgresModel implements Model {
         return users.stream().map(user -> user.getUsername() + "#" + user.getId()).collect(toList());
     }
 
-
-    private void setMerchId(List<Deals> deals, int oldId, int newId) {
-        if (oldId != newId) {
-            deals.forEach(deal -> {
-                if (deal.getMerchId() == oldId) {
-                    deal.setMerchId(newId);
-                }
-            });
-        }
-    }
-
-    private void setNewUserId(List<Deals> deals, int oldId, int newId) {
-        if (oldId != newId) {
-            deals.forEach(deal -> {
-                if (deal.getUserId() == oldId) {
-                    deal.setUserId(newId);
-                }
-            });
-        }
-    }
 }

@@ -45,7 +45,7 @@ public class SpringRestController {
 
     @RequestMapping(value = "/tokenUpdate", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<? extends String> tokenReset(@RequestParam("username") String username, @RequestParam("token") String password) {
+    public ResponseEntity<? extends String> tokenReset(@RequestParam("username") String username, @RequestParam("password") String password) {
         try {
             return new ResponseEntity<>(model.updateToken(username, password), HttpStatus.OK);
         } catch (Exception e) {

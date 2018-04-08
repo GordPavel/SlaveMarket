@@ -91,4 +91,16 @@ public interface SpringModel extends Model {
      * @return news json formatted
      */
     String getNewsById(int id);
+
+
+    /**
+     * Method to get user's deals with offset
+     *
+     * @param username user's username
+     * @param token    user's token
+     * @param offset   start with
+     * @param limit    deals quantity
+     * @return
+     */
+    List<String> getDealsByUser(String username, String token, int offset, int limit);
 }

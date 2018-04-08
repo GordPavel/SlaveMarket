@@ -159,7 +159,7 @@ form.login a:hover {
 }
 
 .token-reset input[type="submit"],
-.token-reset .pass-reset-cancel {
+.token-reset .token-reset-cancel {
     width: 100%;
     border: 0;
     font-size: 14px;
