@@ -103,4 +103,12 @@ public interface SpringModel extends Model {
      * @return
      */
     List<String> getDealsByUser(String username, String token, int offset, int limit);
+
+    /**
+     * Method to get json object that contains all required fields with types
+     *
+     * @param className class to get field from
+     * @return json formatted string
+     */
+    String getMandatoryFieldsWithTypes(String className);
 }

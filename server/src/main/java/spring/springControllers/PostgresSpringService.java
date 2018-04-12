@@ -78,6 +78,11 @@ public class PostgresSpringService {
     }
 
     @Transactional
+    public String getMandatoryFieldsWithTypes(String className) {
+        return model.getMandatoryFieldsWithTypes(className);
+    }
+
+    @Transactional
     public void addMerchandiseByMap(String className, Map<String, String> kvs, String user, String token, int price) throws CreateMerchandiseException {
         model.addMerchandiseByMap(className, kvs, user, token, price);
     }

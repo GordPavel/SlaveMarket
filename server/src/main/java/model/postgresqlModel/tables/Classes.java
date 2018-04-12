@@ -31,6 +31,8 @@ public class Classes {
             columnDefinition = "VARCHAR[]")
     @Type(type = "string-array")
     private String[] fields;
+    @Type(type = "string-array")
+    private String[] types;
 
     public String getClassname() {
         return classname;
@@ -39,5 +41,9 @@ public class Classes {
 
     public String[] getFields() {
         return fields;
+    }
+
+    public String[] getTypes() {
+        return types;
     }
 }

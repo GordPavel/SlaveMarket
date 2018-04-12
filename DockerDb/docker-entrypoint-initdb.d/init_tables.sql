@@ -5,6 +5,7 @@ create table classes
 (
   classname varchar(20) not null,
   fields    character varying [],
+  types     character varying [],
   constraint table_name_pkey
   primary key (classname)
 );
@@ -629,24 +630,29 @@ BEGIN
 END;
 $$;
 
-create or replace function insert_classes_proc()
-  returns trigger
-language plpgsql
-as $$
+CREATE OR REPLACE FUNCTION insert_classes_proc()
+  RETURNS TRIGGER
+LANGUAGE plpgsql
+AS $$
 DECLARE
-  fields VARCHAR [];
+  fields    VARCHAR [];
+  types_mas VARCHAR [];
 BEGIN
-  SELECT string_to_array(string_agg(ti.column_name, ' '), ' ')
-  INTO fields
+  SELECT
+    string_to_array(string_agg(ti.column_name, ' '), ' '),
+    string_to_array(string_agg(ti.data_type, ','), ',')
+  INTO fields, types_mas
   FROM (SELECT *
         FROM information_schema.columns
         WHERE table_name = NEW.classname) AS ti
-  WHERE
-    ti.is_nullable = 'NO' AND ti.column_name <> 'id' AND ti.column_name <> 'class' AND ti.column_name <> 'benefit' AND
-    ti.column_name <> 'info';
+  WHERE ti.is_nullable = 'NO' AND ti.column_name <> 'id' AND ti.column_name <> 'class' AND ti.column_name <> 'benefit'
+        AND ti.column_name <> 'info';
   IF fields IS NOT NULL
   THEN
+    types_mas := (select array_replace(types_mas, 'character varying', 'string'));
+    types_mas := (select array_replace(types_mas, 'double precision', 'number'));
     NEW.fields = fields;
+    NEW.types = types_mas;
     RETURN NEW;
   ELSE
     RAISE EXCEPTION 'Can''t find table with name %', NEW.classname
@@ -655,6 +661,8 @@ BEGIN
   END IF;
 END;
 $$;
+
+
 
 create trigger insert_classes_trg
   before insert

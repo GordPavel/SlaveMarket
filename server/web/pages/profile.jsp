@@ -17,7 +17,10 @@
 <head>
     <jsp:include page="/resources/templates/inclues.jsp"/>
     <%--<link rel="stylesheet" href="/resources/styles/profile.css">--%>
-    <%--<script src="/resources/scripts/profile.js"></script>--%>
+    <link rel="stylesheet" href="/resources/styles/brutusin-json-forms.min.css">
+    <script src="/resources/scripts/profile.js"></script>
+    <script src="/resources/scripts/brutusin-json-forms.min.js"></script>
+    <script src="/resources/scripts/brutusin-json-forms-bootstrap.min.js"></script>
     <title>Profile</title>
 </head>
 <body>
@@ -87,11 +90,12 @@
                             Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#addingMerch"><i class="fas fa-plus"></i> Add
+                        <a class="nav-link addMerchLink" data-toggle="tab" href="#addingMerch"><i
+                                class="fas fa-plus"></i> Add
                             merchandise</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#logout"><i class="fas fa-sign-out-alt"></i> Logout</a>
+                        <a class="nav-link" data-toggle="tab" href="#allDeals"><i class="fas fa-list"></i> All deals</a>
                     </li>
                 </ul>
             </div>
@@ -140,36 +144,32 @@
                                                                                 <td>State:</td>
                                                                                 <td>${item.state}</td>
                                                                             </tr>
-                                                                            <c:set var="sym" value=""/>
-                                                                            <c:set var="trCl" value=""/>
                                                                             <c:choose>
                                                                                 <c:when test="${item.state == 'sold'}">
-                                                                                    <c:set target="sym" value="+"/>
-                                                                                    <c:set target="trCl"
-                                                                                           value="success"/>
+                                                                                    <tr class="table-success">
+                                                                                        <td>Price</td>
+                                                                                        <td>+${item.price}</td>
+                                                                                    </tr>
                                                                                 </c:when>
                                                                                 <c:when test="${item.state == 'bought'}">
-                                                                                    <c:set target="sym" value="-"/>
-                                                                                    <c:set target="trCl"
-                                                                                           value="danger"/>
+                                                                                    <tr class="table-danger">
+                                                                                        <td>Price</td>
+                                                                                        <td>-${item.price}</td>
+                                                                                    </tr>
                                                                                 </c:when>
                                                                                 <c:otherwise>
-                                                                                    <c:set target="sym" value=""/>
-                                                                                    <c:set target="trCl" value=""/>
+                                                                                    <tr>
+                                                                                        <td>Price</td>
+                                                                                        <td>${item.price}</td>
+                                                                                    </tr>
                                                                                 </c:otherwise>
                                                                             </c:choose>
-                                                                            <tr class="${trCl}">
-                                                                                <td>Balance</td>
-                                                                                <td>${sym}${item.price}</td>
-                                                                            </tr>
-                                                                            <tr>
-                                                                                <td>
-                                                                                    Merchandise id
-                                                                                </td>
-                                                                                <td>
-                                                                                        ${item.merchId}
-                                                                                </td>
-                                                                            </tr>
+                                                                                <tr>
+
+                                                                                    <td>Merchandise id</td>
+                                                                                    <td><a href="/merchandise/${item.merchId}">${item.merchId}</a></td>
+                                                                                </tr>
+
                                                                         </tbody>
                                                                     </table>
                                                                 </pre>
@@ -187,11 +187,27 @@
                         </div>
                     </div>
                     <div id="addingMerch" class="container tab-pane fade"><br>
-                        <h3>Menu 1</h3>
-                        <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea
-                            commodo consequat.</p>
+                        <h3 class="addingHeader">
+                            Wich type of merchandise you want to add?
+                        </h3>
+                        <div id="content-container">
+                            <div id="form-container-main">
+                                <div id='form-container'
+                                     style="padding-left:12px;padding-right:12px;padding-bottom: 12px;"></div>
+                                <div class="panel-footer">
+                                    <button class="btn btn-primary"
+                                            onclick="if (bf.validate()) {addMerch()}">Add merchandise
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="list-group availableClasses">
+
+                            </div>
+
+                        </div>
                     </div>
-                    <div id="menu2" class="container tab-pane fade"><br>
+                    <div id="allDeals" class="container tab-pane fade"><br>
                         <h3>Menu 2</h3>
                         <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
                             laudantium, totam rem aperiam.</p>
@@ -203,7 +219,7 @@
 
 </section>
 
-<jsp:include page="/resources/templates/footer.jsp"/>
+<%--<jsp:include page="/resources/templates/footer.jsp"/>--%>
 
 </body>
 </html>

@@ -14,6 +14,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(path = "/rest/methods")
 public class SpringRestController {
@@ -62,6 +64,39 @@ public class SpringRestController {
         } catch (Exception e) {
             return new ResponseEntity<>(e.getMessage(), HttpStatus.BAD_REQUEST);
         }
+    }
+
+    @RequestMapping(value = "/availableClasses", method = RequestMethod.POST)
+    public ResponseEntity<List<String>> getAvailableClasses() {
+        try {
+            return ResponseEntity.ok(model.getAvailableClasses());
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @RequestMapping(value = "/getFields", method = RequestMethod.POST)
+    public ResponseEntity<List<String>> getFields(@RequestParam("className") String className) {
+        try {
+            return ResponseEntity.ok(model.getMandatoryFields(className));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @RequestMapping(value = "/getFieldsWithTypes", method = RequestMethod.POST)
+    public ResponseEntity<String> getFieldsWithTypes(@RequestParam("className") String className) {
+        try {
+            return ResponseEntity.ok(model.getMandatoryFieldsWithTypes(className));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @RequestMapping(value = "/addMerch", method = RequestMethod.POST)
+    public void addMerch(@RequestParam("fields") String fields) {
+        System.out.println("Ух, бля.");
+//        model.addMerchandiseByMap();
     }
 
     @Autowired

@@ -42,6 +42,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import static java.util.stream.Collectors.toList;
 
@@ -217,6 +218,39 @@ public class PostgresModel implements SpringModel {
             return Arrays.asList(classes.getFields());
         } catch (Throwable e) {
             return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public String getMandatoryFieldsWithTypes(String className) {
+        Session session = sessionFactory.getCurrentSession();
+
+        try {
+            Classes classes = (Classes) session.createQuery("from Classes where classname like :name")
+                    .setParameter("name", className).getSingleResult();
+            String[] fields = classes.getFields();
+            String[] types = classes.getTypes();
+            JsonObject root = new JsonObject();
+            root.add("$schema", new JsonPrimitive("http://json-schema.org/draft-03/schema#"));
+            root.add("type", new JsonPrimitive("object"));
+            JsonObject properties = new JsonObject();
+            IntStream.range(0, fields.length).forEach(i -> {
+                JsonObject type = new JsonObject();
+                type.add("title", new JsonPrimitive(fields[i]));
+                if (types[i].equals("text")) {
+                    type.add("type", new JsonPrimitive("string"));
+                    type.add("format", new JsonPrimitive("text"));
+                } else {
+                    type.add("type", new JsonPrimitive(types[i]));
+                }
+                type.add("required", new JsonPrimitive(true));
+                type.add("description", new JsonPrimitive("merchandise " + fields[i]));
+                properties.add(fields[i], type);
+            });
+            root.add("properties", properties);
+            return root.toString();
+        } catch (Throwable e) {
+            return "";
         }
     }
 
