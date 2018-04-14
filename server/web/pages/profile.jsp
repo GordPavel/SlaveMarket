@@ -16,70 +16,19 @@
 <html>
 <head>
     <jsp:include page="/resources/templates/inclues.jsp"/>
-    <%--<link rel="stylesheet" href="/resources/styles/profile.css">--%>
+    <link rel="stylesheet" href="/resources/styles/profile.css">
     <link rel="stylesheet" href="/resources/styles/brutusin-json-forms.min.css">
     <script src="/resources/scripts/profile.js"></script>
     <script src="/resources/scripts/brutusin-json-forms.min.js"></script>
     <script src="/resources/scripts/brutusin-json-forms-bootstrap.min.js"></script>
+    <script src="/resources/scripts/jquery.magnific-popup.min.js"></script>
+    <link rel="stylesheet" href="/resources/styles/magnific-popup.css">
     <title>Profile</title>
 </head>
 <body>
 <%@include file="/resources/templates/header.jsp" %>
 
 <section class="profilePageContent">
-    <%--<div class="container">--%>
-    <%--<!-- Nav pills -->--%>
-    <%--<div class="row">--%>
-    <%--<div class="col-md-3">--%>
-    <%--<div class="container profile">--%>
-    <%--<div class="row">--%>
-    <%--<div class="span12">--%>
-    <%--<div class="card bg-light card-body mb-3 card bg-faded p-1 mb-3all clearfix">--%>
-    <%--<div class="row-fluid">--%>
-    <%--<div class="span2 text-center">--%>
-    <%--<c:if test="${ null == user.image}">--%>
-    <%--<img src="/resources/images/user2.png"--%>
-    <%--class="rounded-circle userProfile">--%>
-    <%--</c:if>--%>
-    <%--<c:if test="${null != user.image}">--%>
-    <%--<img src="data:image/jpg;base64,${user.encodedImage}"--%>
-    <%--class="rounded-circle userProfile">--%>
-    <%--</c:if>--%>
-    <%--</div>--%>
-    <%--<div class="span4">--%>
-    <%--<h2>${user.username}</h2>--%>
-    <%--<ul class="unstyled">--%>
-    <%--<li><i class="icon-phone"></i> 916-241-3613</li>--%>
-    <%--<li><i class="icon-envelope"></i> jonniespratley@me.com</li>--%>
-    <%--<li><i class="icon-globe"></i> http://jonniespratley.me</li>--%>
-    <%--</ul>--%>
-    <%--</div>--%>
-    <%--<div class="span6">--%>
-    <%--<ul class="inline stats">--%>
-    <%--<li><span>275</span>--%>
-    <%--Deals--%>
-    <%--</li>--%>
-    <%--<li><span>354</span>--%>
-    <%--Followers--%>
-    <%--</li>--%>
-    <%--<li><span>186</span>--%>
-    <%--Photos--%>
-    <%--</li>--%>
-    <%--</ul>--%>
-    <%--<div>--%>
-    <%--<!--/span6-->--%>
-    <%--</div>--%>
-    <%--<!--/row-->--%>
-    <%--</div>--%>
-    <%--<!--Body content-->--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
-    <%--</div>--%>
     <div class="container">
         <div class="row">
             <!-- Nav tabs -->
@@ -95,12 +44,13 @@
                             merchandise</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" data-toggle="tab" href="#allDeals"><i class="fas fa-list"></i> All deals</a>
+                        <a class="nav-link my-deals-list"
+                           onclick="$offset=0; openDeals('${user.username}', '${user.token}');"
+                           data-toggle="tab"
+                           href="#allDeals"><i class="fas fa-list"></i>All deals</a>
                     </li>
                 </ul>
             </div>
-
-            <!-- Tab panes -->
             <div class="col-md-9">
                 <div class="tab-content">
                     <div id="profileContent" class="container tab-pane active"><br>
@@ -118,7 +68,7 @@
                                 <div class="card-body">
                                     <c:choose>
                                         <c:when test="${myDeals.size()!=0}">
-                                            <div id="accordion" id="deals-accordion">
+                                            <div id="deals-accordion">
                                                 <c:forEach items="${myDeals}" var="item">
                                                     <div class="card">
                                                         <div class="card-header collapsed" data-toggle="collapse"
@@ -148,18 +98,18 @@
                                                                                 <c:when test="${item.state == 'sold'}">
                                                                                     <tr class="table-success">
                                                                                         <td>Price</td>
-                                                                                        <td>+${item.price}</td>
+                                                                                        <td>${item.price}</td>
                                                                                     </tr>
                                                                                 </c:when>
                                                                                 <c:when test="${item.state == 'bought'}">
                                                                                     <tr class="table-danger">
                                                                                         <td>Price</td>
-                                                                                        <td>-${item.price}</td>
+                                                                                        <td>${item.price}</td>
                                                                                     </tr>
                                                                                 </c:when>
                                                                                 <c:otherwise>
                                                                                     <tr>
-                                                                                        <td>Price</td>
+                                                                                        <td>Price:</td>
                                                                                         <td>${item.price}</td>
                                                                                     </tr>
                                                                                 </c:otherwise>
@@ -188,7 +138,7 @@
                     </div>
                     <div id="addingMerch" class="container tab-pane fade"><br>
                         <h3 class="addingHeader">
-                            Wich type of merchandise you want to add?
+                            Which type of merchandise you want to add?
                         </h3>
                         <div id="content-container">
                             <div id="form-container-main">
@@ -208,9 +158,15 @@
                         </div>
                     </div>
                     <div id="allDeals" class="container tab-pane fade"><br>
-                        <h3>Menu 2</h3>
-                        <p>Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque
-                            laudantium, totam rem aperiam.</p>
+                        <h3>My Deals</h3>
+                        <div class="my-deals-list">
+                            <div id="accordion">
+
+                            </div>
+                            <div class="my-deals-footer">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

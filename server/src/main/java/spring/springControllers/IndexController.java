@@ -9,6 +9,7 @@
 package spring.springControllers;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import model.merchandises.Merchandise;
@@ -123,10 +124,11 @@ public class IndexController {
         if (null != user) {
 //            modelMap.addAttribute("user", user);
             Gson gson = new Gson();
-            List<Deals> dealsList =
-                    model.getDealsByUser(user.getUsername(), user.getToken(), 0, 5).stream()
-                            .map(item -> gson.fromJson(item, Deals.class))
-                            .collect(toList());
+            JsonParser parser = new JsonParser();
+            String deals = model.getDealsByUser(user.getUsername(), user.getToken(), 0, 5);
+            JsonArray array = parser.parse(deals).getAsJsonObject().get("deals").getAsJsonArray();
+            List<Deals> dealsList = new ArrayList<>();
+            array.forEach(item -> dealsList.add(gson.fromJson(item, Deals.class)));
             modelMap.addAttribute("myDeals", dealsList);
             return VIEW_PROFILE;
         } else {

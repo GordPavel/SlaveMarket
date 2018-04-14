@@ -109,7 +109,7 @@ public class PostgresSpringService {
 
 
     @Transactional
-    public List<String> getDealsByUser(String username, String token, int offset, int limit) {
+    public String getDealsByUser(String username, String token, int offset, int limit) {
         return model.getDealsByUser(username, token, offset, limit);
     }
 

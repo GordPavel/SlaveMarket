@@ -93,6 +93,27 @@ public class SpringRestController {
         }
     }
 
+    @RequestMapping(value = "/getAllDeals", method = RequestMethod.POST)
+    public ResponseEntity<List<String>> getAllDeals(@RequestParam("username") String username, @RequestParam("token") String token) {
+        try {
+            return ResponseEntity.ok(model.getDealsByUser(username, token));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
+    @RequestMapping(value = "/getDeals", method = RequestMethod.POST)
+    public ResponseEntity<String> getDeals(@RequestParam("username") String username,
+                                           @RequestParam("token") String token,
+                                           @RequestParam("offset") int offset,
+                                           @RequestParam("limit") int limit) {
+        try {
+            return ResponseEntity.ok(model.getDealsByUser(username, token, offset, limit));
+        } catch (Exception e) {
+            return ResponseEntity.noContent().build();
+        }
+    }
+
     @RequestMapping(value = "/addMerch", method = RequestMethod.POST)
     public void addMerch(@RequestParam("fields") String fields) {
         System.out.println("Ух, бля.");

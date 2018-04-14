@@ -382,6 +382,7 @@ public class PostgresModel implements SpringModel {
                     .setParameter("tkn", token).getResultList();
             return formatDeals(dealsList);
         } catch (Exception e) {
+            logger.error("Found exception while taking deals for user " + username + "Exception message: " + e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -391,7 +392,7 @@ public class PostgresModel implements SpringModel {
     }
 
     @Override
-    public List<String> getDealsByUser(String username, String token, int offset, int limit) {
+    public String getDealsByUser(String username, String token, int offset, int limit) {
         Session session = sessionFactory.getCurrentSession();
         try {
             List<Deals> dealsList = session.createNativeQuery("SELECT * FROM deals WHERE " +
@@ -402,10 +403,20 @@ public class PostgresModel implements SpringModel {
                     .setParameter("lim", limit)
                     .addEntity(Deals.class)
                     .getResultList();
-            return formatDeals(dealsList);
+            long counter = ((long) session.createQuery("select count(id) from deals where userId=(SELECT id FROM Users WHERE username LIKE :un AND token LIKE :tkn) group by userId")
+                    .setParameter("un", username)
+                    .setParameter("tkn", token).getSingleResult());
+            JsonObject root = new JsonObject();
+            root.add("count", new JsonPrimitive(counter));
+            JsonArray dealsArray = new JsonArray();
+            JsonParser parser = new JsonParser();
+            dealsList.forEach(deal -> dealsArray.add(parser.parse(gson.toJson(deal)).getAsJsonObject()));
+            root.add("deals", dealsArray);
+            return root.toString();
+//            return formatDeals(dealsList);
         } catch (Exception e) {
             logger.error("Found exception while taking deals for user " + username + "Exception message: " + e.getMessage());
-            return new ArrayList<>();
+            return "";
         }
     }
 

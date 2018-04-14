@@ -100,9 +100,9 @@ public interface SpringModel extends Model {
      * @param token    user's token
      * @param offset   start with
      * @param limit    deals quantity
-     * @return
+     * @return json formatted string
      */
-    List<String> getDealsByUser(String username, String token, int offset, int limit);
+    String getDealsByUser(String username, String token, int offset, int limit);
 
     /**
      * Method to get json object that contains all required fields with types
