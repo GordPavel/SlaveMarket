@@ -1,6 +1,7 @@
 var bf;
 var $deal_limit = 0;
 var $deal_panel;
+var $class_name = "";
 
 $(document).ready(function () {
     $deal_panel = $('#accordion');
@@ -20,30 +21,14 @@ $(document).ready(function () {
                 classList.append('<a href="javascript:void(0)" onclick="chooseClass(\'' + item + '\')" class="list-group-item list-group-item-action classesListItem">' + item + '</a>');
             });
         }).fail(function (data, status) {
-            $.magnificPopup.open({
-                items: {
-                    src: '<div class="text-center white-popup">' +
-                    '<h2>Error:</h2>' +
-                    '<div class="popup-modal-text">Can\'t load classes.\nReload page or contact system administrator.</div>' +
-                    '<button class="btn btn-outline-primary popup-modal-dismiss">Close</button>' +
-                    '</div>',
-                    type: 'inline'
-                },
-                closeBtnInside: true
-            });
-            $(document).on('click', '.popup-modal-dismiss', function (e) {
-                e.preventDefault();
-                $.magnificPopup.close();
-            });
+            showPopup('Error:', 'Can\'t load classes.\nReload page or contact system administrator.');
         });
-    });
-    $('.my-deals-list').click(function (event) {
-
     });
 });
 
 function chooseClass(item) {
     $('.addingHeader').text('Please enter following values');
+    $class_name = item;
     $.post('/rest/methods/getFieldsWithTypes', {className: item}, function (data) {
         $('#form-container-main').show();
         var classList = $('.availableClasses');
@@ -55,49 +40,26 @@ function chooseClass(item) {
         bf.render(container, '');
         $(".glyphicon-info-sign").removeClass('glyphicon glyphicon-info-sign').addClass('fas fa-info-circle')
     }).fail(function (data, status) {
-        $.magnificPopup.open({
-            items: {
-                src: '<div class="text-center white-popup">' +
-                '<h2>Error:</h2>' +
-                '<div class="popup-modal-text">Can\'t load required fields.\nReload page or contact system administrator.</div>' +
-                '<button class="btn btn-outline-primary popup-modal-dismiss">Close</button>' +
-                '</div>',
-                type: 'inline'
-            },
-            closeBtnInside: true
-        });
-        $(document).on('click', '.popup-modal-dismiss', function (e) {
-            e.preventDefault();
-            $.magnificPopup.close();
-        });
+        showPopup('Error:', 'Can\'t load required fields.\nReload page or contact system administrator.');
     });
 }
 
-function addMerch() {
+function addMerch($username, $token) {
     if (null != bf.getData()) {
-        alert(JSON.stringify(bf.getData(), null, 4));
+        $.post('/rest/methods/addMerch', {
+            className: $class_name,
+            fields: JSON.stringify(bf.getData()),
+            username: $username,
+            token: $token
+        }, function (data) {
+            showPopup('Info:', 'successfullyAdded')
+        }).fail(function (data, status) {
+            showPopup('Error:', 'Can\'t add merchandise');
+        });
     }
     else {
-        $.magnificPopup.open({
-            items: {
-                src: '<div class="text-center white-popup">' +
-                '<h2>Error:</h2>' +
-                '<div class="popup-modal-text">Enter at least one field</div>' +
-                '<button class="btn btn-outline-primary popup-modal-dismiss">Close</button>' +
-                '</div>',
-                type: 'inline'
-            },
-            closeBtnInside: true
-        });
-        $(document).on('click', '.popup-modal-dismiss', function (e) {
-            e.preventDefault();
-            $.magnificPopup.close();
-        });
+        showPopup('Error:', 'Please enter at least one field.');
     }
-}
-
-function generateDealPanel(deal) {
-
 }
 
 function loadDeals($username, $token, $page) {
@@ -135,7 +97,11 @@ function openDeals($username, $token, $offset) {
         var $deal_panel = $('#accordion');
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: $page_count,
-            visiblePages: 10,
+            visiblePages: 6,
+            first:null,
+            last:null,
+            prev:'<',
+            next:'>',
             onPageClick: function (event, page) {
                 loadDeals($username, $token, page)
             }
@@ -146,21 +112,7 @@ function openDeals($username, $token, $offset) {
             $offset++;
         });
     }).fail(function (data, status) {
-        $.magnificPopup.open({
-            items: {
-                src: '<div class="text-center white-popup">' +
-                '<h2>Error:</h2>' +
-                '<div class="popup-modal-text">Can\'t load deals.\nReload page or contact system administrator.</div>' +
-                '<button class="btn btn-outline-primary popup-modal-dismiss">Close</button>' +
-                '</div>',
-                type: 'inline'
-            },
-            closeBtnInside: true
-        });
-        $(document).on('click', '.popup-modal-dismiss', function (e) {
-            e.preventDefault();
-            $.magnificPopup.close();
-        });
+        showPopup('Error:', 'Can\'t load deals.\nReload page or contact system administrator.');
     });
 }
 
@@ -203,7 +155,7 @@ function appendDeal(deal) {
         '                  </tr>\n' +
         '                  <tr>\n' +
         '                    <td>Date:</td>\n' +
-        '                    <td>' + deal.date + '</td>\n' +
+        '                    <td>' + deal.time + '</td>\n' +
         '                  </tr>\n' +
         '                  <tr>\n' +
         '                    <td>State:</td>\n' +
@@ -222,4 +174,22 @@ function appendDeal(deal) {
         '        </pre>\n' +
         '     </div>\n' +
         '  </div>\n');
+}
+
+function showPopup(header, message) {
+    $.magnificPopup.open({
+        items: {
+            src: '<div class="text-center white-popup">' +
+            '<h2>' + header + '</h2>' +
+            '<div class="popup-modal-text">' + message + '</div>' +
+            '<button class="btn btn-outline-primary popup-modal-dismiss">Close</button>' +
+            '</div>',
+            type: 'inline'
+        },
+        closeBtnInside: true
+    });
+    $(document).on('click', '.popup-modal-dismiss', function (e) {
+        e.preventDefault();
+        $.magnificPopup.close();
+    });
 }

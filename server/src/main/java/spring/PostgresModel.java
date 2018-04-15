@@ -217,6 +217,7 @@ public class PostgresModel implements SpringModel {
                     .setParameter("name", className).getSingleResult();
             return Arrays.asList(classes.getFields());
         } catch (Throwable e) {
+            logger.error("Can't get fields for class " + className + ", because exception: " + e.getMessage());
             return new ArrayList<>();
         }
     }
@@ -247,9 +248,18 @@ public class PostgresModel implements SpringModel {
                 type.add("description", new JsonPrimitive("merchandise " + fields[i]));
                 properties.add(fields[i], type);
             });
+            JsonObject price = new JsonObject();
+            price.add("type", new JsonPrimitive("integer"));
+            price.add("title", new JsonPrimitive("price"));
+            price.add("minimum", new JsonPrimitive(1));
+            price.add("description", new JsonPrimitive("The amount of money you will receive for the sale of this product"));
+            price.add("required", new JsonPrimitive(true));
+            properties.add("price", price);
+
             root.add("properties", properties);
             return root.toString();
         } catch (Throwable e) {
+            logger.error("Can't get fields for class " + className + ", because exception: " + e.getMessage());
             return "";
         }
     }

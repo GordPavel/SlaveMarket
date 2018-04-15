@@ -88,6 +88,11 @@ public class IndexController {
         return VIEW_INDEX;
     }
 
+    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
+    public String showAdminPanel(ModelMap modelMap) {
+        setAttr(modelMap);
+        return VIEW_ADMIN;
+    }
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(ModelMap modelMap) {
@@ -134,7 +139,7 @@ public class IndexController {
             modelMap.addAttribute("myDeals", dealsList);
             return VIEW_PROFILE;
         } else {
-            return VIEW_INDEX;
+            return welcomePage(modelMap);
         }
     }
 
@@ -185,7 +190,8 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/news/")
-    public String showNews(ModelMap model) {
+    public String showNews(ModelMap modelMap) {
+        setAttr(modelMap);
         return VIEW_ALL_NEWS;
     }
 

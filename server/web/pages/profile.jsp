@@ -147,7 +147,7 @@
                                      style="padding-left:12px;padding-right:12px;padding-bottom: 12px;"></div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary"
-                                            onclick="if (bf.validate()) {addMerch()}">Add merchandise
+                                            onclick="if (bf.validate()) {addMerch('${user.username}', '${user.token}')}">Add merchandise
                                     </button>
                                 </div>
                             </div>
@@ -166,7 +166,7 @@
                             </div>
                             <div id="my-deals-footer">
                                 <nav aria-label="Page navigation">
-                                    <ul class="pagination" id="pagination"></ul>
+                                    <ul class="pagination center" id="pagination"></ul>
                                 </nav>
                             </div>
                         </div>

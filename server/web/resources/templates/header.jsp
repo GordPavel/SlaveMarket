@@ -34,7 +34,6 @@
                                     class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a class="nav-link" href="/profile/">My profile</a></li>
-                                <li><a class="nav-link" href="/profile/deals">My deals</a></li>
                                 <li><a class="nav-link" href="/logout">Log out</a></li>
                             </ul>
                         </li>

@@ -31,3 +31,12 @@
     max-width: 500px;
     margin: 20px auto;
 }
+
+.pagination ul {
+    float: none;
+    display: inline-block;
+    overflow: hidden;
+}
+.pagination.center {
+    text-align: center;
+}
