@@ -126,9 +126,11 @@ public class IndexController {
             Gson gson = new Gson();
             JsonParser parser = new JsonParser();
             String deals = model.getDealsByUser(user.getUsername(), user.getToken(), 0, 5);
-            JsonArray array = parser.parse(deals).getAsJsonObject().get("deals").getAsJsonArray();
             List<Deals> dealsList = new ArrayList<>();
-            array.forEach(item -> dealsList.add(gson.fromJson(item, Deals.class)));
+            if (!deals.equals("")) {
+                JsonArray array = parser.parse(deals).getAsJsonObject().get("deals").getAsJsonArray();
+                array.forEach(item -> dealsList.add(gson.fromJson(item, Deals.class)));
+            }
             modelMap.addAttribute("myDeals", dealsList);
             return VIEW_PROFILE;
         } else {
