@@ -6,12 +6,8 @@ $(function () {
 function updateCart() {
     var cart = $('.cart-info');
     var cartSize = $('.cart-info .badge');
-    $.ajax({
-        url: "/cart/info/",
-        method: "POST",
-        data: {type: "size"}
-    })
-        .done(function (data) {
+    $.post(
+        "/cart/info/", {type: "size"}, function (data) {
             var size = JSON.parse(data);
             if (size.size >= 1) {
                 cart.removeAttr("data-toggle");
@@ -27,8 +23,8 @@ function updateCart() {
                 });
                 cartSize.text("empty");
             }
-        })
-        .fail(function (data) {
+        }).fail(function (data, status) {
+            console.log("Response error with status " + status + " data:" + data.responseText);
             showPopup("Error", "Can\'t update cart.\nPlease reload page.");
         })
 }

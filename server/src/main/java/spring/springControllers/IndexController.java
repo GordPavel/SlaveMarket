@@ -91,9 +91,6 @@ public class IndexController {
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(ModelMap modelMap) {
-        Aliens alien = new Aliens();
-        alien.setName("alien" + cart.size());
-        cart.add(1);
         setAttr(modelMap);
         return VIEW_CART;
     }
@@ -212,7 +209,6 @@ public class IndexController {
 
 
     private void setAttr(ModelMap modelMap) {
-        modelMap.addAttribute("cart", cart);
         modelMap.addAttribute("user", user);
     }
 
