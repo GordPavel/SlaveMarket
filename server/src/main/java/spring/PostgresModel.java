@@ -181,16 +181,21 @@ public class PostgresModel implements SpringModel {
                 .registerStoredProcedureParameter(1, Integer.class, ParameterMode.IN)
                 .registerStoredProcedureParameter(2, String.class, ParameterMode.IN)
                 .registerStoredProcedureParameter(3, String.class, ParameterMode.IN)
-                .registerStoredProcedureParameter(4, Boolean.class, ParameterMode.OUT).setParameter(1, id)
+                .registerStoredProcedureParameter(4, Boolean.class, ParameterMode.OUT)
+                .setParameter(1, id)
                 .setParameter(2, user)
                 .setParameter(3, token);
         try {
-            updateMerch.getOutputParameterValue(4);
-            Merchandises merch = (Merchandises) session.createQuery("from Merchandises where id=:id")
-                    .setParameter("id", id).getSingleResult();
-            session.createNativeQuery("UPDATE " + merch.getClassName() + " SET " + kvs + " WHERE id=:id")
-                    .setParameter("id", id).executeUpdate();
-            logger.info("updated Merchandise" + id + " by User " + user);
+            boolean canUpdate = (Boolean) updateMerch.getOutputParameterValue(4);
+            if (canUpdate) {
+                Merchandises merch = (Merchandises) session.createQuery("from Merchandises where id=:id")
+                        .setParameter("id", id).getSingleResult();
+                session.createNativeQuery("UPDATE " + merch.getClassName() + " SET " + kvs + " WHERE id=:id")
+                        .setParameter("id", id).executeUpdate();
+                logger.info("updated Merchandise" + id + " by User " + user);
+            } else {
+                logger.info("merchandise# " + id + " can not be updated by " + user);
+            }
         } catch (JDBCException e) {
             logger.error(getMessageByCode(e) + " while updating values merchandise " + id + " by user " + user);
             throw new MerchandiseUpdateException(getMessageByCode(e));
@@ -262,6 +267,27 @@ public class PostgresModel implements SpringModel {
             logger.error("Can't get fields for class " + className + ", because exception: " + e.getMessage());
             return "";
         }
+    }
+
+    @Override
+    public List<String> searchMerchandise(String query, int limit, String oreder, boolean desc) {
+        Session session = sessionFactory.getCurrentSession();
+        String ord = desc ? "DESC" : "ASC";
+        Query querySet = session.createNativeQuery("SELECT * FROM searchMerchandise(:query) ORDER BY " + oreder + " " + ord + " limit :lmt")
+                .addEntity(Merchandises.class).setParameter("query", query).setParameter("lmt", limit);
+        JsonParser parser = new JsonParser();
+        return ((List<Merchandises>) querySet.getResultList())
+                .stream().map(o -> {
+                    Deals deals = (Deals) session.createNativeQuery("SELECT * FROM getLastDeal(:id)")
+                            .setParameter("id", o.getId()).addEntity(Deals.class).getSingleResult();
+                    JsonObject object = parser.parse(o.getAllInfo()).getAsJsonObject();
+                    object.add("state", new JsonPrimitive(deals.getState()));
+                    Users users = (Users) session.createQuery("from Users where id=:id")
+                            .setParameter("id", deals.getUserId()).getSingleResult();
+                    object.add("user", new JsonPrimitive(users.getUsername()));
+                    object.add("price", new JsonPrimitive(deals.getPrice()));
+                    return gson.toJson(object);
+                }).collect(toList());
     }
 
     @Override

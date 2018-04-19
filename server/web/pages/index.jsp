@@ -1,4 +1,5 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="h" uri="http://struts.apache.org/tags-html" %>
 <%--
   ~ Copyright (c) 2018.
   ~ You may use, distribute and modify this code
@@ -16,6 +17,7 @@
     <script src="/resources/scripts/owl.carousel.min.js"></script>
     <script src="/resources/scripts/wow.min.js"></script>
     <script src="/resources/scripts/index.js"></script>
+
     <title>Slave market</title>
 </head>
 <body>
@@ -40,7 +42,50 @@
     <div id="main-dot-container" class="owl-dots">
     </div>
 </section>
-
+<section class="merchandises">
+    <div class="container">
+        <div class="heading">Most valuable merchandises</div>
+        <div class="owl-carousel">
+            <c:forEach items="${merchandises}" var="item">
+                <div class="item">
+                    <div class="info">
+                        <div class="className">
+                            Class: ${item.className}
+                        </div>
+                        <div class="name">
+                            Name: ${item.name}
+                        </div>
+                        <div class="benefit">
+                            Benefit: ${item.benefit}
+                        </div>
+                        <div class="price">
+                            Price: ${item.price}<i class="fab fa-stripe-s"></i>
+                        </div>
+                        <div class="control">
+                            <div class="buttons">
+                                <c:choose>
+                                    <c:when test="${cart.contains(item.id)}">
+                                        <button href="#" onclick="void(0)" class="btn btn-primary disabled"
+                                                data-product_id="${item.id}">
+                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>Added
+                                        </button>
+                                    </c:when>
+                                    <c:when test="${!cart.contains(item.id)}">
+                                        <button href="#" onclick="void(0)" class="btn btn-primary add-card-btn"
+                                                data-product_id="${item.id}"><i
+                                                class="fa fa-shopping-cart" aria-hidden="true"></i>Add to cart
+                                        </button>
+                                    </c:when>
+                                </c:choose>
+                                <a href="/merchandises/${item.id}" class="btn btn-primary">Show</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </c:forEach>
+        </div>
+    </div>
+</section>
 <section class="newsSection">
     <div class="container-fluid">
         <div class="row">
@@ -48,8 +93,8 @@
                 <div class="panel panel-default">
                     <div class="panel-heading"><i class="fa fa-link"></i> Links</div>
                     <div class="panel-body">
-                        <div class="info-items-row row wow slideInDown">
-                            <div class="info-item col-lg-6" >
+                        <div class="info-items-row row wow slideInLeft">
+                            <div class="info-item col-lg-6">
                                 <a href="/info/about">
                                     <span>About Us</span>
                                     <img src="/resources/images/about-us.jpg"/>
@@ -75,7 +120,7 @@
                                     <img src="/resources/images/dev.jpg"/>
                                 </a>
                             </div>
-                            <div class="info-item col-lg-4 " >
+                            <div class="info-item col-lg-4 ">
                                 <a href="/info/coop">
                                     <span>Cooperation with us</span>
                                     <img src="/resources/images/coop.jpg"/>

@@ -98,10 +98,10 @@ function openDeals($username, $token, $offset) {
         window.pagObj = $('#pagination').twbsPagination({
             totalPages: $page_count,
             visiblePages: 6,
-            first:null,
-            last:null,
-            prev:'<',
-            next:'>',
+            first: null,
+            last: null,
+            prev: '<',
+            next: '>',
             onPageClick: function (event, page) {
                 loadDeals($username, $token, page)
             }
@@ -163,7 +163,7 @@ function appendDeal(deal) {
         '                  </tr>\n' +
         '                  <tr class="' + $table_class + '">\n' +
         '                    <td>Price:</td>\n' +
-        '                    <td>' + deal.price + '</td>\n' +
+        '                    <td>' + deal.price + '<i class="fab fa-stripe-s"></i></td>\n' +
         '                  </tr>\n' +
         '                  <tr>\n' +
         '                      <td>Merchandise id</td>\n' +
@@ -174,22 +174,4 @@ function appendDeal(deal) {
         '        </pre>\n' +
         '     </div>\n' +
         '  </div>\n');
-}
-
-function showPopup(header, message) {
-    $.magnificPopup.open({
-        items: {
-            src: '<div class="text-center white-popup">' +
-            '<h2>' + header + '</h2>' +
-            '<div class="popup-modal-text">' + message + '</div>' +
-            '<button class="btn btn-outline-primary popup-modal-dismiss">Close</button>' +
-            '</div>',
-            type: 'inline'
-        },
-        closeBtnInside: true
-    });
-    $(document).on('click', '.popup-modal-dismiss', function (e) {
-        e.preventDefault();
-        $.magnificPopup.close();
-    });
 }

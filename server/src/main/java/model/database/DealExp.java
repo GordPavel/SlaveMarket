@@ -1,5 +1,5 @@
 package model.database;
 
 public interface DealExp<A, B> {
-  A apply(B deal);
+    A apply(B deal);
 }

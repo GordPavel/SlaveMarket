@@ -2,9 +2,8 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.description.Font?>
-<?import javafx.scene.description.Text?>
-<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity"
+<AnchorPane xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+            minWidth="-Infinity"
             prefHeight="191.0" prefWidth="305.0" stylesheets="/сss/login.css"
             xmlns="http://javafx.com/javafx/8.0.162-ea">
     <children>
@@ -23,7 +22,8 @@
                                 vgrow="SOMETIMES"/>
             </rowConstraints>
             <children>
-                <Text fx:id="welcome" strokeType="OUTSIDE" strokeWidth="0.0" description="slave market" textAlignment="CENTER"
+                <Text fx:id="welcome" strokeType="OUTSIDE" strokeWidth="0.0" description="slave market"
+                      textAlignment="CENTER"
                       wrappingWidth="351.951171875" GridPane.columnSpan="3">
                     <font>
                         <Font size="20.0"/>

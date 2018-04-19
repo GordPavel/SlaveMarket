@@ -46,17 +46,17 @@
                         <input type="submit" value="Register" class="btn btn-primary register-btn"/>
                         <div class="remember-forgot">
                             <%--<div class="row">--%>
-                                <%--<div class="col-md-6">--%>
-                                <%--<div class="checkbox">--%>
-                                <%--<label>--%>
-                                <%--<input type="checkbox"/>--%>
-                                <%--Remember Me--%>
-                                <%--</label>--%>
-                                <%--</div>--%>
-                                <%--</div>--%>
-                                <div class="text-center forgot-pass-content">
-                                    <a href="javascript:void(0);" class="forgot-token">Update Token</a>
-                                </div>
+                            <%--<div class="col-md-6">--%>
+                            <%--<div class="checkbox">--%>
+                            <%--<label>--%>
+                            <%--<input type="checkbox"/>--%>
+                            <%--Remember Me--%>
+                            <%--</label>--%>
+                            <%--</div>--%>
+                            <%--</div>--%>
+                            <div class="text-center forgot-pass-content">
+                                <a href="javascript:void(0);" class="forgot-token">Update Token</a>
+                            </div>
                             <%--</div>--%>
                         </div>
                     </form>

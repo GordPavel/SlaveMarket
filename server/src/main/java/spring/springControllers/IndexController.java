@@ -8,11 +8,7 @@
 
 package spring.springControllers;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import model.merchandises.Merchandise;
+import com.google.gson.*;
 import model.merchandises.MerchandiseImpl;
 import model.postgresqlModel.Users;
 import model.postgresqlModel.tables.Deals;
@@ -23,12 +19,11 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Scope;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
@@ -60,7 +55,7 @@ public class IndexController {
     private static final String VIEW_PROFILE = "profile";
     private PostgresSpringService model;
     private Users user = null;
-    private List<Merchandise> cart = new ArrayList<>();
+    private List<Integer> cart = new ArrayList<>();
 
     // TODO: 30.03.18 all that web stuff
     @RequestMapping(value = "/", method = RequestMethod.GET)
@@ -71,7 +66,7 @@ public class IndexController {
             return gson.fromJson(string, News.class);
         }).sorted(Comparator.comparingInt(News::getId).reversed()).collect(toList()));
         modelMap.addAttribute("merchandises",
-                model.searchMerchandise("").stream()
+                model.searchMerchandise("", 10, "benefit", true).stream()
                         .map(item -> {
                             JsonParser parser = new JsonParser();
                             JsonObject object = parser.parse(item).getAsJsonObject();
@@ -80,27 +75,65 @@ public class IndexController {
                             merchandise.setId(object.get("id").getAsInt());
                             merchandise.setName(object.get("name").getAsString());
                             merchandise.setBenefit(object.get("benefit").getAsFloat());
+                            merchandise.setClassName(object.get("class").getAsString());
+                            merchandise.setPrice(object.get("price").getAsInt());
                             merchandise.setAllInfo(item);
                             return merchandise;
-                        })
-                        .sorted(Comparator.comparingDouble(Merchandise::getBenefit).reversed())
-                        .limit(8).collect(toList()));
+                        }).collect(toList()));
         return VIEW_INDEX;
     }
 
-    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
-    public String showAdminPanel(ModelMap modelMap) {
-        setAttr(modelMap);
-        return VIEW_ADMIN;
-    }
+//    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
+//    public String showAdminPanel(ModelMap modelMap) {
+//        setAttr(modelMap);
+//        return VIEW_ADMIN;
+//    }
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(ModelMap modelMap) {
         Aliens alien = new Aliens();
         alien.setName("alien" + cart.size());
-        cart.add(alien);
+        cart.add(1);
         setAttr(modelMap);
         return VIEW_CART;
+    }
+
+    @RequestMapping(value = "/cart", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<Boolean> addToCart(@RequestParam int id) {
+        if (cart.contains(id)) {
+            return ResponseEntity.badRequest().body(false);
+        } else {
+            cart.add(id);
+            return ResponseEntity.ok(true);
+        }
+    }
+
+    @RequestMapping(value = "/cart/info", method = RequestMethod.POST)
+    public ResponseEntity<String> getCartInfo(@RequestParam String type) {
+        switch (type) {
+            case "size":
+                JsonObject object = new JsonObject();
+                object.add("size", new JsonPrimitive(cart.size()));
+                return ResponseEntity.ok(object.toString());
+            case "items":
+                JsonObject jCart = new JsonObject();
+                JsonParser parser = new JsonParser();
+                JsonArray items = new JsonArray();
+                cart.forEach(integer -> {
+                    String merchant = model.getMerchantById(integer);
+                    JsonObject item = parser.parse(merchant).getAsJsonObject();
+                    items.add(item);
+                });
+                jCart.add("count", new JsonPrimitive(items.size()));
+                jCart.add("items", items);
+                return ResponseEntity.ok(jCart.toString());
+            case "amITeaPot":
+                // If you ever forget about what type of organism you are.
+                return ResponseEntity.status(HttpStatus.I_AM_A_TEAPOT).body("Maybe");
+            default:
+                return ResponseEntity.badRequest().body("Can't find query for type \"" + type + "\"");
+        }
     }
 
     @RequestMapping(value = "/shop", method = RequestMethod.GET)
@@ -205,7 +238,7 @@ public class IndexController {
         news.setSlider(false);
         news.setAuthor(19);
         try {
-            BufferedImage image2 = ImageIO.read(new File("/home/s3rius/Development/Projects/slaveMarket/server/web/resources/images/iot .jpg"));
+            BufferedImage image2 = ImageIO.read(new File("/home/s3rius/Development/Projects/slaveMarket/server/web/resources/images/iot.jpg"));
             Image scaled = image2.getScaledInstance(1366, 768, Image.SCALE_SMOOTH);
             BufferedImage result = new BufferedImage(1366, 768, image2.getType());
             Graphics2D g = result.createGraphics();

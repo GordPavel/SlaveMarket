@@ -5,13 +5,13 @@ package exceptions;
  */
 public class MerchandiseAlreadyBought extends IllegalArgumentException {
 
-  /**
-   * Constructor.
-   * "You can't change that merchandise.\n"
-   *
-   * @param cause cause why user can't buy merchandise
-   */
-  public MerchandiseAlreadyBought(String cause) {
-    super(cause);
-  }
+    /**
+     * Constructor.
+     * "You can't change that merchandise.\n"
+     *
+     * @param cause cause why user can't buy merchandise
+     */
+    public MerchandiseAlreadyBought(String cause) {
+        super(cause);
+    }
 }

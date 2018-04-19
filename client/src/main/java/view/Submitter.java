@@ -6,5 +6,5 @@ import java.util.Map;
 
 @FunctionalInterface
 public interface Submitter {
-  void submit(Map<String, TextField> object);
+    void submit(Map<String, TextField> object);
 }

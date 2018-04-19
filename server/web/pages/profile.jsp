@@ -21,9 +21,8 @@
     <script src="/resources/scripts/profile.js"></script>
     <script src="/resources/scripts/brutusin-json-forms.min.js"></script>
     <script src="/resources/scripts/brutusin-json-forms-bootstrap.min.js"></script>
-    <script src="/resources/scripts/jquery.magnific-popup.min.js"></script>
     <script src="/resources/scripts/jquery.twbsPagination.min.js"></script>
-    <link rel="stylesheet" href="/resources/styles/magnific-popup.css">
+
     <title>Profile</title>
 </head>
 <body>
@@ -62,7 +61,7 @@
                             </div>
                             <div class="card">
                                 <div class="card-header">Balance</div>
-                                <div class="card-body">${user.balance}</div>
+                                <div class="card-body">${user.balance}<i class="fab fa-stripe-s"></i></div>
                             </div>
                             <div class="card panel-dark">
                                 <div class="card-header">Last Deals</div>
@@ -111,7 +110,7 @@
                                                                                 <c:otherwise>
                                                                                     <tr>
                                                                                         <td>Price:</td>
-                                                                                        <td>${item.price}</td>
+                                                                                        <td>${item.price}<i class="fab fa-stripe-s"></i></td>
                                                                                     </tr>
                                                                                 </c:otherwise>
                                                                             </c:choose>
@@ -147,7 +146,8 @@
                                      style="padding-left:12px;padding-right:12px;padding-bottom: 12px;"></div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary"
-                                            onclick="if (bf.validate()) {addMerch('${user.username}', '${user.token}')}">Add merchandise
+                                            onclick="if (bf.validate()) {addMerch('${user.username}', '${user.token}')}">
+                                        Add merchandise
                                     </button>
                                 </div>
                             </div>
@@ -166,7 +166,9 @@
                             </div>
                             <div id="my-deals-footer">
                                 <nav aria-label="Page navigation">
-                                    <ul class="pagination center" id="pagination"></ul>
+                                    <ul class="pagination center" id="pagination">
+
+                                    </ul>
                                 </nav>
                             </div>
                         </div>

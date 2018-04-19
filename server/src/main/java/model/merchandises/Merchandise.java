@@ -11,58 +11,58 @@ import java.util.Map;
 @XmlRootElement
 public interface Merchandise extends Serializable {
 
-  /**
-   * Returns minimum of required fields for create an object of chosen class.
-   *
-   * @return field names
-   */
-  static List<String> getMandatoryFields(String className) {
-    try {
-      return MandatoryFields.valueOf(className).getFields();
-    } catch (IllegalArgumentException e) {
-      throw new IllegalArgumentException("wrong class called");
+    /**
+     * Returns minimum of required fields for create an object of chosen class.
+     *
+     * @return field names
+     */
+    static List<String> getMandatoryFields(String className) {
+        try {
+            return MandatoryFields.valueOf(className).getFields();
+        } catch (IllegalArgumentException e) {
+            throw new IllegalArgumentException("wrong class called");
+        }
     }
-  }
 
-  /**
-   * get Merchandise's id.
-   *
-   * @return id
-   */
-  int getId();
+    /**
+     * get Merchandise's id.
+     *
+     * @return id
+     */
+    int getId();
 
-  /**
-   * method to set new id to merchandise.
-   *
-   * @param id new id
-   */
-  void setId(int id);
+    /**
+     * method to set new id to merchandise.
+     *
+     * @param id new id
+     */
+    void setId(int id);
 
-  /**
-   * Returns merchandise quality in percentage.
-   */
-  float getBenefit();
-
-
-  /**
-   * Get merchant's name.
-   *
-   * @return Merchant's name
-   */
-  String getName();
-
-  /**
-   * Returns all information about merchandise.
-   *
-   * @return Complicated string of merchandise info. Formatted like "ClassName Param1:Value1 etc.
-   */
-  String getAllInfo();
+    /**
+     * Returns merchandise quality in percentage.
+     */
+    float getBenefit();
 
 
-  /**
-   * Set up object params with map values.
-   *
-   * @param map of params. Where key is field name and value is field value.
-   */
-  void setParamsByMap(Map<String, String> map);
+    /**
+     * Get merchant's name.
+     *
+     * @return Merchant's name
+     */
+    String getName();
+
+    /**
+     * Returns all information about merchandise.
+     *
+     * @return Complicated string of merchandise info. Formatted like "ClassName Param1:Value1 etc.
+     */
+    String getAllInfo();
+
+
+    /**
+     * Set up object params with map values.
+     *
+     * @param map of params. Where key is field name and value is field value.
+     */
+    void setParamsByMap(Map<String, String> map);
 }

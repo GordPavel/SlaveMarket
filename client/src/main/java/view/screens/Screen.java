@@ -1,9 +1,9 @@
 package view.screens;
 
 public interface Screen {
-  void show();
+    void show();
 
-  void update();
+    void update();
 
-  void clear();
+    void clear();
 }

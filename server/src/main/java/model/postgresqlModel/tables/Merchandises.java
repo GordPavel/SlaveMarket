@@ -2,7 +2,10 @@ package model.postgresqlModel.tables;
 
 import model.merchandises.Merchandise;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 import java.io.Serializable;
 import java.util.Map;
 

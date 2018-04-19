@@ -663,7 +663,6 @@ END;
 $$;
 
 
-
 create trigger insert_classes_trg
   before insert
   on classes

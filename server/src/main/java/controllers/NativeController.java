@@ -201,7 +201,6 @@ public class NativeController implements Controller {
     }
 
 
-
 //  private String encrypt(String username, String pass) {
 //    try {
 //      String key = username;

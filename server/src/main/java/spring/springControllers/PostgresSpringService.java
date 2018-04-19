@@ -53,6 +53,12 @@ public class PostgresSpringService {
     }
 
     @Transactional
+    public List<String> searchMerchandise(String query, int limit, String order, boolean desc) throws WrongQueryException {
+        return model.searchMerchandise(query, limit, order, desc);
+    }
+
+
+    @Transactional
     public String getMerchantById(int id) throws MerchandiseNotFoundException {
         return model.getMerchantById(id);
     }

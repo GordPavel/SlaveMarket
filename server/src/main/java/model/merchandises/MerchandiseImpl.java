@@ -8,9 +8,6 @@
 
 package model.merchandises;
 
-import org.apache.commons.codec.binary.Base64;
-
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 public abstract class MerchandiseImpl implements Merchandise {
@@ -18,7 +15,8 @@ public abstract class MerchandiseImpl implements Merchandise {
     private String name;
     private float benefit;
     private String allInfo;
-    private byte[] image;
+    private String className;
+    private int price;
 
     @Override
     public int getId() {
@@ -62,15 +60,19 @@ public abstract class MerchandiseImpl implements Merchandise {
 
     }
 
-    public String getImage() {
-        try {
-            return new String(Base64.encodeBase64(this.image), "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            return "";
-        }
+    public String getClassName() {
+        return className;
     }
 
-    public void setImage(byte[] image) {
-        this.image = image;
+    public void setClassName(String className) {
+        this.className = className;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 }

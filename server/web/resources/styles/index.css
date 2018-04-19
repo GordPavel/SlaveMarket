@@ -199,8 +199,6 @@ div.owl-caption {
     font-size: 24pt;
 }
 
-/****----------------------------------------------****/
-
 .NewsHeader {
     font-size: 23pt;
 }
@@ -378,9 +376,9 @@ a {
     top: 50%;
     height: 100%;
     width: auto;
-    -webkit-transform: translate(-50%,-50%);
-    -ms-transform: translate(-50%,-50%);
-    transform: translate(-50%,-50%);
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
 }
 
 .newsList a {
@@ -403,3 +401,57 @@ li.linkToNews:hover {
     text-decoration-color: #428bca;
 }
 
+.merchandises .heading {
+    font-size: 30px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: .75px;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+section.merchandises {
+    padding: 30px 0;
+    background: url("/resources/images/slider2.jpg") no-repeat;
+    background-size: cover;
+}
+
+@media (max-width: 768px) {
+    section.merchandises .heading, section.merchandises .heading-xs {
+        text-align: left;
+        font-size: 20px;
+    }
+}
+
+.product-items .item .info .control {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+.product-items .item .info .control .price {
+    font-size: 22px;
+    font-weight: 700;
+    letter-spacing: .6px;
+}
+
+.merchandises .owl-nav {
+    display: flex;
+    position: absolute;
+    top: -60px;
+    right: 0;
+}
+
+.merchandises .owl-item {
+    width: 255px;
+    margin-right: 30px;
+    margin-bottom: 30px;
+    background-color: #efefef;
+    padding: 15px;
+}
+
+.owl-carousel .owl-nav .owl-prev, .owl-carousel .owl-nav .owl-next {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+}

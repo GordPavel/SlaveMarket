@@ -41,12 +41,13 @@ public interface Model {
     void removeMerchandise(int id, String user, String token) throws MerchandiseAlreadyBought;
 
     /**
-     * Search slave by the string  query like "height>150 productivity>40 weight<90 age=22".
+     * Search slave by the string.
      *
      * @param query query string
      * @return list of founed slaves
      */
     List<String> searchMerchandise(String query) throws WrongQueryException;
+
 
     /**
      * Returns merchandise by id or exception.
