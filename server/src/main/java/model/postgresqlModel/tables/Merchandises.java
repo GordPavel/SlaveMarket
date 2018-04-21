@@ -1,12 +1,12 @@
 package model.postgresqlModel.tables;
 
 import model.merchandises.Merchandise;
+import org.apache.commons.codec.binary.Base64;
+import org.hibernate.annotations.Type;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.io.Serializable;
+import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 
@@ -24,6 +24,11 @@ public class Merchandises implements Merchandise, Serializable {
     private Float benefit;
     @Column(name = "info")
     private String info;
+    @Lob
+    @Column(name = "image")
+    @Type(type = "org.hibernate.type.BinaryType")
+    private byte[] image;
+
 
     @Override
     public String toString() {
@@ -79,5 +84,22 @@ public class Merchandises implements Merchandise, Serializable {
 
     public void setInfo(String info) {
         this.info = info;
+    }
+
+
+    public byte[] getImage() {
+        return image;
+    }
+
+    public void setImage(byte[] image) {
+        this.image = image;
+    }
+
+    public String getBase64image() {
+        try {
+            return new String(Base64.encodeBase64(this.image), "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            return "";
+        }
     }
 }

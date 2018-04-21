@@ -20,6 +20,18 @@
 </head>
 <body>
 <%@include file="/resources/templates/header.jsp" %>
+<section class="cart_body">
+    <div class="accordion">
+        <c:forEach var="object" items="${cart}">
+            <div>
+                <c:forEach var="entery" items="${object.entrySet()}">
+                    ${entery.getKey()}=${entery.getValue()}
+                </c:forEach>
+            </div>
+            <br>
+        </c:forEach>
+    </div>
+</section>
 
 <jsp:include page="/resources/templates/footer.jsp"/>
 </body>

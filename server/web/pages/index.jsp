@@ -48,6 +48,11 @@
         <div class="owl-carousel">
             <c:forEach items="${merchandises}" var="item">
                 <div class="item">
+                    <div class="image">
+                        <a href="/merchandises/${item.id}">
+                            <img src="data:image/jpg;base64,${item.image}" alt="Image">
+                        </a>
+                    </div>
                     <div class="info">
                         <div class="className">
                             Class: ${item.className}
@@ -67,7 +72,7 @@
                                     <c:when test="${cart.contains(item.id)}">
                                         <button href="#" onclick="void(0)" class="btn btn-primary disabled"
                                                 data-product_id="${item.id}">
-                                            <i class="fa fa-shopping-cart" aria-hidden="true"></i>Added
+                                            Added
                                         </button>
                                     </c:when>
                                     <c:when test="${!cart.contains(item.id)}">

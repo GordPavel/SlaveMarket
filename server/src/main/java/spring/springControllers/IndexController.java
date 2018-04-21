@@ -9,11 +9,11 @@
 package spring.springControllers;
 
 import com.google.gson.*;
+import exceptions.UserException;
 import model.merchandises.MerchandiseImpl;
 import model.postgresqlModel.Users;
 import model.postgresqlModel.tables.Deals;
 import model.postgresqlModel.tables.News;
-import model.postgresqlModel.tables.merchandises.Aliens;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,6 +65,7 @@ public class IndexController {
             Gson gson = new Gson();
             return gson.fromJson(string, News.class);
         }).sorted(Comparator.comparingInt(News::getId).reversed()).collect(toList()));
+        modelMap.addAttribute("cart", cart);
         modelMap.addAttribute("merchandises",
                 model.searchMerchandise("", 10, "benefit", true).stream()
                         .map(item -> {
@@ -73,6 +74,7 @@ public class IndexController {
                             MerchandiseImpl merchandise = new MerchandiseImpl() {
                             };
                             merchandise.setId(object.get("id").getAsInt());
+                            merchandise.setImage(object.get("image").getAsString());
                             merchandise.setName(object.get("name").getAsString());
                             merchandise.setBenefit(object.get("benefit").getAsFloat());
                             merchandise.setClassName(object.get("class").getAsString());
@@ -92,6 +94,12 @@ public class IndexController {
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(ModelMap modelMap) {
         setAttr(modelMap);
+        JsonParser parser = new JsonParser();
+        modelMap.addAttribute("cart", model
+                .getGroupMerchandises(cart)
+                .stream()
+                .map(item -> parser.parse(item).getAsJsonObject())
+                .collect(toList()));
         return VIEW_CART;
     }
 
@@ -105,6 +113,20 @@ public class IndexController {
             return ResponseEntity.ok(true);
         }
     }
+
+
+    @RequestMapping(value = "/cart", method = RequestMethod.DELETE)
+    @ResponseBody
+    public ResponseEntity<Boolean> deleteFromCart(@RequestParam int id) {
+        if (cart.contains(id)) {
+            int target = cart.indexOf(id);
+            cart.remove(target);
+            return ResponseEntity.ok(true);
+        } else {
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+
 
     @RequestMapping(value = "/cart/info", method = RequestMethod.POST)
     public ResponseEntity<String> getCartInfo(@RequestParam String type) {
@@ -140,15 +162,23 @@ public class IndexController {
     }
 
     @RequestMapping(value = "/login")
-    public String login(ModelMap modelMap) {
+    public ModelAndView login(ModelMap modelMap) {
         setAttr(modelMap);
-        return VIEW_LOGIN;
+        if (null == user) {
+            return new ModelAndView(VIEW_LOGIN);
+        } else {
+            return loginRedirect(user.getToken());
+        }
     }
 
     @RequestMapping(value = "/loginRedirect", method = RequestMethod.GET)
     public ModelAndView loginRedirect(@RequestParam("token") String token) {
         String newUser = model.getUserByToken(token);
         Gson gson = new Gson();
+        if (null == newUser) {
+            user = null;
+            return new ModelAndView("redirect:/");
+        }
         user = gson.fromJson(newUser, Users.class);
         return new ModelAndView("redirect:/profile");
     }
@@ -201,7 +231,11 @@ public class IndexController {
     @RequestMapping(value = "/logout")
     public ModelAndView logout() {
         if (null != user) {
-            model.disconnect(user.getUsername(), user.getToken());
+            try {
+                model.disconnect(user.getUsername(), user.getToken());
+            } catch (UserException exception) {
+                logger.info("user " + user.getUsername() + " has wrong token. Logging out.");
+            }
             user = null;
         }
         return new ModelAndView("redirect:/");

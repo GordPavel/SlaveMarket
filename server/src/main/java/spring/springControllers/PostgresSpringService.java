@@ -190,6 +190,11 @@ public class PostgresSpringService {
         return model.getNewsById(id);
     }
 
+    @Transactional
+    public List<String> getGroupMerchandises(List<Integer> ids) {
+        return model.getMerchandisesGroup(ids);
+    }
+
     public void setModel(PostgresModel model) {
         this.model = model;
     }

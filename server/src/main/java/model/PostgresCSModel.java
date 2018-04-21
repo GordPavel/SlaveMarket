@@ -450,7 +450,7 @@ public class PostgresCSModel implements Model {
         news.setSlider(false);
         byte[] img = new byte[0];
         try {
-            img = Files.readAllBytes(Paths.get("/home/s3rius/Development/Projects/slaveMarket/server/web/resources/images/news.jpg"));
+            img = Files.readAllBytes(Paths.get("/home/s3rius/Development/Projects/server/SlaveMarket/server/web/resources/images/alien.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

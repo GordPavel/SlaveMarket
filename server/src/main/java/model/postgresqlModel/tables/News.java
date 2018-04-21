@@ -27,12 +27,10 @@ public class News {
     private String header;
     @Column
     private String description;
-
     @Lob
     @Column(name = "newsimg")
     @Type(type = "org.hibernate.type.BinaryType")
     private byte[] image;
-
     @Column
     private boolean slider;
     @Column(name = "newstext")

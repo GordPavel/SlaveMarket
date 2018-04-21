@@ -47,7 +47,13 @@
                         <a class="nav-link my-deals-list"
                            onclick="openDeals('${user.username}', '${user.token}', 0);"
                            data-toggle="tab"
-                           href="#allDeals"><i class="fas fa-list"></i>All deals</a>
+                           href="#allDeals"><i class="fas fa-list"></i> All deals</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link"
+                           data-toggle="tab"
+                           onclick="openUserEditor();"
+                           href="#editProfileDiv"><i class="far fa-edit"></i> Edit profile</a>
                     </li>
                 </ul>
             </div>
@@ -110,7 +116,8 @@
                                                                                 <c:otherwise>
                                                                                     <tr>
                                                                                         <td>Price:</td>
-                                                                                        <td>${item.price}<i class="fab fa-stripe-s"></i></td>
+                                                                                        <td>${item.price}<i
+                                                                                                class="fab fa-stripe-s"></i></td>
                                                                                     </tr>
                                                                                 </c:otherwise>
                                                                             </c:choose>
@@ -170,6 +177,35 @@
 
                                     </ul>
                                 </nav>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="editProfileDiv" class="container tab-pane fade"><br>
+                        <div class="settings-form-container"
+                             style="padding-left:12px;padding-right:12px;padding-bottom: 12px;">
+                            <div id="changePasswordSection">
+                                <h4>Change password</h4>
+                                <div id="changePasswordForm">
+                                </div>
+                                <div class="panel-footer">
+                                    <button class="btn btn-primary"
+                                            onclick="if (cpf.validate()) {new_pass()}">
+                                        Confirm
+                                    </button>
+                                </div>
+                            </div>
+                            <hr/>
+                            <div id="changeUsernameSection">
+                                <h4>Change username</h4>
+                                <div id="changeUsernameForm">
+
+                                </div>
+                                <div class="panel-footer">
+                                    <button class="btn btn-primary"
+                                            onclick="if (cunf.validate()) {new_username()}">
+                                        Confirm
+                                    </button>
+                                </div>
                             </div>
                         </div>
                     </div>

@@ -1,4 +1,9 @@
+// Create merchandise form.
 var bf;
+// Change password form.
+var cpf;
+// Change username form.
+var cunf;
 var $deal_limit = 0;
 var $deal_panel;
 var $class_name = "";
@@ -174,4 +179,80 @@ function appendDeal(deal) {
         '        </pre>\n' +
         '     </div>\n' +
         '  </div>\n');
+}
+
+function openUserEditor() {
+    var new_username_form = {
+        "$schema": "http://json-schema.org/draft-03/schema#",
+        "type": "object",
+        "properties": {
+            "new_username": {
+                "type": "string",
+                "title": "New username",
+                "minLength": 1,
+                "description": "Your new username"
+            }
+        }
+    };
+    var password_forms = {
+        "$schema": "http://json-schema.org/draft-03/schema#",
+        "type": "object",
+        "properties": {
+            "old_password": {
+                "title": "old password",
+                "type": "string",
+                "required": true,
+                "format": "password",
+                "minLength": 8,
+                "description": "Your old password"
+            },
+            "new_password": {
+                "title": "old password",
+                "type": "string",
+                "required": true,
+                "minLength": 8,
+                "format": "password",
+                "description": "Your new password"
+            }
+        }
+    };
+    $('#changeUsernameForm').empty();
+    $('#changePasswordForm').empty();
+    var BrutusinForms = brutusin["json-forms"];
+    cpf = BrutusinForms.create(password_forms);
+    BrutusinForms.addDecorator(function (element, schema) {
+        if (element.tagName) {
+            var tagName = element.tagName.toLowerCase();
+            if (tagName === "input" && schema.type === "string") {
+                if (schema.format === 'inputstream' || schema.format === 'file') {
+                    element.type = 'file';
+                } else if (schema.format === 'password') {
+                    element.type = 'password';
+                }
+            }
+        }
+    });
+
+    var container1 = document.getElementById('changePasswordForm');
+    cpf.render(container1);
+    cunf = BrutusinForms.create(new_username_form);
+    var container2 = document.getElementById('changeUsernameForm');
+    cunf.render(container2);
+
+}
+
+function new_pass() {
+    if (cpf.getData() != null) {
+        alert(JSON.stringify(cpf.getData()));
+    } else {
+        showPopup('Error:', 'Please enter at least one field.')
+    }
+}
+
+function new_username() {
+    if (cunf.getData() != null) {
+        alert(JSON.stringify(cunf.getData()));
+    } else {
+        showPopup('Error:', 'Please enter at least one field.')
+    }
 }

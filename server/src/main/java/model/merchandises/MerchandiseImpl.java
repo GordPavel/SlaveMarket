@@ -17,6 +17,7 @@ public abstract class MerchandiseImpl implements Merchandise {
     private String allInfo;
     private String className;
     private int price;
+    private String image;
 
     @Override
     public int getId() {
@@ -57,7 +58,6 @@ public abstract class MerchandiseImpl implements Merchandise {
 
     @Override
     public void setParamsByMap(Map<String, String> map) {
-
     }
 
     public String getClassName() {
@@ -74,5 +74,13 @@ public abstract class MerchandiseImpl implements Merchandise {
 
     public void setPrice(int price) {
         this.price = price;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        this.image = image;
     }
 }

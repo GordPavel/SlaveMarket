@@ -74,4 +74,12 @@ public interface SpringModel extends Model {
      * @return list of json formatted merchandises
      */
     List<String> searchMerchandise(String query, int limit, String order, boolean desc);
+
+    /**
+     * get info about group of merchandises
+     *
+     * @param ids list with merch ids.
+     * @return json formatted merchandises.
+     */
+    List<String> getMerchandisesGroup(List<Integer> ids);
 }

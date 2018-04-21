@@ -117,19 +117,7 @@ public class PostgresModel implements SpringModel {
         Session session = sessionFactory.getCurrentSession();
         Query querySet = session.createNativeQuery("SELECT * FROM searchMerchandise(:query)")
                 .addEntity(Merchandises.class).setParameter("query", query);
-        JsonParser parser = new JsonParser();
-        return ((List<Merchandises>) querySet.getResultList())
-                .stream().map(o -> {
-                    Deals deals = (Deals) session.createNativeQuery("SELECT * FROM getLastDeal(:id)")
-                            .setParameter("id", o.getId()).addEntity(Deals.class).getSingleResult();
-                    JsonObject object = parser.parse(o.getAllInfo()).getAsJsonObject();
-                    object.add("state", new JsonPrimitive(deals.getState()));
-                    Users users = (Users) session.createQuery("from Users where id=:id")
-                            .setParameter("id", deals.getUserId()).getSingleResult();
-                    object.add("user", new JsonPrimitive(users.getUsername()));
-                    object.add("price", new JsonPrimitive(deals.getPrice()));
-                    return gson.toJson(object);
-                }).collect(toList());
+        return formatMerchandise((List<Merchandises>) querySet.getResultList());
     }
 
     @Override
@@ -144,6 +132,20 @@ public class PostgresModel implements SpringModel {
             return null;
         }
     }
+
+    @Override
+    public List<String> getMerchandisesGroup(List<Integer> ids) {
+        Session session = sessionFactory.getCurrentSession();
+        List<Merchandises> merchandises = new ArrayList<>();
+        ids.forEach(id ->
+                merchandises.add((Merchandises) session.createQuery
+                        ("from Merchandises where id = :id")
+                        .setParameter("id", id)
+                        .getSingleResult())
+        );
+        return formatMerchandise(merchandises);
+    }
+
 
     @Override
     public String buyMerchandise(int id, String user, String token) throws MerchandiseNotFoundException {
@@ -275,19 +277,25 @@ public class PostgresModel implements SpringModel {
         String ord = desc ? "DESC" : "ASC";
         Query querySet = session.createNativeQuery("SELECT * FROM searchMerchandise(:query) ORDER BY " + oreder + " " + ord + " limit :lmt")
                 .addEntity(Merchandises.class).setParameter("query", query).setParameter("lmt", limit);
+        return formatMerchandise((List<Merchandises>) querySet.getResultList());
+    }
+
+
+    public List<String> formatMerchandise(List<Merchandises> merch) {
+        Session session = sessionFactory.getCurrentSession();
         JsonParser parser = new JsonParser();
-        return ((List<Merchandises>) querySet.getResultList())
-                .stream().map(o -> {
-                    Deals deals = (Deals) session.createNativeQuery("SELECT * FROM getLastDeal(:id)")
-                            .setParameter("id", o.getId()).addEntity(Deals.class).getSingleResult();
-                    JsonObject object = parser.parse(o.getAllInfo()).getAsJsonObject();
-                    object.add("state", new JsonPrimitive(deals.getState()));
-                    Users users = (Users) session.createQuery("from Users where id=:id")
-                            .setParameter("id", deals.getUserId()).getSingleResult();
-                    object.add("user", new JsonPrimitive(users.getUsername()));
-                    object.add("price", new JsonPrimitive(deals.getPrice()));
-                    return gson.toJson(object);
-                }).collect(toList());
+        return merch.stream().map(o -> {
+            JsonObject object = parser.parse(o.getAllInfo()).getAsJsonObject();
+            object.addProperty("image", o.getBase64image());
+            Deals deals = (Deals) session.createNativeQuery("SELECT * FROM getLastDeal(:id)")
+                    .setParameter("id", o.getId()).addEntity(Deals.class).getSingleResult();
+            object.add("state", new JsonPrimitive(deals.getState()));
+            Users users = (Users) session.createQuery("from Users where id=:id")
+                    .setParameter("id", deals.getUserId()).getSingleResult();
+            object.add("user", new JsonPrimitive(users.getUsername()));
+            object.add("price", new JsonPrimitive(deals.getPrice()));
+            return gson.toJson(object);
+        }).collect(toList());
     }
 
     @Override
