@@ -48,7 +48,7 @@ public class IndexController {
     private static final String VIEW_ALL_NEWS = "news_list";
     private static final String VIEW_CART = "cart";
     private static final String VIEW_SHOP = "shop";
-    private static final String VIEW_404 = "not_found";
+    private static final String VIEW_404 = "error_page";
     private static final String VIEW_ABOUT = "about_us";
     private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
     private final static String VIEW_LOGIN = "login";
@@ -95,6 +95,9 @@ public class IndexController {
             case "about":
                 return VIEW_ABOUT;
         }
+        map.addAttribute("errorHead", "Http Error Code: 404.");
+        map.addAttribute("errorMsg", "Resource not found. You might try returning to the " +
+                "<a href=\"/\">home page</a>.");
         return VIEW_404;
     }
 

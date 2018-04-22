@@ -61,7 +61,7 @@
                             Name: ${item.name}
                         </div>
                         <div class="benefit">
-                            Benefit: ${item.benefit}
+                            Benefit: ${item.benefit}%
                         </div>
                         <div class="price">
                             Price: ${item.price}<i class="fab fa-stripe-s"></i>

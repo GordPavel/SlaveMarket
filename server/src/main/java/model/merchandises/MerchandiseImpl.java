@@ -31,7 +31,7 @@ public abstract class MerchandiseImpl implements Merchandise {
 
     @Override
     public float getBenefit() {
-        return benefit;
+        return Math.round(benefit);
     }
 
     public void setBenefit(float benefit) {

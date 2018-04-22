@@ -1,0 +1,47 @@
+.main-title {
+    padding-top: 5%;
+}
+
+.intro-header {
+    opacity: 1;
+}
+
+.intro-body {
+    opacity: 1;
+}
+
+.font-3 {
+    font-size: 3rem;
+    line-height: 1.3;
+    font-weight: 300;
+}
+
+.intro-paragraph {
+    font-size: 1.5rem;
+}
+
+.intro-image {
+    padding-top: 135px;
+    padding-bottom: 135px;
+    background: url("/resources/images/about1.png") no-repeat;
+    background-size: cover;
+}
+
+section {
+    position: relative;
+    word-wrap: break-word;
+}
+
+.card {
+    background-color: transparent;
+    border: none;
+}
+
+.card-img {
+    width: auto;
+}
+
+.card-img {
+    text-align: center;
+    flex-shrink: 0;
+}

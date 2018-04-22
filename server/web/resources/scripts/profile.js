@@ -11,8 +11,13 @@ var exifNode = $('#exif');
 var thumbNode = $('#thumbnail');
 var currentFile;
 var coordinates;
+var token;
+var username;
 
 $(document).ready(function () {
+    var user_card = $('#user-card');
+    token = user_card.attr("tkn");
+    username = user_card.attr("unm");
     $deal_panel = $('#accordion');
     $('.addMerchLink').click(function (event) {
         $('#form-container-main').hide();
@@ -38,6 +43,8 @@ $(document).ready(function () {
 function chooseClass(item) {
     $('.addingHeader').text('Please enter following values');
     $class_name = item;
+    $('#img-editor').hide();
+    $('#img-crop').hide();
     $.post('/rest/methods/getFieldsWithTypes', {className: item}, function (data) {
         $('#form-container-main').show();
         var classList = $('.availableClasses');
@@ -185,7 +192,7 @@ function displayExifData(exif) {
     exifNode.show()
 }
 
-function addMerch($username, $token) {
+function addMerch() {
     if (null != bf.getData()) {
         var img = $('a[target="_blank"]').attr("href").split(',')[1];
         var request = bf.getData();
@@ -195,8 +202,8 @@ function addMerch($username, $token) {
         $.post('/rest/methods/addMerch', {
             className: $class_name,
             fields: JSON.stringify(request),
-            username: $username,
-            token: $token
+            username: username,
+            token: token
         }, function (data) {
             showPopup('Info:', 'successfullyAdded')
         }).fail(function (data, status) {
@@ -208,11 +215,11 @@ function addMerch($username, $token) {
     }
 }
 
-function loadDeals($username, $token, $page) {
+function loadDeals($page) {
     var $offset = ($page - 1) * 10;
     $.post("/rest/methods/getDeals", {
-        username: $username,
-        token: $token,
+        username: username,
+        token: token,
         offset: $offset,
         limit: 10
     }, function (data, status) {
@@ -227,36 +234,40 @@ function loadDeals($username, $token, $page) {
 
 }
 
-function openDeals($username, $token, $offset) {
+function openDeals($offset) {
     var deal_response;
     var $page_count = 1;
     $.post("/rest/methods/getDeals", {
-        username: $username,
-        token: $token,
+        username: username,
+        token: token,
         offset: $offset,
         limit: 10
     }, function (data, status) {
         deal_response = JSON.parse(data);
         var dealsList = deal_response.deals;
         $deal_limit = deal_response.count;
-        $page_count = Math.ceil($deal_limit / 10);
         var $deal_panel = $('#accordion');
-        window.pagObj = $('#pagination').twbsPagination({
-            totalPages: $page_count,
-            visiblePages: 6,
-            first: null,
-            last: null,
-            prev: '<',
-            next: '>',
-            onPageClick: function (event, page) {
-                loadDeals($username, $token, page)
-            }
-        });
-        $deal_panel.empty();
-        dealsList.forEach(function (deal) {
-            appendDeal(deal);
-            $offset++;
-        });
+        if ($deal_limit !== 0) {
+            $page_count = Math.ceil($deal_limit / 10);
+            window.pagObj = $('#pagination').twbsPagination({
+                totalPages: $page_count,
+                visiblePages: 6,
+                first: null,
+                last: null,
+                prev: '<',
+                next: '>',
+                onPageClick: function (event, page) {
+                    loadDeals(username, token, page)
+                }
+            });
+            $deal_panel.empty();
+            dealsList.forEach(function (deal) {
+                appendDeal(deal);
+                $offset++;
+            });
+        } else {
+            $deal_panel.append('Nothing to show')
+        }
     }).fail(function (data, status) {
         showPopup('Error:', 'Can\'t load deals.\nReload page or contact system administrator.');
     });
@@ -382,7 +393,7 @@ function openUserEditor() {
     $(".glyphicon-info-sign").removeClass('glyphicon glyphicon-info-sign').addClass('fas fa-info-circle');
 }
 
-function new_pass(username, token) {
+function new_pass() {
     if (cpf.getData() != null) {
         var newPass = cpf.getData();
         if (newPass.new_password !== newPass.new_password_rep) {
@@ -403,7 +414,7 @@ function new_pass(username, token) {
     }
 }
 
-function new_username(username, token) {
+function new_username() {
     if (cunf.getData() != null) {
         $.post("/change/login", {
             username: username,
@@ -411,6 +422,8 @@ function new_username(username, token) {
             token: token
         }, function (data, status) {
             showPopup("Info:", "Successfully changed");
+            username = cunf.getData().new_username;
+            $('#user-card').text(cunf.getData().new_username);
         }).fail(function (data, status) {
             showPopup("Error", "Can\'t change username. Try another, or reload page");
         });

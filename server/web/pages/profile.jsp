@@ -47,7 +47,7 @@
                     </li>
                     <li class="nav-item">
                         <a class="nav-link my-deals-list"
-                           onclick="openDeals('${user.username}', '${user.token}', 0);"
+                           onclick="openDeals(0);"
                            data-toggle="tab"
                            href="#allDeals"><i class="fas fa-list"></i> All deals</a>
                     </li>
@@ -65,7 +65,7 @@
                         <div class="panel-group">
                             <div class="card">
                                 <div class="card-header">Username</div>
-                                <div class="card-body">${user.username}</div>
+                                <div class="card-body" id="user-card" unm="${user.username}" tkn="${user.token}">${user.username}</div>
                             </div>
                             <div class="card">
                                 <div class="card-header">Balance</div>
@@ -78,7 +78,7 @@
                                         <c:when test="${myDeals.size()!=0}">
                                             <div id="deals-accordion">
                                                 <c:forEach items="${myDeals}" var="item">
-                                                    <div class="card">
+                                                    <div class="card" >
                                                         <div class="card-header collapsed" data-toggle="collapse"
                                                              href="#collapse${item.id}">
                                                             <a class="card-title">
@@ -180,7 +180,7 @@
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary"
-                                            onclick="if (bf.validate()) {addMerch('${user.username}', '${user.token}')}">
+                                            onclick="if (bf.validate()) {addMerch()}">
                                         Add merchandise
                                     </button>
                                 </div>
@@ -216,7 +216,7 @@
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary"
-                                            onclick="if (cpf.validate()) {new_pass('${user.username}', '${user.token}')}">
+                                            onclick="if (cpf.validate()) {new_pass()}">
                                         Confirm
                                     </button>
                                 </div>
@@ -229,7 +229,7 @@
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary"
-                                            onclick="if (cunf.validate()) {new_username('${user.username}', '${user.token}')}">
+                                            onclick="if (cunf.validate()) {new_username()}">
                                         Confirm
                                     </button>
                                 </div>

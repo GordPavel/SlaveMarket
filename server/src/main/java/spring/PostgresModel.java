@@ -470,7 +470,10 @@ public class PostgresModel implements SpringModel {
 //            return formatDeals(dealsList);
         } catch (Exception e) {
             logger.error("Found exception while taking deals for user " + username + "Exception message: " + e.getMessage());
-            return "";
+            JsonObject object = new JsonObject();
+            object.add("count", new JsonPrimitive(0));
+            object.add("deals", new JsonArray());
+            return object.toString();
         }
     }
 

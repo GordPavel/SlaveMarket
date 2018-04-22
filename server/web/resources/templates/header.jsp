@@ -37,22 +37,10 @@
                                 <li><a class="nav-link" href="/logout">Log out</a></li>
                             </ul>
                         </li>
-                        <%--<c:set var="admin" value="admin"/>--%>
-                        <%--<c:if test="${user.role==admin}">--%>
-                        <%--<li class="nav-item">--%>
-                        <%--<a class="nav-link" href="/adminPanel">Admin panel</a>--%>
-                        <%--</li>--%>
-                        <%--</c:if>--%>
                     </c:if>
                     <li class="nav-item">
-                        <%--<c:if test="${cart.size()<1}">--%>
                         <a class="nav-link cart-info" href="#" data-container="body"
                            cart_elements="0">Cart <span class="badge badge-info">empty</span></a>
-                        <%--</c:if>--%>
-                        <%--<c:if test="${cart.size()>0}">--%>
-                        <%--<a class="nav-link cart-info" cart_elements="${cart.size()}" href="/cart">Cart <span--%>
-                        <%--class="badge badge-info">${cart.size()}</span></a>--%>
-                        <%--</c:if>--%>
                     </li>
                 </ul>
                 <form class="form-inline my-2 my-lg-0" action="/search">

@@ -11,6 +11,10 @@
 <web-app metadata-complete="true" xmlns="http://java.sun.com/xml/ns/javaee" version="2.5">
     <display-name>Slave Market</display-name>
 
+    <error-page>
+        <location>/errors</location>
+    </error-page>
+
     <servlet>
         <servlet-name>mvc-dispatcher</servlet-name>
         <servlet-class>
