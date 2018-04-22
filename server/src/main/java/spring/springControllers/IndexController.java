@@ -49,10 +49,11 @@ public class IndexController {
     private static final String VIEW_CART = "cart";
     private static final String VIEW_SHOP = "shop";
     private static final String VIEW_404 = "not_found";
-    private static final String VIEW_ADMIN = "admin_panel";
+    private static final String VIEW_ABOUT = "about_us";
     private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
     private final static String VIEW_LOGIN = "login";
     private static final String VIEW_PROFILE = "profile";
+    private static final String VIEW_CONTACTS = "contacts";
     private PostgresSpringService model;
     private Users user = null;
     private List<Integer> cart = new ArrayList<>();
@@ -85,11 +86,18 @@ public class IndexController {
         return VIEW_INDEX;
     }
 
-//    @RequestMapping(value = "/adminPanel", method = RequestMethod.GET)
-//    public String showAdminPanel(ModelMap modelMap) {
-//        setAttr(modelMap);
-//        return VIEW_ADMIN;
-//    }
+    @RequestMapping(value = "/info/{page}")
+    public String aboutUs(ModelMap map, @PathVariable String page) {
+        setAttr(map);
+        switch (page) {
+            case "contacts":
+                return VIEW_CONTACTS;
+            case "about":
+                return VIEW_ABOUT;
+        }
+        return VIEW_404;
+    }
+
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(ModelMap modelMap) {
@@ -234,13 +242,45 @@ public class IndexController {
             try {
                 model.disconnect(user.getUsername(), user.getToken());
             } catch (UserException exception) {
-                logger.info("user " + user.getUsername() + " has wrong token. Logging out.");
+                logger.error("user " + user.getUsername() + " has wrong token. Logging out.");
+            } catch (Exception e) {
+                logger.error("user can't logout because " + e.getMessage());
             }
             user = null;
         }
         return new ModelAndView("redirect:/");
     }
 
+    @RequestMapping(value = "/change/login", method = RequestMethod.POST)
+    public ResponseEntity<Boolean> chageUsername(@RequestParam String username,
+                                                 @RequestParam String newUsername,
+                                                 @RequestParam String token) {
+        try {
+            if (model.changeLogin(username, newUsername, token)) {
+                user.setUsername(newUsername);
+                return ResponseEntity.ok(true);
+            } else {
+                return ResponseEntity.ok(false);
+            }
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+
+    @RequestMapping(value = "/change/password", method = RequestMethod.POST)
+    public ResponseEntity<Boolean> chagePassword(@RequestParam String username,
+                                                 @RequestParam String newPassword,
+                                                 @RequestParam String token) {
+        try {
+            Gson gson = new Gson();
+            Users newUser = gson.fromJson(model.getUserByToken(token), Users.class);
+            model.changePassword(username, newPassword, token);
+            user = newUser;
+            return ResponseEntity.ok(true);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
 
     private void setAttr(ModelMap modelMap) {
         modelMap.addAttribute("user", user);

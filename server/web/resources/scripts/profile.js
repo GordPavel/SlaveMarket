@@ -7,6 +7,10 @@ var cunf;
 var $deal_limit = 0;
 var $deal_panel;
 var $class_name = "";
+var exifNode = $('#exif');
+var thumbNode = $('#thumbnail');
+var currentFile;
+var coordinates;
 
 $(document).ready(function () {
     $deal_panel = $('#accordion');
@@ -40,20 +44,157 @@ function chooseClass(item) {
         classList.empty();
         var schema = JSON.parse(data);
         var BrutusinForms = brutusin["json-forms"];
+        BrutusinForms.addDecorator(function (element, schema) {
+            if (element.tagName) {
+                var tagName = element.tagName.toLowerCase();
+                if (tagName === "input" && schema.type === "string") {
+                    if (schema.format === 'inputstream' || schema.format === 'file') {
+                        element.type = 'file';
+                    }
+                }
+            }
+        });
         bf = BrutusinForms.create(schema);
         var container = document.getElementById('form-container');
         bf.render(container, '');
-        $(".glyphicon-info-sign").removeClass('glyphicon glyphicon-info-sign').addClass('fas fa-info-circle')
+        $(".glyphicon-info-sign").removeClass('glyphicon glyphicon-info-sign').addClass('fas fa-info-circle');
+        var result = $('#img-result');
+        if (window.createObjectURL || window.URL || window.webkitURL ||
+            window.FileReader) {
+            result.children().hide();
+        }
+        $('input[type="file"]')
+            .on('change', dropChangeHandler);
+        $('#img-edit')
+            .on('click', function (event) {
+                event.preventDefault();
+                var imgNode = result.find('img, canvas');
+                var img = imgNode[0];
+                var pixelRatio = window.devicePixelRatio || 1;
+                imgNode.Jcrop({
+                    setSelect: [
+                        40,
+                        40,
+                        (img.width / pixelRatio) - 40,
+                        (img.height / pixelRatio) - 40
+                    ],
+                    onSelect: function (coords) {
+                        coordinates = coords
+                    },
+                    onRelease: function () {
+                        coordinates = null
+                    }
+                }).parent().on('click', function (event) {
+                    event.preventDefault()
+                });
+                $('#img-crop').show();
+            });
+        $('#img-crop')
+            .on('click', function (event) {
+                event.preventDefault();
+                var img = result.find('img, canvas')[0];
+                var pixelRatio = window.devicePixelRatio || 1;
+                if (img && coordinates) {
+                    updateResults(loadImage.scale(img, {
+                        left: coordinates.x * pixelRatio,
+                        top: coordinates.y * pixelRatio,
+                        sourceWidth: coordinates.w * pixelRatio,
+                        sourceHeight: coordinates.h * pixelRatio,
+                        minWidth: result.width(),
+                        maxWidth: result.width(),
+                        pixelRatio: pixelRatio,
+                        downsamplingRatio: 0.5
+                    }));
+                    coordinates = null;
+                }
+                $('#img-crop').hide();
+            })
     }).fail(function (data, status) {
         showPopup('Error:', 'Can\'t load required fields.\nReload page or contact system administrator.');
     });
 }
 
+function displayImage(file, options) {
+    currentFile = file;
+    if (!loadImage(
+        file,
+        updateResults,
+        options
+    )) {
+        result.children().replaceWith(
+            $('<span>' +
+                'Your browser does not support the URL or FileReader API.' +
+                '</span>')
+        )
+    }
+}
+
+function updateResults(img, data) {
+    var fileName = currentFile.name;
+    var href = img.src;
+    var dataURLStart;
+    var content;
+    if (!(img.src || img instanceof HTMLCanvasElement)) {
+        content = $('<span>Loading image file failed</span>')
+    } else {
+        if (!href) {
+            href = img.toDataURL(currentFile.type + 'REMOVEME');
+            // Check if file type is supported for the dataURL export:
+            dataURLStart = 'data:' + currentFile.type;
+            if (href.slice(0, dataURLStart.length) !== dataURLStart) {
+                fileName = fileName.replace(/\.\w+$/, '.png')
+            }
+        }
+        content = $('<a target="_blank">').append(img)
+            .attr('download', fileName)
+            .attr('href', href)
+    }
+    var result = $('#img-result');
+    result.children().replaceWith(content);
+    var actionsNode = $('#img-actions');
+    if (img.getContext) {
+        actionsNode.show()
+    }
+    if (data && data.exif) {
+        displayExifData(data.exif)
+    }
+}
+
+function displayExifData(exif) {
+    var thumbnail = exif.get('Thumbnail');
+    var tags = exif.getAll();
+    var table = exifNode.find('table').empty();
+    var row = $('<tr></tr>');
+    var cell = $('<td></td>');
+    var prop;
+    if (thumbnail) {
+        thumbNode.empty();
+        loadImage(thumbnail, function (img) {
+            thumbNode.append(img).show()
+        }, {orientation: exif.get('Orientation')})
+    }
+    for (prop in tags) {
+        if (tags.hasOwnProperty(prop)) {
+            table.append(
+                row.clone()
+                    .append(cell.clone().text(prop))
+                    .append(cell.clone().text(tags[prop]))
+            )
+        }
+    }
+    exifNode.show()
+}
+
 function addMerch($username, $token) {
     if (null != bf.getData()) {
+        var img = $('a[target="_blank"]').attr("href").split(',')[1];
+        var request = bf.getData();
+        if (request.image) {
+            request.image = img;
+        }
         $.post('/rest/methods/addMerch', {
             className: $class_name,
-            fields: JSON.stringify(bf.getData()),
+            fields: JSON.stringify(request),
             username: $username,
             token: $token
         }, function (data) {
@@ -198,29 +339,29 @@ function openUserEditor() {
         "$schema": "http://json-schema.org/draft-03/schema#",
         "type": "object",
         "properties": {
-            "old_password": {
-                "title": "old password",
-                "type": "string",
-                "required": true,
-                "format": "password",
-                "minLength": 8,
-                "description": "Your old password"
-            },
             "new_password": {
-                "title": "old password",
+                "title": "New password",
+                "type": "string",
+                "required": true,
+                "format": "password",
+                "minLength": 8,
+                "description": "Your new password"
+            },
+            "new_password_rep": {
+                "title": "Repeat new password",
                 "type": "string",
                 "required": true,
                 "minLength": 8,
                 "format": "password",
-                "description": "Your new password"
+                "description": "Your new password one more time"
             }
         }
     };
     $('#changeUsernameForm').empty();
     $('#changePasswordForm').empty();
-    var BrutusinForms = brutusin["json-forms"];
-    cpf = BrutusinForms.create(password_forms);
-    BrutusinForms.addDecorator(function (element, schema) {
+    var BrutusinForms1 = brutusin["json-forms"];
+    cpf = BrutusinForms1.create(password_forms);
+    BrutusinForms1.addDecorator(function (element, schema) {
         if (element.tagName) {
             var tagName = element.tagName.toLowerCase();
             if (tagName === "input" && schema.type === "string") {
@@ -232,27 +373,70 @@ function openUserEditor() {
             }
         }
     });
-
+    var BrutusinForms2 = brutusin["json-forms"];
     var container1 = document.getElementById('changePasswordForm');
     cpf.render(container1);
-    cunf = BrutusinForms.create(new_username_form);
+    cunf = BrutusinForms2.create(new_username_form);
     var container2 = document.getElementById('changeUsernameForm');
     cunf.render(container2);
-
+    $(".glyphicon-info-sign").removeClass('glyphicon glyphicon-info-sign').addClass('fas fa-info-circle');
 }
 
-function new_pass() {
+function new_pass(username, token) {
     if (cpf.getData() != null) {
-        alert(JSON.stringify(cpf.getData()));
+        var newPass = cpf.getData();
+        if (newPass.new_password !== newPass.new_password_rep) {
+            showPopup('Error:', 'Password does not match');
+        } else {
+            $.post("/change/password", {
+                username: username,
+                newPassword: newPass.new_password,
+                token: token
+            }, function (data, status) {
+                showPopup("Info:", "Successfully changed");
+            }).fail(function (data, status) {
+                showPopup("Error", "Can\'t change password. Try another, or reload page");
+            });
+        }
     } else {
-        showPopup('Error:', 'Please enter at least one field.')
+        showPopup('Error:', 'Please enter passwords.')
     }
 }
 
-function new_username() {
+function new_username(username, token) {
     if (cunf.getData() != null) {
-        alert(JSON.stringify(cunf.getData()));
+        $.post("/change/login", {
+            username: username,
+            newUsername: cunf.getData().new_username,
+            token: token
+        }, function (data, status) {
+            showPopup("Info:", "Successfully changed");
+        }).fail(function (data, status) {
+            showPopup("Error", "Can\'t change username. Try another, or reload page");
+        });
     } else {
-        showPopup('Error:', 'Please enter at least one field.')
+        showPopup('Error:', 'Please enter at least one field.');
     }
+}
+
+function dropChangeHandler(e) {
+    $('#img-editor').show();
+    e.preventDefault();
+    e = e.originalEvent;
+    var target = e.dataTransfer || e.target;
+    var file = target && target.files && target.files[0];
+    var result = $('#img-result');
+    var options = {
+        maxWidth: result.width(),
+        canvas: true,
+        pixelRatio: window.devicePixelRatio,
+        downsamplingRatio: 0.5,
+        orientation: true
+    };
+    if (!file) {
+        return
+    }
+    exifNode.hide();
+    thumbNode.hide();
+    displayImage(file, options)
 }

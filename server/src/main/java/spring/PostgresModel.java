@@ -248,10 +248,15 @@ public class PostgresModel implements SpringModel {
                 if (types[i].equals("text")) {
                     type.add("type", new JsonPrimitive("string"));
                     type.add("format", new JsonPrimitive("text"));
+                    type.add("required", new JsonPrimitive(true));
+                } else if (types[i].equals("image")) {
+                    type.add("type", new JsonPrimitive("string"));
+                    type.add("format", new JsonPrimitive("inputstream"));
+                    type.add("required", new JsonPrimitive(false));
                 } else {
                     type.add("type", new JsonPrimitive(types[i]));
+                    type.add("required", new JsonPrimitive(true));
                 }
-                type.add("required", new JsonPrimitive(true));
                 type.add("description", new JsonPrimitive("merchandise " + fields[i]));
                 properties.add(fields[i], type);
             });
@@ -319,11 +324,16 @@ public class PostgresModel implements SpringModel {
                 "VALUES (" + vals.substring(0, vals.length() - 2) + ") RETURNING id");
         int i = 1;
         for (String key : kvs.keySet()) {
-            try {
-                double param = Double.parseDouble(kvs.get(key));
-                query.setParameter(i, param);
-            } catch (Exception e) {
-                query.setParameter(i, kvs.get(key));
+            if (!key.equals("image")) {
+                try {
+                    double param = Double.parseDouble(kvs.get(key));
+                    query.setParameter(i, param);
+                } catch (Exception e) {
+                    query.setParameter(i, kvs.get(key));
+                }
+            } else {
+
+                query.setParameter(i, session.createNativeQuery("select decode('" + kvs.get(key) + "', 'base64')").getSingleResult());
             }
             i++;
         }

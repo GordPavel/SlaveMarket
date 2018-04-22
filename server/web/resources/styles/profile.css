@@ -32,3 +32,8 @@
 .pagination.center {
     text-align: center;
 }
+
+#img-result{
+    max-height: 358px;
+    max-width: 358px;
+}

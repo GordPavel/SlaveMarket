@@ -135,6 +135,30 @@ public class SpringRestController {
         }
     }
 
+    @RequestMapping(value = "/change/login", method = RequestMethod.POST)
+    public ResponseEntity<Boolean> chageUsername(@RequestParam String username,
+                                                 @RequestParam String newUsername,
+                                                 @RequestParam String token) {
+        try {
+            model.changeLogin(username, newUsername, token);
+            return ResponseEntity.ok(true);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+
+    @RequestMapping(value = "/change/password", method = RequestMethod.POST)
+    public ResponseEntity<Boolean> chagePassword(@RequestParam String username,
+                                                 @RequestParam String newPassword,
+                                                 @RequestParam String token) {
+        try {
+            model.changePassword(username, newPassword, token);
+            return ResponseEntity.ok(true);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(false);
+        }
+    }
+
     @Autowired
     @Qualifier("psqlService")
     public void setModel(PostgresSpringService model) {

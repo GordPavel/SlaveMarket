@@ -22,6 +22,8 @@
     <script src="/resources/scripts/brutusin-json-forms.min.js"></script>
     <script src="/resources/scripts/brutusin-json-forms-bootstrap.min.js"></script>
     <script src="/resources/scripts/jquery.twbsPagination.min.js"></script>
+    <script src="/resources/scripts/jquery.Jcrop.js"></script>
+    <script src="/resources/scripts/load-image.all.min.js"></script>
 
     <title>Profile</title>
 </head>
@@ -151,6 +153,31 @@
                             <div id="form-container-main">
                                 <div id='form-container'
                                      style="padding-left:12px;padding-right:12px;padding-bottom: 12px;"></div>
+                                <div id="img-editor" class="image-preview" style="display: none;">
+                                    <p id="img-actions" style="display:none;">
+                                        <button type="button" href="#" onclick="void(0)" class="btn btn-primary"
+                                                id="img-edit">Edit
+                                        </button>
+                                        <button type="button" href="#" onclick="void(0)" class="btn btn-primary"
+                                                id="img-crop"
+                                                style="display: none;">Crop
+                                        </button>
+                                    </p>
+                                    <h4>
+                                        Image editor:
+                                    </h4>
+                                    <div id="img-result" class="result">
+                                        <p>Image preview feature works only in browsers with support for the <a
+                                                href="https://developer.mozilla.org/en/DOM/window.URL">URL</a> or <a
+                                                href="https://developer.mozilla.org/en/DOM/FileReader">FileReader</a>
+                                            API.</p>
+                                    </div>
+                                    <div id="exif" class="exif" style="display:none;">
+                                        <h2>Exif meta data</h2>
+                                        <p id="thumbnail" class="thumbnail" style="display:none;"></p>
+                                        <table></table>
+                                    </div>
+                                </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary"
                                             onclick="if (bf.validate()) {addMerch('${user.username}', '${user.token}')}">
@@ -189,7 +216,7 @@
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary"
-                                            onclick="if (cpf.validate()) {new_pass()}">
+                                            onclick="if (cpf.validate()) {new_pass('${user.username}', '${user.token}')}">
                                         Confirm
                                     </button>
                                 </div>
@@ -202,7 +229,7 @@
                                 </div>
                                 <div class="panel-footer">
                                     <button class="btn btn-primary"
-                                            onclick="if (cunf.validate()) {new_username()}">
+                                            onclick="if (cunf.validate()) {new_username('${user.username}', '${user.token}')}">
                                         Confirm
                                     </button>
                                 </div>
