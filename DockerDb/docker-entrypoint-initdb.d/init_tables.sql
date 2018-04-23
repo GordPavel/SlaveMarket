@@ -738,8 +738,10 @@ BEGIN
                   WHERE id = $1);
         end if;
       ELSE
-        RAISE EXCEPTION 'Merchandise on sale by you'
-        USING ERRCODE ='BM002';
+        INSERT into deals (userid, state, time, merchid, price) VALUES (deal.userid, 'removed', now(), $1, deal.price);
+        RETURN (SELECT info
+                FROM merchandises
+                WHERE id = $1);
       end if;
     ELSE
       RAISE EXCEPTION 'Merchandise already bought'

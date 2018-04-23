@@ -215,7 +215,7 @@ function addMerch() {
     }
 }
 
-function loadDeals($page) {
+function loadDeals(username, token, $page) {
     var $offset = ($page - 1) * 10;
     $.post("/rest/methods/getDeals", {
         username: username,

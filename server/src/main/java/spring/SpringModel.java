@@ -82,4 +82,6 @@ public interface SpringModel extends Model {
      * @return json formatted merchandises.
      */
     List<String> getMerchandisesGroup(List<Integer> ids);
+
+    void buyMerchandises(List<Integer> cart, String username, String token);
 }

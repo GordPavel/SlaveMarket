@@ -146,6 +146,14 @@ public class PostgresModel implements SpringModel {
         return formatMerchandise(merchandises);
     }
 
+    @Override
+    public void buyMerchandises(List<Integer> cart, String username, String token) {
+        JsonParser parser = new JsonParser();
+        getMerchandisesGroup(cart).stream().filter(item -> parser.parse(item).getAsJsonObject().get("state").getAsString().equals("on sale")).
+                mapToInt(item -> parser.parse(item).getAsJsonObject().get("id").getAsInt()).
+                forEach(item_id -> buyMerchandise(item_id, username, token));
+    }
+
 
     @Override
     public String buyMerchandise(int id, String user, String token) throws MerchandiseNotFoundException {

@@ -50,10 +50,14 @@ public class IndexController {
     private static final String VIEW_SHOP = "shop";
     private static final String VIEW_404 = "error_page";
     private static final String VIEW_ABOUT = "about_us";
-    private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
     private final static String VIEW_LOGIN = "login";
     private static final String VIEW_PROFILE = "profile";
     private static final String VIEW_CONTACTS = "contacts";
+    private static final String VIEW_QNA = "questions";
+    private static final String VIEW_DEV = "dev_team";
+    private static final String VIEW_COOP = "coop";
+    private final static Logger logger = LoggerFactory.getLogger(IndexController.class);
+    private boolean straightLink = true;
     private PostgresSpringService model;
     private Users user = null;
     private List<Integer> cart = new ArrayList<>();
@@ -66,27 +70,14 @@ public class IndexController {
             Gson gson = new Gson();
             return gson.fromJson(string, News.class);
         }).sorted(Comparator.comparingInt(News::getId).reversed()).collect(toList()));
-        modelMap.addAttribute("cart", cart);
+//        modelMap.addAttribute("cart", cart);
         modelMap.addAttribute("merchandises",
                 model.searchMerchandise("", 10, "benefit", true).stream()
-                        .map(item -> {
-                            JsonParser parser = new JsonParser();
-                            JsonObject object = parser.parse(item).getAsJsonObject();
-                            MerchandiseImpl merchandise = new MerchandiseImpl() {
-                            };
-                            merchandise.setId(object.get("id").getAsInt());
-                            merchandise.setImage(object.get("image").getAsString());
-                            merchandise.setName(object.get("name").getAsString());
-                            merchandise.setBenefit(object.get("benefit").getAsFloat());
-                            merchandise.setClassName(object.get("class").getAsString());
-                            merchandise.setPrice(object.get("price").getAsInt());
-                            merchandise.setAllInfo(item);
-                            return merchandise;
-                        }).collect(toList()));
+                        .map(this::getMerchandise).collect(toList()));
         return VIEW_INDEX;
     }
 
-    @RequestMapping(value = "/info/{page}")
+    @RequestMapping(value = "/info/{page}", method = RequestMethod.GET)
     public String aboutUs(ModelMap map, @PathVariable String page) {
         setAttr(map);
         switch (page) {
@@ -94,6 +85,12 @@ public class IndexController {
                 return VIEW_CONTACTS;
             case "about":
                 return VIEW_ABOUT;
+            case "quest":
+                return VIEW_QNA;
+            case "dev":
+                return VIEW_DEV;
+            case "coop":
+                return VIEW_COOP;
         }
         map.addAttribute("errorHead", "Http Error Code: 404.");
         map.addAttribute("errorMsg", "Resource not found. You might try returning to the " +
@@ -104,14 +101,36 @@ public class IndexController {
 
     @RequestMapping(value = "/cart", method = RequestMethod.GET)
     public String showCart(ModelMap modelMap) {
+        if (cart.size() < 1) {
+            return welcomePage(modelMap);
+        }
         setAttr(modelMap);
-        JsonParser parser = new JsonParser();
+        if (user == null) {
+            straightLink = false;
+            return VIEW_LOGIN;
+        }
         modelMap.addAttribute("cart", model
                 .getGroupMerchandises(cart)
                 .stream()
-                .map(item -> parser.parse(item).getAsJsonObject())
+                .map(this::getMerchandise)
                 .collect(toList()));
         return VIEW_CART;
+    }
+
+    private MerchandiseImpl getMerchandise(String item) {
+        JsonParser parser = new JsonParser();
+        JsonObject object = parser.parse(item).getAsJsonObject();
+        MerchandiseImpl merchandise = new MerchandiseImpl() {
+        };
+        merchandise.setId(object.get("id").getAsInt());
+        merchandise.setImage(object.get("image").getAsString());
+        merchandise.setName(object.get("name").getAsString());
+        merchandise.setBenefit(object.get("benefit").getAsFloat());
+        merchandise.setClassName(object.get("class").getAsString());
+        merchandise.setPrice(object.get("price").getAsInt());
+        merchandise.setState(object.get("state").getAsString());
+        merchandise.setAllInfo(item);
+        return merchandise;
     }
 
     @RequestMapping(value = "/cart", method = RequestMethod.POST)
@@ -126,20 +145,40 @@ public class IndexController {
     }
 
 
-    @RequestMapping(value = "/cart", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/cart/remove", method = RequestMethod.POST)
     @ResponseBody
-    public ResponseEntity<Boolean> deleteFromCart(@RequestParam int id) {
+    public ResponseEntity<String> deleteFromCart(@RequestParam int id) {
+        JsonObject object = new JsonObject();
         if (cart.contains(id)) {
             int target = cart.indexOf(id);
+            object.add("status", new JsonPrimitive(true));
             cart.remove(target);
-            return ResponseEntity.ok(true);
+            return ResponseEntity.ok(object.toString());
         } else {
-            return ResponseEntity.badRequest().body(false);
+            object.add("status", new JsonPrimitive(false));
+            return ResponseEntity.badRequest().body(object.toString());
         }
     }
 
+    @RequestMapping(value = "/checkout", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<String> checkout() {
+        JsonObject response = new JsonObject();
+        try {
+            model.buyMerchandises(cart, user.getUsername(), user.getToken());
+            cart.clear();
+            response.add("status", new JsonPrimitive("true"));
+            return ResponseEntity.ok(response.toString());
+        } catch (Exception e) {
+            cart.clear();
+            response.add("status", new JsonPrimitive("false"));
+            response.add("error", new JsonPrimitive(e.getMessage()));
+            return ResponseEntity.badRequest().body(response.toString());
+        }
+    }
 
     @RequestMapping(value = "/cart/info", method = RequestMethod.POST)
+
     public ResponseEntity<String> getCartInfo(@RequestParam String type) {
         switch (type) {
             case "size":
@@ -150,11 +189,7 @@ public class IndexController {
                 JsonObject jCart = new JsonObject();
                 JsonParser parser = new JsonParser();
                 JsonArray items = new JsonArray();
-                cart.forEach(integer -> {
-                    String merchant = model.getMerchantById(integer);
-                    JsonObject item = parser.parse(merchant).getAsJsonObject();
-                    items.add(item);
-                });
+                model.getGroupMerchandises(cart).forEach(items::add);
                 jCart.add("count", new JsonPrimitive(items.size()));
                 jCart.add("items", items);
                 return ResponseEntity.ok(jCart.toString());
@@ -172,7 +207,7 @@ public class IndexController {
         return VIEW_SHOP;
     }
 
-    @RequestMapping(value = "/login")
+    @RequestMapping(value = "/login", method = RequestMethod.GET)
     public ModelAndView login(ModelMap modelMap) {
         setAttr(modelMap);
         if (null == user) {
@@ -191,7 +226,12 @@ public class IndexController {
             return new ModelAndView("redirect:/");
         }
         user = gson.fromJson(newUser, Users.class);
-        return new ModelAndView("redirect:/profile");
+        if (straightLink) {
+            return new ModelAndView("redirect:/profile");
+        } else {
+            straightLink = true;
+            return new ModelAndView("redirect:/cart");
+        }
     }
 
     @RequestMapping(value = "/profile", method = RequestMethod.GET)
@@ -239,7 +279,7 @@ public class IndexController {
      *
      * @return redirect on home page
      */
-    @RequestMapping(value = "/logout")
+    @RequestMapping(value = "/logout", method = RequestMethod.GET)
     public ModelAndView logout() {
         if (null != user) {
             try {
@@ -295,7 +335,7 @@ public class IndexController {
         this.model = model;
     }
 
-    @RequestMapping(value = "/news/")
+    @RequestMapping(value = "/news/", method = RequestMethod.GET)
     public String showNews(ModelMap modelMap) {
         setAttr(modelMap);
         return VIEW_ALL_NEWS;

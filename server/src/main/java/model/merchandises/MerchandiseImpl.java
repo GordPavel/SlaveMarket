@@ -18,6 +18,7 @@ public abstract class MerchandiseImpl implements Merchandise {
     private String className;
     private int price;
     private String image;
+    private String state;
 
     @Override
     public int getId() {
@@ -82,5 +83,17 @@ public abstract class MerchandiseImpl implements Merchandise {
 
     public void setImage(String image) {
         this.image = image;
+    }
+
+    public String getState() {
+        return state;
+    }
+
+    public void setState(String state) {
+        this.state = state;
+    }
+
+    public boolean isAvailable() {
+        return state.equals("on sale");
     }
 }

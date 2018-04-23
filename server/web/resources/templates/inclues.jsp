@@ -4,7 +4,7 @@
 
 <link rel="icon" href="/resources/images/logo.png"/>
 <link rel="stylesheet" href="/resources/styles/bootstrap.min.css" id="bootstrap-css"/>
-<link rel="stylesheet" href="/resources/fontawesome/css/fontawesome-all.min.css"/>
+<link rel="stylesheet" href="/resources/fonts/fontawesome/css/fontawesome-all.min.css"/>
 <link rel="stylesheet" href="/resources/styles/footer.css"/>
 <link rel="stylesheet" href="/resources/styles/magnific-popup.css">
 <link rel="stylesheet" href="/resources/styles/header.css">

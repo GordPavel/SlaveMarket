@@ -198,4 +198,9 @@ public class PostgresSpringService {
     public void setModel(PostgresModel model) {
         this.model = model;
     }
+
+    @Transactional
+    public void buyMerchandises(List<Integer> cart, String username, String token) {
+        model.buyMerchandises(cart, username, token);
+    }
 }

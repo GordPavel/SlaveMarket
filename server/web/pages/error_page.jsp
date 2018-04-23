@@ -8,6 +8,7 @@
 --%>
 <html>
 <head>
+    <link rel="icon" href="/resources/images/logo.png"/>
     <link rel="stylesheet" href="/resources/styles/not_found.css"/>
     <link rel="stylesheet" href="/resources/styles/footer.css">
     <link rel="stylesheet" href="/resources/styles/bootstrap.min.css">
