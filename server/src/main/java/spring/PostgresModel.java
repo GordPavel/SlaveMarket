@@ -285,12 +285,17 @@ public class PostgresModel implements SpringModel {
     }
 
     @Override
-    public List<String> searchMerchandise(String query, int limit, String oreder, boolean desc) {
+    public List<String> searchMerchandise(String query, int limit, String order, boolean desc, int offset) {
         Session session = sessionFactory.getCurrentSession();
         String ord = desc ? "DESC" : "ASC";
-        Query querySet = session.createNativeQuery("SELECT * FROM searchMerchandise(:query) ORDER BY " + oreder + " " + ord + " limit :lmt")
-                .addEntity(Merchandises.class).setParameter("query", query).setParameter("lmt", limit);
-        return formatMerchandise((List<Merchandises>) querySet.getResultList());
+        try {
+            Query querySet = session.createNativeQuery("SELECT * FROM searchMerchandise(:query) ORDER BY " + order + " " + ord + " limit :lmt offset :oft")
+                    .addEntity(Merchandises.class).setParameter("query", query).setParameter("lmt", limit).setParameter("oft", offset);
+            return formatMerchandise((List<Merchandises>) querySet.getResultList());
+        } catch (JDBCException e) {
+            logger.error("Error found while search merchandise: ", e);
+            return new ArrayList<>();
+        }
     }
 
 
@@ -300,15 +305,19 @@ public class PostgresModel implements SpringModel {
         return merch.stream().map(o -> {
             JsonObject object = parser.parse(o.getAllInfo()).getAsJsonObject();
             object.addProperty("image", o.getBase64image());
-            Deals deals = (Deals) session.createNativeQuery("SELECT * FROM getLastDeal(:id)")
-                    .setParameter("id", o.getId()).addEntity(Deals.class).getSingleResult();
-            object.add("state", new JsonPrimitive(deals.getState()));
-            Users users = (Users) session.createQuery("from Users where id=:id")
-                    .setParameter("id", deals.getUserId()).getSingleResult();
-            object.add("user", new JsonPrimitive(users.getUsername()));
-            object.add("price", new JsonPrimitive(deals.getPrice()));
-            return gson.toJson(object);
-        }).collect(toList());
+            try {
+                Deals deals = (Deals) session.createNativeQuery("SELECT * FROM getLastDeal(:id)")
+                        .setParameter("id", o.getId()).addEntity(Deals.class).getSingleResult();
+                object.add("state", new JsonPrimitive(deals.getState()));
+                Users users = (Users) session.createQuery("from Users where id=:id")
+                        .setParameter("id", deals.getUserId()).getSingleResult();
+                object.add("user", new JsonPrimitive(users.getUsername()));
+                object.add("price", new JsonPrimitive(deals.getPrice()));
+                return object;
+            } catch (Exception e) {
+                return null;
+            }
+        }).filter(Objects::nonNull).map(JsonObject::toString).collect(toList());
     }
 
     @Override

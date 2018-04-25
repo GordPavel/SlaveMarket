@@ -68,20 +68,12 @@
                         </div>
                         <div class="control">
                             <div class="buttons">
-                                <c:choose>
-                                    <c:when test="${cart.contains(item.id)}">
-                                        <button href="#" onclick="void(0)" class="btn btn-primary disabled"
-                                                data-product_id="${item.id}">
-                                            Added
-                                        </button>
-                                    </c:when>
-                                    <c:when test="${!cart.contains(item.id)}">
-                                        <button href="#" onclick="void(0)" class="btn btn-primary add-card-btn"
-                                                data-product_id="${item.id}"><i
-                                                class="fa fa-shopping-cart" aria-hidden="true"></i>Add to cart
-                                        </button>
-                                    </c:when>
-                                </c:choose>
+                                <button href="#" onclick="void(0)" class="btn btn-primary add-card-btn"
+                                        data-product_id="${item.id}"><i
+                                        data-product_id="${item.id}"
+                                        class="fa fa-shopping-cart" aria-hidden="true">
+                                </i> Add to cart
+                                </button>
                                 <a href="/merchandises/${item.id}" class="btn btn-primary">Show</a>
                             </div>
                         </div>

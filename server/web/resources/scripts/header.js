@@ -1,20 +1,43 @@
 $(function () {
     updateCart();
-    $('[data-toggle="popover"]').popover()
+    $('body').on('click', '.merchandises .item .control .add-card-btn', function (event) {
+        let merchId = event.target.getAttribute("data-product_id");
+        console.log(merchId);
+        $.post("/cart/", {id: merchId}, function (data) {
+            console.log("Added in cart");
+            $(event.target).addClass('disabled');
+            $('.cart-info').attr({
+                "data-toggle": "",
+                "data-placement": "",
+                "data-content": ""
+            });
+            updateCart();
+        }).fail(function (data, status) {
+            console.log("Response error with status " + status + " data:" + data.responseText);
+            showPopup('Error', 'Can\'t add merchandise into cart');
+        });
+    });
+    $('body').on('click', '.merchandises .item .control .disabled', function (event) {
+        showPopup('Info:', 'Already in cart')
+    });
 });
 
 function updateCart() {
-    var cart = $('.cart-info');
-    var cartSize = $('.cart-info .badge');
+    let cart = $('.cart-info');
+    let cartSize = $('.cart-info .badge');
     $.post(
-        "/cart/info/", {type: "size"}, function (data) {
-            var size = JSON.parse(data);
-            if (size.size >= 1) {
-                cart.removeAttr("data-toggle");
-                cart.removeAttr("data-placement");
-                cart.removeAttr("data-content");
+        "/cart/info/", {type: "items"}, function (data) {
+            let cart_res = JSON.parse(data);
+            let size = cart_res.size;
+            if (size >= 1) {
                 cart.attr({href: "/cart", cart_elements: size.size});
-                cartSize.text(size.size);
+                cartSize.text(size);
+                cart_res.items.map(x => JSON.parse(x)).forEach(x => {
+                    $('.add-card-btn[data-product_id="' + x.id + '"]')
+                        .addClass("disabled")
+                        .removeClass('add-card-btn')
+                        .html('<i class="fas fa-check"></i>');
+                });
             } else {
                 cart.attr({
                     "data-toggle": "popover",
@@ -22,11 +45,12 @@ function updateCart() {
                     "data-content": "Your cart is empty"
                 });
                 cartSize.text("empty");
+                $('[data-toggle="popover"]').popover();
             }
         }).fail(function (data, status) {
-            console.log("Response error with status " + status + " data:" + data.responseText);
-            showPopup("Error", "Can\'t update cart.\nPlease reload page.");
-        })
+        console.log("Response error with status " + status + " data:" + data.responseText);
+        showPopup("Error", "Can\'t update cart.\nPlease reload page.");
+    })
 }
 
 function showPopup(header, message) {

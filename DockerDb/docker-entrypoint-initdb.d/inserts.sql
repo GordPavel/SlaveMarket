@@ -66,7 +66,6 @@ INSERT INTO public.slaves (name, class, benefit, info, height, weight, age, gend
 INSERT INTO public.slaves (name, class, benefit, info, height, weight, age, gender) VALUES('Garry', 'slaves', 31.6, '{"id" : 45, "class" : "slaves", "name" : "Garry", "age" : 20, "weight" : 84, "height" : 198, "benefit" : 31.600000000000001}', 198, 84, 20, 'Male');
 INSERT INTO public.slaves (name, class, benefit, info, height, weight, age, gender) VALUES('Josef', 'slaves', 27.2, '{"id" : 49, "class" : "slaves", "name" : "Josef", "age" : 30, "weight" : 72, "height" : 178, "benefit" : 27.199999999999999}', 178, 72, 30, 'Genderflow');
 INSERT INTO public.slaves (name, class, benefit, info, height, weight, age, gender) VALUES('Linda', 'slaves', 85.51724137931, '{"id" : 53, "class" : "slaves", "name" : "Linda", "age" : 29, "weight" : 65, "height" : 172, "benefit" : 85.517241379309993}', 172, 65, 29, 'Agender');
-INSERT INTO public.slaves (name, class, benefit, info, height, weight, age, gender) VALUES('Linda', 'slaves', 29.25, '{"id" : 57, "class" : "slaves", "name" : "Linda", "age" : 24, "weight" : 73, "height" : 174, "benefit" : 29.25}', 174, 73, 24, 'Abimegender');
 INSERT INTO public.deals (userid, state, time, merchid, price) VALUES(1, 'on sale', '2018-04-09 02:30:25.332105', 1,  4667);
 INSERT INTO public.deals (userid, state, time, merchid, price) VALUES(1, 'on sale', '2018-04-09 02:30:25.447512', 2,  20481);
 INSERT INTO public.deals (userid, state, time, merchid, price) VALUES(1, 'on sale', '2018-04-09 02:30:25.502879', 3,  56605);

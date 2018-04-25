@@ -38,7 +38,6 @@ public class SpringRestController {
     }
 
     @RequestMapping(value = "/logoutReq", method = RequestMethod.POST)
-    @ResponseBody
     public ResponseEntity<? extends Boolean> logoutRequest(@RequestParam("username") String username, @RequestParam("token") String token) {
         try {
             model.disconnect(username, token);
@@ -49,8 +48,20 @@ public class SpringRestController {
         }
     }
 
+    @RequestMapping(value = "/search", method = RequestMethod.POST)
+    public ResponseEntity<List<String>> searchMerchandise(@RequestParam String query,
+                                                          @RequestParam int limit,
+                                                          @RequestParam String order,
+                                                          @RequestParam boolean desc,
+                                                          @RequestParam int offset) {
+        try {
+            return ResponseEntity.ok(model.searchMerchandise(query, limit, order, desc, offset));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(null);
+        }
+    }
+
     @RequestMapping(value = "/tokenUpdate", method = RequestMethod.POST)
-    @ResponseBody
     public ResponseEntity<? extends String> tokenReset(@RequestParam("username") String username, @RequestParam("password") String password) {
         try {
             return new ResponseEntity<>(model.updateToken(username, password), HttpStatus.OK);

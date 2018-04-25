@@ -72,7 +72,7 @@ public class IndexController {
         }).sorted(Comparator.comparingInt(News::getId).reversed()).collect(toList()));
 //        modelMap.addAttribute("cart", cart);
         modelMap.addAttribute("merchandises",
-                model.searchMerchandise("", 10, "benefit", true).stream()
+                model.searchMerchandise("", 10, "benefit", true, 0).stream()
                         .map(this::getMerchandise).collect(toList()));
         return VIEW_INDEX;
     }
@@ -187,10 +187,9 @@ public class IndexController {
                 return ResponseEntity.ok(object.toString());
             case "items":
                 JsonObject jCart = new JsonObject();
-                JsonParser parser = new JsonParser();
                 JsonArray items = new JsonArray();
                 model.getGroupMerchandises(cart).forEach(items::add);
-                jCart.add("count", new JsonPrimitive(items.size()));
+                jCart.add("size", new JsonPrimitive(items.size()));
                 jCart.add("items", items);
                 return ResponseEntity.ok(jCart.toString());
             case "amITeaPot":

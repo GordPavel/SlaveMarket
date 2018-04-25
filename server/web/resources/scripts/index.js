@@ -57,19 +57,4 @@ $(document).ready(function () {
             }
         }
     });
-    $('.merchandises .item .control .add-card-btn').click(function (event) {
-        var merchId = event.target.getAttribute("data-product_id");
-        console.log(merchId);
-        $.post("/cart/", {id: merchId}, function (data) {
-            if (console && console.log) {
-                console.log("Added in cart");
-                $(event.target).addClass('disabled');
-                $(event.target).text('Added');
-                updateCart();
-            }
-        }).fail(function (data, status) {
-            console.log("Response error with status " + status + " data:" + data.responseText);
-            showPopup('Error', 'Can\'t add merchandise into cart');
-        });
-    });
 });

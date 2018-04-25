@@ -69,11 +69,13 @@ public interface SpringModel extends Model {
     /**
      * Method to search merchandise by string
      *
-     * @param query search query
-     * @param limit quantity of return values
+     * @param query  search query
+     * @param limit  quantity of return values
+     * @param desc   sort descend
+     * @param offset result offset
      * @return list of json formatted merchandises
      */
-    List<String> searchMerchandise(String query, int limit, String order, boolean desc);
+    List<String> searchMerchandise(String query, int limit, String order, boolean desc, int offset);
 
     /**
      * get info about group of merchandises
